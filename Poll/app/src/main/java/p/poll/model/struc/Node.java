@@ -5,8 +5,8 @@ package p.poll.model.struc;
  */
 public class Node
 {
-    private int number;
-    private Node next;
+    int number;
+    Node next;
 
     public Node(int num)
     {

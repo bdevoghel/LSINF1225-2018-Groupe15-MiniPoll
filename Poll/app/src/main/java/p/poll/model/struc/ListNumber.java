@@ -8,7 +8,7 @@ package p.poll.model.struc;
 
 public class ListNumber
 {
-    private Node first;
+    Node first;
     public ListNumber()
     {
         first = null;

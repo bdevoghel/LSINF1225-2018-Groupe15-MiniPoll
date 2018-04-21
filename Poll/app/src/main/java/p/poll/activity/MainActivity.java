@@ -15,12 +15,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
-
-
-     /** Lance l'activité ajouter un ami. */
-     public void addFriend(View v) {
-         Intent intent = new Intent(this, AddFriendActivity.class);
-         startActivity(intent);
-     }
+    /** Lance l'activité ajouter un ami. */
+    public void addFriend(View v) {
+        Intent intent = new Intent(this, p.poll.AddFriendActivity.class);
+        startActivity(intent);
+    }
 }
