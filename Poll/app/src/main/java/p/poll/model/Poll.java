@@ -1,82 +1,130 @@
 package p.poll.model;
 
 import java.util.ArrayList;
-import java.util.Date;
+
+import p.poll.*;
 
 public class Poll {
-    private static int ID;
-    private int id;
-    private String title;
-    private String description;
-    private Date deadline;
-    private char type;
-    private User owner;
-    private ArrayList<User> accessList;
-    public Poll(){
-        this.id=ID;
-        ID++;
-        accessList=new ArrayList();
+    static ListNumber number = new ListNumber();
+    static int currentnumber;
+    String title;
+    String description;
+    java.sql.Date deadLine;
+    Character type;
+    User proprietaire;
+    ArrayList<User> listeAcces;
+    int id;
+
+
+    public Poll(String title, String description, java.sql.Date deadline,
+                Character type, User proprietaire, int id) {
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setDeadLine(deadline);
+        this.setType(type);
+        this.setProprietaire(proprietaire);
+        this.setID(id);
     }
-    //Ca ne marche pas comme ça mais en gros il va falloir trouver un moyen de reset les id parfois
-    //sinon ça va monter jusque l'infini.
-/*public void rmv() {
-ID--;
-}*/
-    public int getId(){
-        return this.id;
+
+    public int addAcces(User utilisateur)
+    {
+        if(!listeAcces.contains(utilisateur)){
+            this.listeAcces.add(utilisateur);
+            return 0;
+        }
+        else
+        {
+            return -1;
+        }
     }
+
     public boolean equals(Object o) {
         if (o != null) {
-            if (o instanceof p.poll.model.Poll) {
-                if(((p.poll.model.Poll) o).getId()==(this.getId())){
+            if (o instanceof Poll) {
+                if(((Poll) o).getID()==(this.getID())){
                     return true;
                 }
             }
         }
         return false;
     }
-    public void setTitle(String title){
-        this.title=title;
-    }
-    public String getTitle(){
+
+    public String getTitle() {
         return this.title;
     }
-    public void setDescription(String description){
-        this.description=description;
+
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return this.description;
     }
-    public void setDeadline(Date date){
-        this.deadline=date;
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
-    public Date getDeadline(){
-        return this.deadline;
+
+    public java.sql.Date getDeadLine() {
+        return this.deadLine;
     }
-    /*
-    @input type={c,s,q}
-    */
-    public void setType(char a){
-        this.type=a;
+
+    public void setDeadLine(java.sql.Date date)
+    {
+        this.deadLine = date;
     }
-    public char getType(){
+
+    public Character getType()
+    {
         return this.type;
     }
-    public void setOwner(User u){
-        this.owner=u;
+
+    public void setType(Character type)
+    {
+        this.type = type;
     }
-    public User getOwner(){
-        return this.owner;
+
+    public User getProprietaire()
+    {
+        return proprietaire;
     }
-    public void addAccess(User u){
-        if(!accessList.contains(u)){
-            this.accessList.add(u);
+
+    public void setProprietaire(User proprietaire)
+    {
+        this.proprietaire = proprietaire;
+    }
+
+    public ArrayList<User> getAccessList(){
+        return listeAcces;
+    }
+
+    public int getID()
+    {
+        return id;
+    }
+
+    public void setID(int id)
+    {
+        if(number.isEmpty()) {
+            this.id = currentnumber;
+            currentnumber ++;
+        }
+        else
+        {
+            this.id = number.remove();
         }
     }
-    public void rmvAccess(User u){
-        this.accessList.remove(u);
+
+    public void removeAcces(User utilisateur)
+    {
+        this.listeAcces.remove(utilisateur);
     }
-    public ArrayList<User> getAccessList(){
-        return accessList;
+
+    public void chooseBySliding()
+    {
+
     }
 }
+
