@@ -1,10 +1,10 @@
-package p.poll;
+package p.poll.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle; /* utilisé pour transmettre des données entre les activités */
 import android.content.Intent;/*  Intent (='inter' en anglais) permet l'intéraction entre les activités */
 import android.view.View;
-import android.widget.TextView;
+import p.poll.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** Lance l'activité ajouter un ami. */
     public void addFriend(View v) {
-        Intent intent = new Intent(this, p.poll.AddFriendActivity.class);
+        Intent intent = new Intent(this,AddFriendActivity.class);
         startActivity(intent);
     }
 }

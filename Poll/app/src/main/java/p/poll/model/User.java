@@ -117,8 +117,18 @@ public class User {
             friendList.add(friend);
         }
     }
+    public void addFriend(ArrayList<User> users){
+        for(int i=0;i<users.size();i++){
+            this.addFriend(users.get(i));
+        }
+    }
     public void rmvFriend(User friend) {
         this.friendList.remove(friend);
+    }
+    public void rmvFriend(ArrayList<User> users){
+        for(int i=0;i<users.size();i++){
+            this.rmvFriend(users.get(i));
+        }
     }
     public void addPoll(Poll p) {
         if(!pollList.contains(p))
@@ -126,16 +136,36 @@ public class User {
             this.pollList.add(p);
         }
     }
+    public void addPoll(ArrayList<Poll> polls){
+        for(int i=0;i<polls.size();i++){
+            this.addPoll(polls.get(i));
+        }
+    }
     public void rmvPoll(Poll p) {
         this.pollList.remove(p);
+    }
+    public void rmvPoll(ArrayList<Poll> polls){
+        for(int i=0;i<polls.size();i++){
+            this.rmvPoll(polls.get(i));
+        }
     }
     public void addNotification(Notification n) {
         if(!this.notificationList.contains(n)) {
             notificationList.add(n);
         }
     }
+    public void addNotification(ArrayList<Notification> n){
+        for(int i=0;i<n.size();i++){
+            this.addNotification(n.get(i));
+        }
+    }
     public void rmvNotification(Notification n) {
         this.notificationList.remove(n);
+    }
+    public void rmvNotification(ArrayList<Notification> n){
+        for(int i=0;i<n.size();i++){
+            this.rmvNotification(n.get(i));
+        }
     }
 
     //Redefinition de la methode equals

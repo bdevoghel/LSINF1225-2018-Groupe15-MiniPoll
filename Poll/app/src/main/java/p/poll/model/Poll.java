@@ -29,7 +29,7 @@ public class Poll {
         this.setID();
     }
     public Poll(String title, String description, java.sql.Date deadline,
-                Character type, User owner) {
+                char type, User owner) {
         this.setTitle(title);
         this.setDescription(description);
         this.setDeadLine(deadline);
@@ -66,12 +66,12 @@ public class Poll {
         this.deadLine = date;
     }
 
-    public Character getType()
+    public char getType()
     {
         return this.type;
     }
 
-    public void setType(Character type)
+    public void setType(char type)
     {
         this.type = type;
     }
@@ -96,21 +96,26 @@ public class Poll {
     }
 
     //Addeurs et removers
-    public int addAccess(User user)
+    public void addAccess(User user)
     {
         if(!accessList.contains(user)){
             this.accessList.add(user);
-            return 0;
         }
-        else
-        {
-            return -1;
+    }
+    public void addAccess(ArrayList<User> users){
+        for(int i=0;i<users.size();i++){
+            this.addAccess(users.get(i));
         }
     }
 
     public void removeAcces(User user)
     {
         this.accessList.remove(user);
+    }
+    public void removeAcces(ArrayList<User> users){
+        for(int i=0;i<users.size();i++){
+            this.removeAcces(users.get(i));
+        }
     }
 
     //Redefinition de la methode equals

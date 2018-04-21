@@ -1,7 +1,8 @@
-package p.poll;
+package p.poll.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import p.poll.R;
 
 
 public class AddFriendActivity extends AppCompatActivity {
