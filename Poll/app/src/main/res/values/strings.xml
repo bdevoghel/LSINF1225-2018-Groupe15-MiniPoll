@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Poll</string>
+    <string name="addFriend_activity_title">Add a friend</string>
+    <string name="search_hint">Find your friends</string>
 </resources>
