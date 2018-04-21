@@ -1,4 +1,4 @@
-package be.lsinf1225.PoolApp;
+package p.poll;
 
 import android.app.Application;
 /**

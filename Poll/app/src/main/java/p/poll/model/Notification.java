@@ -1,19 +1,33 @@
 package p.poll.model;
 
+import p.poll.model.struc.LimitedNumber;
+import p.poll.model.struc.ListNumber;
+
 public class Notification{
-    private static int ID;
+
+    //Constantes
+    private static final int MAX_POLL = Poll.MAX_POLL;
+
+    //Structures utilisees pour l affectation des id
+    private static ListNumber number = new ListNumber();
+    private static LimitedNumber currentNumber = new LimitedNumber(MAX_POLL);
+
+    //Attributs
     private int id;
     private String text;
     private int state;
+
+    //Constructeurs
     public Notification(){
-        this.id=ID;
-        ID++;
+        this.setID();
     }
-    //Ca ne marche pas comme ça mais en gros il va falloir trouver un moyen de reset les id parfois
-    //sinon ça va monter jusque l'infini.
-/*public void rmv() {
-    ID--;
-}*/
+    public Notification(String text, int state){
+        this.setID();
+        this.text=text;
+        this.state=state;
+    }
+
+    //Redefinition de la methode equals
     public boolean equals(Object o) {
         if (o != null) {
             if (o instanceof Notification) {
@@ -24,6 +38,8 @@ public class Notification{
         }
         return false;
     }
+
+    //Getteurs et setteurs
     public int getId(){
         return this.id;
     }
@@ -38,5 +54,22 @@ public class Notification{
     }
     public void setText(String text){
         this.text=text;
+    }
+
+    //Methode d affectation de l id
+    public void setID()
+    {
+        if(number.isEmpty()) {
+            this.id = currentNumber.get();
+            currentNumber.increment();
+        }
+        //Normalement on a meme pas besoin de else pcq la methode setId est seulement utilisee dans
+        //le constructeur
+        /*
+        else
+        {
+            this.id = number.remove();
+        }
+        */
     }
 }

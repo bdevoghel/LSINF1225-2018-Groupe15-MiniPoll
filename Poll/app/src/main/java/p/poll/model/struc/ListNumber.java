@@ -1,4 +1,4 @@
-package p.poll.model;
+package p.poll.model.struc;
 
 /**
  * Created by Nicolas on 21/04/2018.
@@ -8,7 +8,7 @@ package p.poll.model;
 
 public class ListNumber
 {
-    Node first;
+    private Node first;
     public ListNumber()
     {
         first = null;
@@ -28,7 +28,7 @@ public class ListNumber
         }
     }
 
-    boolean isEmpty()
+    public boolean isEmpty()
     {
         if(first == null) {
             return true;
@@ -39,7 +39,7 @@ public class ListNumber
         }
     }
 
-    void insert(int number)
+    public void insert(int number)
     {
         Node current = first;
         if(first == null)

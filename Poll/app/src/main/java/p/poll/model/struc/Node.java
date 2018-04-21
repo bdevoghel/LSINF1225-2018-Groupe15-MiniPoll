@@ -1,12 +1,13 @@
-package p.poll.model;
+package p.poll.model.struc;
 
 /**
  * Created by User on 21-04-18.
  */
 public class Node
 {
-    int number;
-    Node next;
+    private int number;
+    private Node next;
+
     public Node(int num)
     {
         this.number = num;
