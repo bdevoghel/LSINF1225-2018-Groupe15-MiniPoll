@@ -1,4 +1,4 @@
-package be.lsinf1225.PoolApp;
+package p.poll;
 
 import android.content.Context;
 
@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.util.List;
 import java.util.ArrayList;
 
-import be.lsinf1225.PoolApp.database.Database;
+//import p.poll.database.Database;
 
 /**
  * Created by Nicolas on 21/04/2018.
