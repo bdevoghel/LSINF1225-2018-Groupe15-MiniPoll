@@ -14,7 +14,8 @@ import be.lsinf1225.PoolApp.database.Database;
  */
 
 public class Poll {
-    static int number;
+    static ListNumber number = new ListNumber();
+    static int currentnumber;
     String title;
     String description;
     Date deadLine;
@@ -115,7 +116,14 @@ public class Poll {
 
     public void setID(int id)
     {
-        this.id = id;
+        if(number.isEmpty()) {
+            this.id = currentnumber;
+            currentnumber ++;
+        }
+        else
+        {
+            this.id = number.remove();
+        }
     }
 
     public void removeAcces(User utilisateur)
@@ -148,6 +156,17 @@ class ListNumber
             int value = first.number;
             first = first.next;
             return value;
+        }
+    }
+
+    boolean isEmpty()
+    {
+        if(first == null) {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
