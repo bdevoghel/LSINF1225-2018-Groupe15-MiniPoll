@@ -16,7 +16,8 @@ public class User {
 
     //Noms des colonnes de la database
     private static final String DB_COLUMN_USERNAME = "u_username";
-    private static final String DB_COLUMN_NAME = "u_name";
+    private static final String DB_COLUMN_FNAME = "u_fname";
+    private static final String DB_COLUMN_LNAME = "u_lname";
     private static final String DB_COLUMN_PASSWORD = "u_password";
     private static final String DB_TABLE = "users";
 
@@ -154,7 +155,7 @@ public class User {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
 
         // Colonnes à récupérer
-        String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_NAME, DB_COLUMN_PASSWORD};
+        String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_FNAME, DB_COLUMN_LNAME, DB_COLUMN_PASSWORD};
 
         // Requête de selection (SELECT)
         Cursor cursor = db.query(DB_TABLE, colonnes, null, null, null, null, null);
@@ -174,7 +175,7 @@ public class User {
             String uPassword = cursor.getString(3);
 
             // Vérification pour savoir s'il y a déjà une instance de cet utilisateur.
-            User user = User.userMap.get(uUsername);
+            User user = userMap.get(uUsername);
             if (user == null) {
                 // Si pas encore d'instance, création d'une nouvelle instance.
                 user= new User(uUsername,uFName,uLName,uPassword);
