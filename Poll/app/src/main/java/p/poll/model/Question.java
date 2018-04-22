@@ -14,15 +14,15 @@ public class Question {
 
     //Constructeurs
     public Question(){
-        PropositionList=new ArrayList();
+        PropositionList=new ArrayList<>();
     }
     public Question(String title) {
         this.title = title;
-        PropositionList=new ArrayList();
+        PropositionList=new ArrayList<>();
     }
     public Question(String title, Proposition proposition){
         this.title=title;
-        PropositionList=new ArrayList();
+        PropositionList=new ArrayList<>();
         this.addProposition(proposition);
     }
     public Question(String title, ArrayList<Proposition> propositionList){

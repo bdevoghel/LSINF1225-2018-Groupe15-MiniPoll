@@ -6,6 +6,7 @@ import java.util.Map;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Picture;
+import android.util.SparseArray;
 
 import p.poll.MySQLiteHelper;
 
@@ -29,24 +30,24 @@ public class User {
     private String password;
     private Picture profilePic;
     private User bestFriend;
-    private ArrayList<Notification> notificationList;
-    private ArrayList<Poll> pollList;
-    private ArrayList<User> friendList;
+    private SparseArray<Notification> notificationList;
+    private SparseArray<Poll> pollList;
+    private HashMap<String,User> friendList;
 
     //Constructeurs
     public User(){
-        friendList=new ArrayList();
-        notificationList=new ArrayList();
-        pollList=new ArrayList();
+        friendList=new HashMap<>();
+        notificationList=new SparseArray<>();
+        pollList=new SparseArray<>();
     }
     public User(String uUsername,String uFName,String uLName, String uPassword){
         username=uUsername;
         firstName=uFName;
         lastName=uLName;
         password=uPassword;
-        friendList=new ArrayList();
-        notificationList=new ArrayList();
-        pollList=new ArrayList();
+        friendList=new HashMap<>();
+        notificationList=new SparseArray<>();
+        pollList=new SparseArray<>();
         userMap.put(username,this);
     }
 
@@ -93,13 +94,13 @@ public class User {
     public void setProfilePic(Picture p){
         this.profilePic=p;
     }
-    public ArrayList<User> getFriendList(){
+    public HashMap<String,User> getFriendList(){
         return friendList;
     }
-    public ArrayList<Poll> getPollList() {
+    public SparseArray<Poll> getPollList() {
         return pollList;
     }
-    public ArrayList<Notification> getNotificationList() {
+    public SparseArray<Notification> getNotificationList() {
         return notificationList;
     }
     //Je ne sais pas pourquoi ça marche pas
@@ -112,60 +113,33 @@ public class User {
 
     //Addeurs et removeurs
     public void addFriend(User friend) {
-        if(!friendList.contains(friend))
+        if(!friendList.containsKey(friend.getUsername()))
         {
-            friendList.add(friend);
+            friendList.put(friend.getUsername(),friend);
         }
     }
-    public void addFriend(ArrayList<User> users){
-        for(int i=0;i<users.size();i++){
-            this.addFriend(users.get(i));
-        }
+    public void addFriend(HashMap<String,User> users){
+        friendList.putAll(users);
     }
     public void rmvFriend(User friend) {
-        this.friendList.remove(friend);
-    }
-    public void rmvFriend(ArrayList<User> users){
-        for(int i=0;i<users.size();i++){
-            this.rmvFriend(users.get(i));
-        }
+        this.friendList.remove(friend.getUsername());
     }
     public void addPoll(Poll p) {
-        if(!pollList.contains(p))
+        if(pollList.indexOfKey(p.getId())<0)
         {
-            this.pollList.add(p);
-        }
-    }
-    public void addPoll(ArrayList<Poll> polls){
-        for(int i=0;i<polls.size();i++){
-            this.addPoll(polls.get(i));
+            this.pollList.append(p.getId(),p);
         }
     }
     public void rmvPoll(Poll p) {
-        this.pollList.remove(p);
-    }
-    public void rmvPoll(ArrayList<Poll> polls){
-        for(int i=0;i<polls.size();i++){
-            this.rmvPoll(polls.get(i));
-        }
+        this.pollList.remove(p.getId());
     }
     public void addNotification(Notification n) {
-        if(!this.notificationList.contains(n)) {
-            notificationList.add(n);
-        }
-    }
-    public void addNotification(ArrayList<Notification> n){
-        for(int i=0;i<n.size();i++){
-            this.addNotification(n.get(i));
+        if(this.notificationList.indexOfKey(n.getId())<0) {
+            notificationList.append(n.getId(),n);
         }
     }
     public void rmvNotification(Notification n) {
-        this.notificationList.remove(n);
-    }
-    public void rmvNotification(ArrayList<Notification> n){
-        for(int i=0;i<n.size();i++){
-            this.rmvNotification(n.get(i));
-        }
+        this.notificationList.remove(n.getId());
     }
 
     //Redefinition de la methode equals

@@ -13,22 +13,22 @@ public class Quizz extends Poll {
     //Constructeurs
     public Quizz(){
         super();
-        questionList=new ArrayList();
+        questionList=new ArrayList<>();
     }
     public Quizz(Question question){
         super();
-        questionList=new ArrayList();
+        questionList=new ArrayList<>();
         this.addQuestion(question);
     }
     public Quizz(String title, String description, java.sql.Date deadline,
                   char type, User owner){
         super(title, description, deadline, type, owner);
-        questionList=new ArrayList();
+        questionList=new ArrayList<>();
     }
     public Quizz(String title, String description, java.sql.Date deadline,
                   char type, User owner, Question question){
         super(title, description, deadline, type, owner);
-        questionList=new ArrayList();
+        questionList=new ArrayList<>();
         this.addQuestion(question);
     }
     public Quizz(String title, String description, java.sql.Date deadline,

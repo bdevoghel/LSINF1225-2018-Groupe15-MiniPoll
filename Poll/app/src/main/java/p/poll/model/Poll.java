@@ -2,6 +2,7 @@ package p.poll.model;
 
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.HashMap;
 
 import p.poll.model.struc.LimitedNumber;
 import p.poll.model.struc.ListNumber;
@@ -21,12 +22,13 @@ public class Poll {
     private Date deadLine;
     private char type;
     private User owner;
-    private ArrayList<User> accessList;
+    private HashMap<String,User> accessList;
     private int id;
 
     //Constructeurs
     public Poll(){
-        this.setID();
+        this.setId();
+        accessList=new HashMap<>();
     }
     public Poll(String title, String description, java.sql.Date deadline,
                 char type, User owner) {
@@ -35,7 +37,8 @@ public class Poll {
         this.setDeadLine(deadline);
         this.setType(type);
         this.setOwner(owner);
-        this.setID();
+        this.setId();
+        accessList=new HashMap<>();
     }
 
     //Getteurs et setteurs
@@ -86,11 +89,11 @@ public class Poll {
         this.owner = owner;
     }
 
-    public ArrayList<User> getAccessList(){
+    public HashMap<String,User> getAccessList(){
         return accessList;
     }
 
-    public int getID()
+    public int getId()
     {
         return id;
     }
@@ -98,31 +101,24 @@ public class Poll {
     //Addeurs et removers
     public void addAccess(User user)
     {
-        if(!accessList.contains(user)){
-            this.accessList.add(user);
+        if(!accessList.containsKey(user.getUsername())){
+            this.accessList.put(user.getUsername(),user);
         }
     }
-    public void addAccess(ArrayList<User> users){
-        for(int i=0;i<users.size();i++){
-            this.addAccess(users.get(i));
-        }
+    public void addAccess(HashMap<String,User> users){
+        accessList.putAll(users);
     }
 
     public void removeAcces(User user)
     {
-        this.accessList.remove(user);
-    }
-    public void removeAcces(ArrayList<User> users){
-        for(int i=0;i<users.size();i++){
-            this.removeAcces(users.get(i));
-        }
+        this.accessList.remove(user.getUsername());
     }
 
     //Redefinition de la methode equals
     public boolean equals(Object o) {
         if (o != null) {
             if (o instanceof Poll) {
-                if(((Poll) o).getID()==(this.getID())){
+                if(((Poll) o).getId()==(this.getId())){
                     return true;
                 }
             }
@@ -131,7 +127,7 @@ public class Poll {
     }
 
     //Methode d affectation de l id
-    public void setID()
+    public void setId()
     {
         if(number.isEmpty()) {
             this.id = currentNumber.get();
