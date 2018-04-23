@@ -1,0 +1,231 @@
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+
+import android.graphics.Picture;
+
+class User {
+    private String username;
+    private String lastName;
+    private String firstName;
+    private String mailAdress;
+    private String password;
+    private Picture profilePic;
+    private User bestFriend;
+    private ArrayList<Notification> notificationList;
+    private ArrayList<Poll> pollList;
+    private ArrayList<User> friendList;
+    public User(){
+        friendList=new ArrayList();
+        notificationList=new ArrayList();
+        pollList=new ArrayList();
+    }
+    public void setUsername(String name){
+        this.username=name;
+    }
+    public String getUsername(){
+        return username;
+    }
+    public void setFirstName(String name){
+        this.firstName=name;
+    }
+    public String getFirstName(){
+        return firstName;
+    }
+    public void setLastName(String name){
+        this.lastName=name;
+    }
+    public String getLastName(){
+        return lastName;
+    }
+    public void setMailAdress(String name){
+        this.mailAdress=name;
+    }
+    public String getMailAdress(){
+        return mailAdress;
+    }
+    public void setPassword(String name){
+        this.password=name;
+    }
+    public String getPassword(){
+        return password;
+    }
+    public void setBestFriend(User bff){
+        this.bestFriend=bff;
+    }
+    public User getBestFriend(){
+        return bestFriend;
+    }
+    public void addFriend(User friend) {
+        if(!friendList.contains(friend))
+        {
+            friendList.add(friend);
+        }
+    }
+    public void rmvFriend(User friend) {
+        this.friendList.remove(friend);
+    }
+    public void addPoll(Poll p) {
+        if(!pollList.contains(p))
+        {
+            this.pollList.add(p);
+        }
+    }
+    public void rmvPoll(Poll p) {
+        this.pollList.remove(p);
+    }
+    public void addNotification(Notification n) {
+        if(!this.notificationList.contains(n)) {
+            notificationList.add(n);
+        }
+    }
+    public void rmvNotification(Notification n) {
+        this.notificationList.remove(n);
+    }
+    public void setProfilePic(Picture p){
+        this.profilePic=p;
+    }
+    public ArrayList<User> getFriendList(){
+        return friendList;
+    }
+    public ArrayList<Poll> getPollList() {
+        return pollList;
+    }
+    public ArrayList<Notification> getNotificationList() {
+        return notificationList;
+    }
+    //Je ne sais pas pourquoi ça marche pas
+    /*public void setProfilePic(String filename) {
+        this.profilePic=new Picture(filename);
+    }*/
+    public Picture getProfilePic() {
+        return this.profilePic;
+    }
+    public boolean equals(Object o) {
+        if (o instanceof User) {
+            if(((User) o).getUsername().equals(this.getUsername())){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+class Poll{
+    private static int ID;
+    private int id;
+    private String title;
+    private String description;
+    private Date deadline;
+    private char type;
+    private User owner;
+    private ArrayList<User> accessList;
+    public Poll(){
+        this.id=ID;
+        ID++;
+        accessList=new ArrayList();
+    }
+    //Ca ne marche pas comme ça mais en gros il va falloir trouver un moyen de reset les id parfois
+    //sinon ça va monter jusque l'infini.
+    /*public void rmv() {
+        ID--;
+    }*/
+    public int getId(){
+        return this.id;
+    }
+    public boolean equals(Object o) {
+        if (o != null) {
+            if (o instanceof Poll) {
+                if(((Poll) o).getId()==(this.getId())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public void setTitle(String title){
+        this.title=title;
+    }
+    public String getTitle(){
+        return this.title;
+    }
+    public void setDescription(String description){
+        this.description=description;
+    }
+    public String getDescription(){
+        return this.description;
+    }
+    public void setDeadline(Date date){
+        this.deadline=date;
+    }
+    public Date getDeadline(){
+        return this.deadline;
+    }
+    /*
+    @input type={c,s,q}
+    */
+    public void setType(char a){
+        this.type=a;
+    }
+    public char getType(){
+        return this.type;
+    }
+    public void setOwner(User u){
+        this.owner=u;
+    }
+    public User getOwner(){
+        return this.owner;
+    }
+    public void addAccess(User u){
+        if(!accessList.contains(u)){
+            this.accessList.add(u);
+        }
+    }
+    public void rmvAccess(User u){
+        this.accessList.remove(u);
+    }
+    public ArrayList<User> getAccessList(){
+        return accessList;
+    }
+}
+class Notification{
+    private static int ID;
+    private int id;
+    private String text;
+    private int state;
+    public Notification(){
+        this.id=ID;
+        ID++;
+    }
+    //Ca ne marche pas comme ça mais en gros il va falloir trouver un moyen de reset les id parfois
+    //sinon ça va monter jusque l'infini.
+    /*public void rmv() {
+        ID--;
+    }*/
+    public boolean equals(Object o) {
+        if (o != null) {
+            if (o instanceof Notification) {
+                if (((Notification) o).getId() == (this.getId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public int getId(){
+        return this.id;
+    }
+    public int getState(){
+        return this.state;
+    }
+    public void setState(int i){
+        this.state=i;
+    }
+    public String getText(){
+        return this.text;
+    }
+    public void setText(String text){
+        this.text=text;
+    }
+}
