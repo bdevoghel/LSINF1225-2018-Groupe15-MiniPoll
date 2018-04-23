@@ -9,11 +9,12 @@ import android.graphics.Picture;
 
 import p.poll.R;
 
-public class FriendActivity extends AppCompatActivity {
+public class FriendListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend);
     }
+
 }
