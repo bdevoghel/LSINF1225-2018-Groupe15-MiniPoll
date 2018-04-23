@@ -152,7 +152,7 @@ public class User {
     /**
      * Fournit la liste des utilisateurs.
      */
-    public static ArrayList<User> getUsers() {
+    public static HashMap<String,User> getUsers() {
         // Récupération du  SQLiteHelper et de la base de données.
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
 
@@ -166,7 +166,7 @@ public class User {
         cursor.moveToFirst();
 
         // Initialisation la liste des utilisateurs.
-        ArrayList<User> users = new ArrayList<>();
+        HashMap<String,User> users = new HashMap<>();
 
         // Tant qu'il y a des lignes.
         while (!cursor.isAfterLast()) {
@@ -184,7 +184,7 @@ public class User {
             }
 
             // Ajout de l'utilisateur à la liste.
-            users.add(user);
+            users.put(user.getUsername(),user);
 
             // Passe à la ligne suivante.
             cursor.moveToNext();
