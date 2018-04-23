@@ -350,3 +350,121 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 }
 
+/*
+
+package be.lsinf1252.myfirstappication;
+
+/**
+ * Created by Antoine on 22-04-18.
+ *
+
+public class test1 {
+
+    public void CreationCompte(){
+        String nom;
+        String identifiant;
+        String prenom;
+        String AdresseMail;
+        String MotDePasse1;
+        String MotDePasse2;
+        jpeg photo;
+
+    public void setNom(String identifiant){
+
+        String identifiant = identifiant;
+    }
+    public String getIdentifiant(){
+
+        return identifiant;
+    }
+
+    public void setNom(String){
+        String nom = nom;
+    }
+    public String getNom(){
+        return nom;
+    }
+    public void setPrenom(String prenom){
+        this.prenom = prenom;
+    }
+    public String getPrenom(){
+        return prenom;
+    }
+    public void setAdressMail(String AdressMail){
+        this.AdressMail = AdressMail;
+    }
+    public String getAdressMail(){
+        return AdressMail;
+    }
+    public void setMotDePasse1(String MotDePasse1) {
+        this.MotDePasse1 = MotDePasse1;
+    }
+    public String getMotDePasse1(){
+        return MotDePasse1;
+    }
+    public void setMotDePasse2(String MotDePasse2){
+        this.MotDePasse2 = MotDePasse2;
+    }
+    public String getMotDePasse2(){
+        return MotDePasse2;
+    }
+    public void setPhoto(jpeg photo){
+        this.photo = photo;
+    }
+    public void getPhoto(){
+        return photo;
+    }
+    public boolean samePassword(){
+        return getMotDePasse1() == getMotDePasse2();
+    }
+    public boolean identifiantExist(){
+        return Exist();
+    }
+
+
+    /**
+     * Renvoie si l'identifiant est dans la base de donnée. On va cherecher une valeur obligatoire du tableau comme ça on voit si il y en a un ou pas
+     * @return null si requete sans resultat, une liste de strings contenant
+     * les langages presents dans la base de donnees.
+     *
+    public String getLanguages() {
+        SQLiteDatabase db = getReadableDatabase();
+        // Les resultats de la requête sont mis dans un "curseur"
+        Cursor c = db.query("\"Utilisateur\"", // La table
+                new String[]{"\"nom\""},
+                "\"identifiant\"", // Colonnes pour la clause WHERE // Je ne comprend pas très bien comment ca marche
+                this.getIdentifiant(), // Valeurs pour la clause WHERE
+                null, // ne pas grouper les lignes
+                null, // ne pas filtrer par goupe de ligne
+                null  // pas d'ordre
+        );
+
+        c.close();
+        return Utilisateur;
+    }
+} // TODO : vérifier exist
+
+
+
+
+    if (!samePassWord()) CreationCompte();
+            if (identifiantExist()) CreationCompte();
+            }
+
+
+
+
+@Override
+public void onCreate(SQLiteDatabase db) {
+
+        //db.execSQL("DROP TABLE IF EXISTS \"Utilisateur\";");
+        //db.execSQL("CREATE TABLE \"Utilisateur\" (\"identifiant\" TEXT , \"nom\" TEXT, \"prenom\" TEXT, \"AdressMail\" TEXT, \"MotDePasse\" TEXT, \"photo\" JPEG);");
+//Deja fait normalement donc pas necessaire.
+        db.execSQL("INSERT INTO \"languages\" VALUES(CreationCompte().getIdentifiant(), CreationCompte().getNOm(), CreationCompte().getprenom(), CreationCompte().AdressMail, CreationCompte().getMotDePasse1(), CreationCompte().getPhoto();");
+
+        }
+
+        }
+
+
+  */
