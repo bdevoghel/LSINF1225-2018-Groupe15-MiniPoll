@@ -3,6 +3,7 @@
     <string name="addFriend_activity_title">Add a friend</string>
     <string name="search_hint">Find your friends</string>
     <string name="username">Username</string>
+    <string name="friend_list_activity">Friends</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->

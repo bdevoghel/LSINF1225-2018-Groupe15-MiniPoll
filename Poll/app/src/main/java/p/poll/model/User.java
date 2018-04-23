@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Picture;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 import android.util.SparseArray;
 
 import p.poll.MySQLiteHelper;
@@ -28,7 +30,7 @@ public class User {
     private String firstName;
     private String mailAdress;
     private String password;
-    private Picture profilePic;
+    private Bitmap profilePic;
     private User bestFriend;
     private SparseArray<Notification> notificationList;
     private SparseArray<Poll> pollList;
@@ -91,7 +93,7 @@ public class User {
     public User getBestFriend(){
         return bestFriend;
     }
-    public void setProfilePic(Picture p){
+    public void setProfilePic(Bitmap p){
         this.profilePic=p;
     }
     public HashMap<String,User> getFriendList(){
@@ -103,11 +105,7 @@ public class User {
     public SparseArray<Notification> getNotificationList() {
         return notificationList;
     }
-    //Je ne sais pas pourquoi ça marche pas
-/*public void setProfilePic(String filename) {
-    this.profilePic=new Picture(filename);
-}*/
-    public Picture getProfilePic() {
+    public Bitmap getProfilePic() {
         return this.profilePic;
     }
 
@@ -197,5 +195,13 @@ public class User {
         db.close();
 
         return users;
+    }
+    /**
+     * Transforme un fichier en Bitmap
+     */
+    public Bitmap upLoadPicture(String filePath){
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        this.setProfilePic(bitmap);
+        return bitmap;
     }
 }
