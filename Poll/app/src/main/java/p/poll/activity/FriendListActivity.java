@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.graphics.Picture;
+import android.view.View;
+import android.widget.Button;
 
 import p.poll.R;
 import p.poll.model.User;
@@ -20,5 +22,10 @@ public class FriendListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend);
+        final Button button = findViewById(R.id.button_id);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            }
+        });
     }
 }
