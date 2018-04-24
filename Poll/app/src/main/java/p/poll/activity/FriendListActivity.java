@@ -18,10 +18,10 @@ public class FriendListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friendlist);
-        final Button button = findViewById(R.id.button1);
+        /*final Button button = findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             }
-        });
+        });*/
     }
 }

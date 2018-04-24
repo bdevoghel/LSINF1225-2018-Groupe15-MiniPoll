@@ -1,59 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="p.poll.activity.MainActivity">
-    android:background="@android:color/grey"
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@color/colorAccent"
-        android:text="Menu"
-
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="372dp" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="232dp"
-        android:layout_height="24dp"
-        tools:layout_editor_absoluteX="76dp"
-        tools:layout_editor_absoluteY="432dp" />
 
     <SearchView
-        android:layout_width="368dp"
-        android:layout_height="49dp"
-        android:text="rechercher un ami"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        android:id="@+id/searchB1"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+
+    </SearchView>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:weightSum="100">
 
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="127dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="168dp"
-        android:background="@color/colorAccent"
-        android:text="ajouter un ami"
-        app:layout_constraintBottom_toTopOf="@+id/button1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="195dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="115dp"
+                android:layout_weight="50"
+                app:srcCompat="@drawable/michel" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="76dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="400dp"
-        android:layout_marginEnd="152dp"
-        android:gravity="center"
-        android:text="Amis"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <EditText
+                android:id="@+id/editText2"
+                style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="52dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Michel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-</android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</RelativeLayout>
