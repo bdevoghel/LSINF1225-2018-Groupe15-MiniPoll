@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
+import p.poll.model.User;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -41,6 +42,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
+
+    public static User loggedUser;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -304,8 +307,43 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
+            /*
+            public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String mUsername;
+        private final String mPassword;
+
+        UserLoginTask(String username, String password) {
+            mUsername = username;
+            mPassword = password;
+            HashMap<String,User> users=User.getUsers();
+            loggedUser=users.get(mUsername);
         }
 
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+            try {
+                // Simulate network access.
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                return false;
+            }
+
+            for (String credential : DUMMY_CREDENTIALS) {
+                String[] pieces = credential.split(":");
+                if (pieces[0].equals(mUsername)) {
+                    // Account exists, return true if the password matches.
+                    return pieces[1].equals(mPassword);
+                }
+            }
+
+            // TODO: register the new account here.
+            return true;
+        }
+             */
+        }
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.

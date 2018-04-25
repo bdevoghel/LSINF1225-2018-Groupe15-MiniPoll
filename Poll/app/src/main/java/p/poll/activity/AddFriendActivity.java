@@ -2,6 +2,7 @@ package p.poll.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -13,15 +14,18 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import p.poll.R;
+import p.poll.model.FriendRequest;
+import p.poll.model.Notification;
 import p.poll.model.User;
 
 
 public class AddFriendActivity extends AppCompatActivity {
 
     ImageView user_image;
-    User person_object;
+    User userFriend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +36,13 @@ public class AddFriendActivity extends AppCompatActivity {
         user_image = (ImageView) findViewById(R.id.userImageProfile);
 
         Bundle data = getIntent().getExtras();
-        person_object = data.getParcelable("person_object");
+        userFriend = new User("dmichel","michel","dupuis","1234");
+        ArrayList<User> userArray=User.toArray(userList);
+        int i=0;
+        userFriend = userArray.get(i);
+        userArray.remove(i);
         // getPhoto() function returns a Base64 String
-        Bitmap bmp   = person_object.getProfilePic();
+        Bitmap bmp   = userFriend.getProfilePic();
         int size     = bmp.getRowBytes() * bmp.getHeight();
         ByteBuffer b = ByteBuffer.allocate(size);
 
@@ -55,8 +63,14 @@ public class AddFriendActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.buttonAddFriend);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                userLogged.addFriend(userFriend);
+                addFriendProcess(userFriend);
             }
         });
+
+    }
+
+    protected void addFriendProcess(User friend){
+        FriendRequest notification= new FriendRequest(LoginActivity.loggedUser.getFirstName()+" "+LoginActivity.loggedUser.getLastName()+" would like to add you in his friendlist",0,friend);
+        friend.addNotification(notification);
     }
 }

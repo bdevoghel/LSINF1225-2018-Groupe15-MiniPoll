@@ -13,12 +13,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //goToMenu();
     }
 
     /** Lance l'activité ajouter un ami. */
     public void addFriend(View v) {
         Intent intent = new Intent(this,AddFriendActivity.class);
+        startActivity(intent);
+    }
+
+    /** Lance le menu. */
+    public void goToMenu() {
+        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
         startActivity(intent);
     }
 }

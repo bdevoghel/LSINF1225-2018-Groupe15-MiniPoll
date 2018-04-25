@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MenuActivity"
+            android:label="@string/menu"
+            android:parentActivityName=".activity.MainActivity"></activity>
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"></activity>
@@ -28,7 +31,9 @@
             android:label="@string/addFriend_activity_title" ></activity>
         <activity android:name=".activity.FriendListActivity"
             android:label="@string/friend_list_activity"></activity>
-        <activity android:name=".activity.MenuActivity"></activity>
+        <activity android:name=".activity.NotificationActivity"
+            android:label="@string/notification"></activity>
+
     </application>
 
 </manifest>

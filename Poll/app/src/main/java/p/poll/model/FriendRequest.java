@@ -7,22 +7,22 @@ package p.poll.model;
 public class FriendRequest extends p.poll.model.Notification {
 
     //Attributs
-    private String friendUsername;
+    private User friend;
 
     //Constructeurs
     public FriendRequest() {
         super();
     }
-    public FriendRequest(String text, int state, String username){
+    public FriendRequest(String text, int state, User user){
         super(text, state);
-        this.friendUsername=username;
+        this.friend=user;
     }
 
     //Getteurs et setteurs
-    public String getFriendUsername(){
-        return friendUsername;
+    public User getUser(){
+        return friend;
     }
-    public void setFriendUsername(String username){
-        friendUsername=username;
+    public void setUser(User user){
+        friend=user;
     }
 }

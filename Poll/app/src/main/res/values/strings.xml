@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">Poll</string>
+
+    <!-- Strings related to addFriend -->
     <string name="addFriend_activity_title">Add a friend</string>
+    <string name="add">Add</string>
     <string name="search_hint">Find your friends</string>
     <string name="username">Username</string>
     <string name="friend_list_activity">Friends</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="notification">Notifications</string>
 
     <!-- Strings related to menu -->
+    <string name="menu">Menu</string>
     <string name="quizz">Quizz</string>
     <string name="survey">Survey</string>
     <string name="newpoll">New Poll</string>
@@ -26,4 +31,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- Strings related to notifications -->
 </resources>

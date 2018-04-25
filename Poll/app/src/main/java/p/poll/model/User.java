@@ -1,6 +1,7 @@
 package p.poll.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import android.database.Cursor;
@@ -51,6 +52,28 @@ public class User {
         notificationList=new SparseArray<>();
         pollList=new SparseArray<>();
         userMap.put(username,this);
+    }
+    public User(String uUsername,String uFName,String uLName, String uPassword, String profilePicFile){
+        username=uUsername;
+        firstName=uFName;
+        lastName=uLName;
+        password=uPassword;
+        friendList=new HashMap<>();
+        notificationList=new SparseArray<>();
+        pollList=new SparseArray<>();
+        userMap.put(username,this);
+        this.setProfilePic(upLoadPicture(profilePicFile));
+    }
+    public User(String uUsername,String uFName,String uLName, String uPassword, Bitmap profilePic){
+        username=uUsername;
+        firstName=uFName;
+        lastName=uLName;
+        password=uPassword;
+        friendList=new HashMap<>();
+        notificationList=new SparseArray<>();
+        pollList=new SparseArray<>();
+        userMap.put(username,this);
+        this.setProfilePic((profilePic));
     }
 
     //Getteurs et setteurs
@@ -195,6 +218,12 @@ public class User {
         db.close();
 
         return users;
+    }
+
+    public static ArrayList<User> toArray(HashMap<String,User> users){
+        Collection<User> values = users.values();
+        ArrayList<User> listOfValues = new ArrayList<User>(values);
+        return listOfValues;
     }
     /**
      * Transforme un fichier en Bitmap
