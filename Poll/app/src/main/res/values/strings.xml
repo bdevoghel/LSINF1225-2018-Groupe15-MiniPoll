@@ -6,6 +6,14 @@
     <string name="friend_list_activity">Friends</string>
     <string name="title_activity_login">Sign in</string>
 
+    <!-- Strings related to menu -->
+    <string name="quizz">Quizz</string>
+    <string name="survey">Survey</string>
+    <string name="newpoll">New Poll</string>
+    <string name="choice">Choice</string>
+    <string name="profile">Profile</string>
+    <string name="friends">Friends</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

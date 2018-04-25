@@ -28,6 +28,7 @@
             android:label="@string/addFriend_activity_title" ></activity>
         <activity android:name=".activity.FriendListActivity"
             android:label="@string/friend_list_activity"></activity>
+        <activity android:name=".activity.MenuActivity"></activity>
     </application>
 
 </manifest>

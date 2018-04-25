@@ -1,4 +1,4 @@
-package be.lsinf1225.PoolApp.database;
+package p.poll.database;
 
 import android.content.Context;
 import android.database.Cursor;

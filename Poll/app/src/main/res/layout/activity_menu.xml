@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="177dp"
+        android:layout_height="312dp"
+        android:layout_marginEnd="192dp"
+        android:layout_marginRight="192dp"
+        android:layout_marginTop="148dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <RadioButton
+            android:id="@+id/survey"
+            style="@android:style/Widget.Holo.Light.CompoundButton.RadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_weight="1"
+            android:button="@drawable/survey"
+            android:text="@string/survey" />
+
+        <RadioButton
+            android:id="@+id/quizz"
+            android:layout_width="match_parent"
+            android:layout_height="19dp"
+            android:layout_weight="1"
+            android:button="@drawable/quizz"
+            android:text="@string/quizz" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="179dp"
+        android:layout_height="312dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="1.0">
+
+        <RadioButton
+            android:id="@+id/choice"
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:layout_weight="1"
+            android:button="@drawable/choice"
+            android:text="@string/choice" />
+
+        <RadioButton
+            android:id="@+id/newpoll"
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:layout_weight="1"
+            android:button="@drawable/newpoll"
+            android:text="@string/newpoll" />
+    </RadioGroup>
+
+    <RadioButton
+        android:id="@+id/profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:button="@drawable/profile"
+        android:text="@string/profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="40dp"
+        android:button="@drawable/friends"
+        android:text="@string/friends"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
