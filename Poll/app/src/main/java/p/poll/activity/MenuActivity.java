@@ -15,6 +15,9 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu);
+
         Button survey;
         Button quizz;
         Button choice;
@@ -22,8 +25,6 @@ public class MenuActivity extends AppCompatActivity {
         Button profile;
         Button friends;
         Button notification;
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
         survey=findViewById(R.id.survey);
         quizz=findViewById(R.id.quizz);
         choice=findViewById(R.id.choice);

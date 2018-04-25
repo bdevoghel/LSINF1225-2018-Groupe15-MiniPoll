@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle; /* utilisé pour transmettre des données entre les activités */
 import android.content.Intent;/*  Intent (='inter' en anglais) permet l'intéraction entre les activités */
 import android.view.View;
+import android.widget.Button;
+
 import p.poll.R;
 
 
@@ -13,7 +15,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //goToMenu();
+
+        Button login=findViewById(R.id.loginbutton);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToLogin(view);
+            }
+        });
     }
 
     /** Lance l'activité ajouter un ami. */
@@ -23,8 +32,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /** Lance le menu. */
-    public void goToMenu() {
+    public void goToMenu(View v) {
         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        startActivity(intent);
+    }
+
+    /** Lance le login. */
+    public void goToLogin(View v) {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }
 }
