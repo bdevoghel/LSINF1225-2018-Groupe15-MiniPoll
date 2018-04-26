@@ -1,19 +1,22 @@
 package p.poll.activity;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle; /* utilisé pour transmettre des données entre les activités */
 import android.content.Intent;/*  Intent (='inter' en anglais) permet l'intéraction entre les activités */
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import p.poll.R;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private static int SPLASH_TIME_OUT = 4000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
         Button login=findViewById(R.id.loginbutton);
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
                 goToLogin(view);
             }
         });
+
+
+
     }
 
     /** Lance l'activité ajouter un ami. */

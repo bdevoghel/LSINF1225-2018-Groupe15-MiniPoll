@@ -14,25 +14,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="p.poll.activity.MainActivity">
+        <activity android:name=".activity.LoadScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MenuActivity"
-            android:label="@string/menu"
-            android:parentActivityName=".activity.MainActivity"></activity>
+
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-        <activity android:name=".activity.AddFriendActivity"
-            android:label="@string/addFriend_activity_title" ></activity>
-        <activity android:name=".activity.FriendListActivity"
-            android:label="@string/friend_list_activity"></activity>
-        <activity android:name=".activity.NotificationActivity"
-            android:label="@string/notification"></activity>
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".activity.AddFriendActivity"
+            android:label="@string/addFriend_activity_title" />
+        <activity
+            android:name=".activity.FriendListActivity"
+            android:label="@string/friend_list_activity" />
+        <activity
+            android:name=".activity.NotificationActivity"
+            android:label="@string/notification" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
 
     </application>
 
