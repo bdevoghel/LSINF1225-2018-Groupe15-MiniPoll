@@ -1,6 +1,8 @@
 package p.poll.activity;
 
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,20 +20,13 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        Button survey;
-        Button quizz;
-        Button choice;
-        Button newpoll;
-        Button profile;
-        Button friends;
-        Button notification;
-        survey=findViewById(R.id.survey);
-        quizz=findViewById(R.id.quizz);
-        choice=findViewById(R.id.choice);
-        newpoll=findViewById(R.id.newpoll);
-        profile=findViewById(R.id.profile);
-        friends=findViewById(R.id.friends);
-        notification=findViewById(R.id.notification);
+        Button survey=findViewById(R.id.survey);
+        Button quizz=findViewById(R.id.quizz);
+        Button choice=findViewById(R.id.choice);
+        Button newpoll=findViewById(R.id.newpoll);
+        Button profile=findViewById(R.id.profile);
+        Button friends=findViewById(R.id.friends);
+        Button notification=findViewById(R.id.notification);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,11 +71,11 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
     public void seeFriendList(View v) {
-        Intent intent = new Intent(this,FriendListActivity.class);
+        Intent intent = new Intent(getApplicationContext(),FriendListActivity.class);
         startActivity(intent);
     }
     public void seeNotifications(View v){
-        Intent intent = new Intent(this,NotificationActivity.class);
+        Intent intent = new Intent(getApplicationContext(),NotificationActivity.class);
         startActivity(intent);
     }
 }

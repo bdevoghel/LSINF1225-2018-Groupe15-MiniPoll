@@ -25,6 +25,9 @@
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
+            android:name=".activity.MenuActivity"
+            android:label="@string/title_activity_menu" />
+        <activity
             android:name=".activity.AddFriendActivity"
             android:label="@string/addFriend_activity_title" />
         <activity

@@ -7,7 +7,7 @@
     <string name="friend_list_activity">Friends</string>
     <string name="title_activity_login">Sign in</string>
     <string name="notification">Notifications</string>
-    <string name="menu">Menu</string>
+    <string name="title_activity_menu">Menu</string>
     <string name="quizz">Quizz</string>
     <string name="survey">Survey</string>
     <string name="newpoll">New Poll</string>
