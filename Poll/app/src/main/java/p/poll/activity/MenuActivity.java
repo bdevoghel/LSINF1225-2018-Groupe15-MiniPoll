@@ -26,7 +26,7 @@ public class MenuActivity extends AppCompatActivity {
         Button newpoll=findViewById(R.id.newpoll);
         Button profile=findViewById(R.id.profile);
         Button friends=findViewById(R.id.friends);
-        Button notification=findViewById(R.id.notification);
+        //Button notification=findViewById(R.id.notification);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,12 +63,12 @@ public class MenuActivity extends AppCompatActivity {
                 //TODO: Go to pollCreation
             }
         });
-        notification.setOnClickListener(new View.OnClickListener() {
+        /*notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 seeNotifications(view);
             }
-        });
+        });*/
     }
     public void seeFriendList(View v) {
         Intent intent = new Intent(getApplicationContext(),FriendListActivity.class);
