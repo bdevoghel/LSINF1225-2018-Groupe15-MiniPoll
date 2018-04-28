@@ -6,6 +6,7 @@
     <string name="username">Username</string>
     <string name="friend_list_activity">Friends</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_register">Register</string>
     <string name="notification">Notifications</string>
     <string name="title_activity_menu">Menu</string>
     <string name="quizz">Quizz</string>
