@@ -15,21 +15,17 @@ import p.poll.model.User;
  * Created by Vahid Beyraghi on 25-04-18.
  */
 public class NotificationActivity extends AppCompatActivity {
-    User hostUser=LoginActivity.loggedUser;
-    private View view;
-    private TextView notification;
-    private Button accept;
-    private Button remove;
+    //User hostUser=LoginActivity.loggedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         int i=0; //TODO: Gerer sur quelle notif on est
-        notification = findViewById(R.id.notification1);
-        accept = findViewById(R.id.acceptnotif);
-        remove = findViewById(R.id.removenotif);
-        notification.append(hostUser.getNotificationList().get(i).getText());
+        TextView notification = findViewById(R.id.notification1);
+        Button accept = findViewById(R.id.acceptnotif);
+        Button remove = findViewById(R.id.removenotif);
+        /*notification.append(hostUser.getNotificationList().get(i).getText());
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +49,6 @@ public class NotificationActivity extends AppCompatActivity {
                 int i=0; //TODO: Gerer sur quelle notif on est
                 hostUser.rmvNotification(hostUser.getNotificationList().get(i));
             }
-        });
+        });*/
     }
 }

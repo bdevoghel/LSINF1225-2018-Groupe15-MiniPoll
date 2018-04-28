@@ -9,7 +9,7 @@
 
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/scrollView"
         android:layout_width="368dp"
         android:layout_height="495dp"
         android:layout_marginBottom="8dp"
@@ -38,7 +38,18 @@
         android:layout_marginTop="20dp"
         android:text="Notification"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2" />
+        app:layout_constraintTop_toTopOf="@+id/scrollView" />
+
+    <TextView
+        android:id="@+id/notification2"
+        android:layout_width="169dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="84dp"
+        android:text="Notification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView" />
 
     <Button
         android:id="@+id/acceptnotif"
@@ -49,10 +60,26 @@
         app:layout_constraintTop_toTopOf="@+id/notification1" />
 
     <Button
+        android:id="@+id/acceptnotif2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accept"
+        app:layout_constraintStart_toEndOf="@+id/notification2"
+        app:layout_constraintTop_toTopOf="@+id/notification2" />
+
+    <Button
         android:id="@+id/removenotif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remove"
         app:layout_constraintStart_toEndOf="@+id/acceptnotif"
         app:layout_constraintTop_toTopOf="@+id/notification1" />
+
+    <Button
+        android:id="@+id/removenotif2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove"
+        app:layout_constraintStart_toEndOf="@+id/acceptnotif2"
+        app:layout_constraintTop_toTopOf="@+id/notification2" />
 </android.support.constraint.ConstraintLayout>

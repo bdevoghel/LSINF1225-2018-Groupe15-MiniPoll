@@ -1,8 +1,7 @@
 package p.poll.activity;
 
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle; /* utilisé pour transmettre des données entre les activités */
+import android.os.Bundle;     /* utilisé pour transmettre des données entre les activités */
 import android.content.Intent;/*  Intent (='inter' en anglais) permet l'intéraction entre les activités */
 import android.view.View;
 import android.view.Window;
@@ -27,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button SignInButton = findViewById(R.id.sign_in_button);
-        SignInButton.setOnClickListener(new  View.OnClickListener() {
+        Button RegisterButton = findViewById(R.id.register_button);
+        RegisterButton.setOnClickListener(new  View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToRegister(view);}
@@ -37,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /** Lance l'activité register. */
     public void goToRegister(View v) {
         Intent intent = new Intent(this,RegisterActivity.class);
         startActivity(intent);
     }
-
 
     /** Lance l'activité ajouter un ami. */
     public void addFriend(View v) {
