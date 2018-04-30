@@ -16,7 +16,7 @@ import p.poll.MySQLiteHelper;
 public class User {
 
     //Map des instances des Users
-    private static Map<String,User> userMap = new HashMap<>();
+    private static HashMap<String,User> userMap = new HashMap<>();
 
     //Noms des colonnes de la database
     private static final String DB_COLUMN_USERNAME = "u_username";
@@ -33,35 +33,41 @@ public class User {
     private String password;
     private Bitmap profilePic;
     private User bestFriend;
-    private SparseArray<Notification> notificationList;
-    private SparseArray<Poll> pollList;
-    private HashMap<String,User> friendList;
+    private ArrayList<Notification> notificationList;
+    private ArrayList<Poll> pollList;
+    private ArrayList<User> friendList;
 
     //Constructeurs
     public User(){
-        friendList=new HashMap<>();
-        notificationList=new SparseArray<>();
-        pollList=new SparseArray<>();
+        friendList=new ArrayList<>();
+        notificationList=new ArrayList<>();
+        pollList=new ArrayList<>();
     }
+
+    /** Ce constructeur ne peut qu'être utilisé pour faire des comparations */
+    public User(String username){
+        this.username=username;
+    }
+
     public User(String uUsername,String uFName,String uLName, String uPassword){
         username=uUsername;
         firstName=uFName;
         lastName=uLName;
         password=uPassword;
-        friendList=new HashMap<>();
-        notificationList=new SparseArray<>();
-        pollList=new SparseArray<>();
-        userMap.put(username,this);
+        friendList=new ArrayList<>();
+        notificationList=new ArrayList<>();
+        pollList=new ArrayList<>();
+        userMap.put(uUsername,this);
     }
     public User(String uUsername,String uFName,String uLName, String uPassword, String profilePicFile){
         username=uUsername;
         firstName=uFName;
         lastName=uLName;
         password=uPassword;
-        friendList=new HashMap<>();
-        notificationList=new SparseArray<>();
-        pollList=new SparseArray<>();
-        userMap.put(username,this);
+        friendList=new ArrayList<>();
+        notificationList=new ArrayList<>();
+        pollList=new ArrayList<>();
+        userMap.put(uUsername,this);
         this.setProfilePic(upLoadPicture(profilePicFile));
     }
     public User(String uUsername,String uFName,String uLName, String uPassword, Bitmap profilePic){
@@ -69,17 +75,17 @@ public class User {
         firstName=uFName;
         lastName=uLName;
         password=uPassword;
-        friendList=new HashMap<>();
-        notificationList=new SparseArray<>();
-        pollList=new SparseArray<>();
-        userMap.put(username,this);
+        friendList=new ArrayList<>();
+        notificationList=new ArrayList<>();
+        pollList=new ArrayList<>();
+        userMap.put(uUsername,this);
         this.setProfilePic((profilePic));
     }
 
     //Getteurs et setteurs
     public void setUsername(String name){
         this.username=name;
-        if(!userMap.containsKey(username)){
+        if(!userMap.containsKey((username))){
             userMap.put(username,this);
         }
     }
@@ -119,13 +125,13 @@ public class User {
     public void setProfilePic(Bitmap p){
         this.profilePic=p;
     }
-    public HashMap<String,User> getFriendList(){
+    public ArrayList<User> getFriendList(){
         return friendList;
     }
-    public SparseArray<Poll> getPollList() {
+    public ArrayList<Poll> getPollList() {
         return pollList;
     }
-    public SparseArray<Notification> getNotificationList() {
+    public ArrayList<Notification> getNotificationList() {
         return notificationList;
     }
     public Bitmap getProfilePic() {
@@ -134,33 +140,33 @@ public class User {
 
     //Addeurs et removeurs
     public void addFriend(User friend) {
-        if(!friendList.containsKey(friend.getUsername()))
+        if(!friendList.contains(friend))
         {
-            friendList.put(friend.getUsername(),friend);
+            friendList.add(friend);
         }
     }
-    public void addFriend(HashMap<String,User> users){
-        friendList.putAll(users);
+    public void addFriend(ArrayList<User> users){
+        friendList.addAll(users);
     }
     public void rmvFriend(User friend) {
-        this.friendList.remove(friend.getUsername());
+        this.friendList.remove(friend);
     }
     public void addPoll(Poll p) {
-        if(pollList.indexOfKey(p.getId())<0)
+        if(!pollList.contains(p))
         {
-            this.pollList.append(p.getId(),p);
+            this.pollList.add(p);
         }
     }
     public void rmvPoll(Poll p) {
-        this.pollList.remove(p.getId());
+        this.pollList.remove(p);
     }
     public void addNotification(Notification n) {
-        if(this.notificationList.indexOfKey(n.getId())<0) {
-            notificationList.append(n.getId(),n);
+        if(this.notificationList.contains(n)) {
+            notificationList.add(n);
         }
     }
     public void rmvNotification(Notification n) {
-        this.notificationList.remove(n.getId());
+        this.notificationList.remove(n);
     }
 
     //Redefinition de la methode equals
@@ -175,7 +181,7 @@ public class User {
     /**
      * Fournit la liste des utilisateurs.
      */
-    public static HashMap<String,User> getUsers() {
+    public static ArrayList<User> getUsers() {
         // Récupération du  SQLiteHelper et de la base de données.
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
 
@@ -189,7 +195,7 @@ public class User {
         cursor.moveToFirst();
 
         // Initialisation la liste des utilisateurs.
-        HashMap<String,User> users = new HashMap<>();
+        ArrayList<User> users = new ArrayList<>();
 
         // Tant qu'il y a des lignes.
         while (!cursor.isAfterLast()) {
@@ -207,7 +213,7 @@ public class User {
             }
 
             // Ajout de l'utilisateur à la liste.
-            users.put(uUsername,user);
+            users.add(user);
 
             // Passe à la ligne suivante.
             cursor.moveToNext();
