@@ -6,8 +6,11 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import p.poll.R;
 
@@ -19,12 +22,35 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_menu2);
 
-        ImageButton survey=findViewById(R.id.survey);
-        ImageButton quizz=findViewById(R.id.quizz);
-        ImageButton choice=findViewById(R.id.choice);
-        ImageButton newpoll=findViewById(R.id.newpoll);
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(this));
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                if(id == 0)
+                {
+                    Quizz();
+                }
+                else if(id == 1)
+                {
+                    Choise();
+                }
+                else if(id == 2)
+                {
+                    Newpoll();
+                }
+                else
+                {
+                    Survey();
+                }
+            }
+        });
+
+
+
         Button profile=findViewById(R.id.profile);
         Button friends=findViewById(R.id.friends);
         profile.setOnClickListener(new View.OnClickListener() {
@@ -39,30 +65,33 @@ public class MenuActivity extends AppCompatActivity {
                 seeFriendList(view);
             }
         });
-        survey.setOnClickListener(new View.OnClickListener() {
+        friends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Go to surveyList
+                seeFriendList(view);
             }
         });
-        quizz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Go to quizzList
-            }
-        });
-        choice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Go to choiceList
-            }
-        });
-        newpoll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Go to pollCreation
-            }
-        });
+
+    }
+    public void Survey()
+    {
+        Toast.makeText(MenuActivity.this, "Survey",
+                Toast.LENGTH_SHORT).show();
+    }
+    public void Quizz()
+    {
+        Toast.makeText(MenuActivity.this, "Quizz",
+                Toast.LENGTH_SHORT).show();
+    }
+    private void Choise()
+    {
+        Toast.makeText(MenuActivity.this, "choise",
+                Toast.LENGTH_SHORT).show();
+    }
+    private void Newpoll()
+    {
+        Toast.makeText(MenuActivity.this, "New Poll",
+                Toast.LENGTH_SHORT).show();
     }
     public void seeFriendList(View v) {
         Intent intent = new Intent(getApplicationContext(),FriendListActivity.class);
