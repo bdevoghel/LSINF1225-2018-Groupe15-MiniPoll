@@ -53,25 +53,14 @@ public class MenuActivity extends AppCompatActivity {
 
         Button profile=findViewById(R.id.profile);
         Button friends=findViewById(R.id.friends);
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Go to profileActivity
-            }
-        });
-        friends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                seeFriendList(view);
-            }
-        });
-        friends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                seeFriendList(view);
-            }
-        });
 
+
+    }
+    public void profile(View v){
+
+    }
+    public void friends(View v) {
+        seeFriendList(v);
     }
     public void Survey()
     {

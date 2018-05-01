@@ -13,29 +13,64 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/friends"
-                android:layout_width="400dp"
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="40dp"
-                android:layout_weight="1"
-                android:button="@drawable/friends"
-                android:text="@string/friends" />
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:onClick="friends"
+                android:orientation="vertical"
+                android:padding="30px">
 
-            <RadioButton
-                android:id="@+id/profile"
-                android:layout_width="407dp"
+                <ImageButton
+                    android:id="@+id/Img4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:onClick="friends"
+                    android:src="@drawable/friends" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/friends"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
+
+            <View android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="40dp"
-                android:layout_weight="1"
-                android:button="@drawable/profile"
-                android:text="@string/profile" />
+                android:clickable="true"
+                android:onClick="profile"
+                android:orientation="vertical"
+                android:padding="30px">
 
+                <ImageButton
+                    android:id="@+id/Img5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:onClick="profile"
+                    android:src="@drawable/profile" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/profile"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
         </LinearLayout>
 
         <RelativeLayout
@@ -53,7 +88,8 @@
             android:horizontalSpacing="10dp"
             android:numColumns="2"
             android:stretchMode="spacingWidthUniform"
-            android:verticalSpacing="24dp" />
+            android:verticalSpacing="24dp"
+            android:background="@android:color/black" />
 
     </LinearLayout>
 
