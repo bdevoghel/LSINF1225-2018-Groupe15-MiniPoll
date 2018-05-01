@@ -57,7 +57,8 @@ public class MenuActivity extends AppCompatActivity {
 
     }
     public void profile(View v){
-
+        Intent intent = new Intent(getApplicationContext(),ScreenSlidePagerActivity.class);
+        startActivity(intent);
     }
     public void friends(View v) {
         seeFriendList(v);
