@@ -54,4 +54,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    //Photo
+    <string name="TakeNewPhoto">Prendre une photo</string>
+    <string name="ChoosePhoto">Choisir une photo</string>
+    <string name="cannotopencamera">Cannot use the camera without permission</string>
 </resources>
