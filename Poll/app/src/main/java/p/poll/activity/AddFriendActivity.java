@@ -31,7 +31,7 @@ public class AddFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addfriend);
         //Getting the user list
-        HashMap<String,User> userList=User.getUsers();
+        ArrayList<User> userList=User.getUsers();
         // ImageViews
         user_image = (ImageView) findViewById(R.id.userImageProfile);
 

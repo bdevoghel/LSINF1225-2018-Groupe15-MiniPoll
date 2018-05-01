@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import p.poll.R;
 
@@ -20,10 +21,10 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        Button survey=findViewById(R.id.survey);
-        Button quizz=findViewById(R.id.quizz);
-        Button choice=findViewById(R.id.choice);
-        Button newpoll=findViewById(R.id.newpoll);
+        ImageButton survey=findViewById(R.id.survey);
+        ImageButton quizz=findViewById(R.id.quizz);
+        ImageButton choice=findViewById(R.id.choice);
+        ImageButton newpoll=findViewById(R.id.newpoll);
         Button profile=findViewById(R.id.profile);
         Button friends=findViewById(R.id.friends);
         profile.setOnClickListener(new View.OnClickListener() {
