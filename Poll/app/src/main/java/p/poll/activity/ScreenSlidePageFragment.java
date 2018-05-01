@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import p.poll.R;
@@ -30,6 +31,8 @@ public class ScreenSlidePageFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_scroll, container, false);
         TextView textView = (TextView) view.findViewById(R.id.text);
         textView.setText("Update your text Here"+" "+this.pos);
+        ImageView image = (ImageView) view.findViewById(R.id.imageView6);
+        image.setImageResource(R.drawable.survey);
         ScreenSlidePagerActivity.pos ++;
         return view;
     }
