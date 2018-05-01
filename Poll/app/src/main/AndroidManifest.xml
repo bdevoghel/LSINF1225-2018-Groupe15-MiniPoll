@@ -22,6 +22,11 @@
         </activity>
 
         <activity
+            android:name=".activity.ChargingPage"
+            android:hardwareAccelerated="false"
+            android:label="@string/title_activity_login" />
+
+        <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
@@ -43,6 +48,7 @@
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
+
 
         <meta-data
             android:name="preloaded_fonts"

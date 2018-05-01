@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Poll.iml" filepath="$PROJECT_DIR$/Poll.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Nicolas\Documents\GitHub\LSINF1225-2018-Groupe15-MiniPoll\Poll\app\app.iml" filepath="C:\Users\Nicolas\Documents\GitHub\LSINF1225-2018-Groupe15-MiniPoll\Poll\app\app.iml" />
     </modules>
   </component>
 </project>
