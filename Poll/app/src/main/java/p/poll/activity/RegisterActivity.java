@@ -45,6 +45,11 @@ public class RegisterActivity extends AppCompatActivity{
         imgPicture = (ImageView) findViewById(R.id.imgPicture);
     }
 
+    public void resetimage(View v)
+    {
+        imgPicture.setImageResource(R.drawable.userimage);
+    }
+
     public void onTakePhotoClicked(View v) {
         if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             invokeCamera();
