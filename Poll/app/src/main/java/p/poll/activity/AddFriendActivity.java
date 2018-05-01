@@ -37,10 +37,9 @@ public class AddFriendActivity extends AppCompatActivity {
 
         Bundle data = getIntent().getExtras();
         userFriend = new User("dmichel","michel","dupuis","1234");
-        ArrayList<User> userArray=User.toArray(userList);
         int i=0;
-        userFriend = userArray.get(i);
-        userArray.remove(i);
+        userFriend = userList.get(i);
+        userList.remove(i);
         // getPhoto() function returns a Base64 String
         Bitmap bmp   = userFriend.getProfilePic();
         int size     = bmp.getRowBytes() * bmp.getHeight();
