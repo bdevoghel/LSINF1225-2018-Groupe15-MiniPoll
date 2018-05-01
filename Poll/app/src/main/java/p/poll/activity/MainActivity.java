@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** Lance le menu. */
     public void goToMenu(View v) {
-        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MenuActivity2.class);
         startActivity(intent);
     }
 
