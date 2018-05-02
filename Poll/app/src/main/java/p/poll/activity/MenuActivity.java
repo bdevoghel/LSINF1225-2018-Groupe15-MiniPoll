@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import p.poll.R;
@@ -86,5 +87,10 @@ public class MenuActivity extends AppCompatActivity {
     public void seeFriendList(View v) {
         Intent intent = new Intent(getApplicationContext(),FriendListActivity.class);
         startActivity(intent);
+    }
+    public void action(View v)
+    {
+        TextView textView2 = (TextView) v.findViewById(R.id.text3);
+        textView2.setText("PrenomHello :");
     }
 }

@@ -10,19 +10,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button3"
+        <SearchView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_height="match_parent" />
 
-        <EditText
-            android:id="@+id/editText"
+        <ImageView
+            android:id="@+id/imageView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            app:srcCompat="@drawable/michel" />
 
         <TextView
             android:id="@+id/text3"
@@ -33,12 +29,6 @@
             android:padding="16dp"
             android:text="lorem_ipsum" />
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/michel" />
-
         <TextView
             android:id="@+id/text"
             style="?android:textAppearanceMedium"
@@ -47,6 +37,13 @@
             android:lineSpacingMultiplier="1.2"
             android:padding="16dp"
             android:text="lorem_ipsum" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="action"
+            android:text="Button" />
     </LinearLayout>
 
 </ScrollView>
