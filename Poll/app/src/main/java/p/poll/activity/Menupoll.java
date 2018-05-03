@@ -1,31 +1,37 @@
 package p.poll.activity;
 
-import android.app.LoaderManager;
 import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import p.poll.R;
 
 /**
- * Created by Vahid Beyraghi on 25-04-18.
+ * Created by Nicolas on 03/05/2018.
  */
-public class MenuActivity extends AppCompatActivity {
+
+public class Menupoll extends AppCompatActivity {
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+
+    private Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu2);
-
+        setContentView(R.layout.activity_menu_poll_creation);
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this));
 
@@ -50,15 +56,32 @@ public class MenuActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
         Button profile=findViewById(R.id.profile);
         Button friends=findViewById(R.id.friends);
         ImageView notif =(ImageView) findViewById(R.id.notification);
+        mToolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(mToolbar);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
 
 
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     public void profile(View v){
         Intent intent = new Intent(getApplicationContext(),ScreenSlidePagerActivity.class);
         startActivity(intent);
@@ -68,29 +91,29 @@ public class MenuActivity extends AppCompatActivity {
     }
     public void Survey()
     {
-        Toast.makeText(MenuActivity.this, "Survey",
+        Toast.makeText(Menupoll.this, "Survey",
                 Toast.LENGTH_SHORT).show();
     }
     public void Notification(View v)
     {
-        Toast.makeText(MenuActivity.this, "Notification",
+        Toast.makeText(Menupoll.this, "Notification",
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),Notification2.class);
         startActivity(intent);
     }
     public void Quizz()
     {
-        Toast.makeText(MenuActivity.this, "Quizz",
+        Toast.makeText(Menupoll.this, "Quizz",
                 Toast.LENGTH_SHORT).show();
     }
     private void Choise()
     {
-        Toast.makeText(MenuActivity.this, "choise",
+        Toast.makeText(Menupoll.this, "choise",
                 Toast.LENGTH_SHORT).show();
     }
     private void Newpoll()
     {
-        Toast.makeText(MenuActivity.this, "New Poll",
+        Toast.makeText(Menupoll.this, "New Poll",
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),Menupoll.class);
         startActivity(intent);

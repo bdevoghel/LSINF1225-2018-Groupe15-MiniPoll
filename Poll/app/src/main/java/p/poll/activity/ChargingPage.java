@@ -37,7 +37,8 @@ public class ChargingPage extends AppCompatActivity {
                 videoView.start();
                 if(i>2)
                 {
-                    Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
+                    //Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),Menupoll.class);
                     startActivity(intent);
                     finish();
                 }

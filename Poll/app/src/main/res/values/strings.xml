@@ -31,7 +31,7 @@
     <string name="username">Username</string>
     <string name="friend_list_activity">Friends</string>
     <string name="login_button">Login</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Menu Principal</string>
     <string name="register_button">Register</string>
     <string name="title_activity_register">Register</string>
     <string name="notification">Notifications</string>
@@ -59,4 +59,8 @@
     <string name="TakeNewPhoto">Prendre une photo</string>
     <string name="ChoosePhoto">Choisir une photo</string>
     <string name="cannotopencamera">Cannot use the camera without permission</string>
+
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
