@@ -29,6 +29,7 @@ public class PollAdapter extends ArrayAdapter<PollModel> {
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_help,parent, false);
+
         }
 
         PollViewHolder viewHolder = (PollViewHolder) convertView.getTag();

@@ -8,7 +8,10 @@
         android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Liste des demandes d'aide"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/listView"
@@ -16,11 +19,5 @@
         android:layout_height="505dp">
 
     </ListView>
-
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 
 </LinearLayout>

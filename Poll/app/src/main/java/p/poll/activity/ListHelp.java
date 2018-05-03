@@ -1,37 +1,81 @@
 package p.poll.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import p.poll.R;
+
 
 /**
  * Created by Nicolas on 03/05/2018.
  */
 
-public class ListHelp  extends AppCompatActivity {
+public class ListHelp extends AppCompatActivity {
     private ListView mListView;
-    private String[] prenoms = new String[]{
-            "Antoine", "Benoit", "Cyril", "David", "Eloise", "Florent",
-            "Gerard", "Hugo", "Ingrid", "Jonathan", "Kevin", "Logan",
-            "Mathieu", "Noemie", "Olivia", "Philippe", "Quentin", "Romain",
-            "Sophie", "Tristan", "Ulric", "Vincent", "Willy", "Xavier",
-            "Yann", "Zoé"
-    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listhelp);
-
         mListView = (ListView) findViewById(R.id.listView);
 
-        //android.R.layout.simple_list_item_1 est une vue disponible de base dans le SDK android,
-        //Contenant une TextView avec comme identifiant "@android:id/text1"
+        List<PollModel> polls = genererPoll();
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(ListHelp.this,
-                android.R.layout.simple_list_item_1, prenoms);
+        PollAdapter adapter = new PollAdapter(ListHelp.this, polls);
         mListView.setAdapter(adapter);
+        mListView.setClickable(true);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                Object o = mListView.getItemAtPosition(position);
+                PollModel j = (PollModel)o;
+                Toast.makeText(ListHelp.this, j.getText(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private List<PollModel> genererPoll(){
+        List<PollModel> tweets = new ArrayList<PollModel>();
+        tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
+        tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
+        tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));
+        tweets.add(new PollModel(Color.RED, "Mathieu", "Il est quelle heure ??"));
+        tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
+        tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
+        tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
+        tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));
+        tweets.add(new PollModel(Color.RED, "Mathieu", "Il est quelle heure ??"));
+        tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
+        tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
+        tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
+        tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));
+        tweets.add(new PollModel(Color.RED, "Mathieu", "Il est quelle heure ??"));
+        tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
+        tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
+        tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
+        tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));
+        tweets.add(new PollModel(Color.RED, "Mathieu", "Il est quelle heure ??"));
+        tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
+        tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
+        tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
+        tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));
+        tweets.add(new PollModel(Color.RED, "Mathieu", "Il est quelle heure ??"));
+        tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
+        return tweets;
     }
 }
