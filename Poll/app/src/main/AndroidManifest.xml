@@ -21,6 +21,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.ListSurvey"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".activity.ListQuizz"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".activity.ListHelp"
             android:label="@string/title_activity_login" />
         <activity

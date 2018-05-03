@@ -146,11 +146,15 @@ public class Menupoll extends AppCompatActivity implements
     {
         Toast.makeText(Menupoll.this, "Quizz",
                 Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(),ListQuizz.class);
+        startActivity(intent);
     }
     private void Choise()
     {
         Toast.makeText(Menupoll.this, "choise",
                 Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(),ListSurvey.class);
+        startActivity(intent);
     }
     private void Newpoll()
     {

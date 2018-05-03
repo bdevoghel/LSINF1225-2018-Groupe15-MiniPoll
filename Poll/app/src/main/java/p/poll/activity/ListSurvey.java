@@ -24,7 +24,7 @@ import p.poll.R;
  * Created by Nicolas on 03/05/2018.
  */
 
-public class ListHelp extends AppCompatActivity {
+public class ListSurvey extends AppCompatActivity {
     private ListView mListView;
 
     @Override
@@ -32,12 +32,12 @@ public class ListHelp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listhelp);
         TextView texte =(TextView) findViewById(R.id.Title);
-        texte.setText("Liste des demandes d'aide");
+        texte.setText("Liste des sondages");
         mListView = (ListView) findViewById(R.id.listView);
 
         List<PollModel> polls = genererPoll();
 
-        PollAdapter adapter = new PollAdapter(ListHelp.this, polls);
+        PollAdapter adapter = new PollAdapter(ListSurvey.this, polls);
         mListView.setAdapter(adapter);
         mListView.setClickable(true);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -46,7 +46,7 @@ public class ListHelp extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Object o = mListView.getItemAtPosition(position);
                 PollModel j = (PollModel)o;
-                Toast.makeText(ListHelp.this, j.getText(),
+                Toast.makeText(ListSurvey.this, j.getText(),
                         Toast.LENGTH_SHORT).show();
             }
         });
