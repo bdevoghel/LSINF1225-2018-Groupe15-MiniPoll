@@ -35,15 +35,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingMultiplier="1.2"
-            android:padding="16dp"
-            android:text="lorem_ipsum" />
+            android:padding="16dp" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="action"
             android:text="Button" />
+        <Button
+            android:id="@+id/buttonexit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Menu" />
     </LinearLayout>
-
 </ScrollView>

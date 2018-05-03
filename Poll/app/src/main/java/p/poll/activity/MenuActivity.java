@@ -88,9 +88,4 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(),FriendListActivity.class);
         startActivity(intent);
     }
-    public void action(View v)
-    {
-        TextView textView2 = (TextView) v.findViewById(R.id.text3);
-        textView2.setText("PrenomHello :");
-    }
 }
