@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.Notification2"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".activity.ScreenSlidePagerActivity"
             android:label="@string/title_activity_login" />
         <activity

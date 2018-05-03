@@ -21,10 +21,10 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-        int i=0; //TODO: Gerer sur quelle notif on est
-        TextView notification = findViewById(R.id.notification1);
-        Button accept = findViewById(R.id.acceptnotif);
-        Button remove = findViewById(R.id.removenotif);
+        //int i=0; //TODO: Gerer sur quelle notif on est
+        //TextView notification = findViewById(R.id.notification1);
+        //Button accept = findViewById(R.id.acceptnotif);
+        //Button remove = findViewById(R.id.removenotif);
         /*notification.append(hostUser.getNotificationList().get(i).getText());
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
