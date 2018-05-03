@@ -10,17 +10,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="100"
-        android:text="Arthur a besoin de vos conseil"
+        android:text="Demander conseil ?"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView9"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Je te conseil de sortir avec :" />
+        android:layout_weight="100"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="100"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Description" />
 
     <view
         android:id="@+id/view2"
@@ -30,30 +57,28 @@
         android:layout_height="11dp"
         android:layout_weight="100" />
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:src="@drawable/proposition1" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="197dp"
         android:layout_weight="100"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:visibility="invisible" />
+        android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="match_parent"
-        android:layout_height="137dp"
-        android:layout_gravity="center"
-        android:layout_weight="100"
-        android:src="@drawable/proposition2" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/proposition1" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/proposition2" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView11"

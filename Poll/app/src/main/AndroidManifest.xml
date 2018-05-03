@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.NewHelp"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".activity.Menupoll"
             android:label="@string/title_activity_login" />
         <activity

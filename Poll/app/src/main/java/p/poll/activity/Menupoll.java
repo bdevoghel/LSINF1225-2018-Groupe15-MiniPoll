@@ -100,6 +100,9 @@ public class Menupoll extends AppCompatActivity implements
         else if (id == R.id.new_help){
             Toast.makeText(Menupoll.this, "Aide",
                     Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(),NewHelp.class);
+            startActivity(intent);
+
         }
         else {
             Toast.makeText(Menupoll.this, "Deconnection",
