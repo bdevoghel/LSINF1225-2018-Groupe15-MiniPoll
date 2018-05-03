@@ -31,7 +31,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal|center"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@android:color/white" />
         </LinearLayout>
 
         <RelativeLayout

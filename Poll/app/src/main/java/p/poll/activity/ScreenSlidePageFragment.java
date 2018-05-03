@@ -68,8 +68,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             default:
                 break;
         }
-        Intent intent = new Intent(getActivity(), MenuActivity.class);
-        startActivity(intent);
     }
 
 
