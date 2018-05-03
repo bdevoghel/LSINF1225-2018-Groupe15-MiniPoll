@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,7 @@ public class MenuActivity extends AppCompatActivity {
 
         Button profile=findViewById(R.id.profile);
         Button friends=findViewById(R.id.friends);
+        ImageView notif =(ImageView) findViewById(R.id.notification);
 
 
     }
@@ -68,6 +70,13 @@ public class MenuActivity extends AppCompatActivity {
     {
         Toast.makeText(MenuActivity.this, "Survey",
                 Toast.LENGTH_SHORT).show();
+    }
+    public void Notification(View v)
+    {
+        Toast.makeText(MenuActivity.this, "Notification",
+                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(),Notification2.class);
+        startActivity(intent);
     }
     public void Quizz()
     {

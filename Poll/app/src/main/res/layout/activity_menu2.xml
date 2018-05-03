@@ -124,12 +124,14 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_weight="0.3"
                 android:clickable="true"
+                android:contextClickable="true"
+                android:onClick="Notification"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/notification" />
 

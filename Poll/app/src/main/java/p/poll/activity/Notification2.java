@@ -23,9 +23,42 @@ public class Notification2 extends Activity {
                 "C++",
                 "C#",
                 "HTML",
+                "CSS",
+                "Java",
+                "C++",
+                "C#",
+                "HTML",
+                "CSS",
+                "Java",
+                "C++",
+                "C#",
+                "HTML",
+                "CSS",
+                "Java",
+                "C++",
+                "C#",
+                "HTML",
+                "CSS",
+                "HTML",
                 "CSS"
         } ;
         Integer[] imageId = {
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.notification,
+                R.drawable.survey,
+                R.drawable.choice,
+                R.drawable.friends,
+                R.drawable.userimage,
                 R.drawable.michel,
                 R.drawable.survey,
                 R.drawable.choice,
@@ -36,7 +69,7 @@ public class Notification2 extends Activity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_notification);
-            CustomList listAdapter = new
+            final CustomList listAdapter = new
                     CustomList(Notification2.this, web, imageId);
             list=(ListView)findViewById(R.id.list);
             list.setAdapter(listAdapter);
@@ -44,7 +77,7 @@ public class Notification2 extends Activity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    Toast.makeText(Notification2.this, "You Clicked at " +web[+ position], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Notification2.this, "You Clicked at " +web[+ position]+" value = ", Toast.LENGTH_SHORT).show();
                 }
             });
         }

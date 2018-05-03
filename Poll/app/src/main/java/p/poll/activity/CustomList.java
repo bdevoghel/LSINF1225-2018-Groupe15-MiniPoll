@@ -30,6 +30,8 @@ public class CustomList extends ArrayAdapter<String>{
         View rowView= inflater.inflate(R.layout.activity_screen_notification, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
+        imageView.setMaxHeight(30);
+        imageView.setMaxWidth(30);
         txtTitle.setText(web[position]);
         imageView.setImageResource(imageId[position]);
         return rowView;
