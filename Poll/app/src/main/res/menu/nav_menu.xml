@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:id="@+id/nav_account"
+    <item
+        android:id="@+id/nav_account"
         android:icon="@mipmap/ic_person_black_24dp"
         android:title="Mon compte" />
 
-    <item android:id="@+id/new_poll"
+    <item
+        android:id="@+id/new_quizz"
         android:icon="@mipmap/ic_settings_black_24dp"
-        android:title="Créer un poll" />
+        android:title="Créer un quizz" />
+    <item
+        android:id="@+id/new_survey"
+        android:icon="@mipmap/ic_settings_black_24dp"
+        android:title="Créer un sondage" />
+    <item
+        android:id="@+id/new_help"
+        android:icon="@mipmap/ic_settings_black_24dp"
+        android:title="Besoin d'un conseil ?" />
 
     <item android:id="@+id/nav_logout"
-        android:icon="@mipmap/exit"
         android:title="Déconnection" />
 
 </menu>
