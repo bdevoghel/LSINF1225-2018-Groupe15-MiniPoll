@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import p.poll.MySQLiteHelper;
 import p.poll.R;
 
 
@@ -17,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main2);
-
         Button login=findViewById(R.id.loginbutton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
