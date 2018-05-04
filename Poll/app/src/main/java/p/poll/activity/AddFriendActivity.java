@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -26,25 +28,25 @@ public class AddFriendActivity extends AppCompatActivity {
 
     ImageView user_image;
     User userFriend;
+    ArrayList<User> userList=User.getUsers();
+    String[] fname = User.getFName(userList);
+    String[] lname = User.getLName(userList);
+    Bitmap[] image = User.getPicture(userList);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addfriend);
-        //Getting the user list
-        ArrayList<User> userList=User.getUsers();
-        // ImageViews
+
+
         user_image = (ImageView) findViewById(R.id.userImageProfile);
 
         Bundle data = getIntent().getExtras();
-        userFriend = new User("dmichel","michel","dupuis","1234");
         int i=0;
         userFriend = userList.get(i);
-        userList.remove(i);
         // getPhoto() function returns a Base64 String
         Bitmap bmp   = userFriend.getProfilePic();
         int size     = bmp.getRowBytes() * bmp.getHeight();
         ByteBuffer b = ByteBuffer.allocate(size);
-
         bmp.copyPixelsToBuffer(b);
 
         byte[] bytes = new byte[size];

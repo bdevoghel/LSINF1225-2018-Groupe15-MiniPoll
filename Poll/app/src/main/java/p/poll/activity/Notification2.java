@@ -10,6 +10,7 @@ import android.widget.Toast;
 import android.app.Activity;
 
 import p.poll.R;
+import p.poll.model.Notification;
 
 /**
  * Created by Nicolas on 03/05/2018.
@@ -80,5 +81,10 @@ public class Notification2 extends Activity {
                     Toast.makeText(Notification2.this, "You Clicked at " +web[+ position]+" value = ", Toast.LENGTH_SHORT).show();
                 }
             });
+        }
+
+        protected void acceptNotification(Notification n)
+        {
+            
         }
     }

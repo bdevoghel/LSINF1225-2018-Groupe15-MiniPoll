@@ -19,11 +19,11 @@ public class User {
     private static HashMap<String,User> userMap = new HashMap<>();
 
     //Noms des colonnes de la database
-    private static final String DB_COLUMN_USERNAME = "u_username";
-    private static final String DB_COLUMN_FNAME = "u_fname";
-    private static final String DB_COLUMN_LNAME = "u_lname";
-    private static final String DB_COLUMN_PASSWORD = "u_password";
-    private static final String DB_TABLE = "users";
+    private static final String DB_COLUMN_USERNAME = "identifiant";
+    private static final String DB_COLUMN_FNAME = "prenom";
+    private static final String DB_COLUMN_LNAME = "nom";
+    private static final String DB_COLUMN_PASSWORD = "mdp";
+    private static final String DB_TABLE = "profil";
 
     //Attributs de la classe
     private String username;
@@ -178,10 +178,61 @@ public class User {
         }
         return false;
     }
+
+    public static String[] getFName(ArrayList<User> userList){
+        String[] infoList=new String[userList.size()];
+        for(int i=0;i<userList.size();i++)
+        {
+            infoList[i]=(userList.get(i)).getFirstName();
+        }
+        return infoList;
+    }
+
+    public static String[] getLName(ArrayList<User> userList){
+        String[] infoList=new String[userList.size()];
+        for(int i=0;i<userList.size();i++)
+        {
+            infoList[i]=(userList.get(i)).getLastName();
+        }
+        return infoList;
+    }
+
+    public static String[] getUsername(ArrayList<User> userList){
+        String[] infoList=new String[userList.size()];
+        for(int i=0;i<userList.size();i++)
+        {
+            infoList[i]=(userList.get(i)).getUsername();
+        }
+        return infoList;
+    }
+
+    public static String[] getEmail(ArrayList<User> userList){
+        String[] infoList=new String[userList.size()];
+        for(int i=0;i<userList.size();i++)
+        {
+            infoList[i]=(userList.get(i)).getMailAdress();
+        }
+        return infoList;
+    }
+
+    public static Bitmap[] getPicture(ArrayList<User> userList){
+        Bitmap[] infoList=new Bitmap[userList.size()];
+        for(int i=0;i<userList.size();i++)
+        {
+            infoList[i]=(userList.get(i)).getProfilePic();
+        }
+        return infoList;
+    }
+
     /**
      * Fournit la liste des utilisateurs.
      */
+
     public static ArrayList<User> getUsers() {
+        ArrayList<User> michel = new ArrayList<>();
+        michel.add(new User("michel","michel","dupond","12345"));
+        return michel;
+        /*
         // Récupération du  SQLiteHelper et de la base de données.
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
 
@@ -223,13 +274,15 @@ public class User {
         cursor.close();
         db.close();
 
-        return users;
+        return users;*/
     }
 
-    public static ArrayList<User> toArray(HashMap<String,User> users){
-        Collection<User> values = users.values();
-        ArrayList<User> listOfValues = new ArrayList<User>(values);
-        return listOfValues;
+    public static HashMap<String,User> toHashMap(ArrayList<User> users){
+        HashMap<String,User> hash = new HashMap<>();
+        for(int i=0;i<users.size();i++){
+            hash.put((users.get(i)).getUsername(),users.get(i));
+        }
+        return hash;
     }
     /**
      * Transforme un fichier en Bitmap

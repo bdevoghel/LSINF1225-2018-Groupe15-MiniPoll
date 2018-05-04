@@ -42,7 +42,7 @@
     <string name="choice">Choice</string>
     <string name="profile">Profile</string>
     <string name="friends">Friends</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_register">Register</string>

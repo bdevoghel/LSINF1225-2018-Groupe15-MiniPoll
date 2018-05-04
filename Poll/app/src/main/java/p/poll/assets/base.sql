@@ -1,6 +1,6 @@
 ﻿PRAGMA foreign_keys = off;
 BEGIN TRANSACTION;
-create table profil (identifiant STRING not null primary key,prenom STRING not null,nom STRING not null,email STRING not null,mdp STRING not null,photo binary,favoris STRING);
+create table profil (identifiant STRING not null primary key,prenom STRING not null,nom STRING not null,email STRING not null,mdp STRING not null,photo BLOB,favori int);
 create table poll(identifiant_proprietaire STRING not null ,idpoll STRING not null primary key,titre STRING not null,description STRING not null,types STRING(1) not null,deadline DATETIME,status_principal int);
 create table liste_questions(idpoll int,idquestion STRING,description_question STRING);
 create table notifications (identifiant STRING not null,etat int,message STRING,identifiant_notif STRING,poll_notif int);

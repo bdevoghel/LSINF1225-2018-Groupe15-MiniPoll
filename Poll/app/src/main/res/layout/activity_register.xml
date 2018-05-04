@@ -61,7 +61,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/email"
+            app:layout_constraintBottom_toTopOf="@+id/username"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,12 +87,12 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:hint="@string/prompt_email"
+            android:hint="@string/prompt_username"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:singleLine="true"
@@ -117,7 +117,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email" />
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <EditText
             android:id="@+id/confirm_password"
