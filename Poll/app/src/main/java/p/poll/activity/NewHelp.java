@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +38,7 @@ import p.poll.R;
  * Created by Nicolas on 03/05/2018.
  */
 
-public class NewHelp extends AppCompatActivity{
+public class NewHelp extends AppCompatActivity implements Serializable{
     public static final int IMAGE_GALLERY_REQUEST = 20;
     public static final int CAMERA_REQUEST_CODE = 228;
     public static final int CAMERA_PERMISSION_REQUEST_CODE = 4192;
@@ -45,6 +48,8 @@ public class NewHelp extends AppCompatActivity{
     Spinner spinner2;
     Spinner spinner3;
     View v;
+    public static Drawable proposition1;
+    public static Drawable proposition2;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,12 +122,11 @@ public class NewHelp extends AppCompatActivity{
                 Menu(view);}
         });
         ImageButton prevue=findViewById(R.id.prevue);
-        annuler.setOnClickListener(new  View.OnClickListener() {
+        prevue.setOnClickListener(new  View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Prevue(view);}
         });
-
         Button photo1=findViewById(R.id.but1);
         menu.setOnClickListener(new  View.OnClickListener() {
             @Override
@@ -157,7 +161,24 @@ public class NewHelp extends AppCompatActivity{
 
     public void Prevue(View v)
     {
-
+        EditText tp = (EditText) findViewById (R.id.editText);
+        String description = tp.getText().toString();
+        Spinner s = (Spinner) findViewById(R.id.spinner);
+        String semaine = s.getSelectedItem().toString();
+        //int sem = Integer.getInteger(semaine);
+        Spinner s2 = (Spinner) findViewById(R.id.spinner2);
+        String jour = s2.getSelectedItem().toString();
+        //int j = Integer.getInteger(jour);
+        Spinner s3 = (Spinner) findViewById(R.id.spinner3);
+        String heures = s3.getSelectedItem().toString();
+        //int h = Integer.getInteger(heures);
+        proposition1 = img1.getDrawable();
+        proposition2 = img2.getDrawable();
+        Intent intent = new Intent(this, Helpprevue.class);
+        intent.putExtra("desc", description);
+        //intent.putExtra("img1", proposition1);
+        //intent.putExtra("img2", (Serializable)proposition2);
+        startActivity(intent);
     }
 
     public void resetimage2(View v)

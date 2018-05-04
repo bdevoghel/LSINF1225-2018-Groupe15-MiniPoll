@@ -71,12 +71,14 @@
         android:layout_weight="100"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Button" />
+        <view
+            android:id="@+id/view"
+            class="android.support.v4.widget.Space"
+            id="@+id/view"
+            layout_weight="1"
+            android:layout_width="91dp"
+            android:layout_height="47dp"
+            android:layout_weight="1" />
 
         <view
             class="android.support.v4.widget.Space"
@@ -90,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Valider" />
     </LinearLayout>
 
 </LinearLayout>

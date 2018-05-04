@@ -160,7 +160,7 @@ public class Menupoll extends AppCompatActivity implements
     {
         Toast.makeText(Menupoll.this, "New Poll",
                 Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+        Intent intent = new Intent(getApplicationContext(),AddFriendActivity.class);
         startActivity(intent);
     }
     public void seeFriendList(View v) {
