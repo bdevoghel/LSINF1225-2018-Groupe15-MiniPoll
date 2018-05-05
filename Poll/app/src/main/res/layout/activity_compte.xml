@@ -141,7 +141,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonexit"
+                android:id="@+id/menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -154,7 +154,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/valider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
