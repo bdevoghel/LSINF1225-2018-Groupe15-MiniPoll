@@ -98,6 +98,8 @@ public class Menupoll extends AppCompatActivity implements
         else if (id == R.id.new_survey) {
             Toast.makeText(Menupoll.this, "Sondage",
                     Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(),Sondage.class);
+            startActivity(intent);
         }
         else if (id == R.id.new_help){
             Toast.makeText(Menupoll.this, "Aide",
