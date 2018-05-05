@@ -19,11 +19,11 @@ public class User {
     private static HashMap<String,User> userMap = new HashMap<>();
 
     //Noms des colonnes de la database
-    private static final String DB_COLUMN_USERNAME = "identifiant";
-    private static final String DB_COLUMN_FNAME = "prenom";
-    private static final String DB_COLUMN_LNAME = "nom";
+    private static final String DB_COLUMN_USERNAME = "Username";
+    private static final String DB_COLUMN_FNAME = "Prenom";
+    private static final String DB_COLUMN_LNAME = "Nom";
     private static final String DB_COLUMN_PASSWORD = "mdp";
-    private static final String DB_TABLE = "profil";
+    private static final String DB_TABLE = "Utilisateur";
 
     //Attributs de la classe
     private String username;
