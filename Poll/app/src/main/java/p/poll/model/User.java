@@ -236,6 +236,7 @@ public class User {
         // Récupération du  SQLiteHelper et de la base de données.
 
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        //ArrayList<User> users = new ArrayList<>();
 
         // Colonnes à récupérer
         String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_FNAME, DB_COLUMN_LNAME, DB_COLUMN_PASSWORD};
