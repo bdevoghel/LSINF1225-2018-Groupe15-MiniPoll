@@ -78,6 +78,10 @@
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
+        <activity
+            android:name=".activity.ActivityCompte"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
 
 
         <meta-data
