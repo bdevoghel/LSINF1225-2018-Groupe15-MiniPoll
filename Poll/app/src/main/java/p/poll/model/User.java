@@ -49,6 +49,15 @@ public class User {
         this.username=username;
     }
 
+    public User(String username, String password){
+        this.username=username;
+        this.password=password;
+        friendList=new ArrayList<>();
+        notificationList=new ArrayList<>();
+        pollList=new ArrayList<>();
+        userMap.put(username,this);
+    }
+
     public User(String uUsername,String uFName,String uLName, String uPassword){
         username=uUsername;
         firstName=uFName;
@@ -236,8 +245,9 @@ public class User {
         // Récupération du  SQLiteHelper et de la base de données.
 
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        //ArrayList<User> users = new ArrayList<>();
-
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User("michel","michel","dupond","12345"));
+/*
         // Colonnes à récupérer
         String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_FNAME, DB_COLUMN_LNAME, DB_COLUMN_PASSWORD};
 
@@ -247,8 +257,6 @@ public class User {
         // Placement du curseur sur la première ligne.
         cursor.moveToFirst();
 
-        // Initialisation la liste des utilisateurs.
-        ArrayList<User> users = new ArrayList<>();
 
         // Tant qu'il y a des lignes.
         while (!cursor.isAfterLast()) {
@@ -275,7 +283,7 @@ public class User {
         // Fermeture du curseur et de la base de données.
         cursor.close();
         db.close();
-
+*/
         return users;
     }
 

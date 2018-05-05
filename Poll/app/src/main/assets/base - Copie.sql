@@ -1,7 +1,7 @@
 ﻿PRAGMA foreign_keys = off;
 BEGIN TRANSACTION;
 CREATE TABLE profil (identifiant STRING not null primary key,prenom STRING not null,nom STRING not null,email STRING not null,mdp STRING not null,photo BLOB,favori int);
-CREATE TABLE poll(identifiant_proprietaire STRING not null ,idpoll STRING not null primary key,titre STRING not null,description STRING not null,types STRING(1) not null,deadline DATETIME,status_principal int);
+CREATE TABLE poll(identifiant_proprietaire STRING not null ,idpoll STRING not null primary key,titre STRING not null,description STRING not null,types STRING(1) not null,status_principal int);
 CREATE TABLE liste_questions(idpoll int,idquestion STRING,description_question STRING);
 CREATE TABLE notifications (identifiant STRING not null,etat int,message STRING,identifiant_notif STRING,poll_notif int);
 CREATE TABLE liste_amis(identifiant STRING not null,identifiant_amis STRING not null,etat int not null);
@@ -25,10 +25,10 @@ INSERT INTO profil(identifiant,prenom,nom,email,mdp) VALUES("ingid.pierret","ing
 INSERT INTO profil(identifiant,prenom,nom,email,mdp) VALUES("natasha.civ","Natasha","Civi","n.civi@yopmail.com","kothello");
 INSERT INTO poll VALUES("roger.charles",'P1',"Asterosismologie","repondez ci-dessous",'Q',0,0.2);
 INSERT INTO poll VALUES("rogerdu",'P2',"Cinema","repondez ci-dessous",'S',NULL,0.5);
-INSERT INTO poll VALUES("pierre.jean",'P3',"Dans quelle capitale va t'on ?","repondez ci-dessous",'S',1000,0);
-INSERT INTO poll VALUES("nico",'P4',"Quelle est le meilleur language de programmation","repondez ci-dessous",'S',50000,0);
-INSERT INTO poll VALUES("ingid.pierret",'P5',"Mathematique","Es-tu un genie ? Pour le savoir repond au question :)",'Q',500,0.5);
-INSERT INTO poll VALUES("ingid.pierret",'P7',"Aide moi a choisir","Quel vêtement dois-je acheter ?",'C',NULL,0);
+INSERT INTO poll VALUES("pierre.jean",'P3',"Dans quelle capitale va t'on ?","repondez ci-dessous",'S',0);
+INSERT INTO poll VALUES("nico",'P4',"Quelle est le meilleur language de programmation","repondez ci-dessous",'S',0);
+INSERT INTO poll VALUES("ingid.pierret",'P5',"Mathematique","Es-tu un genie ? Pour le savoir repond au question :)",'Q',0.5);
+INSERT INTO poll VALUES("ingid.pierret",'P7',"Aide moi a choisir","Quel vêtement dois-je acheter ?",'C',0);
 INSERT INTO notifications  VALUES("rogerdu",0,"Pierre Jean a cree un sondage, allez vite y repondre",NULL,'P3');
 INSERT INTO notifications  VALUES("c.haron",1,"Donatien Dede vous demande en amis","donadede",NULL);
 INSERT INTO notifications  VALUES("arnauddelemelle",1,"Ingrid Pierret demande votre aide",NULL,'P7');

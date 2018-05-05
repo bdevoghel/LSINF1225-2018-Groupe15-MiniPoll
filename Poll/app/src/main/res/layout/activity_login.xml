@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
-                    android:id="@+id/username"
+                    android:id="@+id/usernameRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:completionHint="@string/username"

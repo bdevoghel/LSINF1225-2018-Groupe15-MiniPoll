@@ -1,23 +1,22 @@
 package p.poll.activity;
 
-import android.*;
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.content.FileProvider;
 //import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,8 +25,10 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import p.poll.R;
+import p.poll.model.User;
 
 public class RegisterActivity extends AppCompatActivity{
 
@@ -35,21 +36,186 @@ public class RegisterActivity extends AppCompatActivity{
     public static final int CAMERA_REQUEST_CODE = 228;
     public static final int CAMERA_PERMISSION_REQUEST_CODE = 4192;
     private ImageView imgPicture;
+    public static User loggedUser=LoginActivity.loggedUser;
+    private EditText mUsername;
+    private EditText mPassword;
+    private EditText mPasswordC;
+    private Button registerB;
+    private UserRegisterTask mAuthTask = null;
+    private User existingUser = null;
+    private View mRegisterFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         // get a reference to the image view that holds the image that the user will see.
+        mUsername = (EditText) findViewById(R.id.usernameRegister);
+        mPassword = (EditText) findViewById(R.id.register_password);
+        mPasswordC = (EditText) findViewById(R.id.confirm_password);
+        /*
+        password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                    attemptLogin();
+                    return true;
+                }
+                return false;
+            }
+        });
+        */
         imgPicture = (ImageView) findViewById(R.id.imgPicture);
+        registerB = (Button) findViewById(R.id.register_button);
+        registerB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attempRegister();
+            }
+        });
+
     }
+
+    public void attempRegister()
+    {
+        if (mAuthTask != null) {
+            return;
+        }
+
+        // Reset errors.
+        mUsername.setError(null);
+        mPassword.setError(null);
+        mPasswordC.setError(null);
+
+        // Store values at the time of the login attempt.
+        String username = this.mUsername.getText().toString();
+        String password = this.mPassword.getText().toString();
+        String passwordC = this.mPasswordC.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid password, if the user entered one.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            this.mPassword.setError(getString(R.string.error_invalid_password));
+            focusView = this.mPassword;
+            cancel = true;
+        }
+
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(username)) {
+            this.mUsername.setError(getString(R.string.error_field_required));
+            focusView = this.mUsername;
+            cancel = true;
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            //showProgress(true);
+            mAuthTask = new RegisterActivity.UserRegisterTask(username, password, passwordC);
+            mAuthTask.execute((Void) null);
+        }
+    }
+
+    private boolean isPasswordValid(String password) {
+        return password.length() > 4;
+    }
+
+
+
+    public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String username;
+        private final String password;
+        private final String passwordC;
+
+        UserRegisterTask(String username, String password, String passwordC) {
+            this.username = username;
+            this.password = password;
+            this.passwordC = passwordC;
+            HashMap<String, User> users = User.toHashMap(User.getUsers());
+            existingUser=users.get(this.username);
+            //loggedUser = users.get(username);
+            /*
+            if(loggedUser!=null)
+            {
+                if(loggedUser.getPassword().equals(password))
+                {
+                    onPostExecute(true);
+                }
+            }
+            onPostExecute(false);
+            */
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+            try {
+                // Simulate network access.
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                return false;
+            }
+            /*
+            for (String credential : DUMMY_CREDENTIALS) {
+                String[] pieces = credential.split(":");
+                if (pieces[0].equals(username)) {
+                    // Account exists, return true if the password matches.
+                    return pieces[1].equals(password);
+                }
+            }
+            */
+            if(existingUser==null) {
+                if (this.password.equals(this.passwordC)) {
+                    loggedUser=new User(this.username, this.password);
+                    LoginActivity.loggedUser=loggedUser;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mAuthTask = null;
+            //showProgress(false);
+
+            if (success) {
+                goToProfil(mRegisterFormView);
+            } else {
+                mPassword.setError(getString(R.string.error_password_match));
+                mPassword.requestFocus();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            //showProgress(false);
+        }
+        /** Lance le profil. */
+        public void goToProfil(View v) {
+            Intent intent = new Intent(getApplicationContext(), /*ChargingPage.class*/);
+            startActivity(intent);
+        }
+    }
+
+
+
 
     public void resetimage(View v)
     {
         imgPicture.setImageResource(R.drawable.userimage);
     }
-
+/*
     public void onTakePhotoClicked(View v) {
         if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             invokeCamera();
@@ -59,7 +225,7 @@ public class RegisterActivity extends AppCompatActivity{
             requestPermissions(permissionRequest, CAMERA_PERMISSION_REQUEST_CODE);
         }
     }
-
+*/
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -160,5 +326,7 @@ public class RegisterActivity extends AppCompatActivity{
 
             }
         }
+
     }
+
 }

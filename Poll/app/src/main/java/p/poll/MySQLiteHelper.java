@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.SyncStateContract;
 import android.util.Log;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     /**
      * Nom du fichier de la base de données.
      */
-    private static final String DATABASE_NAME = "easyPoll_base.sqlite";
+    private static final String DATABASE_NAME = "database.db";
 
     /**
      * Version de la base de données (à incrémenter en cas de modification de celle-ci afin que la
@@ -117,17 +118,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      * enregistrées.
      */
     private void initDatabase(SQLiteDatabase db) {
+
+        //String sqlQuery = "CREATE TABLE [profil] ( [identifiant] TEXT PRIMARY KEY NOT NULL DEFAULT ( NULL ) , [prenom] TEXT NOT NULL DEFAULT ( NULL ) , [nom] TEXT NOT NULL DEFAULT ( NULL ) , [email] TEXT NOT NULL DEFAULT ( NULL ) , [mdp] TEXT NOT NULL DEFAULT ( NULL ) , [photo] BLOB , [favori] INTEGER )";
+        //db.execSQL(sqlQuery);
         try {
+
             // Ouverture du fichier sql.
             Scanner scan = new Scanner(Pollapp.getContext().getAssets().open(DATABASE_SQL_FILENAME));
             scan.useDelimiter(Pattern.compile(";"));
             while (scan.hasNext()) {
                 String sqlQuery = scan.next();
-                /*
-                 * @note : Pour des raisons de facilité, on ne prend en charge ici que les fichiers
-                 * contenant une instruction par ligne. Si des instructions SQL se trouvent sur deux
-                 * lignes, cela produira des erreurs (car l'instruction sera coupée)
-                 */
                 if (!sqlQuery.trim().isEmpty() && !sqlQuery.trim().startsWith("--")) {
                     Log.d("MySQL query", sqlQuery);
                     db.execSQL(sqlQuery);
