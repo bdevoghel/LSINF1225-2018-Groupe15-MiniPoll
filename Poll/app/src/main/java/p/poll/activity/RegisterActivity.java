@@ -1,5 +1,6 @@
 package p.poll.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -203,7 +204,7 @@ public class RegisterActivity extends AppCompatActivity{
         }
         /** Lance le profil. */
         public void goToProfil(View v) {
-            Intent intent = new Intent(getApplicationContext(), /*ChargingPage.class*/);
+            Intent intent = new Intent(getApplicationContext(), ActivityCompte.class);
             startActivity(intent);
         }
     }
@@ -215,7 +216,7 @@ public class RegisterActivity extends AppCompatActivity{
     {
         imgPicture.setImageResource(R.drawable.userimage);
     }
-/*
+
     public void onTakePhotoClicked(View v) {
         if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             invokeCamera();
@@ -225,7 +226,7 @@ public class RegisterActivity extends AppCompatActivity{
             requestPermissions(permissionRequest, CAMERA_PERMISSION_REQUEST_CODE);
         }
     }
-*/
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
