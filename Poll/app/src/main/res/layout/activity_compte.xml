@@ -1,166 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
+
+        android:id="@+id/profileActivityForm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="554dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/profile_pic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/michel" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_height="224dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/usernameRegister"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
+            app:srcCompat="@drawable/default_pic" />
 
-            <ImageButton
-                android:id="@+id/btnImageGallery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onImageGalleryClicked"
-                app:srcCompat="@android:drawable/ic_menu_gallery" />
+        <ImageButton
+            android:id="@+id/btnImageCamera"
+            android:layout_width="94dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_weight="1"
+            android:onClick="onTakePhotoClicked"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_pic"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
 
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onTakePhotoClicked"
-                app:srcCompat="@android:drawable/ic_menu_camera" />
+        <ImageButton
+            android:id="@+id/btnImageGallery"
+            android:layout_width="94dp"
+            android:layout_height="52dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:onClick="onImageGalleryClicked"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_pic"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/text3"
-                style="?android:textAppearanceMedium"
-                android:layout_width="13dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:lineSpacingMultiplier="1.2"
-                android:padding="16dp"
-                android:text="Nom :"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/editText4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Nom" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/text"
-                style="?android:textAppearanceMedium"
-                android:layout_width="14dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:lineSpacingMultiplier="1.2"
-                android:padding="16dp"
-                android:text="Prenom : "
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Prenom" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/emailinfo"
-                style="?android:textAppearanceMedium"
-                android:layout_width="13dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:lineSpacingMultiplier="1.2"
-                android:padding="16dp"
-                android:text="Email : "
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:text="email" />
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/text3"
+            style="?android:textAppearanceMedium"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:lineSpacingMultiplier="1.2"
+            android:padding="16dp"
+            android:text="@string/last_name"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/text"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/profile_name"
+            android:layout_width="254dp"
+            android:layout_height="51dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/hint_last_name"
+            android:inputType="textPersonName"
+            android:singleLine="true"
+            app:layout_constraintBottom_toTopOf="@+id/profile_first_name"
+            app:layout_constraintStart_toEndOf="@+id/text3" />
+
+
+        <TextView
+            android:id="@+id/text"
+            style="?android:textAppearanceMedium"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:lineSpacingMultiplier="1.2"
+            android:padding="16dp"
+            android:text="@string/first_name"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/emailinfo"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/profile_first_name"
+            android:layout_width="262dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/hint_first_name"
+            android:inputType="textPersonName"
+            android:singleLine="true"
+            app:layout_constraintBottom_toTopOf="@+id/profile_email"
+            app:layout_constraintStart_toEndOf="@+id/text" />
+
+
+        <TextView
+            android:id="@+id/emailinfo"
+            style="?android:textAppearanceMedium"
+            android:layout_width="108dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:lineSpacingMultiplier="1.2"
+            android:padding="16dp"
+            android:text="@string/email"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/valider"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/profile_email"
+            android:layout_width="257dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/hint_email"
+            android:imeActionId="6"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@+id/emailinfo"
+            app:layout_constraintStart_toEndOf="@+id/emailinfo" />
+
+
+        <Button
+            android:id="@+id/valider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Valider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Menu" />
-
-            <View
-                android:id="@+id/view5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/valider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Valider" />
-        </LinearLayout>
-
-    </LinearLayout>
-</LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
 

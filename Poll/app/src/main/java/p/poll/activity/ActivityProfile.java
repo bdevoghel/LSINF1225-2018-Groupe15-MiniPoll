@@ -5,14 +5,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
-import java.util.HashMap;
 
 import p.poll.R;
 import p.poll.model.User;
@@ -20,7 +17,7 @@ import p.poll.model.User;
 /**
  * Created by Vahid Beyraghi on 05-05-18.
  */
-public class ActivityCompte extends AppCompatActivity {
+public class ActivityProfile extends AppCompatActivity {
 
     public static User loggedUser=LoginActivity.loggedUser;
     private View profileActivityView;
@@ -44,6 +41,7 @@ public class ActivityCompte extends AppCompatActivity {
             goToLogin(profileActivityView);
             finish();
         }
+        menu=findViewById(R.id.menu);
         valider=findViewById(R.id.valider);
         profile_name=findViewById(R.id.profile_name);
         profile_first_name=findViewById(R.id.profile_first_name);
@@ -51,6 +49,13 @@ public class ActivityCompte extends AppCompatActivity {
         profile_pic=findViewById(R.id.profile_pic);
         btnImageCamera= findViewById(R.id.btnImageCamera);
         btnImageGallery= findViewById(R.id.btnImageGallery);
+
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMenu(v);
+            }
+        });
 
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,16 +73,6 @@ public class ActivityCompte extends AppCompatActivity {
         String lastName = this.profile_name.getText().toString();
         String eMail = this.profile_email.getText().toString();
         //TODO: ajouter la photo
-
-        if (mAuthTask != null) {
-            return;
-        }
-
-        // Reset errors.
-        profile_first_name.setError(null);
-        profile_name.setError(null);
-        profile_email.setError(null);
-
         if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && isEmailValid(eMail)) {
             loggedUser.setFirstName(firstName);
             loggedUser.setLastName(lastName);
@@ -109,7 +104,7 @@ public class ActivityCompte extends AppCompatActivity {
         }
         else
         {
-            mAuthTask = new ActivityCompte.UserModifyTask();
+            mAuthTask = new ActivityProfile.UserModifyTask();
             mAuthTask.execute((Void) null);
         }
         //TODO: si l'image n'est pas vide, ajouter l'image, sinon ajouter l'image par défaut
@@ -120,6 +115,9 @@ public class ActivityCompte extends AppCompatActivity {
 
 
     public class UserModifyTask extends AsyncTask<Void, Void, Boolean> {
+
+        private String error;
+        private int flag;
 
         UserModifyTask() {
         }

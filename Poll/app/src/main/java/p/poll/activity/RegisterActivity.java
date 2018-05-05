@@ -55,18 +55,6 @@ public class RegisterActivity extends AppCompatActivity{
         mUsername = (EditText) findViewById(R.id.usernameRegister);
         mPassword = (EditText) findViewById(R.id.register_password);
         mPasswordC = (EditText) findViewById(R.id.confirm_password);
-        /*
-        password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-        */
         imgPicture = (ImageView) findViewById(R.id.imgPicture);
         registerB = (Button) findViewById(R.id.register_button);
         registerB.setOnClickListener(new View.OnClickListener() {
@@ -142,11 +130,8 @@ public class RegisterActivity extends AppCompatActivity{
             this.username = username;
             this.password = password;
             this.passwordC = passwordC;
-            Log.i("test","new HashMap");
             HashMap<String, User> users = User.toHashMap(User.getUsers());
-            Log.i("test","users get");
             existingUser=users.get(this.username);
-            Log.i("test","get done");
         }
 
         @Override
@@ -161,9 +146,7 @@ public class RegisterActivity extends AppCompatActivity{
             }
             if(existingUser==null) {
                 if (this.password.equals(this.passwordC)) {
-                    Log.i("test","new User");
                     loggedUser=new User(this.username, this.password);
-                    Log.i("test","logUser=logUser");
                     LoginActivity.loggedUser=loggedUser;
                     return true;
                 }
@@ -183,11 +166,6 @@ public class RegisterActivity extends AppCompatActivity{
             //showProgress(false);
 
             if (success) {
-                if(loggedUser==null) {
-                    Log.i("test", "NULL");
-                }
-                Log.i("test","add User");
-                User.addUser(loggedUser);
                 goToProfil(mRegisterFormView);
             } else {
                 if(flag==1)
@@ -196,7 +174,6 @@ public class RegisterActivity extends AppCompatActivity{
                     mUsername.requestFocus();
                 }
                 else {
-                    Log.i("test","error mdp");
                     mPasswordC.setError(error);
                     mPassword.requestFocus();
                     mPasswordC.requestFocus();
