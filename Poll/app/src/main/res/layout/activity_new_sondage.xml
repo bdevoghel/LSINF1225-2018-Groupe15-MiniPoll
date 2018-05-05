@@ -36,7 +36,8 @@
         android:backgroundTint="@color/colorPrimary"
         android:text="Inviter un ami à participer"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/textView14"

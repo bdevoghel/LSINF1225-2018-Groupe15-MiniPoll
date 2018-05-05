@@ -26,7 +26,7 @@ public class Sondage extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
+        setContentView(R.layout.activity_new_sondage);
         final CustomSondage listAdapter = new
                 CustomSondage(Sondage.this, web);
         list=(ListView)findViewById(R.id.list);
