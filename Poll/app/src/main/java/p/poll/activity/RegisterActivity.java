@@ -143,7 +143,7 @@ public class RegisterActivity extends AppCompatActivity{
             this.password = password;
             this.passwordC = passwordC;
             Log.i("test","new HashMap");
-            HashMap<String, User> users = new HashMap<>(); //User.toHashMap(User.getUsers());
+            HashMap<String, User> users = User.toHashMap(User.getUsers());
             Log.i("test","users get");
             existingUser=users.get(this.username);
             Log.i("test","get done");
