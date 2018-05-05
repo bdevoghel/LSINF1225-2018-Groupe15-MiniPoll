@@ -50,7 +50,7 @@ public class Sondage extends Activity {
 
         List<PollModel> polls = genererAmi();
 
-        PollAdapter adapter = new PollAdapter(Sondage.this, polls);
+        PollAdapterSondage adapter = new PollAdapterSondage(Sondage.this, polls);
         mListView.setAdapter(adapter);
         mListView.setClickable(true);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
