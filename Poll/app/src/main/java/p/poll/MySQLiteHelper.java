@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import static p.poll.Pollapp.getContext;
+
 /**
  * Classe utilitaire qui va gérer la connexion, la création et la mise à jour de la base de données.
  * <p>
@@ -30,11 +32,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      * Nom du fichier sql contenant les instructions de création de la base de données. Le fichier
      * doit être placé dans le dossier assets/
      */
-    private static final String DATABASE_SQL_FILENAME = "base.sql";
+    private static final String DATABASE_SQL_FILENAME = "base2.sql";
     /**
      * Nom du fichier de la base de données.
      */
-    private static final String DATABASE_NAME = "database.db";
+    private static final String DATABASE_NAME = "easyPoll_database.sqlite";
 
     /**
      * Version de la base de données (à incrémenter en cas de modification de celle-ci afin que la
@@ -56,7 +58,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      */
     private MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        Log.i("test","Constructeur fait");
         instance = this;
+        Log.i("test","Instance=this");
     }
 
     /**
@@ -66,8 +70,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      */
     public static MySQLiteHelper get() {
         if (instance == null) {
-            return new MySQLiteHelper(Pollapp.getContext());
+            Log.i("test","new MySQLiteHelper");
+            if(getContext()==null){Log.i("test","NULL");}
+            new MySQLiteHelper(getContext());
         }
+        Log.i("test","Return instance");
         return instance;
     }
 
@@ -124,7 +131,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         try {
 
             // Ouverture du fichier sql.
-            Scanner scan = new Scanner(Pollapp.getContext().getAssets().open(DATABASE_SQL_FILENAME));
+            Scanner scan = new Scanner(getContext().getAssets().open(DATABASE_SQL_FILENAME));
             scan.useDelimiter(Pattern.compile(";"));
             while (scan.hasNext()) {
                 String sqlQuery = scan.next();

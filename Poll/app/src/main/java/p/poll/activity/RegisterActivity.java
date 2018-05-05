@@ -15,6 +15,7 @@ import android.support.v4.content.FileProvider;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -134,24 +135,18 @@ public class RegisterActivity extends AppCompatActivity{
         private final String username;
         private final String password;
         private final String passwordC;
+        private String error;
+        private int flag;
 
         UserRegisterTask(String username, String password, String passwordC) {
             this.username = username;
             this.password = password;
             this.passwordC = passwordC;
-            HashMap<String, User> users = User.toHashMap(User.getUsers());
+            Log.i("test","new HashMap");
+            HashMap<String, User> users = new HashMap<>(); //User.toHashMap(User.getUsers());
+            Log.i("test","users get");
             existingUser=users.get(this.username);
-            //loggedUser = users.get(username);
-            /*
-            if(loggedUser!=null)
-            {
-                if(loggedUser.getPassword().equals(password))
-                {
-                    onPostExecute(true);
-                }
-            }
-            onPostExecute(false);
-            */
+            Log.i("test","get done");
         }
 
         @Override
@@ -164,22 +159,18 @@ public class RegisterActivity extends AppCompatActivity{
             } catch (InterruptedException e) {
                 return false;
             }
-            /*
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(username)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(password);
-                }
-            }
-            */
             if(existingUser==null) {
                 if (this.password.equals(this.passwordC)) {
                     loggedUser=new User(this.username, this.password);
                     LoginActivity.loggedUser=loggedUser;
                     return true;
                 }
+                flag=0;
+                error=getString(R.string.error_password_match);
+                return false;
             }
+            flag=1;
+            error=getString(R.string.error_username_exists);
             return false;
         }
 
@@ -192,18 +183,26 @@ public class RegisterActivity extends AppCompatActivity{
             if (success) {
                 goToProfil(mRegisterFormView);
             } else {
-                mPassword.setError(getString(R.string.error_password_match));
-                mPassword.requestFocus();
+                if(flag==1)
+                {
+                    mUsername.setError(error);
+                    mUsername.requestFocus();
+                }
+                else {
+                    mPassword.setError(error);
+                    mPassword.requestFocus();
+                    mPasswordC.requestFocus();
+                }
             }
         }
 
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            //showProgress(false);
         }
         /** Lance le profil. */
         public void goToProfil(View v) {
+            Log.i("test","Go to profil");
             Intent intent = new Intent(getApplicationContext(), ActivityCompte.class);
             startActivity(intent);
         }
