@@ -58,9 +58,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      */
     private MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        Log.i("test","Constructeur fait");
         instance = this;
-        Log.i("test","Instance=this");
     }
 
     /**
@@ -70,11 +68,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      */
     public static MySQLiteHelper get() {
         if (instance == null) {
-            Log.i("test","new MySQLiteHelper");
-            if(getContext()==null){Log.i("test","NULL");}
             new MySQLiteHelper(getContext());
         }
-        Log.i("test","Return instance");
         return instance;
     }
 

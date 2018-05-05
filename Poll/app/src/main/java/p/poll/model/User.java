@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.ImageView;
 import android.util.SparseArray;
 
@@ -22,8 +25,12 @@ public class User {
     private static final String DB_COLUMN_USERNAME = "Username";
     private static final String DB_COLUMN_FNAME = "Prenom";
     private static final String DB_COLUMN_LNAME = "Nom";
+    private static final String DB_COLUMN_EMAIL = "email";
     private static final String DB_COLUMN_PASSWORD = "mdp";
     private static final String DB_TABLE = "Utilisateur";
+    private static final String DB_COLUMN_PIC = "photo";
+    private static final String DB_COLUMN_FAV = "favori";
+
 
     //Attributs de la classe
     private String username;
@@ -285,6 +292,36 @@ public class User {
         db.close();
 
         return users;
+    }
+
+    public static void addUser(User user)
+    {
+        userMap.put(user.getUsername(),user);
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        ContentValues values = new ContentValues();
+        String username=user.getUsername();
+        String firstname=user.getFirstName();
+        String lastname=user.getFirstName();
+        String password=user.getPassword();
+        String mail=user.getMailAdress();
+        String bff=null;
+        if(user.getBestFriend()!=null)
+        {
+            bff=user.getBestFriend().getUsername();
+        }
+        values.put(DB_COLUMN_USERNAME, username);
+        values.put(DB_COLUMN_FNAME, firstname);
+        values.put(DB_COLUMN_LNAME, lastname);
+        values.put(DB_COLUMN_PASSWORD, password);
+        values.put(DB_COLUMN_EMAIL, mail);
+        //TODO: photo
+        //values.put(DB_COLUMN_PIC, user.getProfilePic());
+        values.put(DB_COLUMN_FAV, bff);
+
+        Log.i("test","insert");
+        db.insert(DB_TABLE, null, values);
+
+        Log.i("test","done");
     }
 
     public static HashMap<String,User> toHashMap(ArrayList<User> users){

@@ -3,7 +3,7 @@ BEGIN TRANSACTION;
 
 -- Table: profil
 DROP TABLE IF EXISTS profil;
-CREATE TABLE profil (identifiant TEXT NOT NULL UNIQUE PRIMARY KEY,prenom STRING not null,nom STRING not null,email STRING not null,mdp STRING not null,photo NUMERIC,favori INTEGER);
+CREATE TABLE profil (identifiant TEXT NOT NULL UNIQUE PRIMARY KEY,prenom STRING not null,nom STRING not null,email STRING not null,mdp STRING not null,photo NUMERIC, favori TEXT, FOREIGN KEY (favori) REFERENCES Utilisateur (Username)));
 CREATE TABLE poll (identifiant_proprietaire STRING not null ,idpoll STRING not null primary key,titre STRING not null,description STRING not null,types STRING(1) not null,status_principal int);
 CREATE TABLE liste_questions (idpoll int,idquestion STRING,description_question STRING);
 CREATE TABLE notifications (identifiant STRING not null,etat int,message STRING,identifiant_notif STRING,poll_notif int);

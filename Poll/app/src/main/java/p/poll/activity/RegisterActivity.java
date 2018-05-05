@@ -161,7 +161,9 @@ public class RegisterActivity extends AppCompatActivity{
             }
             if(existingUser==null) {
                 if (this.password.equals(this.passwordC)) {
+                    Log.i("test","new User");
                     loggedUser=new User(this.username, this.password);
+                    Log.i("test","logUser=logUser");
                     LoginActivity.loggedUser=loggedUser;
                     return true;
                 }
@@ -181,6 +183,11 @@ public class RegisterActivity extends AppCompatActivity{
             //showProgress(false);
 
             if (success) {
+                if(loggedUser==null) {
+                    Log.i("test", "NULL");
+                }
+                Log.i("test","add User");
+                User.addUser(loggedUser);
                 goToProfil(mRegisterFormView);
             } else {
                 if(flag==1)
@@ -189,7 +196,8 @@ public class RegisterActivity extends AppCompatActivity{
                     mUsername.requestFocus();
                 }
                 else {
-                    mPassword.setError(error);
+                    Log.i("test","error mdp");
+                    mPasswordC.setError(error);
                     mPassword.requestFocus();
                     mPasswordC.requestFocus();
                 }
