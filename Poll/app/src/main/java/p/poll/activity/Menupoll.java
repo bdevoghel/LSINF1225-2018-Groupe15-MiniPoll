@@ -88,6 +88,8 @@ public class Menupoll extends AppCompatActivity implements
         if (id == R.id.nav_account) {
             Toast.makeText(Menupoll.this, "Compte",
                     Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(),modification_compte.class);
+            startActivity(intent);
         }
         else if (id == R.id.new_quizz) {
             Toast.makeText(Menupoll.this, "Quizz",
