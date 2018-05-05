@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.Sondage"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".activity.modification_compte"
             android:label="@string/title_activity_login" />
         <activity

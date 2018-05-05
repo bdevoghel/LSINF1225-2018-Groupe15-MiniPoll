@@ -9,7 +9,7 @@
         android:layout_gravity="center_horizontal|center">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txt"
             android:layout_width="395dp"
             android:layout_height="wrap_content"
             android:text="TextView" />

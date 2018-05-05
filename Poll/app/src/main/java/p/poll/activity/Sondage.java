@@ -22,26 +22,13 @@ public class Sondage extends Activity {
             "Proposition4",
             "Proposition5",
     } ;
-    Integer[] imageId = {
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-            R.drawable.notification,
-    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-        final CustomList listAdapter = new
-                CustomList(Sondage.this, web, imageId);
+        final CustomSondage listAdapter = new
+                CustomSondage(Sondage.this, web);
         list=(ListView)findViewById(R.id.list);
         list.setAdapter(listAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
