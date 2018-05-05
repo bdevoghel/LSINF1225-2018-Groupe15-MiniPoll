@@ -238,16 +238,16 @@ public class User {
      */
 
     public static ArrayList<User> getUsers() {
-        ArrayList<User> michel = new ArrayList<>();
-        michel.add(new User("michel","michel","dupond","12345"));
-        return michel;
+        //ArrayList<User> michel = new ArrayList<>();
+        //michel.add(new User("michel","michel","dupond","12345"));
+        //return michel;
 
         // Récupération du  SQLiteHelper et de la base de données.
 
-        //SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        //ArrayList<User> users = new ArrayList<>();
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        ArrayList<User> users = new ArrayList<>();
         //users.add(new User("michel","michel","dupond","12345"));
-/*
+
         // Colonnes à récupérer
         String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_FNAME, DB_COLUMN_LNAME, DB_COLUMN_PASSWORD};
 
@@ -283,8 +283,8 @@ public class User {
         // Fermeture du curseur et de la base de données.
         cursor.close();
         db.close();
-*/
-        //return users;
+
+        return users;
     }
 
     public static HashMap<String,User> toHashMap(ArrayList<User> users){
