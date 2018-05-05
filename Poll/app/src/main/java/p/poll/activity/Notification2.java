@@ -17,31 +17,20 @@ import p.poll.model.Notification;
  */
 
 public class Notification2 extends Activity {
-
         ListView list;
         String[] web = {
                 "Java",
                 "C++",
-                "C#",
-                "HTML",
-                "CSS",
                 "Java",
                 "C++",
-                "C#",
-                "HTML",
-                "CSS",
                 "Java",
                 "C++",
-                "C#",
-                "HTML",
-                "CSS",
                 "Java",
                 "C++",
-                "C#",
-                "HTML",
-                "CSS",
-                "HTML",
-                "CSS"
+                "Java",
+                "C++",
+                "Java",
+                "C++",
         } ;
         Integer[] imageId = {
                 R.drawable.notification,
@@ -56,15 +45,6 @@ public class Notification2 extends Activity {
                 R.drawable.notification,
                 R.drawable.notification,
                 R.drawable.notification,
-                R.drawable.survey,
-                R.drawable.choice,
-                R.drawable.friends,
-                R.drawable.userimage,
-                R.drawable.michel,
-                R.drawable.survey,
-                R.drawable.choice,
-                R.drawable.friends,
-                R.drawable.userimage
         };
         @Override
         protected void onCreate(Bundle savedInstanceState) {
