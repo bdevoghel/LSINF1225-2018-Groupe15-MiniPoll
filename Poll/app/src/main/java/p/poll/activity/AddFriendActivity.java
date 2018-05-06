@@ -31,7 +31,6 @@ public class AddFriendActivity extends AppCompatActivity {
     ArrayList<User> userList=User.getUsers();
     String[] fname = User.getFName(userList);
     String[] lname = User.getLName(userList);
-    Bitmap[] image = User.getPicture(userList);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +38,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
 
         user_image = (ImageView) findViewById(R.id.userImageProfile);
-
+/*
         Bundle data = getIntent().getExtras();
         int i=0;
         userFriend = userList.get(i);
@@ -60,7 +59,7 @@ public class AddFriendActivity extends AppCompatActivity {
         InputStream inputStream  = new ByteArrayInputStream(decodedString);
         Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
         user_image.setImageBitmap(bitmap);
-
+*/
         final Button button = findViewById(R.id.buttonAddFriend);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

@@ -5,15 +5,20 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
 import android.util.SparseArray;
-
+import android.support.v4.content.FileProvider;
 import p.poll.MySQLiteHelper;
 
 public class User {
@@ -38,7 +43,7 @@ public class User {
     private String firstName;
     private String mailAdress;
     private String password;
-    private Bitmap profilePic;
+    private String profilePic;
     private String bestFriend;
     private ArrayList<Notification> notificationList;
     private ArrayList<Poll> pollList;
@@ -57,47 +62,25 @@ public class User {
     }
 
     public User(String username, String password){
-        this.username=username;
-        this.password=password;
-        friendList=new ArrayList<>();
-        notificationList=new ArrayList<>();
-        pollList=new ArrayList<>();
-        userMap.put(username,this);
-    }
-
-    public User(String uUsername,String uFName,String uLName, String uPassword, String email, String bestfriend){
+            this.username=username;
+            this.password=password;
+            friendList=new ArrayList<>();
+            notificationList=new ArrayList<>();
+            pollList=new ArrayList<>();
+            userMap.put(username,this);
+        }
+    public User(String uUsername,String uFName,String uLName, String uPassword, String email, String bestfriend, String profilePicFile){
         username=uUsername;
         firstName=uFName;
         lastName=uLName;
         password=uPassword;
+        bestFriend=bestfriend;
         mailAdress=email;
-        this.bestFriend=bestfriend;
         friendList=new ArrayList<>();
         notificationList=new ArrayList<>();
         pollList=new ArrayList<>();
         userMap.put(uUsername,this);
-    }
-    public User(String uUsername,String uFName,String uLName, String uPassword, String profilePicFile){
-        username=uUsername;
-        firstName=uFName;
-        lastName=uLName;
-        password=uPassword;
-        friendList=new ArrayList<>();
-        notificationList=new ArrayList<>();
-        pollList=new ArrayList<>();
-        userMap.put(uUsername,this);
-        this.setProfilePic(upLoadPicture(profilePicFile));
-    }
-    public User(String uUsername,String uFName,String uLName, String uPassword, Bitmap profilePic){
-        username=uUsername;
-        firstName=uFName;
-        lastName=uLName;
-        password=uPassword;
-        friendList=new ArrayList<>();
-        notificationList=new ArrayList<>();
-        pollList=new ArrayList<>();
-        userMap.put(uUsername,this);
-        this.setProfilePic((profilePic));
+        profilePic=profilePicFile;
     }
 
     //Getteurs et setteurs
@@ -140,7 +123,7 @@ public class User {
     public String getBestFriend(){
         return bestFriend;
     }
-    public void setProfilePic(Bitmap p){
+    public void setProfilePic(String p){
         this.profilePic=p;
     }
     public ArrayList<User> getFriendList(){
@@ -152,7 +135,7 @@ public class User {
     public ArrayList<Notification> getNotificationList() {
         return notificationList;
     }
-    public Bitmap getProfilePic() {
+    public String getProfilePic() {
         return this.profilePic;
     }
 
@@ -233,15 +216,6 @@ public class User {
         return infoList;
     }
 
-    public static Bitmap[] getPicture(ArrayList<User> userList){
-        Bitmap[] infoList=new Bitmap[userList.size()];
-        for(int i=0;i<userList.size();i++)
-        {
-            infoList[i]=(userList.get(i)).getProfilePic();
-        }
-        return infoList;
-    }
-
     /**
      * Fournit la liste des utilisateurs.
      */
@@ -258,7 +232,7 @@ public class User {
         //users.add(new User("michel","michel","dupond","12345"));
 
         // Colonnes à récupérer
-        String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_FNAME, DB_COLUMN_LNAME, DB_COLUMN_PASSWORD, DB_COLUMN_EMAIL, DB_COLUMN_FAV};
+        String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_FNAME, DB_COLUMN_LNAME, DB_COLUMN_PASSWORD, DB_COLUMN_EMAIL, DB_COLUMN_PIC, DB_COLUMN_FAV};
 
         // Requête de selection (SELECT)
         Cursor cursor = db.query(DB_TABLE, colonnes, null, null, null, null, null);
@@ -275,14 +249,16 @@ public class User {
             String uLName = cursor.getString(2);
             String uPassword = cursor.getString(3);
             String email = cursor.getString(4);
-            String bestfriend = cursor.getString(5);
-
+            String pic = cursor.getString(5);
+            String bestfriend = cursor.getString(6);
+/*
             // Vérification pour savoir s'il y a déjà une instance de cet utilisateur.
             User user = userMap.get(uUsername);
             if (user == null) {
                 // Si pas encore d'instance, création d'une nouvelle instance.
-                user= new User(uUsername,uFName,uLName,uPassword,email,bestfriend);
-            }
+                */
+                User user= new User(uUsername,uFName,uLName,uPassword,email,bestfriend,pic);
+
 
             // Ajout de l'utilisateur à la liste.
             users.add(user);
@@ -308,20 +284,19 @@ public class User {
         String password=user.getPassword();
         String mail=user.getMailAdress();
         String bff=user.getBestFriend();
+        String picture=user.getProfilePic();
         values.put(DB_COLUMN_USERNAME, username);
         values.put(DB_COLUMN_FNAME, firstname);
         values.put(DB_COLUMN_LNAME, lastname);
         values.put(DB_COLUMN_PASSWORD, password);
         values.put(DB_COLUMN_EMAIL, mail);
-        //TODO: photo
-        //values.put(DB_COLUMN_PIC, user.getProfilePic());
+        values.put(DB_COLUMN_PIC, picture);
         values.put(DB_COLUMN_FAV, bff);
         Log.i("test","update");
         db.update(DB_TABLE, values, DB_COLUMN_USERNAME+"=?", new String[]{usernameArg});
         Log.i("test","done");
-        Log.i("display",loggedUser.getUsername());
         loggedUser=(User.toHashMap(User.getUsers())).get(username);
-        Log.i("display",loggedUser.getUsername());
+        //Log.i("Display",loggedUser.getProfilePic());
         db.close();
     }
 
@@ -346,17 +321,17 @@ public class User {
         ContentValues values = new ContentValues();
         String username=user.getUsername();
         String firstname=user.getFirstName();
-        String lastname=user.getFirstName();
+        String lastname=user.getLastName();
         String password=user.getPassword();
         String mail=user.getMailAdress();
         String bff=user.getBestFriend();
+        String picture=user.getProfilePic();
         values.put(DB_COLUMN_USERNAME, username);
         values.put(DB_COLUMN_FNAME, firstname);
         values.put(DB_COLUMN_LNAME, lastname);
         values.put(DB_COLUMN_PASSWORD, password);
         values.put(DB_COLUMN_EMAIL, mail);
-        //TODO: photo
-        //values.put(DB_COLUMN_PIC, user.getProfilePic());
+        values.put(DB_COLUMN_PIC, picture);
         values.put(DB_COLUMN_FAV, bff);
 
         Log.i("test","insert");
@@ -376,10 +351,17 @@ public class User {
     /**
      * Transforme un fichier en Bitmap
      */
-    public Bitmap upLoadPicture(String filePath){
-        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-        this.setProfilePic(bitmap);
-        return bitmap;
+    public static Bitmap toBitmap(String filePath, ContentResolver content){
+        Log.i("TOBITMAP",filePath);
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(content, Uri.parse(filePath));
+            return bitmap;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static void refreshLoggedUser()

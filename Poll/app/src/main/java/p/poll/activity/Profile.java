@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,32 +49,33 @@ public class Profile extends AppCompatActivity {
     private ImageView profile_pic;
     private ImageButton btnImageGallery;
     private ImageButton btnImageCamera;
-    private UserModifyTask mAuthTask=null;
+    private UserModifyTask mAuthTask = null;
+    private String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         User.refreshLoggedUser();
-        if(User.loggedUser==null)
-        {
+        if (User.loggedUser == null) {
             goToLogin(profileActivityView);
             finish();
         }
-        menu=findViewById(R.id.menu);
-        valider=findViewById(R.id.valider);
-        profile_name=findViewById(R.id.profile_name);
-        profile_first_name=findViewById(R.id.profile_first_name);
-        profile_email=findViewById(R.id.profile_email);
-        profile_pic=findViewById(R.id.profile_pic);
-        btnImageCamera= findViewById(R.id.btnImageCamera);
-        btnImageGallery= findViewById(R.id.btnImageGallery);
+        menu = findViewById(R.id.menu);
+        valider = findViewById(R.id.valider);
+        profile_name = findViewById(R.id.profile_name);
+        profile_first_name = findViewById(R.id.profile_first_name);
+        profile_email = findViewById(R.id.profile_email);
+        profile_pic = findViewById(R.id.profile_pic);
+        btnImageCamera = findViewById(R.id.btnImageCamera);
+        btnImageGallery = findViewById(R.id.btnImageGallery);
         profile_name.setText(User.loggedUser.getLastName());
         profile_first_name.setText((User.loggedUser.getFirstName()));
         profile_email.setText(User.loggedUser.getMailAdress());
-
-        //TODO: IMAGE
-        //profile_pic.setImageBitmap(loggedUser.getProfilePic());
+        if ((User.loggedUser.getProfilePic() != null)) {
+            Log.i("display","setting bitmap picture");
+            profile_pic.setImageBitmap(User.toBitmap(User.loggedUser.getProfilePic(), getContentResolver()));
+        }
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,10 +90,9 @@ public class Profile extends AppCompatActivity {
         });
     }
 
-    protected void attempModifyProfile()
-    {
-        View focusView=null;
-        boolean cancel=false;
+    protected void attempModifyProfile() {
+        View focusView = null;
+        boolean cancel = false;
         String firstName = this.profile_first_name.getText().toString();
         String lastName = this.profile_name.getText().toString();
         String eMail = this.profile_email.getText().toString();
@@ -110,39 +111,32 @@ public class Profile extends AppCompatActivity {
             User.loggedUser.setFirstName(firstName);
             User.loggedUser.setLastName(lastName);
             User.loggedUser.setMailAdress(eMail);
-        }
-        else {
-            if(TextUtils.isEmpty(firstName))
-            {
+            User.loggedUser.setProfilePic(imagePath);
+        } else {
+            if (TextUtils.isEmpty(firstName)) {
                 profile_first_name.setError("@string/error_empty_fname");
-                focusView=profile_first_name;
-                cancel=true;
+                focusView = profile_first_name;
+                cancel = true;
             }
-            if(TextUtils.isEmpty(lastName))
-            {
+            if (TextUtils.isEmpty(lastName)) {
                 profile_name.setError("@string/error_empty_lname");
-                focusView=profile_name;
-                cancel=true;
+                focusView = profile_name;
+                cancel = true;
             }
-            if(!isEmailValid(eMail))
-            {
+            if (!isEmailValid(eMail)) {
                 profile_email.setError("@string/error_invalid_email");
-                focusView=profile_email;
-                cancel=true;
+                focusView = profile_email;
+                cancel = true;
             }
         }
-        if(cancel)
-        {
+        if (cancel) {
             focusView.requestFocus();
-        }
-        else
-        {
+        } else {
             mAuthTask = new Profile.UserModifyTask();
             mAuthTask.execute((Void) null);
         }
         //TODO: si l'image n'est pas vide, ajouter l'image, sinon ajouter l'image par défaut
     }
-
 
 
     public class UserModifyTask extends AsyncTask<Void, Void, Boolean> {
@@ -170,6 +164,7 @@ public class Profile extends AppCompatActivity {
             //showProgress(false);
 
             if (success) {
+                Log.i("display","modifying user");
                 User.modifyUser(User.loggedUser);
                 goToMenu(profileActivityView);
             }
@@ -182,32 +177,35 @@ public class Profile extends AppCompatActivity {
     }
 
 
-
     private boolean isEmailValid(String email) {
-        return email.contains("@")&& email.contains(".");
+        return email.contains("@") && email.contains(".");
     }
 
 
-    /** Lance le menu. */
+    /**
+     * Lance le menu.
+     */
     public void goToMenu(View v) {
         Intent intent = new Intent(getApplicationContext(), Menupoll.class);
         startActivity(intent);
         finish();
     }
 
-    /** Lance le login. */
+    /**
+     * Lance le login.
+     */
     public void goToLogin(View v) {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }
 
-    public void resetimage(View v)
-    {
+
+    public void resetimage(View v) {
         profile_pic.setImageResource(R.drawable.userimage);
     }
 
     public void onTakePhotoClicked(View v) {
-        if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             invokeCamera();
         } else {
             // let's request permission.
@@ -262,6 +260,7 @@ public class Profile extends AppCompatActivity {
 
     /**
      * This method will be invoked when the user clicks a button
+     *
      * @param v
      */
     public void onImageGalleryClicked(View v) {
@@ -307,6 +306,7 @@ public class Profile extends AppCompatActivity {
 
                     // show the image to the user
                     profile_pic.setImageBitmap(image);
+                    imagePath = String.valueOf(imageUri);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

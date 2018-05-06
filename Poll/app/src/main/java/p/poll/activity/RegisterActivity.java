@@ -38,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity{
     public static final int CAMERA_REQUEST_CODE = 228;
     public static final int CAMERA_PERMISSION_REQUEST_CODE = 4192;
     private ImageView imgPicture;
+    public static String imagePath;
     private EditText mUsername;
     private EditText mPassword;
     private EditText mPasswordC;
@@ -300,6 +301,7 @@ public class RegisterActivity extends AppCompatActivity{
 
                     // show the image to the user
                     imgPicture.setImageBitmap(image);
+                    imagePath=String.valueOf(imageUri);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

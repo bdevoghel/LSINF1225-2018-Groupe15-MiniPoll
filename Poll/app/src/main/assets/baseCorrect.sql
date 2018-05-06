@@ -3,7 +3,7 @@ BEGIN TRANSACTION;
 
 -- Table: User
 DROP TABLE IF EXISTS User;
-CREATE TABLE User (username TEXT NOT NULL UNIQUE PRIMARY KEY,firstname TEXT NOT NULL,name TEXT NOT NULL,mail TEXT NOT NULL,password TEXT NOT NULL,photo NUMERIC, favori TEXT, FOREIGN KEY (favori) REFERENCES Utilisateur (username));
+CREATE TABLE User (username TEXT NOT NULL UNIQUE PRIMARY KEY,firstname TEXT NOT NULL,name TEXT NOT NULL,mail TEXT NOT NULL,password TEXT NOT NULL,photo TEXT, favori TEXT, FOREIGN KEY (favori) REFERENCES Utilisateur (username));
 CREATE TABLE Poll (username_proprietaire TEXT NOT NULL ,idpoll TEXT NOT NULL PRIMARY KEY,titre TEXT NOT NULL,description TEXT NOT NULL,types TEXT(1) NOT NULL,status_principal INTEGER);
 CREATE TABLE Question_list (idpoll INTEGER,idquestion TEXT,description_question TEXT);
 CREATE TABLE Notification (username TEXT NOT NULL,etat INTEGER,message TEXT,username_notif TEXT,poll_notif INTEGER);
