@@ -63,6 +63,27 @@ public class ModifyPassword extends AppCompatActivity{
         boolean cancel = false;
         View focusView = null;
 
+        if(TextUtils.isEmpty(username))
+        {
+            this.mUsername.setError(getString(R.string.error_field_required));
+            focusView = this.mUsername;
+            cancel=true;
+        }
+
+        if(TextUtils.isEmpty(password))
+        {
+            this.mPassword.setError(getString(R.string.error_field_required));
+            focusView = this.mPassword;
+            cancel=true;
+        }
+
+        if(TextUtils.isEmpty(passwordC))
+        {
+            this.mPasswordC.setError(getString(R.string.error_field_required));
+            focusView = this.mPasswordC;
+            cancel=true;
+        }
+
         if(!TextUtils.isEmpty(username) && !isPasswordValid(username))
         {
             this.mUsername.setError(getString(R.string.error_invalid_password));
@@ -132,7 +153,8 @@ public class ModifyPassword extends AppCompatActivity{
                 error = getString(R.string.error_password_match);
                 return false;
             }
-            error = getString(R.string.error_invalid_password);
+
+            error = getString(R.string.error_incorrect_password);
             return false;
         }
 
@@ -150,8 +172,8 @@ public class ModifyPassword extends AppCompatActivity{
                     mPassword.requestFocus();
                     mPasswordC.requestFocus();
                 } else {
-                    mUsername.setError(error);
-                    mUsername.requestFocus();
+                    mPassword.setError(error);
+                    mPassword.requestFocus();
                 }
             }
         }

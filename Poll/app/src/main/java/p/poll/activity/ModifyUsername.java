@@ -63,10 +63,25 @@ public class ModifyUsername extends AppCompatActivity{
         boolean cancel = false;
         View focusView = null;
 
+
         if(TextUtils.isEmpty(username))
         {
-            this.mUsername.setError(getString(R.string.error_invalid_username));
+            this.mUsername.setError(getString(R.string.error_field_required));
             focusView = this.mUsername;
+            cancel=true;
+        }
+
+        if(TextUtils.isEmpty(password))
+        {
+            this.mPassword.setError(getString(R.string.error_field_required));
+            focusView = this.mPassword;
+            cancel=true;
+        }
+
+        if(TextUtils.isEmpty(passwordC))
+        {
+            this.mPasswordC.setError(getString(R.string.error_field_required));
+            focusView = this.mPasswordC;
             cancel=true;
         }
 
