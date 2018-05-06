@@ -32,7 +32,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      * Nom du fichier sql contenant les instructions de création de la base de données. Le fichier
      * doit être placé dans le dossier assets/
      */
-    private static final String DATABASE_SQL_FILENAME = "base2.sql";
+    private static final String DATABASE_SQL_FILENAME = "baseCorrect.sql";
     /**
      * Nom du fichier de la base de données.
      */
@@ -44,7 +44,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      *
      * @note Le numéro de version doit changer de manière monotone.
      */
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     /**
      * Instance de notre classe afin de pouvoir y accéder facilement depuis n'importe quel objet.

@@ -23,13 +23,13 @@ public class User {
 
     //Noms des colonnes de la database
     private static final String DB_COLUMN_USERNAME = "Username";
-    private static final String DB_COLUMN_FNAME = "fName";
-    private static final String DB_COLUMN_LNAME = "lName";
-    private static final String DB_COLUMN_EMAIL = "email";
+    private static final String DB_COLUMN_FNAME = "firstname";
+    private static final String DB_COLUMN_LNAME = "name";
+    private static final String DB_COLUMN_EMAIL = "mail";
     private static final String DB_COLUMN_PASSWORD = "password";
     private static final String DB_TABLE = "User";
     private static final String DB_COLUMN_PIC = "photo";
-    private static final String DB_COLUMN_FAV = "bestFriend";
+    private static final String DB_COLUMN_FAV = "favori";
 
 
     //Attributs de la classe
