@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mUsername;
+    private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mUsername = (AutoCompleteTextView) findViewById(R.id.usernameRegister);
+        mUsernameView = (AutoCompleteTextView) findViewById(R.id.usernameRegister);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -94,11 +94,11 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Reset errors.
-        mUsername.setError(null);
+        mUsernameView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String username = mUsername.getText().toString();
+        String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -113,8 +113,8 @@ public class LoginActivity extends AppCompatActivity {
 
         // Check for a valid username.
         if (TextUtils.isEmpty(username)) {
-            mUsername.setError(getString(R.string.error_field_required));
-            focusView = mUsername;
+            mUsernameView.setError(getString(R.string.error_field_required));
+            focusView = mUsernameView;
             cancel = true;
         }
 
@@ -145,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
         private final String mUsername;
         private final String mPassword;
+        private int flag=0;
 
         UserLoginTask(String username, String password) {
             mUsername = username;
@@ -168,6 +169,7 @@ public class LoginActivity extends AppCompatActivity {
                     return mPassword.equals(loggedUser.getPassword());
                 }
             }
+            flag=1;
             return false;
         }
 
@@ -180,8 +182,16 @@ public class LoginActivity extends AppCompatActivity {
             if (success) {
                 goToMenu(mLoginFormView);
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                if(flag==1)
+                {
+                    mUsernameView.setError(getString(R.string.error_username_not_exists));
+                    mUsernameView.requestFocus();
+                }
+                else {
+                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.requestFocus();
+                }
+                flag=0;
             }
         }
 
@@ -195,5 +205,13 @@ public class LoginActivity extends AppCompatActivity {
     public void goToMenu(View v) {
         Intent intent = new Intent(getApplicationContext(), ChargingPage.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

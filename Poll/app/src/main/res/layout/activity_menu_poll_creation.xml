@@ -67,7 +67,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/abhaya_libre"
                     android:gravity="center"
-                    android:text="Menu Principale"
+                    android:text="@string/menu_principal"
                     android:textAlignment="center"
                     android:textSize="28sp"
                     android:textStyle="bold" />
@@ -109,7 +109,7 @@
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
                 android:layout_height="337dp"
-                android:background="@android:color/black"
+                android:background="@android:color/white"
                 android:columnWidth="100dp"
                 android:gravity="center"
                 android:horizontalSpacing="10dp"

@@ -121,9 +121,9 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:ems="10"
+            android:focusable="true"
             android:imeActionId="6"
             android:imeOptions="actionUnspecified"
-            android:focusable="true"
             android:hint="@string/hint_first_name"
             android:inputType="textPersonName"
             android:singleLine="true"
@@ -156,9 +156,9 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:ems="10"
+            android:focusable="true"
             android:imeActionId="6"
             android:imeOptions="actionUnspecified"
-            android:focusable="true"
             android:hint="@string/hint_email"
             android:imeActionLabel="@string/action_sign_in_short"
             android:inputType="textPersonName"
@@ -170,18 +170,28 @@
         <Button
             android:id="@+id/valider"
             style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="Valider"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/menu"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:text="@string/menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

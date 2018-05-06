@@ -53,7 +53,7 @@ public class ListHelp extends AppCompatActivity {
     }
 
     private List<PollModel> genererPoll(){
-        List<PollModel> tweets = new ArrayList<PollModel>();
+        List<PollModel> tweets = new ArrayList<>();
         tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
         tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
         tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));

@@ -23,13 +23,13 @@ public class User {
 
     //Noms des colonnes de la database
     private static final String DB_COLUMN_USERNAME = "Username";
-    private static final String DB_COLUMN_FNAME = "Prenom";
-    private static final String DB_COLUMN_LNAME = "Nom";
+    private static final String DB_COLUMN_FNAME = "fName";
+    private static final String DB_COLUMN_LNAME = "lName";
     private static final String DB_COLUMN_EMAIL = "email";
-    private static final String DB_COLUMN_PASSWORD = "mdp";
-    private static final String DB_TABLE = "Utilisateur";
+    private static final String DB_COLUMN_PASSWORD = "password";
+    private static final String DB_TABLE = "User";
     private static final String DB_COLUMN_PIC = "photo";
-    private static final String DB_COLUMN_FAV = "favori";
+    private static final String DB_COLUMN_FAV = "bestFriend";
 
 
     //Attributs de la classe
@@ -294,6 +294,36 @@ public class User {
         return users;
     }
 
+    public static void modifyUser(User user)
+    {
+        userMap.remove(user.getUsername());
+        userMap.put(user.getUsername(),user);
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        ContentValues values = new ContentValues();
+        String username=user.getUsername();
+        String firstname=user.getFirstName();
+        String lastname=user.getFirstName();
+        String password=user.getPassword();
+        String mail=user.getMailAdress();
+        String bff=null;
+        if(user.getBestFriend()!=null)
+        {
+            bff=user.getBestFriend().getUsername();
+        }
+        values.put(DB_COLUMN_USERNAME, username);
+        values.put(DB_COLUMN_FNAME, firstname);
+        values.put(DB_COLUMN_LNAME, lastname);
+        values.put(DB_COLUMN_PASSWORD, password);
+        values.put(DB_COLUMN_EMAIL, mail);
+        //TODO: photo
+        //values.put(DB_COLUMN_PIC, user.getProfilePic());
+        values.put(DB_COLUMN_FAV, bff);
+        Log.i("test","update");
+        db.update(DB_TABLE, values, DB_COLUMN_USERNAME+"=?", new String[]{user.getUsername()});
+        Log.i("test","done");
+        db.close();
+    }
+
     public static void addUser(User user)
     {
         userMap.put(user.getUsername(),user);
@@ -322,6 +352,7 @@ public class User {
         db.insert(DB_TABLE, null, values);
 
         Log.i("test","done");
+        db.close();
     }
 
     public static HashMap<String,User> toHashMap(ArrayList<User> users){
