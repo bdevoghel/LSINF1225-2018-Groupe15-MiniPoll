@@ -1,5 +1,10 @@
 package p.poll.activity;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,39 +12,38 @@ import java.util.List;
  */
 // va chercher tous les sondages de l'utilisateur
 public class LienBaseDeDonnée {
-//
-   public List<String> getListSondage(String identifiant){
-       List<String> sondages = new ArrayList<String>();
-       SQLiteDatabase db = getReadableDatabase();
-       //Les resultats de la requete sont mis dans un "curseur"
-       Cursor c = db.query("\"poll\"", // La table
-               "\"titre\"",
-               new String [] {"\"id\"", "\"type\""},
-               new String [] {identifiant, "\"S\""},
-               null,
-               null,
-);
-       if (c.moveToFirst()) {
-           for (int i = 0; i < c.getCount(); i++) {
-               String s = c.getString(c.getColumnIndexOrThrow("titre"));
-               sondages.add(s);
-               c.moveToNext();
-           }
-       }
-       c.close();
-       return sondages;
-           }
+    //
+    public List<String> getListSondage(String identifiant) {
+        List<String> sondages = new ArrayList<String>();
+        SQLiteDatabase db = getReadableDatabase();
+        //Les resultats de la requete sont mis dans un "curseur"
+        Cursor c = db.query("\"poll\"", // La table
+                "\"titre\"",
+                new String[]{"\"id\"", "\"type\""},
+                new String[]{identifiant, "\"S\""},
+                null,
+                null,
+                );
+        if (c.moveToFirst()) {
+            for (int i = 0; i < c.getCount(); i++) {
+                String s = c.getString(c.getColumnIndexOrThrow("titre"));
+                sondages.add(s);
+                c.moveToNext();
+            }
+        }
+        c.close();
+        return sondages;
+    }
+    //Ici on va recuperer les propositions du sondage
 
-
-//Ici on va recuperer les propositions du sondage
-public List<String> getListProposition(String PollIdentifiant){
+    public List<String> getListProposition(String PollIdentifiant){
     List<String> proposition = new ArrayList<String>();
     SQLiteDatabase db = getReadableDatabase();
     //Les resultats de la requete sont mis dans un "curseur"
     Cursor c = db.query("\"sondage\"", // La table
             "\"data_reponse\"",
             "\"idpoll\"",
-            identifiant,
+            PollIdentifiant,
             null,
             null,
             );
@@ -55,7 +59,7 @@ public List<String> getListProposition(String PollIdentifiant){
 }
 
 //Ici on va recuperer la valeur de la proposition pour l'incrémenter
-public int getListProposition(String proposition){
+        public int getListProposition(String proposition){
         List<int> sondages = new ArrayList<int>();
         SQLiteDatabase db = getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
@@ -86,7 +90,7 @@ public int Increment5 (String proposition){
     ContentValues newValues = new ContentValues();
     newValues.put("ordre", p);
 
-    db.update("reponse_sondage", newValues, "id = "+proposition, null);
+    baseCorrect.sql.update("reponse_sondage", newValues, "id = "+proposition, null);
 }
     // A la première place
     public int Increment5 (String proposition){
@@ -95,7 +99,7 @@ public int Increment5 (String proposition){
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        db.update("reponse_sondage", newValues, "id = "+proposition, null);
+        baseCorrect.sql.update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la première place
@@ -105,7 +109,7 @@ public int Increment5 (String proposition){
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        db.update("reponse_sondage", newValues, "id = "+proposition, null);
+        baseCorrect.sql.update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la deuxième place
@@ -115,7 +119,7 @@ public int Increment5 (String proposition){
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        db.update("reponse_sondage", newValues, "id = "+proposition, null);
+        baseCorrect.sql.update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la troisième place
@@ -125,7 +129,7 @@ public int Increment5 (String proposition){
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        db.update("reponse_sondage", newValues, "id = "+proposition, null);
+        baseCorrect.sql.update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la quatrième place
@@ -135,7 +139,7 @@ public int Increment5 (String proposition){
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        db.update("reponse_sondage", newValues, "id = "+proposition, null);
+        baseCorrect.sql.update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la cinquième place
@@ -145,7 +149,7 @@ public int Increment5 (String proposition){
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        db.update("reponse_sondage", newValues, "id = "+proposition, null);
+        baseCorrect.sql.update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la sixième  place on ne modifie rien
