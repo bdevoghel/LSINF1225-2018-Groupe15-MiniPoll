@@ -71,7 +71,7 @@ public class AddFriendActivity extends AppCompatActivity {
     }
 
     protected void addFriendProcess(User friend){
-        FriendRequest notification= new FriendRequest(LoginActivity.loggedUser.getFirstName()+" "+LoginActivity.loggedUser.getLastName()+" would like to add you in his friendlist",0,friend);
+        FriendRequest notification= new FriendRequest(User.loggedUser.getFirstName()+" "+User.loggedUser.getLastName()+" would like to add you in his friendlist",0,friend);
         friend.addNotification(notification);
     }
 }

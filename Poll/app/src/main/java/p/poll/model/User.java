@@ -20,7 +20,7 @@ public class User {
 
     //Map des instances des Users
     private static HashMap<String,User> userMap = new HashMap<>();
-
+    public static User loggedUser;
     //Noms des colonnes de la database
     private static final String DB_COLUMN_USERNAME = "Username";
     private static final String DB_COLUMN_FNAME = "firstname";
@@ -39,7 +39,7 @@ public class User {
     private String mailAdress;
     private String password;
     private Bitmap profilePic;
-    private User bestFriend;
+    private String bestFriend;
     private ArrayList<Notification> notificationList;
     private ArrayList<Poll> pollList;
     private ArrayList<User> friendList;
@@ -65,11 +65,13 @@ public class User {
         userMap.put(username,this);
     }
 
-    public User(String uUsername,String uFName,String uLName, String uPassword){
+    public User(String uUsername,String uFName,String uLName, String uPassword, String email, String bestfriend){
         username=uUsername;
         firstName=uFName;
         lastName=uLName;
         password=uPassword;
+        mailAdress=email;
+        this.bestFriend=bestfriend;
         friendList=new ArrayList<>();
         notificationList=new ArrayList<>();
         pollList=new ArrayList<>();
@@ -132,10 +134,10 @@ public class User {
     public String getPassword(){
         return password;
     }
-    public void setBestFriend(User bestFriend){
+    public void setBestFriend(String bestFriend){
         this.bestFriend=bestFriend;
     }
-    public User getBestFriend(){
+    public String getBestFriend(){
         return bestFriend;
     }
     public void setProfilePic(Bitmap p){
@@ -256,7 +258,7 @@ public class User {
         //users.add(new User("michel","michel","dupond","12345"));
 
         // Colonnes à récupérer
-        String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_FNAME, DB_COLUMN_LNAME, DB_COLUMN_PASSWORD};
+        String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_FNAME, DB_COLUMN_LNAME, DB_COLUMN_PASSWORD, DB_COLUMN_EMAIL, DB_COLUMN_FAV};
 
         // Requête de selection (SELECT)
         Cursor cursor = db.query(DB_TABLE, colonnes, null, null, null, null, null);
@@ -272,12 +274,14 @@ public class User {
             String uFName = cursor.getString(1);
             String uLName = cursor.getString(2);
             String uPassword = cursor.getString(3);
+            String email = cursor.getString(4);
+            String bestfriend = cursor.getString(5);
 
             // Vérification pour savoir s'il y a déjà une instance de cet utilisateur.
             User user = userMap.get(uUsername);
             if (user == null) {
                 // Si pas encore d'instance, création d'une nouvelle instance.
-                user= new User(uUsername,uFName,uLName,uPassword);
+                user= new User(uUsername,uFName,uLName,uPassword,email,bestfriend);
             }
 
             // Ajout de l'utilisateur à la liste.
@@ -294,22 +298,16 @@ public class User {
         return users;
     }
 
-    public static void modifyUser(User user)
+    public static void writeInUser(User user, String usernameArg)
     {
-        userMap.remove(user.getUsername());
-        userMap.put(user.getUsername(),user);
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         ContentValues values = new ContentValues();
         String username=user.getUsername();
         String firstname=user.getFirstName();
-        String lastname=user.getFirstName();
+        String lastname=user.getLastName();
         String password=user.getPassword();
         String mail=user.getMailAdress();
-        String bff=null;
-        if(user.getBestFriend()!=null)
-        {
-            bff=user.getBestFriend().getUsername();
-        }
+        String bff=user.getBestFriend();
         values.put(DB_COLUMN_USERNAME, username);
         values.put(DB_COLUMN_FNAME, firstname);
         values.put(DB_COLUMN_LNAME, lastname);
@@ -319,9 +317,26 @@ public class User {
         //values.put(DB_COLUMN_PIC, user.getProfilePic());
         values.put(DB_COLUMN_FAV, bff);
         Log.i("test","update");
-        db.update(DB_TABLE, values, DB_COLUMN_USERNAME+"=?", new String[]{user.getUsername()});
+        db.update(DB_TABLE, values, DB_COLUMN_USERNAME+"=?", new String[]{usernameArg});
         Log.i("test","done");
+        Log.i("display",loggedUser.getUsername());
+        loggedUser=(User.toHashMap(User.getUsers())).get(username);
+        Log.i("display",loggedUser.getUsername());
         db.close();
+    }
+
+    public static void modifyUser(User user)
+    {
+        userMap.remove(user.getUsername());
+        userMap.put(user.getUsername(),user);
+        writeInUser(user, user.getUsername());
+    }
+
+    public static void modifyUserWithUsername(User user, String username)
+    {
+        userMap.remove(username);
+        userMap.put(user.getUsername(),user);
+        writeInUser(user, username);
     }
 
     public static void addUser(User user)
@@ -334,11 +349,7 @@ public class User {
         String lastname=user.getFirstName();
         String password=user.getPassword();
         String mail=user.getMailAdress();
-        String bff=null;
-        if(user.getBestFriend()!=null)
-        {
-            bff=user.getBestFriend().getUsername();
-        }
+        String bff=user.getBestFriend();
         values.put(DB_COLUMN_USERNAME, username);
         values.put(DB_COLUMN_FNAME, firstname);
         values.put(DB_COLUMN_LNAME, lastname);
@@ -369,5 +380,10 @@ public class User {
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
         this.setProfilePic(bitmap);
         return bitmap;
+    }
+
+    public static void refreshLoggedUser()
+    {
+        User.loggedUser=(User.toHashMap(User.getUsers())).get(User.loggedUser.getUsername());
     }
 }

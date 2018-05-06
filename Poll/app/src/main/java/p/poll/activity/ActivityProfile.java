@@ -19,7 +19,6 @@ import p.poll.model.User;
  */
 public class ActivityProfile extends AppCompatActivity {
 
-    public static User loggedUser=LoginActivity.loggedUser;
     private View profileActivityView;
     private Button menu;
     private Button valider;
@@ -36,7 +35,7 @@ public class ActivityProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compte);
         profileActivityView=findViewById(R.id.profileActivityForm);
-        if(loggedUser==null)
+        if(User.loggedUser==null)
         {
             goToLogin(profileActivityView);
             finish();
@@ -74,9 +73,9 @@ public class ActivityProfile extends AppCompatActivity {
         String eMail = this.profile_email.getText().toString();
         //TODO: ajouter la photo
         if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && isEmailValid(eMail)) {
-            loggedUser.setFirstName(firstName);
-            loggedUser.setLastName(lastName);
-            loggedUser.setMailAdress(eMail);
+            User.loggedUser.setFirstName(firstName);
+            User.loggedUser.setLastName(lastName);
+            User.loggedUser.setMailAdress(eMail);
         }
         else {
             if(TextUtils.isEmpty(firstName))
@@ -109,7 +108,7 @@ public class ActivityProfile extends AppCompatActivity {
         }
         //TODO: si l'image n'est pas vide, ajouter l'image, sinon ajouter l'image par défaut
 
-        User.addUser(loggedUser);
+        User.addUser(User.loggedUser);
     }
 
 
@@ -142,7 +141,7 @@ public class ActivityProfile extends AppCompatActivity {
             //showProgress(false);
 
             if (success) {
-                User.addUser(loggedUser);
+                User.addUser(User.loggedUser);
                 goToMenu(profileActivityView);
             }
         }

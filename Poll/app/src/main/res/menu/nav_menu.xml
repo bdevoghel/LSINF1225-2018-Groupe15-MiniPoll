@@ -7,18 +7,27 @@
 
     <item
         android:id="@+id/new_quizz"
-        android:icon="@mipmap/ic_settings_black_24dp"
+        android:icon="@mipmap/ic_launcher_round"
         android:title="@string/create_quizz" />
     <item
         android:id="@+id/new_survey"
-        android:icon="@mipmap/ic_settings_black_24dp"
+        android:icon="@mipmap/ic_launcher_round"
         android:title="@string/create_survey" />
     <item
         android:id="@+id/new_help"
-        android:icon="@mipmap/ic_settings_black_24dp"
+        android:icon="@mipmap/ic_launcher_round"
         android:title="@string/create_advice" />
 
+    <item android:id="@+id/nav_modify_password"
+        android:icon="@mipmap/ic_settings_black_24dp"
+        android:title="@string/modify_password" />
+
+    <item android:id="@+id/nav_modify_username"
+        android:icon="@mipmap/ic_settings_black_24dp"
+        android:title="@string/modify_username" />
+
     <item android:id="@+id/nav_logout"
-        android:title="@string/deco" />
+        android:title="@string/deco"
+        android:icon="@mipmap/exit" />
 
 </menu>

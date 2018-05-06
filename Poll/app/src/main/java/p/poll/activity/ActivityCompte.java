@@ -42,7 +42,6 @@ import static p.poll.activity.RegisterActivity.IMAGE_GALLERY_REQUEST;
  */
 public class ActivityCompte extends AppCompatActivity {
 
-    public static User loggedUser=LoginActivity.loggedUser;
     private View profileActivityView;
     private Button menu;
     private Button valider;
@@ -58,7 +57,7 @@ public class ActivityCompte extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compte);
-        if(loggedUser==null)
+        if(User.loggedUser==null)
         {
             goToLogin(profileActivityView);
             finish();
@@ -98,9 +97,9 @@ public class ActivityCompte extends AppCompatActivity {
         profile_email.setError(null);
 
         if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && isEmailValid(eMail)) {
-            loggedUser.setFirstName(firstName);
-            loggedUser.setLastName(lastName);
-            loggedUser.setMailAdress(eMail);
+            User.loggedUser.setFirstName(firstName);
+            User.loggedUser.setLastName(lastName);
+            User.loggedUser.setMailAdress(eMail);
         }
         else {
             if(TextUtils.isEmpty(firstName))
@@ -132,8 +131,6 @@ public class ActivityCompte extends AppCompatActivity {
             mAuthTask.execute((Void) null);
         }
         //TODO: si l'image n'est pas vide, ajouter l'image, sinon ajouter l'image par défaut
-
-        User.addUser(loggedUser);
     }
 
 
@@ -163,7 +160,7 @@ public class ActivityCompte extends AppCompatActivity {
             //showProgress(false);
 
             if (success) {
-                User.addUser(loggedUser);
+                User.addUser(User.loggedUser);
                 goToMenu(profileActivityView);
             }
         }

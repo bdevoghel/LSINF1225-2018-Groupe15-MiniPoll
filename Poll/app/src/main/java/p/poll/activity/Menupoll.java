@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import p.poll.R;
 import p.poll.model.Notification;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 03/05/2018.
@@ -92,25 +93,37 @@ public class Menupoll extends AppCompatActivity implements
             startActivity(intent);
         }
         else if (id == R.id.new_quizz) {
-            Toast.makeText(Menupoll.this, "Quizz",
+            Toast.makeText(Menupoll.this, getString(R.string.create_quizz),
                     Toast.LENGTH_SHORT).show();
         }
         else if (id == R.id.new_survey) {
-            Toast.makeText(Menupoll.this, "Sondage",
+            Toast.makeText(Menupoll.this, getString(R.string.create_survey),
                     Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(),Sondage.class);
             startActivity(intent);
         }
         else if (id == R.id.new_help){
-            Toast.makeText(Menupoll.this, "Aide",
+            Toast.makeText(Menupoll.this, getString(R.string.create_advice),
                     Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(),NewHelp.class);
             startActivity(intent);
 
         }
+        else if (id == R.id.nav_modify_password){
+            Toast.makeText(Menupoll.this, getString(R.string.modify_password),
+                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(),ModifyPassword.class);
+            startActivity(intent);
+        }
+        else if(id == R.id.nav_modify_username){
+            Toast.makeText(Menupoll.this, getString(R.string.modify_username),
+                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(),ModifyUsername.class);
+            startActivity(intent);
+        }
         else {
             Toast.makeText(Menupoll.this, getString(R.string.deco), Toast.LENGTH_SHORT).show();
-                LoginActivity.loggedUser=null;
+            User.loggedUser=null;
                 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(intent);
                 finish();

@@ -39,7 +39,6 @@ import static p.poll.activity.RegisterActivity.IMAGE_GALLERY_REQUEST;
  */
 public class Profile extends AppCompatActivity {
 
-    public static User loggedUser=LoginActivity.loggedUser;
     private View profileActivityView;
     private Button menu;
     private Button valider;
@@ -55,7 +54,8 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        if(loggedUser==null)
+        User.refreshLoggedUser();
+        if(User.loggedUser==null)
         {
             goToLogin(profileActivityView);
             finish();
@@ -68,9 +68,9 @@ public class Profile extends AppCompatActivity {
         profile_pic=findViewById(R.id.profile_pic);
         btnImageCamera= findViewById(R.id.btnImageCamera);
         btnImageGallery= findViewById(R.id.btnImageGallery);
-        profile_name.setText(loggedUser.getLastName());
-        profile_first_name.setText((loggedUser.getFirstName()));
-        profile_email.setText(loggedUser.getMailAdress());
+        profile_name.setText(User.loggedUser.getLastName());
+        profile_first_name.setText((User.loggedUser.getFirstName()));
+        profile_email.setText(User.loggedUser.getMailAdress());
 
         //TODO: IMAGE
         //profile_pic.setImageBitmap(loggedUser.getProfilePic());
@@ -107,9 +107,9 @@ public class Profile extends AppCompatActivity {
         profile_email.setError(null);
 
         if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && isEmailValid(eMail)) {
-            loggedUser.setFirstName(firstName);
-            loggedUser.setLastName(lastName);
-            loggedUser.setMailAdress(eMail);
+            User.loggedUser.setFirstName(firstName);
+            User.loggedUser.setLastName(lastName);
+            User.loggedUser.setMailAdress(eMail);
         }
         else {
             if(TextUtils.isEmpty(firstName))
@@ -170,7 +170,7 @@ public class Profile extends AppCompatActivity {
             //showProgress(false);
 
             if (success) {
-                User.modifyUser(loggedUser);
+                User.modifyUser(User.loggedUser);
                 goToMenu(profileActivityView);
             }
         }

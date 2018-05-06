@@ -26,8 +26,6 @@ import p.poll.model.User;
  */
 public class LoginActivity extends AppCompatActivity {
 
-
-    public static User loggedUser;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -151,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
             mUsername = username;
             mPassword = password;
             HashMap<String, User> users = User.toHashMap(User.getUsers());
-            loggedUser = users.get(mUsername);
+            User.loggedUser = users.get(mUsername);
         }
 
         @Override
@@ -164,9 +162,9 @@ public class LoginActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 return false;
             }
-            if(loggedUser!=null) {
-                if (mUsername.equals(loggedUser.getUsername())) {
-                    return mPassword.equals(loggedUser.getPassword());
+            if(User.loggedUser!=null) {
+                if (mUsername.equals(User.loggedUser.getUsername())) {
+                    return mPassword.equals(User.loggedUser.getPassword());
                 }
             }
             flag=1;

@@ -38,7 +38,6 @@ public class RegisterActivity extends AppCompatActivity{
     public static final int CAMERA_REQUEST_CODE = 228;
     public static final int CAMERA_PERMISSION_REQUEST_CODE = 4192;
     private ImageView imgPicture;
-    public static User loggedUser=LoginActivity.loggedUser;
     private EditText mUsername;
     private EditText mPassword;
     private EditText mPasswordC;
@@ -53,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity{
         setContentView(R.layout.activity_register);
         // get a reference to the image view that holds the image that the user will see.
         mUsername = (EditText) findViewById(R.id.usernameRegister);
-        mPassword = (EditText) findViewById(R.id.register_password);
+        mPassword = (EditText) findViewById(R.id.username);
         mPasswordC = (EditText) findViewById(R.id.confirm_password);
         imgPicture = (ImageView) findViewById(R.id.imgPicture);
         registerB = (Button) findViewById(R.id.register_button);
@@ -146,8 +145,7 @@ public class RegisterActivity extends AppCompatActivity{
             }
             if(existingUser==null) {
                 if (this.password.equals(this.passwordC)) {
-                    loggedUser=new User(this.username, this.password);
-                    LoginActivity.loggedUser=loggedUser;
+                    User.loggedUser=new User(this.username, this.password);
                     return true;
                 }
                 flag=0;
