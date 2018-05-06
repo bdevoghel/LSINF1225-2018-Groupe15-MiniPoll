@@ -3,22 +3,22 @@
     <item
         android:id="@+id/nav_account"
         android:icon="@mipmap/ic_person_black_24dp"
-        android:title="Mon compte" />
+        android:title="@string/myprofile" />
 
     <item
         android:id="@+id/new_quizz"
         android:icon="@mipmap/ic_settings_black_24dp"
-        android:title="Créer un quizz" />
+        android:title="@string/create_quizz" />
     <item
         android:id="@+id/new_survey"
         android:icon="@mipmap/ic_settings_black_24dp"
-        android:title="Créer un sondage" />
+        android:title="@string/create_survey" />
     <item
         android:id="@+id/new_help"
         android:icon="@mipmap/ic_settings_black_24dp"
-        android:title="Besoin d'un conseil ?" />
+        android:title="@string/create_advice" />
 
     <item android:id="@+id/nav_logout"
-        android:title="Déconnection" />
+        android:title="@string/deco" />
 
 </menu>

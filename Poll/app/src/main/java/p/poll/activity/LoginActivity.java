@@ -1,43 +1,25 @@
 package p.poll.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import p.poll.R;
 import p.poll.model.User;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -64,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mUsername;
+    private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -74,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mUsername = (AutoCompleteTextView) findViewById(R.id.username);
+        mUsernameView = (AutoCompleteTextView) findViewById(R.id.usernameRegister);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -112,11 +94,11 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Reset errors.
-        mUsername.setError(null);
+        mUsernameView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String username = mUsername.getText().toString();
+        String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -129,10 +111,10 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        // Check for a valid email address.
+        // Check for a valid username.
         if (TextUtils.isEmpty(username)) {
-            mUsername.setError(getString(R.string.error_field_required));
-            focusView = mUsername;
+            mUsernameView.setError(getString(R.string.error_field_required));
+            focusView = mUsernameView;
             cancel = true;
         }
 
@@ -149,53 +131,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@")&& email.contains(".");
-    }
-
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    /*
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
-*/
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -205,22 +145,13 @@ public class LoginActivity extends AppCompatActivity {
 
         private final String mUsername;
         private final String mPassword;
+        private int flag=0;
 
         UserLoginTask(String username, String password) {
             mUsername = username;
             mPassword = password;
             HashMap<String, User> users = User.toHashMap(User.getUsers());
             loggedUser = users.get(mUsername);
-            /*
-            if(loggedUser!=null)
-            {
-                if(loggedUser.getPassword().equals(mPassword))
-                {
-                    onPostExecute(true);
-                }
-            }
-            onPostExecute(false);
-            */
         }
 
         @Override
@@ -233,20 +164,12 @@ public class LoginActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 return false;
             }
-            /*
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mUsername)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-            */
             if(loggedUser!=null) {
                 if (mUsername.equals(loggedUser.getUsername())) {
                     return mPassword.equals(loggedUser.getPassword());
                 }
             }
+            flag=1;
             return false;
         }
 
@@ -259,8 +182,16 @@ public class LoginActivity extends AppCompatActivity {
             if (success) {
                 goToMenu(mLoginFormView);
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                if(flag==1)
+                {
+                    mUsernameView.setError(getString(R.string.error_username_not_exists));
+                    mUsernameView.requestFocus();
+                }
+                else {
+                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.requestFocus();
+                }
+                flag=0;
             }
         }
 
@@ -274,124 +205,13 @@ public class LoginActivity extends AppCompatActivity {
     public void goToMenu(View v) {
         Intent intent = new Intent(getApplicationContext(), ChargingPage.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
-
-/*
-
-package be.lsinf1252.myfirstappication;
-
-/**
- * Created by Antoine on 22-04-18.
- *
-
-public class test1 {
-
-    public void CreationCompte(){
-        String nom;
-        String identifiant;
-        String prenom;
-        String AdresseMail;
-        String MotDePasse1;
-        String MotDePasse2;
-        jpeg photo;
-
-    public void setNom(String identifiant){
-
-        String identifiant = identifiant;
-    }
-    public String getIdentifiant(){
-
-        return identifiant;
-    }
-
-    public void setNom(String){
-        String nom = nom;
-    }
-    public String getNom(){
-        return nom;
-    }
-    public void setPrenom(String prenom){
-        this.prenom = prenom;
-    }
-    public String getPrenom(){
-        return prenom;
-    }
-    public void setAdressMail(String AdressMail){
-        this.AdressMail = AdressMail;
-    }
-    public String getAdressMail(){
-        return AdressMail;
-    }
-    public void setMotDePasse1(String MotDePasse1) {
-        this.MotDePasse1 = MotDePasse1;
-    }
-    public String getMotDePasse1(){
-        return MotDePasse1;
-    }
-    public void setMotDePasse2(String MotDePasse2){
-        this.MotDePasse2 = MotDePasse2;
-    }
-    public String getMotDePasse2(){
-        return MotDePasse2;
-    }
-    public void setPhoto(jpeg photo){
-        this.photo = photo;
-    }
-    public void getPhoto(){
-        return photo;
-    }
-    public boolean samePassword(){
-        return getMotDePasse1() == getMotDePasse2();
-    }
-    public boolean identifiantExist(){
-        return Exist();
-    }
-
-
-    /**
-     * Renvoie si l'identifiant est dans la base de donnée. On va cherecher une valeur obligatoire du tableau comme ça on voit si il y en a un ou pas
-     * @return null si requete sans resultat, une liste de strings contenant
-     * les langages presents dans la base de donnees.
-     *
-    public String getLanguages() {
-        SQLiteDatabase db = getReadableDatabase();
-        // Les resultats de la requête sont mis dans un "curseur"
-        Cursor c = db.query("\"Utilisateur\"", // La table
-                new String[]{"\"nom\""},
-                "\"identifiant\"", // Colonnes pour la clause WHERE // Je ne comprend pas très bien comment ca marche
-                this.getIdentifiant(), // Valeurs pour la clause WHERE
-                null, // ne pas grouper les lignes
-                null, // ne pas filtrer par goupe de ligne
-                null  // pas d'ordre
-        );
-
-        c.close();
-        return Utilisateur;
-    }
-} // TODO : vérifier exist
-
-
-
-
-    if (!samePassWord()) CreationCompte();
-            if (identifiantExist()) CreationCompte();
-            }
-
-
-
-
-@Override
-public void onCreate(SQLiteDatabase db) {
-
-        //db.execSQL("DROP TABLE IF EXISTS \"Utilisateur\";");
-        //db.execSQL("CREATE TABLE \"Utilisateur\" (\"identifiant\" TEXT , \"nom\" TEXT, \"prenom\" TEXT, \"AdressMail\" TEXT, \"MotDePasse\" TEXT, \"photo\" JPEG);");
-//Deja fait normalement donc pas necessaire.
-        db.execSQL("INSERT INTO \"languages\" VALUES(CreationCompte().getIdentifiant(), CreationCompte().getNOm(), CreationCompte().getprenom(), CreationCompte().AdressMail, CreationCompte().getMotDePasse1(), CreationCompte().getPhoto();");
-
-        }
-
-        }
-
-
-  */

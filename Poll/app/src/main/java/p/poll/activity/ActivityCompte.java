@@ -7,18 +7,19 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
-//import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,106 +33,114 @@ import java.util.HashMap;
 import p.poll.R;
 import p.poll.model.User;
 
-public class RegisterActivity extends AppCompatActivity{
+import static p.poll.activity.RegisterActivity.CAMERA_PERMISSION_REQUEST_CODE;
+import static p.poll.activity.RegisterActivity.CAMERA_REQUEST_CODE;
+import static p.poll.activity.RegisterActivity.IMAGE_GALLERY_REQUEST;
 
-    public static final int IMAGE_GALLERY_REQUEST = 20;
-    public static final int CAMERA_REQUEST_CODE = 228;
-    public static final int CAMERA_PERMISSION_REQUEST_CODE = 4192;
-    private ImageView imgPicture;
+/**
+ * Created by Vahid Beyraghi on 05-05-18.
+ */
+public class ActivityCompte extends AppCompatActivity {
+
     public static User loggedUser=LoginActivity.loggedUser;
-    private EditText mUsername;
-    private EditText mPassword;
-    private EditText mPasswordC;
-    private Button registerB;
-    private UserRegisterTask mAuthTask = null;
-    private User existingUser = null;
-    private View mRegisterFormView;
+    private View profileActivityView;
+    private Button menu;
+    private Button valider;
+    private EditText profile_name;
+    private EditText profile_first_name;
+    private EditText profile_email;
+    private ImageView profile_pic;
+    private ImageButton btnImageGallery;
+    private ImageButton btnImageCamera;
+    private UserModifyTask mAuthTask=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        // get a reference to the image view that holds the image that the user will see.
-        mUsername = (EditText) findViewById(R.id.usernameRegister);
-        mPassword = (EditText) findViewById(R.id.register_password);
-        mPasswordC = (EditText) findViewById(R.id.confirm_password);
-        imgPicture = (ImageView) findViewById(R.id.imgPicture);
-        registerB = (Button) findViewById(R.id.register_button);
-        registerB.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_compte);
+        if(loggedUser==null)
+        {
+            goToLogin(profileActivityView);
+            finish();
+        }
+        valider=findViewById(R.id.valider);
+        profile_name=findViewById(R.id.profile_name);
+        profile_first_name=findViewById(R.id.profile_first_name);
+        profile_email=findViewById(R.id.profile_email);
+        profile_pic=findViewById(R.id.profile_pic);
+        btnImageCamera= findViewById(R.id.btnImageCamera);
+        btnImageGallery= findViewById(R.id.btnImageGallery);
+
+        valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attempRegister();
+                attempModifyProfile();
             }
         });
-
     }
 
-    public void attempRegister()
+    protected void attempModifyProfile()
     {
+        View focusView=null;
+        boolean cancel=false;
+        String firstName = this.profile_first_name.getText().toString();
+        String lastName = this.profile_name.getText().toString();
+        String eMail = this.profile_email.getText().toString();
+        //TODO: ajouter la photo
+
         if (mAuthTask != null) {
             return;
         }
 
         // Reset errors.
-        mUsername.setError(null);
-        mPassword.setError(null);
-        mPasswordC.setError(null);
+        profile_first_name.setError(null);
+        profile_name.setError(null);
+        profile_email.setError(null);
 
-        // Store values at the time of the login attempt.
-        String username = this.mUsername.getText().toString();
-        String password = this.mPassword.getText().toString();
-        String passwordC = this.mPasswordC.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            this.mPassword.setError(getString(R.string.error_invalid_password));
-            focusView = this.mPassword;
-            cancel = true;
+        if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && isEmailValid(eMail)) {
+            loggedUser.setFirstName(firstName);
+            loggedUser.setLastName(lastName);
+            loggedUser.setMailAdress(eMail);
         }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(username)) {
-            this.mUsername.setError(getString(R.string.error_field_required));
-            focusView = this.mUsername;
-            cancel = true;
+        else {
+            if(TextUtils.isEmpty(firstName))
+            {
+                profile_first_name.setError("@string/error_empty_fname");
+                focusView=profile_first_name;
+                cancel=true;
+            }
+            if(TextUtils.isEmpty(lastName))
+            {
+                profile_name.setError("@string/error_empty_lname");
+                focusView=profile_name;
+                cancel=true;
+            }
+            if(!isEmailValid(eMail))
+            {
+                profile_email.setError("@string/error_invalid_email");
+                focusView=profile_email;
+                cancel=true;
+            }
         }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+        if(cancel)
+        {
             focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            //showProgress(true);
-            mAuthTask = new RegisterActivity.UserRegisterTask(username, password, passwordC);
+        }
+        else
+        {
+            mAuthTask = new ActivityCompte.UserModifyTask();
             mAuthTask.execute((Void) null);
         }
+        //TODO: si l'image n'est pas vide, ajouter l'image, sinon ajouter l'image par défaut
+
+        User.addUser(loggedUser);
     }
 
-    private boolean isPasswordValid(String password) {
-        return password.length() > 4;
-    }
 
 
+    public class UserModifyTask extends AsyncTask<Void, Void, Boolean> {
 
-    public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String username;
-        private final String password;
-        private final String passwordC;
-        private String error;
-        private int flag;
-
-        UserRegisterTask(String username, String password, String passwordC) {
-            this.username = username;
-            this.password = password;
-            this.passwordC = passwordC;
-            HashMap<String, User> users = User.toHashMap(User.getUsers());
-            existingUser=users.get(this.username);
+        UserModifyTask() {
         }
 
         @Override
@@ -144,19 +153,7 @@ public class RegisterActivity extends AppCompatActivity{
             } catch (InterruptedException e) {
                 return false;
             }
-            if(existingUser==null) {
-                if (this.password.equals(this.passwordC)) {
-                    loggedUser=new User(this.username, this.password);
-                    LoginActivity.loggedUser=loggedUser;
-                    return true;
-                }
-                flag=0;
-                error=getString(R.string.error_password_match);
-                return false;
-            }
-            flag=1;
-            error=getString(R.string.error_username_exists);
-            return false;
+            return true;
         }
 
 
@@ -166,18 +163,8 @@ public class RegisterActivity extends AppCompatActivity{
             //showProgress(false);
 
             if (success) {
-                goToProfil(mRegisterFormView);
-            } else {
-                if(flag==1)
-                {
-                    mUsername.setError(error);
-                    mUsername.requestFocus();
-                }
-                else {
-                    mPasswordC.setError(error);
-                    mPassword.requestFocus();
-                    mPasswordC.requestFocus();
-                }
+                User.addUser(loggedUser);
+                goToMenu(profileActivityView);
             }
         }
 
@@ -185,20 +172,32 @@ public class RegisterActivity extends AppCompatActivity{
         protected void onCancelled() {
             mAuthTask = null;
         }
-        /** Lance le profil. */
-        public void goToProfil(View v) {
-            Log.i("test","Go to profil");
-            Intent intent = new Intent(getApplicationContext(), ActivityCompte.class);
-            startActivity(intent);
-        }
     }
 
 
 
+    private boolean isEmailValid(String email) {
+        return email.contains("@")&& email.contains(".");
+    }
+
+
+    /** Lance le menu. */
+    public void goToMenu(View v) {
+        Intent intent = new Intent(getApplicationContext(), ChargingPage.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /** Lance le login. */
+    public void goToLogin(View v) {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
+
 
     public void resetimage(View v)
     {
-        imgPicture.setImageResource(R.drawable.userimage);
+        profile_pic.setImageResource(R.drawable.userimage);
     }
 
     public void onTakePhotoClicked(View v) {
@@ -301,7 +300,7 @@ public class RegisterActivity extends AppCompatActivity{
 
 
                     // show the image to the user
-                    imgPicture.setImageBitmap(image);
+                    profile_pic.setImageBitmap(image);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -315,3 +314,4 @@ public class RegisterActivity extends AppCompatActivity{
     }
 
 }
+

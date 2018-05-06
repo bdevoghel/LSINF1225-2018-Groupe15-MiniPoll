@@ -17,10 +17,10 @@ import p.poll.R;
  * Created by Nicolas on 03/05/2018.
  */
 
-public class PollAdapter extends ArrayAdapter<PollModel> {
+public class PollAdapterSondage extends ArrayAdapter<PollModel> {
 
     //tweets est la liste des models à afficher
-    public PollAdapter(Context context, List<PollModel> tweets) {
+    public PollAdapterSondage(Context context, List<PollModel> tweets) {
         super(context, 0, tweets);
     }
 
@@ -28,7 +28,7 @@ public class PollAdapter extends ArrayAdapter<PollModel> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_help,parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_amis,parent, false);
         }
 
         PollViewHolder viewHolder = (PollViewHolder) convertView.getTag();

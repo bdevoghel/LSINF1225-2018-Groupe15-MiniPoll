@@ -46,5 +46,10 @@ public class ChargingPage extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        //Nothing
+    }
 }
 

@@ -5,11 +5,14 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.SyncStateContract;
 import android.util.Log;
 
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
+import static p.poll.Pollapp.getContext;
 
 /**
  * Classe utilitaire qui va gérer la connexion, la création et la mise à jour de la base de données.
@@ -29,11 +32,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      * Nom du fichier sql contenant les instructions de création de la base de données. Le fichier
      * doit être placé dans le dossier assets/
      */
-    private static final String DATABASE_SQL_FILENAME = "base.sql";
+    private static final String DATABASE_SQL_FILENAME = "baseCorrect.sql";
     /**
      * Nom du fichier de la base de données.
      */
-    private static final String DATABASE_NAME = "easyPoll_base.sqlite";
+    private static final String DATABASE_NAME = "easyPoll_database.sqlite";
 
     /**
      * Version de la base de données (à incrémenter en cas de modification de celle-ci afin que la
@@ -41,7 +44,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      *
      * @note Le numéro de version doit changer de manière monotone.
      */
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     /**
      * Instance de notre classe afin de pouvoir y accéder facilement depuis n'importe quel objet.
@@ -65,7 +68,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      */
     public static MySQLiteHelper get() {
         if (instance == null) {
-            return new MySQLiteHelper(Pollapp.getContext());
+            new MySQLiteHelper(getContext());
         }
         return instance;
     }
@@ -117,17 +120,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
      * enregistrées.
      */
     private void initDatabase(SQLiteDatabase db) {
+
+        //String sqlQuery = "CREATE TABLE [profil] ( [identifiant] TEXT PRIMARY KEY NOT NULL DEFAULT ( NULL ) , [prenom] TEXT NOT NULL DEFAULT ( NULL ) , [nom] TEXT NOT NULL DEFAULT ( NULL ) , [email] TEXT NOT NULL DEFAULT ( NULL ) , [mdp] TEXT NOT NULL DEFAULT ( NULL ) , [photo] BLOB , [favori] INTEGER )";
+        //db.execSQL(sqlQuery);
         try {
+
             // Ouverture du fichier sql.
-            Scanner scan = new Scanner(Pollapp.getContext().getAssets().open(DATABASE_SQL_FILENAME));
+            Scanner scan = new Scanner(getContext().getAssets().open(DATABASE_SQL_FILENAME));
             scan.useDelimiter(Pattern.compile(";"));
             while (scan.hasNext()) {
                 String sqlQuery = scan.next();
-                /*
-                 * @note : Pour des raisons de facilité, on ne prend en charge ici que les fichiers
-                 * contenant une instruction par ligne. Si des instructions SQL se trouvent sur deux
-                 * lignes, cela produira des erreurs (car l'instruction sera coupée)
-                 */
                 if (!sqlQuery.trim().isEmpty() && !sqlQuery.trim().startsWith("--")) {
                     Log.d("MySQL query", sqlQuery);
                     db.execSQL(sqlQuery);

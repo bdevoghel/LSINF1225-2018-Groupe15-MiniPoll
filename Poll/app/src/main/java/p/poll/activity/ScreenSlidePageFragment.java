@@ -59,10 +59,10 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             case R.id.button3:
                 Toast.makeText(getActivity(), "Ami ajouté", Toast.LENGTH_SHORT).show();
                 //textView2 = (TextView) v.findViewById(R.id.text3);
-                textView2.setText("PrenomHello :");
+                textView2.setText("Prenom :");
                 break;
             case R.id.buttonexit:
-                Intent intent = new Intent(getActivity(), MenuActivity.class);
+                Intent intent = new Intent(getActivity(), Menupoll.class);
                 startActivity(intent);
                 break;
             default:

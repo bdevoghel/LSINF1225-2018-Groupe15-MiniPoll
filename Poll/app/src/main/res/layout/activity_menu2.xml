@@ -55,7 +55,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/abhaya_libre"
                 android:gravity="center"
-                android:text="Menu Principale"
+                android:text="@string/menu_principal"
                 android:textAlignment="center"
                 android:textSize="28sp"
                 android:textStyle="bold" />

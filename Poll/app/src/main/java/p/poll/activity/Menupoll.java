@@ -88,6 +88,8 @@ public class Menupoll extends AppCompatActivity implements
         if (id == R.id.nav_account) {
             Toast.makeText(Menupoll.this, "Compte",
                     Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(),Profile.class);
+            startActivity(intent);
         }
         else if (id == R.id.new_quizz) {
             Toast.makeText(Menupoll.this, "Quizz",
@@ -96,6 +98,8 @@ public class Menupoll extends AppCompatActivity implements
         else if (id == R.id.new_survey) {
             Toast.makeText(Menupoll.this, "Sondage",
                     Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(),Sondage.class);
+            startActivity(intent);
         }
         else if (id == R.id.new_help){
             Toast.makeText(Menupoll.this, "Aide",
@@ -105,11 +109,19 @@ public class Menupoll extends AppCompatActivity implements
 
         }
         else {
-            Toast.makeText(Menupoll.this, "Deconnection",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(Menupoll.this, getString(R.string.deco), Toast.LENGTH_SHORT).show();
+                LoginActivity.loggedUser=null;
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+                finish();
         }
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //Nothing
     }
 
     @Override
@@ -122,7 +134,7 @@ public class Menupoll extends AppCompatActivity implements
 
 
     public void profile(View v){
-        Intent intent = new Intent(getApplicationContext(),ScreenSlidePagerActivity.class);
+        Intent intent = new Intent(getApplicationContext(),Profile.class);
         startActivity(intent);
     }
     public void friends(View v) {
@@ -160,7 +172,7 @@ public class Menupoll extends AppCompatActivity implements
     {
         Toast.makeText(Menupoll.this, "New Poll",
                 Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(),AddFriendActivity.class);
+        Intent intent = new Intent(getApplicationContext(),NewPoll.class);
         startActivity(intent);
     }
     public void seeFriendList(View v) {
