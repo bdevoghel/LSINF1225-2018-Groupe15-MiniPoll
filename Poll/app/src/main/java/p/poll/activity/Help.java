@@ -58,16 +58,19 @@ public class Help extends Activity{
                 Ybegin = Y;
                 int yy2 = img2location[1];
                 int yy1 = img1location[1];
-                int height = img1.getHeight();
-                if(yy1<Y && Y<(yy1+height))
+                int height1 = img1.getHeight();
+                int height2 = img2.getHeight();
+                if(yy1<Y && Y<(yy1+height1))
                 {
-                    Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+X+" Y: "+Y+"DEDANS" + "height = " + height, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+X+" Y: "+Y+"DEDANS image1" + "height = " + height1, Toast.LENGTH_SHORT).show();
                     isInimg1 = true;
+                    isInimg2 = false;
                 }
-                else if(yy2<Y && Y<(yy2+height))
+                else if(yy2<Y && Y<(yy2+height2))
                 {
-                    Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+X+" Y: "+Y+"DEDANS" + "height = " + height, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+X+" Y: "+Y+"DEDANS image2" + "height = " + height2, Toast.LENGTH_SHORT).show();
                     isInimg2 = true;
+                    isInimg1 = false;
                 }
                 else
                 {
