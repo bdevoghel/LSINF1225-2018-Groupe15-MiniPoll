@@ -103,60 +103,60 @@ public class LienSondageDatabase {
     // A la première place
 
 
-/*
+
     // A la première place
     public void Increment1 (String proposition){
-        int p = getListProposition(String proposition)[0];
+        int p = getListValeurProposition(proposition).get(0);
         p = p+5;
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        MySQLiteHelper.get().update("reponse_sondage", newValues, "id = "+proposition, null);
+        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la deuxième place
     public void Increment2 (String proposition){
-        int p = getListProposition(String proposition)[0];
+        int p = getListValeurProposition(proposition).get(0);
         p = p+4;
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        MySQLiteHelper.get().update("reponse_sondage", newValues, "id = "+proposition, null);
+        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la troisième place
     public void Increment3 (String proposition){
-        int p = getListProposition(String proposition)[0];
+        int p = getListValeurProposition(proposition).get(0);
         p = p+3;
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        MySQLiteHelper.get().update("reponse_sondage", newValues, "id = "+proposition, null);
+        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = ?", neproposition);
     }
 
     // A la quatrième place
     public void Increment4 (String proposition){
-        int p = getListProposition(String proposition)[0];
+        int p = getListValeurProposition(proposition).get(0);
         p = p+2;
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        MySQLiteHelper.get().update("reponse_sondage", newValues, "id = "+proposition, null);
+        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la cinquième place
     public void Increment5 (String proposition){
-        int p = getListProposition(String proposition)[0];
+        int p = getListValeurProposition(proposition).get(0);
         p = p+1;
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        MySQLiteHelper.get().update("reponse_sondage", newValues, "id = "+proposition, null);
+        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = "+proposition, null);
     }
 
     // A la sixième  place on ne modifie rien
 
-*/
+
 
 
 
