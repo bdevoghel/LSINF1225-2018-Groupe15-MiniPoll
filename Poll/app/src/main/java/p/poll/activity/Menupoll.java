@@ -189,7 +189,7 @@ public class Menupoll extends AppCompatActivity implements
         startActivity(intent);
     }
     public void seeFriendList(View v) {
-        Intent intent = new Intent(getApplicationContext(),FriendListActivity.class);
+        Intent intent = new Intent(getApplicationContext(),ScreenSlidePagerActivity.class);
         startActivity(intent);
     }
 }
