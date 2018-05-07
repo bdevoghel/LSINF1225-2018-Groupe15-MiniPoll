@@ -24,6 +24,8 @@ public class Help extends Activity{
     int i = 0;
     int[]  img1location= new int[2];
     int[]  img2location= new int[2];
+    int Xbegin = 0;
+    int Ybegin = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +47,6 @@ public class Help extends Activity{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
-        int Xbegin = 0;
-        int Ybegin = 0;
         int X = (int) event.getX();
         int Y = (int) event.getY();
         int eventaction = event.getAction();
@@ -79,8 +78,8 @@ public class Help extends Activity{
                 }
                 else
                 {
-                    i++;
-                    Toast.makeText(this, "Pas bon mouvement : "+i, Toast.LENGTH_SHORT).show();
+                   // i++;
+                   // Toast.makeText(this, "Pas bon mouvement : "+i, Toast.LENGTH_SHORT).show();
                 }
                 break;
 
