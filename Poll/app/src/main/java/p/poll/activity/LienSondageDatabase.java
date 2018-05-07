@@ -29,7 +29,7 @@ public class LienSondageDatabase {
                 null,
                 null
 
-                );
+        );
         if (c.moveToFirst()) {
             for (int i = 0; i < c.getCount(); i++) {
                 String s = c.getString(c.getColumnIndexOrThrow("titre"));
@@ -44,8 +44,7 @@ public class LienSondageDatabase {
     }
 
     //Ici on va recuperer les propositions du sondage pour que l'utilisateur puisse jouer
-
-    public List<String> getListProposition (String PollIdentifiant){
+    public List<String> getListProposition(String PollIdentifiant) {
         List<String> proposition = new ArrayList<String>();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
@@ -56,10 +55,10 @@ public class LienSondageDatabase {
                 null,
                 null,
                 null
-                );
+        );
         if (c.moveToFirst()) {
             for (int i = 0; i < 6; i++) {
-                if (i >= c.getCount()){
+                if (i >= c.getCount()) {
                     proposition.add(null);
                     c.moveToNext();
                 }
@@ -72,8 +71,33 @@ public class LienSondageDatabase {
         return proposition;
     }
 
-    //Ici on va recuperer la valeur de la proposition pour l'incrémenter
-    public List<Integer> getListValeurProposition(String proposition){
+    //Ici on va recuperer les points de la proposition pour l'incrémenter ou la diminuer.
+    public List<Integer> getListPointsProposition(String proposition) {
+        List<Integer> sondages = new ArrayList<Integer>();
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        //Les resultats de la requete sont mis dans un "curseur"
+
+        Cursor c = db.query("\"languages\"", // La table
+                new String[]{"points"},
+                "reponse=?", // Colonnes pour la clause WHERE
+                new String[]{proposition}, // Valeurs pour la clause WHERE
+                null, // ne pas grouper les lignes
+                null, // ne pas filtrer par goupe de ligne
+                null  // pas d'ordre
+        );
+
+        if (c.moveToFirst()) {
+            for (int i = 0; i < c.getCount(); i++) {
+                int s = c.getInt(c.getColumnIndexOrThrow("points"));
+                sondages.add(s);
+                c.moveToNext();
+            }
+        }
+        c.close();
+        return sondages;
+    }
+    // retourne l'ordre d'une proposition
+    public List<Integer> getListOrdreProposition(String proposition) {
         List<Integer> sondages = new ArrayList<Integer>();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
@@ -99,99 +123,40 @@ public class LienSondageDatabase {
     }
 
 
-    // Quand on place une proposition dans la liste
-    // A la première place
-
-
-
-    // A la première place
-    public void Increment1 (String proposition){
-        int p = getListValeurProposition(proposition).get(0);
-        p = p+5;
-        ContentValues newValues = new ContentValues();
-        newValues.put("ordre", p);
-
-        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = "+proposition, null);
-    }
-
-    // A la deuxième place
-    public void Increment2 (String proposition){
-        int p = getListValeurProposition(proposition).get(0);
-        p = p+4;
-        ContentValues newValues = new ContentValues();
-        newValues.put("ordre", p);
-
-        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = "+proposition, null);
-    }
-
-    // A la troisième place
-    public void Increment3 (String proposition){
-        int p = getListValeurProposition(proposition).get(0);
-        p = p+3;
-        ContentValues newValues = new ContentValues();
-        newValues.put("ordre", p);
-
-        //MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = ?", neproposition);
-    }
-
-    // A la quatrième place
-    public void Increment4 (String proposition){
-        int p = getListValeurProposition(proposition).get(0);
-        p = p+2;
-        ContentValues newValues = new ContentValues();
-        newValues.put("ordre", p);
-
-        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = "+proposition, null);
-    }
-
-    // A la cinquième place
-    public void Increment5 (String proposition){
-        int p = getListValeurProposition(proposition).get(0);
-        p = p+1;
-        ContentValues newValues = new ContentValues();
-        newValues.put("ordre", p);
-
-        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = "+proposition, null);
-    }
-
-    // A la sixième  place on ne modifie rien
-
-
-
 
 
 // retourne la proposition qui a eu le plus de succes
 
-    //retourne la liste de tous les ordres du poll
-    public List<Integer> getListOrdre (String pollIdentifiant){
-        List<Integer> ordre = new ArrayList<Integer>();
+    //retourne la liste de tous les points du poll dans l'ordre dans lequel on a mis les propositions
+    public List<Integer> getListPoints(String pollIdentifiant) {
+        List<Integer> points = new ArrayList<Integer>();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
 
         Cursor c = db.query("\"sondage\"", // La table
-                new String[]{"\"ordre\""},
+                new String[]{"\"points\""},
                 "\"idpoll=?\"",
                 new String[]{pollIdentifiant},
                 null,
                 null,
                 null
-                );
+        );
         if (c.moveToFirst()) {
             for (int i = 0; i < c.getCount(); i++) {
-                int s = c.getInt(c.getColumnIndexOrThrow("ordre"));
-                ordre.add(s);
+                int s = c.getInt(c.getColumnIndexOrThrow("points"));
+                points.add(s);
                 c.moveToNext();
             }
         }
         c.close();
-        return ordre;
+        return points;
     }
 
     // On retourne le plus grand nombre
-    public int premiers (List<Integer> tab){
+    public int premiers(List<Integer> tab) {
         int max = 0;
-        for (int i = 0; i < tab.size(); i++){
-            if (tab.get(i)>max){
+        for (int i = 0; i < tab.size(); i++) {
+            if (tab.get(i) > max) {
                 max = tab.get(i);
             }
         }
@@ -199,20 +164,20 @@ public class LienSondageDatabase {
     }
 
     // On va retourner le/les premiere(s) reponses du sondage
-    public List<Integer> getGagnant (String pollIdentifiant){
-        int max = premiers(getListOrdre(pollIdentifiant));
+    public List<Integer> getGagnant(String pollIdentifiant) {
+        int max = premiers(getListPoints(pollIdentifiant));
 
         List<Integer> resultat = new ArrayList<Integer>();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
         Cursor c = db.query("sondage", // La table
                 new String[]{"titre"},
-                "ordre=? AND idpoll",
-                new String[] {String.valueOf(max), pollIdentifiant},
+                "points=? AND idpoll",
+                new String[]{String.valueOf(max), pollIdentifiant},
                 null,
                 null,
                 null
-                );
+        );
 
         if (c.moveToFirst()) {
             for (int i = 0; i < c.getCount(); i++) {
@@ -225,7 +190,7 @@ public class LienSondageDatabase {
         return resultat;
 
     }
-}
+
 
 
 
@@ -278,3 +243,58 @@ public class LienSondageDatabase {
         MySQLiteHelper.get().insert ("sondage", "idpoll", i);
     }
   */
+//POur réaliser cette fonction, on doit pouvoir connaitre le nombre de points de cette proposition
+
+    // On modifie les points et les positions si le drapeau est false
+
+    public void ModifyF(String proposition) {
+        c = listePos.get(0);
+        listePos.remove(0);
+        b = getListPointsProposition(proposition).get(0) + (6 - c);
+        ContentValues newValues1 = new ContentValues();
+        ContentValues newValues2 = new ContentValues();
+        newValues1.put("points", b);
+        newValues2.put("ordre", c);
+
+        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues1, "id = ?", new String[]{proposition});
+        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues2, "id = ?", new String[]{proposition});
+    }
+    // On modifie les points et les positions si le drapeau est true
+
+    public void ModifyT(String proposition) {
+        c = getListOrdreProposition(proposition).get(0);
+        b = getListPointsProposition(proposition).get(0) - (6 - c);
+        listePos.set(0, c);
+        ContentValues newValues1 = new ContentValues();
+        ContentValues newValues2 = new ContentValues();
+        newValues1.put("points", b);
+        newValues2.put("ordre", 0);
+        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues1, "id = ?", new String[]{proposition});
+        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues2, "id = ?", new String[]{proposition});
+    }
+
+
+    //technique pour le poll, on met des drapeaux pour voir si on a déjà cliqué dessus.
+    //On fait une liste numérotée de 1 à 6 pour mettre leur positions
+    //On met une variable globale qu'on va modifier à chaque fois
+    int a = 0; //sert à avoir l'inderx de la proposition dans le tableau des propositions
+    int b = 0; //sert pour calculer les points.
+    int c = 0; //sert à avoir la position
+    List<Integer> listePos = new ArrayList<Integer>();
+    public void initList(){
+        for (int i = 1; i < 7; i++){
+            listePos.add(i);
+        }
+    }
+
+    public void Classer(String proposition) {
+        a = Sondage.ListePropositions.indexOf(proposition);
+        if (Sondage.flag[a] == false) {
+            ModifyF(proposition);
+            Sondage.flag[a] = true;
+        } else {
+            ModifyT(proposition);
+            Sondage.flag[a] = false;
+        }
+    }
+}
