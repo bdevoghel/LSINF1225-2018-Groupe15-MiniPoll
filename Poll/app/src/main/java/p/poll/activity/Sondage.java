@@ -28,6 +28,23 @@ public class Sondage extends Activity {
             "Proposition5",
             "Proposition6"
     } ;
+    public static List<String> ListePropositions = new ArrayList<String>();
+    public List<String> MakeListePropositions (){
+        for (int i = 0; i < 6; i++){
+            ListePropositions.add(this.web[i]);
+        }
+        return ListePropositions;
+    }
+
+
+    public static Boolean flag[ ]= {
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+    } ;
 
     private ListView mListView;
 

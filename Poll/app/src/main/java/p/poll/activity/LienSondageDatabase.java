@@ -44,7 +44,6 @@ public class LienSondageDatabase {
     }
 
     //Ici on va recuperer les propositions du sondage pour que l'utilisateur puisse jouer
-
     public List<String> getListProposition(String PollIdentifiant) {
         List<String> proposition = new ArrayList<String>();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
