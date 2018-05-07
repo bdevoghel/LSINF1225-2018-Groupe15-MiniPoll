@@ -1,7 +1,9 @@
 package p.poll.activity;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -14,9 +16,12 @@ import p.poll.R;
 
 public class Help extends Activity{
 
-    private boolean isTouch = false;
+    private boolean isIn = false;
     public ImageView img1;
     public ImageView img2;
+    int widthscreen;
+    int heightscreen;
+    int i = 0;
     int[]  img1location= new int[2];
     int[]  img2location= new int[2];
     @Override
@@ -25,6 +30,11 @@ public class Help extends Activity{
         setContentView(R.layout.activity_help);
         img1 = (ImageView) findViewById(R.id.imageView3);
         img2 = (ImageView) findViewById(R.id.imageView4);
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        widthscreen = size.x;
+        heightscreen = size.y;
     }
 
     @Override
@@ -36,12 +46,16 @@ public class Help extends Activity{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        int Xbegin = 0;
+        int Ybegin = 0;
         int X = (int) event.getX();
         int Y = (int) event.getY();
         int eventaction = event.getAction();
 
         switch (eventaction) {
             case MotionEvent.ACTION_DOWN:
+                Xbegin = X;
+                Ybegin = Y;
                 int xx = img1location[0];
                 int yy = img1location[1];
                 int height = img1.getHeight();
@@ -51,11 +65,23 @@ public class Help extends Activity{
                 }
 
                 //Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+xx+" Y: "+yy+"PAS DEDANS", Toast.LENGTH_SHORT).show();
-                isTouch = true;
+                isIn = true;
+
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                //Toast.makeText(this, "MOVE "+"X: "+X+" Y: "+Y, Toast.LENGTH_SHORT).show();
+                if(isIn && X<Xbegin-widthscreen/3) {
+                    Toast.makeText(this, "Slide left", Toast.LENGTH_SHORT).show();
+                }
+                else if(isIn && X>Xbegin+widthscreen/3)
+                {
+                    Toast.makeText(this, "Slide right", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    i++;
+                    Toast.makeText(this, "Pas bon mouvement : "+i, Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case MotionEvent.ACTION_UP:
