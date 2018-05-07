@@ -15,14 +15,22 @@ import android.widget.Toast;
 
 import p.poll.Pollapp;
 import p.poll.R;
+import p.poll.model.User;
 
 
 public class ScreenSlidePageFragment extends Fragment implements View.OnClickListener{
     int pos;
+    User oneuser;
     View view;
     public Button myButton;
     public Button myButton2;
     TextView textView2;
+    public ScreenSlidePageFragment(int pos,User user)
+    {
+        super();
+        this.pos = pos;
+        this.oneuser = user; //maintenant il est instancié donc tu peut l'utiliser ici :)
+    }
     public ScreenSlidePageFragment(int pos)
     {
         super();

@@ -1,5 +1,6 @@
 package p.poll.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,8 @@ public class ListHelp extends AppCompatActivity {
                 PollModel j = (PollModel)o;
                 Toast.makeText(ListHelp.this, j.getText(),
                         Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Help.class);
+                startActivity(intent);
             }
         });
     }

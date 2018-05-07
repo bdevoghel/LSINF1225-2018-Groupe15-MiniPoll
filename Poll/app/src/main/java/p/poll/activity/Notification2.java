@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 
@@ -58,7 +59,10 @@ public class Notification2 extends Activity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    Toast.makeText(Notification2.this, "You Clicked at " +web[+ position]+" value = ", Toast.LENGTH_SHORT).show();
+                    TextView textview = (TextView) view.findViewById(R.id.txt);
+                    CharSequence t = textview.getText();
+                    //Toast.makeText(Notification2.this, "You Clicked at " +web[+ position]+" value = ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Notification2.this, "You Clicked at " +web[+ position]+" value = "+ t.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

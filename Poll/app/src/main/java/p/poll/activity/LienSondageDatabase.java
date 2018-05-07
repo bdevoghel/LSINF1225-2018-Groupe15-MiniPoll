@@ -131,7 +131,7 @@ public class LienSondageDatabase {
         ContentValues newValues = new ContentValues();
         newValues.put("ordre", p);
 
-        MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = ?", neproposition);
+        //MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues, "id = ?", neproposition);
     }
 
     // A la quatrième place
