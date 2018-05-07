@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
+import p.poll.model.User;
 
 
 /**
@@ -26,7 +27,7 @@ import p.poll.R;
 
 public class ListSurvey extends AppCompatActivity {
     private ListView mListView;
-
+    List<String> Sondage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +54,6 @@ public class ListSurvey extends AppCompatActivity {
     }
 
     private List<PollModel> genererPoll(){
-
-        /*
         List<PollModel> tweets = new ArrayList<PollModel>();
         tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
         tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
@@ -82,6 +81,6 @@ public class ListSurvey extends AppCompatActivity {
         tweets.add(new PollModel(Color.RED, "Mathieu", "Il est quelle heure ??"));
         tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
         return tweets;
-        */
+
     }
 }
