@@ -49,7 +49,7 @@ public class ImageAdapter extends BaseAdapter {
 
     // references to our images
     private Integer[] mThumbIds = {
-            R.drawable.survey, R.drawable.quizz,
-            R.drawable.newpoll, R.drawable.choice,
+            R.drawable.survey2, R.drawable.quizz2,
+            R.drawable.newpoll2, R.drawable.choice2,
     };
 }

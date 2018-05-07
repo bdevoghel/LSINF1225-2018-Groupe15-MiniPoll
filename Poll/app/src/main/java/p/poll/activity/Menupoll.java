@@ -155,35 +155,35 @@ public class Menupoll extends AppCompatActivity implements
     }
     public void Survey()
     {
-        Toast.makeText(Menupoll.this, "Survey",
+        Toast.makeText(Menupoll.this,  getString(R.string.survey),
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),ListHelp.class);
         startActivity(intent);
     }
     public void Notification(View v)
     {
-        Toast.makeText(Menupoll.this, "Notification",
+        Toast.makeText(Menupoll.this, getString(R.string.notification),
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),Notification2.class);
         startActivity(intent);
     }
     public void Quizz()
     {
-        Toast.makeText(Menupoll.this, "Quizz",
+        Toast.makeText(Menupoll.this,  getString(R.string.quizz),
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),ListQuizz.class);
         startActivity(intent);
     }
     private void Choise()
     {
-        Toast.makeText(Menupoll.this, "choise",
+        Toast.makeText(Menupoll.this,  getString(R.string.choice),
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),ListSurvey.class);
         startActivity(intent);
     }
     private void Newpoll()
     {
-        Toast.makeText(Menupoll.this, "New Poll",
+        Toast.makeText(Menupoll.this,  getString(R.string.new_poll),
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),NewPoll.class);
         startActivity(intent);
