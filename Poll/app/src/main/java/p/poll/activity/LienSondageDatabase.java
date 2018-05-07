@@ -58,7 +58,11 @@ public class LienSondageDatabase {
                 null
                 );
         if (c.moveToFirst()) {
-            for (int i = 0; i < c.getCount(); i++) {
+            for (int i = 0; i < 6; i++) {
+                if (i >= c.getCount()){
+                    proposition.add(null);
+                    c.moveToNext();
+                }
                 String s = c.getString(c.getColumnIndexOrThrow("data_reponse"));
                 proposition.add(s);
                 c.moveToNext();

@@ -20,12 +20,13 @@ import p.poll.R;
 
 public class Sondage extends Activity {
     ListView list;
-    String[] web = {
+    public static String[] web = {
             "Proposition1",
             "Proposition2",
             "Proposition3",
             "Proposition4",
             "Proposition5",
+            "Proposition6"
     } ;
 
     private ListView mListView;

@@ -28,7 +28,7 @@
         android:text="Placer les éléments par ordre de préférence" />
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/listView2"
         android:layout_width="wrap_content"
         android:layout_height="451dp">
 

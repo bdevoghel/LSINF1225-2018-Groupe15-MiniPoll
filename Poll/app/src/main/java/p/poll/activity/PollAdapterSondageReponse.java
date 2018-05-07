@@ -14,7 +14,7 @@ import java.util.List;
 import p.poll.R;
 
 /**
- * Created by Nicolas on 03/05/2018.
+ * Created by Antoine on 03/05/2018.
  */
 
 public class PollAdapterSondageReponse extends ArrayAdapter<String> {
@@ -28,7 +28,7 @@ public class PollAdapterSondageReponse extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_amis,parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_sondage,parent, false);
         }
 
         PollViewHolder viewHolder = (PollViewHolder) convertView.getTag();
@@ -36,17 +36,16 @@ public class PollAdapterSondageReponse extends ArrayAdapter<String> {
             viewHolder = new PollViewHolder();
             viewHolder.pseudo = (TextView) convertView.findViewById(R.id.pseudo);
             viewHolder.text = (TextView) convertView.findViewById(R.id.text);
-            viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
             convertView.setTag(viewHolder);
         }
 
         //getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
-        PollModel pollModel = getItem(position);
+        String description = getItem(position);
 
         //il ne reste plus qu'à remplir notre vue
-        viewHolder.pseudo.setText(pollModel.getPseudo());
-        viewHolder.text.setText(pollModel.getText());
-        viewHolder.avatar.setImageDrawable(new ColorDrawable(pollModel.getColor()));
+        viewHolder.pseudo.setText(Sondage.web[position]);
+        viewHolder.text.setText(description);
+
 
         return convertView;
     }
