@@ -17,10 +17,10 @@ import p.poll.R;
  * Created by Nicolas on 03/05/2018.
  */
 
-public class PollAdapterSondageReponse extends ArrayAdapter<PollModel> {
+public class PollAdapterSondageReponse extends ArrayAdapter<String> {
 
     //tweets est la liste des models à afficher
-    public PollAdapterSondageReponse(Context context, List<PollModel> tweets) {
+    public PollAdapterSondageReponse(Context context, List<String> tweets) {
         super(context, 0, tweets);
     }
 

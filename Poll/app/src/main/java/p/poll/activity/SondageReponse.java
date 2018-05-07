@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 04/05/2018.
@@ -26,6 +27,7 @@ public class SondageReponse extends Activity {
             "Proposition3",
             "Proposition4",
             "Proposition5",
+            "Proposition6"
     } ;
 
     private ListView mListView;
@@ -48,9 +50,9 @@ public class SondageReponse extends Activity {
 
         mListView = (ListView) findViewById(R.id.listView2);
 
-        List<PollModel> polls = genererAmi();
+        List<String> polls = genererSondage();
 
-        PollAdapterSondage adapter = new PollAdapterSondage(SondageReponse.this, polls);
+        PollAdapterSondageReponse adapter = new PollAdapterSondageReponse(SondageReponse.this, polls);
         mListView.setAdapter(adapter);
         mListView.setClickable(true);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,11 +60,16 @@ public class SondageReponse extends Activity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Object o = mListView.getItemAtPosition(position);
-                PollModel j = (PollModel)o;
-                Toast.makeText(SondageReponse.this, j.getText(),
+
+                String j = (String) o;
+                Toast.makeText(SondageReponse.this, j,
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private List<String> genererSondage() {
+    LienSondageDatabase lien = new LienSondageDatabase();
+    return lien.getListSondage(User.loggedUser.getUsername());
     }
 
 }
