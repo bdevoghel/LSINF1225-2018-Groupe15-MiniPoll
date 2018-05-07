@@ -352,7 +352,6 @@ public class User {
      * Transforme un fichier en Bitmap
      */
     public static Bitmap toBitmap(String filePath, ContentResolver content){
-        Log.i("TOBITMAP",filePath);
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(content, Uri.parse(filePath));
             return bitmap;
