@@ -14,7 +14,7 @@ import p.poll.MySQLiteHelper;
  * Created by Antoine on 05-05-18.
  */
 // va chercher tous les sondages de l'utilisateur
-public class LienBaseDeDonnée {
+public class LienSondageDatabase {
     //
     public List<String> getListSondage(String identifiant) {
         List<String> sondages = new ArrayList<String>();
