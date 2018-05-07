@@ -16,7 +16,8 @@ import p.poll.R;
 
 public class Help extends Activity{
 
-    private boolean isIn = false;
+    private boolean isInimg1 = false;
+    private boolean isInimg2 = false;
     public ImageView img1;
     public ImageView img2;
     int widthscreen;
@@ -55,26 +56,44 @@ public class Help extends Activity{
             case MotionEvent.ACTION_DOWN:
                 Xbegin = X;
                 Ybegin = Y;
-                int xx = img1location[0];
-                int yy = img1location[1];
+                int yy2 = img2location[1];
+                int yy1 = img1location[1];
                 int height = img1.getHeight();
-                if(yy<Y && Y<(yy+height))
+                if(yy1<Y && Y<(yy1+height))
                 {
                     Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+X+" Y: "+Y+"DEDANS" + "height = " + height, Toast.LENGTH_SHORT).show();
+                    isInimg1 = true;
+                }
+                else if(yy2<Y && Y<(yy2+height))
+                {
+                    Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+X+" Y: "+Y+"DEDANS" + "height = " + height, Toast.LENGTH_SHORT).show();
+                    isInimg2 = true;
+                }
+                else
+                {
+                    isInimg1 = false;
+                    isInimg2= false;
                 }
 
-                //Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+xx+" Y: "+yy+"PAS DEDANS", Toast.LENGTH_SHORT).show();
-                isIn = true;
 
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                if(isIn && X<Xbegin-widthscreen/3) {
-                    Toast.makeText(this, "Slide left", Toast.LENGTH_SHORT).show();
+                if(isInimg1 && X<Xbegin-widthscreen/3) {
+                    Toast.makeText(this, "Slide left image1", Toast.LENGTH_SHORT).show();
+
                 }
-                else if(isIn && X>Xbegin+widthscreen/3)
+                else if(isInimg1 && X>Xbegin+widthscreen/3)
                 {
-                    Toast.makeText(this, "Slide right", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Slide right image1", Toast.LENGTH_SHORT).show();
+                }
+                else if(isInimg2 && X<Xbegin-widthscreen/3)
+                {
+                    Toast.makeText(this, "Slide left image2", Toast.LENGTH_SHORT).show();
+                }
+                else if(isInimg2 && X>Xbegin+widthscreen/3)
+                {
+                    Toast.makeText(this, "Slide right image2", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
