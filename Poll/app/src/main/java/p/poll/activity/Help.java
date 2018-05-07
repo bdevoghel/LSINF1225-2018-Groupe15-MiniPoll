@@ -84,19 +84,27 @@ public class Help extends Activity{
             case MotionEvent.ACTION_MOVE:
                 if(isInimg1 && X<Xbegin-widthscreen/3) {
                     Toast.makeText(this, "Slide left image1", Toast.LENGTH_SHORT).show();
+                    img1.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+                    img2.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
 
                 }
                 else if(isInimg1 && X>Xbegin+widthscreen/3)
                 {
                     Toast.makeText(this, "Slide right image1", Toast.LENGTH_SHORT).show();
+                    img2.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+                    img1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
                 }
                 else if(isInimg2 && X<Xbegin-widthscreen/3)
                 {
                     Toast.makeText(this, "Slide left image2", Toast.LENGTH_SHORT).show();
+                    img2.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+                    img1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
                 }
                 else if(isInimg2 && X>Xbegin+widthscreen/3)
                 {
                     Toast.makeText(this, "Slide right image2", Toast.LENGTH_SHORT).show();
+                    img1.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+                    img2.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
                 }
                 else
                 {
