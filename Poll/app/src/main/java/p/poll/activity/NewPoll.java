@@ -17,4 +17,7 @@ public class NewPoll extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_new_poll);
     }
+
+    // Nom du poll
+    public static String idpoll = "idpoll";
 }

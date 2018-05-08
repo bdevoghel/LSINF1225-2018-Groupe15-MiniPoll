@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.MySQLiteHelper;
+import p.poll.model.User;
 
 /**
  * Created by Antoine on 05-05-18.
@@ -72,15 +73,15 @@ public class LienSondageDatabase {
     }
 
     //Ici on va recuperer les points de la proposition pour l'incrémenter ou la diminuer.
-    public List<Integer> getListPointsProposition(String proposition) {
+    public List<Integer> getListPointsProposition(String proposition, String user, String idpoll) {
         List<Integer> sondages = new ArrayList<Integer>();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
 
         Cursor c = db.query("\"languages\"", // La table
                 new String[]{"points"},
-                "reponse=?", // Colonnes pour la clause WHERE
-                new String[]{proposition}, // Valeurs pour la clause WHERE
+                "reponse=? AND identifaint=? AND idpoll", // Colonnes pour la clause WHERE
+                new String[]{proposition, user, idpoll}, // Valeurs pour la clause WHERE
                 null, // ne pas grouper les lignes
                 null, // ne pas filtrer par goupe de ligne
                 null  // pas d'ordre
@@ -96,16 +97,17 @@ public class LienSondageDatabase {
         c.close();
         return sondages;
     }
+
     // retourne l'ordre d'une proposition
-    public List<Integer> getListOrdreProposition(String proposition) {
+    public List<Integer> getListOrdreProposition(String proposition, String user, String idpoll) {
         List<Integer> sondages = new ArrayList<Integer>();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
 
         Cursor c = db.query("\"languages\"", // La table
                 new String[]{"ordre"},
-                "reponse=?", // Colonnes pour la clause WHERE
-                new String[]{proposition}, // Valeurs pour la clause WHERE
+                "reponse=? AND identifaint=? AND idpoll", // Colonnes pour la clause WHERE
+                new String[]{proposition, user, idpoll}, // Valeurs pour la clause WHERE
                 null, // ne pas grouper les lignes
                 null, // ne pas filtrer par goupe de ligne
                 null  // pas d'ordre
@@ -121,8 +123,6 @@ public class LienSondageDatabase {
         c.close();
         return sondages;
     }
-
-
 
 
 // retourne la proposition qui a eu le plus de succes
@@ -250,11 +250,11 @@ public class LienSondageDatabase {
     public void ModifyF(String proposition) {
         c = listePos.get(0);
         listePos.remove(0);
-        b = getListPointsProposition(proposition).get(0) + (6 - c);
+        b = getListPointsProposition(proposition, User.loggedUser.getUsername(), NewPoll.idpoll).get(0) + (6 - c);
         ContentValues newValues1 = new ContentValues();
         ContentValues newValues2 = new ContentValues();
         newValues1.put("points", b);
-        newValues2.put("ordre", c);
+
 
         MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues1, "id = ?", new String[]{proposition});
         MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues2, "id = ?", new String[]{proposition});
@@ -262,8 +262,8 @@ public class LienSondageDatabase {
     // On modifie les points et les positions si le drapeau est true
 
     public void ModifyT(String proposition) {
-        c = getListOrdreProposition(proposition).get(0);
-        b = getListPointsProposition(proposition).get(0) - (6 - c);
+        c = getListOrdreProposition(proposition, User.loggedUser.getUsername(), NewPoll.idpoll).get(0);
+        b = getListPointsProposition(proposition, User.loggedUser.getUsername(), NewPoll.idpoll).get(0) - (6 - c);
         listePos.set(0, c);
         ContentValues newValues1 = new ContentValues();
         ContentValues newValues2 = new ContentValues();
@@ -281,8 +281,9 @@ public class LienSondageDatabase {
     int b = 0; //sert pour calculer les points.
     int c = 0; //sert à avoir la position
     List<Integer> listePos = new ArrayList<Integer>();
-    public void initList(){
-        for (int i = 1; i < 7; i++){
+
+    public void initList() {
+        for (int i = 1; i < 7; i++) {
             listePos.add(i);
         }
     }
@@ -297,4 +298,14 @@ public class LienSondageDatabase {
             Sondage.flag[a] = false;
         }
     }
+
+    // quand un joueur appuie sur valider;
+    public void valider() {
+        Sondage.total++;
+    }
+    //quand on ajoute un ami dans le sondage
+    public void ajouterAmi(){
+        Sondage.joueurs ++;
+    }
 }
+//il faut faire le même systeme que pour incrémenter les poll avec les flags.
