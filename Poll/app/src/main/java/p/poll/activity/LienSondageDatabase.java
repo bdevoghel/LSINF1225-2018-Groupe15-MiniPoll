@@ -254,7 +254,7 @@ public class LienSondageDatabase {
         ContentValues newValues1 = new ContentValues();
         ContentValues newValues2 = new ContentValues();
         newValues1.put("points", b);
-
+        newValues1.put("ordre", c);
 
         MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues1, "id = ?", new String[]{proposition});
         MySQLiteHelper.get().getReadableDatabase().update("reponse_sondage", newValues2, "id = ?", new String[]{proposition});
@@ -309,3 +309,6 @@ public class LienSondageDatabase {
     }
 }
 //il faut faire le même systeme que pour incrémenter les poll avec les flags.
+
+
+   
