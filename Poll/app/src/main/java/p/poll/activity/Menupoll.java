@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import p.poll.R;
-import p.poll.model.Notification;
 import p.poll.model.User;
 
 /**
@@ -162,8 +160,6 @@ public class Menupoll extends AppCompatActivity implements
     }
     public void Notification(View v)
     {
-        Toast.makeText(Menupoll.this, getString(R.string.notification),
-                Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),Notification2.class);
         startActivity(intent);
     }

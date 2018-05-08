@@ -23,7 +23,8 @@ public class ChargingPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.charging_page);
-        videoView = (VideoView) findViewById(R.id.videoView);
+        //TODO: a remettre
+        /*videoView = (VideoView) findViewById(R.id.videoView);
         m = new MediaController(this);
         String path = "android.resource://p.poll/" + R.raw.ring2;
         Uri uu = Uri.parse(path);
@@ -44,7 +45,11 @@ public class ChargingPage extends AppCompatActivity {
                 }
             }
         });
-
+*/
+        //TODO: a delete
+        Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

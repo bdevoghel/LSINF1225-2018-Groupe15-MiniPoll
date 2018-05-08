@@ -1,5 +1,7 @@
 <resources>
     <string name="text_accounts">All Accounts</string>
+    <string name="accept">Accept</string>
+    <string name="refuse">Refuse</string>
     <string name="hint_name">Name</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>

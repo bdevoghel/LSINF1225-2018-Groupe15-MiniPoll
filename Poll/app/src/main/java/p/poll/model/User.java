@@ -27,7 +27,7 @@ public class User {
     private static HashMap<String,User> userMap = new HashMap<>();
     public static User loggedUser;
     //Noms des colonnes de la database
-    private static final String DB_COLUMN_USERNAME = "Username";
+    private static final String DB_COLUMN_USERNAME = "username";
     private static final String DB_COLUMN_FNAME = "firstname";
     private static final String DB_COLUMN_LNAME = "name";
     private static final String DB_COLUMN_EMAIL = "mail";
@@ -47,11 +47,9 @@ public class User {
     private String bestFriend;
     private ArrayList<Notification> notificationList;
     private ArrayList<Poll> pollList;
-    private ArrayList<User> friendList;
 
     //Constructeurs
     public User(){
-        friendList=new ArrayList<>();
         notificationList=new ArrayList<>();
         pollList=new ArrayList<>();
     }
@@ -64,7 +62,6 @@ public class User {
     public User(String username, String password){
             this.username=username;
             this.password=password;
-            friendList=new ArrayList<>();
             notificationList=new ArrayList<>();
             pollList=new ArrayList<>();
             userMap.put(username,this);
@@ -76,7 +73,6 @@ public class User {
         password=uPassword;
         bestFriend=bestfriend;
         mailAdress=email;
-        friendList=new ArrayList<>();
         notificationList=new ArrayList<>();
         pollList=new ArrayList<>();
         userMap.put(uUsername,this);
@@ -126,9 +122,6 @@ public class User {
     public void setProfilePic(String p){
         this.profilePic=p;
     }
-    public ArrayList<User> getFriendList(){
-        return friendList;
-    }
     public ArrayList<Poll> getPollList() {
         return pollList;
     }
@@ -140,18 +133,6 @@ public class User {
     }
 
     //Addeurs et removeurs
-    public void addFriend(User friend) {
-        if(!friendList.contains(friend))
-        {
-            friendList.add(friend);
-        }
-    }
-    public void addFriend(ArrayList<User> users){
-        friendList.addAll(users);
-    }
-    public void rmvFriend(User friend) {
-        this.friendList.remove(friend);
-    }
     public void addPoll(Poll p) {
         if(!pollList.contains(p))
         {
@@ -303,6 +284,104 @@ public class User {
         return users;
     }
 
+    public static ArrayList<User> getNotFriends(){
+        refreshLoggedUser();
+        HashMap<String,User> users = User.toHashMap(getUsers());
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        String[] colonnes = {DB_COLUMN_USERNAME, "username_amis", "etat"};
+        Cursor cursor = db.query("Friend_list", colonnes, DB_COLUMN_USERNAME+"=?", new String[] {loggedUser.getUsername()}, null, null, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            String uFriendUsername = cursor.getString(1);
+            users.remove(uFriendUsername);
+            cursor.moveToNext();
+        }
+        users.remove(loggedUser.getUsername());
+        cursor.close();
+        db.close();
+        //loggedUser.addFriend(users);
+        return User.toArray(users);
+    }
+
+    public static void acceptFriend(User user){
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        ContentValues values = new ContentValues();
+        ContentValues values2 = new ContentValues();
+
+        //values.put(DB_COLUMN_USERNAME, loggedUser.getUsername());
+        values.put("username",User.loggedUser.getUsername());
+        values2.put("username",user.getUsername());
+        values.put("username_amis", user.getUsername());
+        values2.put("username_amis", loggedUser.getUsername());
+        values.put("etat", String.valueOf(1));
+        values2.put("etat", String.valueOf(1));
+        Log.i("test","update");
+        db.update("Friend_list", values, DB_COLUMN_USERNAME+"=? AND username_amis=?", new String[]{loggedUser.getUsername(),user.getUsername()});
+        db.update("Friend_list", values2, DB_COLUMN_USERNAME+"=? AND username_amis=?", new String[]{user.getUsername(),loggedUser.getUsername()});
+        Log.i("test","done");
+        db.close();
+    }
+
+    public static boolean addFriend(User user){
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        try {
+            String[] colonnes = {DB_COLUMN_USERNAME, "username_amis", "etat"};
+            Cursor cursor = db.query("Friend_list", colonnes, DB_COLUMN_USERNAME+"=? AND username_amis=?", new String[] {user.getUsername(),loggedUser.getUsername()}, null, null, null);
+            cursor.moveToFirst();
+            if(!cursor.isAfterLast()) {
+                Log.i("test","isafterlast");
+                ContentValues values = new ContentValues();
+                ContentValues values2 = new ContentValues();
+                values2.put("username",User.loggedUser.getUsername());
+                values2.put("username_amis",user.getUsername());
+                values2.put("etat",String.valueOf(1));
+                values.put("etat", String.valueOf(1));
+                db.insert("Friend_list",null,values2);
+                db.update("Friend_list", values, "username=? AND username_amis=?", new String[]{user.getUsername(),loggedUser.getUsername()});
+                String[] colonnes2 = {"username","message","etat","username_notif","poll_notif"};
+                Cursor cursor1 = db.query("Notification",colonnes2,"username=? AND username_notif=? AND poll_notif=?",new String[]{loggedUser.getUsername(),user.getUsername(),String.valueOf(0)},null,null,null);
+                cursor1.moveToFirst();
+                if(!cursor1.isAfterLast()) {
+                    Log.i("test","isafterlast2");
+                    String message = cursor1.getString(1);
+                    Log.i("test",message);
+                    db.update("Notification",values,"username=? AND username_notif=? AND message=?",new String[]{loggedUser.getUsername(),user.getUsername(),message});
+                }
+                cursor1.close();
+                cursor.close();
+                db.close();
+            }
+            else {
+                ContentValues values = new ContentValues();
+                values.put("username", loggedUser.getUsername());
+                values.put("username_amis", user.getUsername());
+                Log.i("username", user.getUsername());
+                Log.i("etat", String.valueOf(0));
+                Log.i("username_notif", loggedUser.getUsername());
+
+                values.put("etat", String.valueOf(0));
+                db.insert("Friend_list", null, values);
+                ContentValues values2 = new ContentValues();
+                values2.put("username", user.getUsername());
+                values2.put("etat", String.valueOf(0));
+                values2.put("message", User.loggedUser.getFirstName() + " " + User.loggedUser.getLastName() + " would like to be friend with you!");
+                values2.put("username_notif", loggedUser.getUsername());
+                values2.put("poll_notif",String.valueOf(0));
+                Log.i("display", "insert " + User.loggedUser.getFirstName() + " " + User.loggedUser.getLastName() + " would like to be friend with you!");
+                db.insert("Notification", null, values2);
+            }
+        }
+        catch(Exception e)
+        {
+            Log.i("ERREUR","CATCH");
+            db.close();
+            return false;
+        }
+        db.close();
+        return true;
+    }
+
     public static User getUser(String username) {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         User user = null;
@@ -400,6 +479,17 @@ public class User {
             hash.put((users.get(i)).getUsername(),users.get(i));
         }
         return hash;
+    }
+
+    public static ArrayList<User> toArray(HashMap<String,User> users){
+        ArrayList<User> arr = new ArrayList<>();
+        Collection<User> coll=users.values();
+        Object[] tab=coll.toArray();
+        for(int i=0;i<users.size();i++)
+        {
+            arr.add((User) tab[i]);
+        }
+        return arr;
     }
     /**
      * Transforme un fichier en Bitmap

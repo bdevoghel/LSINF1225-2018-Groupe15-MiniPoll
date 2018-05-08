@@ -4,6 +4,7 @@ package p.poll.activity;
  * Created by Nicolas on 02/05/2018.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +12,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,8 +25,8 @@ public class ScreenSlidePagerFriendListActivity extends FragmentActivity {
      * The number of pages (wizard steps) to show in this demo.
      */
     public static int NUM_PAGES;
-    private  static int pos =0;
-    public static ArrayList<User> userList = User.getFriends();
+    public  static int pos =0;
+    public static ArrayList<User> userList;
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
@@ -38,10 +41,28 @@ public class ScreenSlidePagerFriendListActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
         // Instantiate a ViewPager and a PagerAdapter.
+        userList= User.getFriends();
         NUM_PAGES=User.getFriends().size();
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPagerAdapter = new ScreenSlidePagerFriendListAdapter(getSupportFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
+        Log.i("test",String.valueOf(User.getFriends().size()));
+        Log.i("test",String.valueOf(NUM_PAGES));
+        if((User.getNotFriends().size()==0) && (User.getFriends().size()==0))
+        {
+            Log.i("test","goToMenu");
+            Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "There is no one left to add!", Toast.LENGTH_LONG).show();
+            finish();
+        }
+        else if(NUM_PAGES==0){
+            Intent intent = new Intent(getApplicationContext(),ScreenSlidePagerActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            mPager = (ViewPager) findViewById(R.id.pager);
+            mPagerAdapter = new ScreenSlidePagerFriendListAdapter(getSupportFragmentManager());
+            mPager.setAdapter(mPagerAdapter);
+        }
     }
 
     @Override
@@ -68,10 +89,7 @@ public class ScreenSlidePagerFriendListActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            ScreenSlidePageFriendListFragment newFrag=new ScreenSlidePageFriendListFragment();
-            if(position<userList.size()) {
-                newFrag = new ScreenSlidePageFriendListFragment(position, User.getFriends(), getContentResolver());
-            }
+            ScreenSlidePageFriendListFragment newFrag=new ScreenSlidePageFriendListFragment(position, User.getFriends(), getContentResolver());
             return newFrag ;
         }
 

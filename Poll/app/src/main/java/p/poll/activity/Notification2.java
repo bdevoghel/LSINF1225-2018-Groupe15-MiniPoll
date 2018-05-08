@@ -1,14 +1,18 @@
 package p.poll.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
+
+import java.util.ArrayList;
 
 import p.poll.R;
 import p.poll.model.Notification;
@@ -18,39 +22,33 @@ import p.poll.model.Notification;
  */
 
 public class Notification2 extends Activity {
+    public ArrayList<Notification> notifications;
+    public static Notification currentNotification=null;
         ListView list;
-        String[] web = {
-                "Java",
-                "C++",
-                "Java",
-                "C++",
-                "Java",
-                "C++",
-                "Java",
-                "C++",
-                "Java",
-                "C++",
-                "Java",
-                "C++",
-        } ;
-        Integer[] imageId = {
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-                R.drawable.notification,
-        };
+        String[] web ;
+        Integer[] imageId;
+
+        @Override
+        public void onBackPressed(){
+            Intent intent = new Intent(getApplicationContext(), Menupoll.class);
+            startActivity(intent);
+            finish();
+        }
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_notification);
+            Log.i("test","getNotifications");
+            notifications=Notification.getNotifications();
+            if(notifications.size()==0){
+                Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"You have no notifications", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            web= Notification.getText(notifications);
+            imageId = Notification.getImage(notifications);
             final CustomList listAdapter = new
                     CustomList(Notification2.this, web, imageId);
             list=(ListView)findViewById(R.id.list);
@@ -59,16 +57,21 @@ public class Notification2 extends Activity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    TextView textview = (TextView) view.findViewById(R.id.txt);
-                    CharSequence t = textview.getText();
+                    currentNotification=notifications.get(position);
+                    if(currentNotification.getPoll()==0) {
+                        Intent intent = new Intent(getApplicationContext(), NotificationActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else
+                    {
+                        //TODO: Gérer les notifications de poll
+                    }
+                    //TextView textview = (TextView) view.findViewById(R.id.txt);
+                    //CharSequence t = textview.getText();
                     //Toast.makeText(Notification2.this, "You Clicked at " +web[+ position]+" value = ", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(Notification2.this, "You Clicked at " +web[+ position]+" value = "+ t.toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Notification2.this, "You Clicked at " +web[+ position]+" value = "+ t.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
-        }
-
-        protected void acceptNotification(Notification n)
-        {
-            
         }
     }

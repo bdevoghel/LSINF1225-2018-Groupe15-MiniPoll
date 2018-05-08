@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity{
     public static final int CAMERA_REQUEST_CODE = 228;
     public static final int CAMERA_PERMISSION_REQUEST_CODE = 4192;
     private ImageView imgPicture;
-    public static String imagePath;
+    public static String imagePath=null;
     private EditText mUsername;
     private EditText mPassword;
     private EditText mPasswordC;

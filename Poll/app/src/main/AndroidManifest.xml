@@ -55,8 +55,6 @@
         <activity
             android:name=".activity.ScreenSlidePagerActivity"
             android:label="@string/title_activity_menu" />
-        <activity android:name=".activity.ScreenSlidePagerFriendListActivity"
-            />
         <activity
             android:name=".activity.ChargingPage"
             android:hardwareAccelerated="false"
@@ -92,8 +90,8 @@
 
         <activity android:name=".activity.ModifyUsername"
             />
-
-
+        <activity android:name=".activity.ScreenSlidePagerFriendListActivity"
+            />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

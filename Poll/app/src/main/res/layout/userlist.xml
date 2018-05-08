@@ -19,11 +19,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/addFriend_activity_title"
+                android:textAppearance="@android:style/TextAppearance.Material.Display1" />
+
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/michel" />
+                android:layout_width="wrap_content"
+                android:layout_height="188dp"
+                app:srcCompat="@drawable/default_pic" />
 
             <TextView
                 android:id="@+id/text3"
@@ -68,28 +76,6 @@
                     android:layout_weight="1"
                     android:text="Ajouter" />
 
-                <view
-                    class="android.support.v7.widget.Toolbar"
-                    id="@+id/view2"
-                    layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <Switch
-                    android:id="@+id/switch1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=" Favori  "
-                    android:textAlignment="textEnd"
-                    android:theme="@style/SCBSwitch" />
-
-                <view
-                    class="android.support.v7.widget.Toolbar"
-                    id="@+id/view"
-                    layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView

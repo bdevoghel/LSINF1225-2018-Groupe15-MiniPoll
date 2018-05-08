@@ -70,7 +70,9 @@ public class ActivityCompte extends AppCompatActivity {
         btnImageCamera= findViewById(R.id.btnImageCamera);
         btnImageGallery= findViewById(R.id.btnImageGallery);
 
-        profile_pic.setImageBitmap(User.toBitmap(RegisterActivity.imagePath,getContentResolver()));
+        if(RegisterActivity.imagePath!=null) {
+            profile_pic.setImageBitmap(User.toBitmap(RegisterActivity.imagePath, getContentResolver()));
+        }
 
         valider.setOnClickListener(new View.OnClickListener() {
             @Override

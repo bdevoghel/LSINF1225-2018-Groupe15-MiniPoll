@@ -4,7 +4,7 @@ package p.poll.activity;
  * Created by Nicolas on 02/05/2018.
  */
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,18 +12,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 
 import p.poll.R;
+import p.poll.model.User;
 
 public class ScreenSlidePagerActivity extends FragmentActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 5;
+    public static int NUM_PAGES;
     public  static int pos =0;
+    public static ArrayList<User> userList = User.getNotFriends();
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
@@ -38,6 +40,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
         // Instantiate a ViewPager and a PagerAdapter.
+        NUM_PAGES=User.getNotFriends().size();
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
@@ -45,15 +48,8 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            pos--;
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
+        Intent intent = new Intent(getApplicationContext(),ScreenSlidePagerFriendListActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -67,8 +63,16 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            ScreenSlidePageFragment newFrag = new ScreenSlidePageFragment(position);
-            //list.add(newFrag);
+            if(NUM_PAGES==0){
+                Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "There is no one left to add!", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            ScreenSlidePageFragment newFrag=new ScreenSlidePageFragment();
+            if(position<User.getNotFriends().size()) {
+                newFrag = new ScreenSlidePageFragment(position, User.getNotFriends(), getContentResolver());
+            }
             return newFrag ;
         }
 
