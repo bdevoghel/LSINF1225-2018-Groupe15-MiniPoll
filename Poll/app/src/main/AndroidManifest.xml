@@ -55,6 +55,8 @@
         <activity
             android:name=".activity.ScreenSlidePagerActivity"
             android:label="@string/title_activity_menu" />
+        <activity android:name=".activity.ScreenSlidePagerFriendListActivity"
+            />
         <activity
             android:name=".activity.ChargingPage"
             android:hardwareAccelerated="false"
@@ -69,9 +71,6 @@
         <activity
             android:name=".activity.AddFriendActivity"
             android:label="@string/addFriend_activity_title" />
-        <activity
-            android:name=".activity.FriendListActivity"
-            android:label="@string/friend_list_activity" />
         <activity
             android:name=".activity.NotificationActivity"
             android:label="@string/notification" />

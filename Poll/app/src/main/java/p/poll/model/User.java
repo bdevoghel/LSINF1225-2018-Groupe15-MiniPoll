@@ -274,6 +274,59 @@ public class User {
         return users;
     }
 
+    public static ArrayList<User> getFriends() {
+        ArrayList<User> users = new ArrayList<>();
+        if(loggedUser.getBestFriend()!=null) {
+            User bff = User.getUser(loggedUser.getBestFriend());
+            Log.i("add",loggedUser.getBestFriend());
+            users.add(bff);
+        }
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        String[] colonnes = {DB_COLUMN_USERNAME, "username_amis", "etat"};
+        Cursor cursor = db.query("Friend_list", colonnes, DB_COLUMN_USERNAME+"=? AND etat=?", new String[] {loggedUser.getUsername(),String.valueOf(1)}, null, null, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            String uUsername = cursor.getString(0);
+            String uFriendUsername = cursor.getString(1);
+            if(!uFriendUsername.equals(loggedUser.getBestFriend())) {
+
+                User user = getUser(uFriendUsername);
+                Log.i("add",uFriendUsername);
+                users.add(user);
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        //loggedUser.addFriend(users);
+        return users;
+    }
+
+    public static User getUser(String username) {
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        User user = null;
+        String[] colonnes = {DB_COLUMN_USERNAME, DB_COLUMN_FNAME, DB_COLUMN_LNAME, DB_COLUMN_PASSWORD, DB_COLUMN_EMAIL, DB_COLUMN_PIC, DB_COLUMN_FAV};
+        Cursor cursor = db.query(DB_TABLE, colonnes, DB_COLUMN_USERNAME+"=?", new String[]{username}, null, null, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            String uUsername = cursor.getString(0);
+            String uFName = cursor.getString(1);
+            String uLName = cursor.getString(2);
+            String uPassword = cursor.getString(3);
+            String email = cursor.getString(4);
+            String pic = cursor.getString(5);
+            String bestfriend = cursor.getString(6);
+            user=new User(uUsername,uFName,uLName,uPassword,email,bestfriend,pic);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+
+        return user;
+    }
+
     public static void writeInUser(User user, String usernameArg)
     {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();

@@ -18,11 +18,11 @@ public class Advice extends Poll {
     }
     public Advice(String title, String description, java.sql.Date deadline,
                   Character type, User owner) {
-        super(title, description, deadline, type, owner);
+        super(title, description, type, owner);
     }
     public Advice(String title, String description, java.sql.Date deadline,
                   Character type, User owner, Question question){
-        super(title, description, deadline, type, owner);
+        super(title, description, type, owner);
         this.question=question;
     }
     public Advice(Question question){

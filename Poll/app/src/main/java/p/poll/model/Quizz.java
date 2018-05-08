@@ -22,18 +22,18 @@ public class Quizz extends Poll {
     }
     public Quizz(String title, String description, java.sql.Date deadline,
                   char type, User owner){
-        super(title, description, deadline, type, owner);
+        super(title, description, type, owner);
         questionList=new ArrayList<>();
     }
     public Quizz(String title, String description, java.sql.Date deadline,
                   char type, User owner, Question question){
-        super(title, description, deadline, type, owner);
+        super(title, description, type, owner);
         questionList=new ArrayList<>();
         this.addQuestion(question);
     }
     public Quizz(String title, String description, java.sql.Date deadline,
                  char type, User owner, ArrayList<Question> questions){
-        super(title, description, deadline, type, owner);
+        super(title, description, type, owner);
         questionList=questions;
     }
 
