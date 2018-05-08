@@ -311,4 +311,3 @@ public class LienSondageDatabase {
 //il faut faire le même systeme que pour incrémenter les poll avec les flags.
 
 
-   
