@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,14 +24,14 @@ import p.poll.activity.PollModel;
 public class listamihelp extends Activity {
     public static String userselect="";
     private ListView mListView;
+    private Button bouton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choixamishelp);
-
         mListView = (ListView) findViewById(R.id.listView2);
-
+        bouton = (Button) findViewById(R.id.button);
         List<PollModel> polls = genererAmi();
 
         PollAdapterHelp adapter = new PollAdapterHelp(p.poll.activity.listamihelp.this, polls);
@@ -42,17 +43,19 @@ public class listamihelp extends Activity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Object o = mListView.getItemAtPosition(position);
                 PollModel j = (PollModel)o;
-                if(arg1.getDrawingCacheBackgroundColor() == getResources().getColor(android.R.color.holo_green_dark) && userselect != "")
+                if(arg1.getDrawingCacheBackgroundColor() == getResources().getColor(android.R.color.holo_green_dark) && !userselect.equals(""))
                 {
                     Toast.makeText(p.poll.activity.listamihelp.this, "Vous avez déjà sélectionné un ami",
                             Toast.LENGTH_SHORT).show();
                 }
                 else if(arg1.getDrawingCacheBackgroundColor() == getResources().getColor(android.R.color.holo_green_dark))
                 {
+                    bouton.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
                     arg1.setBackgroundColor(getResources().getColor(android.R.color.white));
-                    userselect = "");
+                    userselect = "";
                 }
                 else {
+                    bouton.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
                     arg1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
                     userselect = j.getPseudo();
                     Toast.makeText(p.poll.activity.listamihelp.this, j.getText(),
@@ -60,6 +63,22 @@ public class listamihelp extends Activity {
                 }
             }
         });
+
+        mListView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(userselect.equals(""))
+                {
+                    Toast.makeText(p.poll.activity.listamihelp.this,"Aucun ami sélectionné",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    
+                }
+            }
+            });
     }
 
 
