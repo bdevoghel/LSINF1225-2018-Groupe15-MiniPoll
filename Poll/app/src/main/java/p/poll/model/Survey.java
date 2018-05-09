@@ -36,13 +36,14 @@ public class Survey extends Poll {
     private static final String DB_COLUMN_USERNAME = "username";
     private static final String DB_COLUMN_ANSWER = "reponse";
     private static final String DB_COLUMN_ORDER = "ordre";
+    private static final String DB_COLUMN_POINTS = "points";
 
 
 
 
 
     //Attributs
-    private final int NUMBER_PROPOSITION=5;
+    private final int NUMBER_PROPOSITION=6;
     private ArrayList<Proposition> propositions;
 
     //Constructeurs
@@ -338,7 +339,7 @@ public class Survey extends Poll {
     }
     */
 
-/*//Initialiser la deadline
+//Initialiser la deadline
 
     public void InitialisationDeadLine (bouton DeadLine){
         MySQLiteHelper.get().insert ("poll", "deadline", "bouton jour + 7*bouton semaines + 30*bouton mois ");
@@ -346,8 +347,8 @@ public class Survey extends Poll {
 
     //Initialisation des propostions
     public void InitialisationDeadLine (TextView Proposition1){
-        MySQLiteHelper.insert ("sondage", "data_reponse", Proposition1);
-        MySQLiteHelper.get().insert ("sondage", "idpoll", i);
+        MySQLiteHelper.put ("sondage", "data_reponse", Proposition1);
+        MySQLiteHelper.get().put ("sondage", "idpoll", i);
     }
     public void InitialisationDeadLine (TextView Proposition2){
         MySQLiteHelper.get().insert ("sondage", "data_reponse", Proposition2);
@@ -367,7 +368,7 @@ public class Survey extends Poll {
     }
     public void InitialisationDeadLine (TextView Proposition6){
         MySQLiteHelper.get().insert ("sondage", "data_reponse", Proposition6);
-        MySQLiteHelper.get().insert ("sondage", "idpoll", i);
+        MySQLiteHelper.get().getWritableDatabase().insert("sondage", "idpoll", "hello");
     }
   */
 //POur réaliser cette fonction, on doit pouvoir connaitre le nombre de points de cette proposition

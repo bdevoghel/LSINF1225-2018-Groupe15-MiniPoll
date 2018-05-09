@@ -11,7 +11,7 @@ CREATE TABLE Friend_list (username TEXT NOT NULL,username_amis TEXT NOT NULL,eta
 CREATE TABLE Questionnaire_and_Advice (idquestion INTEGER NOT NULL,texte TEXT NOT NULL,reponse INTEGER NOT NULL);
 CREATE TABLE Questionnaire_and_Advice_Answer (username TEXT NOT NULL,idquestion TEXT NOT NULL,reponse_utilisateur TEXT);
 CREATE TABLE Survey (idpoll INTEGER NOT NULL,data_reponse TEXT NOT NULL);
-CREATE TABLE Survey_Answer (idpoll INTEGER NOT NULL,username TEXT NOT NULL ,reponse TEXT NOT NULL,ordre INTEGER NOT NULL);
+CREATE TABLE Survey_Answer (idpoll INTEGER NOT NULL,username TEXT NOT NULL ,reponse TEXT NOT NULL,ordre INTEGER NOT NULL, points INTEGER);
 CREATE TABLE Poll_access (idpoll INTEGER NOT NULL,username TEXT NOT NULL,statut_particulier FLOAT);
 INSERT INTO User (username,firstname,name,mail,password) VALUES('rogerdu','roger','dupont','r.dupont@yopmail.com','ilovesqlite');
 INSERT INTO User (username,firstname,name,mail,password) VALUES('c.haron','carl','haroun','c.haroun@yopmail.com', 'tuesday');

@@ -5,59 +5,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/Title"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nouveau sondage"
-        android:textAllCaps="false"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:text="AutoCompleteTextView" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:text="Valider" />
-
-    <ListView
-        android:id="@+id/listView1"
-        android:layout_width="wrap_content"
-        android:layout_height="213dp">
-
-    </ListView>
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="match_parent"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView2"
+        android:layout_width="258dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:visibility="invisible" />
+        android:text="AutoCompleteTextView" />
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="match_parent"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView3"
+        android:layout_width="257dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="Propositions à sélectionner"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:visibility="visible" />
+        android:text="AutoCompleteTextView" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="match_parent"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView4"
+        android:layout_width="257dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:visibility="invisible" />
+        android:text="AutoCompleteTextView" />
 
-    <ListView
-        android:id="@+id/listView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView5"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:text="AutoCompleteTextView" />
 
-    </ListView>
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView6"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:text="AutoCompleteTextView" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView7"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:text="AutoCompleteTextView" />
 
 </LinearLayout>
 
