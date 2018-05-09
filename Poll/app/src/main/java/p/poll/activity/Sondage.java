@@ -24,7 +24,7 @@ import p.poll.R;
 
 public class Sondage extends Activity {
     ListView list;
-    List<String> listfriendclick = new ArrayList<String>();
+    public static List<String> listfriendclick;
     Button bouton;
     public static String[] web = {
             "Proposition1",
@@ -59,6 +59,7 @@ public static int joueurs = 0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sondage);
+        listfriendclick = new ArrayList<String>();
         final CustomSondage listAdapter = new
                 CustomSondage(Sondage.this, web);
         list=(ListView)findViewById(R.id.listView1);

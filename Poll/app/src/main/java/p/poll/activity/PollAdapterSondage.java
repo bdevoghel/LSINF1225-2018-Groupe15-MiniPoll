@@ -42,7 +42,14 @@ public class PollAdapterSondage extends ArrayAdapter<PollModel> {
 
         //getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
         PollModel pollModel = getItem(position);
-
+        if(Sondage.listfriendclick.contains(pollModel.getPseudo()))
+        {
+            convertView.setBackgroundColor(getContext().getResources().getColor(android.R.color.holo_green_dark));
+        }
+        else
+        {
+            convertView.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
+        }
         //il ne reste plus qu'à remplir notre vue
         viewHolder.pseudo.setText(pollModel.getPseudo());
         viewHolder.text.setText(pollModel.getText());
