@@ -19,27 +19,4 @@
         android:textColor="@android:color/black"
         tools:text="email" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="95dp"
-        android:layout_marginStart="95dp"
-        android:layout_toEndOf="@+id/text"
-        android:layout_toRightOf="@+id/text"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="17dp"
-        android:layout_marginStart="17dp"
-        android:layout_toEndOf="@+id/imageButton"
-        android:layout_toRightOf="@+id/imageButton"
-        android:visibility="invisible"
-        app:srcCompat="@android:drawable/ic_delete" />
-
 </RelativeLayout>
