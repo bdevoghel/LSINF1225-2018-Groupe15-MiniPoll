@@ -30,17 +30,16 @@ public class CustomSondage extends ArrayAdapter<String>{
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.activity_screen_sondage, null, true);
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-        txtTitle.setText(web[position]);
-        EditText edit = (EditText) rowView.findViewById(R.id.editText6);
         View view2 = Sondage.listproposition.get((position));
         if(view2 == null) {
-            Sondage.listproposition.set(position,view);
+            TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
+            txtTitle.setText(web[position]);
+            Sondage.listproposition.set(position,rowView);
         }
         else
         {
             //edit.setText(((EditText)view2.findViewById(R.id.editText6)).getText());
-            ((TextView)view2.findViewById(R.id.txt)).setText("Proposition "+position);
+            //((TextView)view2.findViewById(R.id.txt)).setText("Proposition"+position+1);
             return view2;
         }
         return rowView;
