@@ -36,6 +36,10 @@ public class CustomSondageAnswer extends ArrayAdapter<String>{
         //if(view2 == null) {
             TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
             txtTitle.setText(web[position]);
+            if(SondageReponse.listenumero.contains(web[position]))
+            {
+                rowView.setBackgroundColor(getContext().getResources().getColor(android.R.color.holo_green_dark));
+            }
             TextView txtDescription = (TextView) rowView.findViewById(R.id.txt2);
             txtDescription.setText(phrase[position]);
             //Sondage.listproposition.set(position,rowView);

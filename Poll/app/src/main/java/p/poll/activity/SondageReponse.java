@@ -111,7 +111,7 @@ public class SondageReponse extends Activity {
                 }
                 else
                 {
-
+                    // Go to Sondage Prevue
                 }
             }
         });

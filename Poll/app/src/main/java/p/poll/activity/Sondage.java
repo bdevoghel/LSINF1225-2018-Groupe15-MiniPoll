@@ -153,7 +153,7 @@ public class Sondage extends Activity {
     }
 
 
-   /* private List<PollModel> genererAmi(){
+    private List<PollModel> genererAmi(){
         List<PollModel> tweets = new ArrayList<PollModel>();
         tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
         tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
@@ -182,5 +182,5 @@ public class Sondage extends Activity {
         tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
         return tweets;
     }
-    */
+
 }
