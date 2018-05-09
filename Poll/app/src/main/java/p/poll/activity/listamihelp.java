@@ -49,8 +49,8 @@ public class listamihelp extends Activity {
                 }
                 else if(arg1.getDrawingCacheBackgroundColor() == getResources().getColor(android.R.color.holo_green_dark))
                 {
-                    Toast.makeText(p.poll.activity.listamihelp.this, "Cet(te) ami(e) est déjà sélectionné",
-                            Toast.LENGTH_SHORT).show();
+                    arg1.setBackgroundColor(getResources().getColor(android.R.color.white));
+                    userselect = "");
                 }
                 else {
                     arg1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
