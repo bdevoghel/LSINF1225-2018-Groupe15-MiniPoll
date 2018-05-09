@@ -98,9 +98,9 @@ public static int joueurs = 0;
                     }
                     else if(listfriendclick.contains(j.getPseudo()))
                     {
-                        bouton.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+                        arg1.setBackgroundColor(getResources().getColor(android.R.color.white));
                         if(listfriendclick.isEmpty()) {
-                            arg1.setBackgroundColor(getResources().getColor(android.R.color.white));
+                            bouton.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
                         }
                         listfriendclick.remove(j.getPseudo());
                     }
