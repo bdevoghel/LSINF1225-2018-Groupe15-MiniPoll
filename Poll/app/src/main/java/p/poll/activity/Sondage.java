@@ -64,7 +64,7 @@ public static int joueurs = 0;
         setContentView(R.layout.activity_new_sondage);
         listfriendclick = new ArrayList<String>();
         listproposition = new ArrayList<View>();
-        for(int i=0;i<6;i++)
+        for(int i=0;i<7;i++)
         {
             listproposition.add(null);
         }
@@ -136,7 +136,7 @@ public static int joueurs = 0;
                 else
                 {
                     View vv = listproposition.get(1);
-                    EditText edit = (EditText) vv.findViewById(R.id.txt);
+                    EditText edit = (EditText) vv.findViewById(R.id.editText6);
                     Toast.makeText(p.poll.activity.Sondage.this,edit.getText(),
                             Toast.LENGTH_SHORT).show();
                     // Go to Sondage Prevue
