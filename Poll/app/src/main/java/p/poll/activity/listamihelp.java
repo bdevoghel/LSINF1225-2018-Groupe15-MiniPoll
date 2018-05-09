@@ -43,12 +43,12 @@ public class listamihelp extends Activity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Object o = mListView.getItemAtPosition(position);
                 PollModel j = (PollModel)o;
-                if(arg1.getDrawingCacheBackgroundColor() == getResources().getColor(android.R.color.holo_green_dark) && !userselect.equals(""))
+                if( !j.getPseudo().equals(userselect) && !userselect.equals(""))
                 {
                     Toast.makeText(p.poll.activity.listamihelp.this, "Vous avez déjà sélectionné un ami",
                             Toast.LENGTH_SHORT).show();
                 }
-                else if(arg1.getDrawingCacheBackgroundColor() == getResources().getColor(android.R.color.holo_green_dark))
+                else if(j.getPseudo().equals(userselect))
                 {
                     bouton.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
                     arg1.setBackgroundColor(getResources().getColor(android.R.color.white));
@@ -64,7 +64,7 @@ public class listamihelp extends Activity {
             }
         });
 
-        mListView.setOnClickListener(new View.OnClickListener() {
+        bouton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -75,7 +75,8 @@ public class listamihelp extends Activity {
                 }
                 else
                 {
-                    
+                    Toast.makeText(p.poll.activity.listamihelp.this, "L'ami(e) sélectionné est : "+ userselect,
+                            Toast.LENGTH_SHORT).show();
                 }
             }
             });
