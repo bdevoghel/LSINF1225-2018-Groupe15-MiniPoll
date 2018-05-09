@@ -33,7 +33,7 @@ public class CustomSondageAnswerAdd extends ArrayAdapter<String>{
         View rowView= inflater.inflate(R.layout.row_sondage_answer, null, true);
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-        txtTitle.setText(position + " : " + web[position]);
+        txtTitle.setText(position+1 + " : " + web[position]);
         TextView txtDescription = (TextView) rowView.findViewById(R.id.txt2);
         txtDescription.setText(SondageReponse.listedescriptionliste[position]);
 

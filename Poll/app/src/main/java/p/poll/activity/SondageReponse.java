@@ -70,26 +70,28 @@ public class SondageReponse extends Activity {
                 String propo = ((TextView) view.findViewById(R.id.txt)).getText().toString();
                 String descr = ((TextView) view.findViewById(R.id.txt2)).getText().toString();
                 if (listenumero.contains(propo)){
+                    view.setBackgroundColor(getResources().getColor(android.R.color.white));
                     listenumero.remove(propo);
                     listedescription.remove(descr);
                     listenumeroliste = listenumero.toArray(new String[listenumero.size()]);
                     listedescriptionliste = listedescription.toArray(new String[listedescription.size()]);
                     listAdapter2 = new
                             CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
-                    //mListView.setAdapter(listAdapter2);
+                    mListView.setAdapter(listAdapter2);
                     Toast.makeText(SondageReponse.this, "You Clicked at " + web[+position] + " value = ", Toast.LENGTH_SHORT).show();
 
                 }
                 else
                 {
-                    listenumero.set(listenumero.size(), propo);
-                    listedescription.set(listedescription.size(), descr);
-                    //listenumeroliste = listenumero.toArray(new String[listenumero.size()]);
-                    //listedescriptionliste = listedescription.toArray(new String[listedescription.size()]);
-                    //listAdapter2 = new
-                    //        CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
-                    //mListView.setAdapter(listAdapter2);
-                    //Toast.makeText(SondageReponse.this, "You Clicked at " + listenumeroliste[listenumero.size()-1] + " value = ", Toast.LENGTH_SHORT).show();
+                    view.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                    listenumero.add(propo);
+                    listedescription.add(descr);
+                    listenumeroliste = listenumero.toArray(new String[listenumero.size()]);
+                    listedescriptionliste = listedescription.toArray(new String[listedescription.size()]);
+                    listAdapter2 = new
+                            CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
+                    mListView.setAdapter(listAdapter2);
+                    Toast.makeText(SondageReponse.this, "You Clicked at " + listenumeroliste[listenumero.size()-1] + " value = ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
