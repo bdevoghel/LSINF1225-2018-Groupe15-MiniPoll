@@ -82,22 +82,14 @@ public class SondageReponse extends Activity {
                 }
                 else
                 {
-                    //liste.set(position,view);
-                    String current;
-                    current = listenumero.get(0);
-                    int i = 0;
-                    while (current != null) {
-                        i++;
-                        current = listenumero.get(i);
-                    }
-                    listenumero.set(i, propo);
-                    listedescription.set(i, descr);
-                    listenumeroliste = listenumero.toArray(new String[listenumero.size()]);
-                    listedescriptionliste = listedescription.toArray(new String[listedescription.size()]);
-                    listAdapter2 = new
-                            CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
-                    mListView.setAdapter(listAdapter2);
-                    Toast.makeText(SondageReponse.this, "You Clicked at " + listenumeroliste[i] + " value = ", Toast.LENGTH_SHORT).show();
+                    listenumero.set(listenumero.size(), propo);
+                    listedescription.set(listedescription.size(), descr);
+                    //listenumeroliste = listenumero.toArray(new String[listenumero.size()]);
+                    //listedescriptionliste = listedescription.toArray(new String[listedescription.size()]);
+                    //listAdapter2 = new
+                    //        CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
+                    //mListView.setAdapter(listAdapter2);
+                    //Toast.makeText(SondageReponse.this, "You Clicked at " + listenumeroliste[listenumero.size()-1] + " value = ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
