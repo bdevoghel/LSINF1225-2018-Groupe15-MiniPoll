@@ -21,6 +21,13 @@ import p.poll.model.User;
 
 public class SondageReponse extends Activity {
     ListView list;
+    String[] listadd;
+    CustomSondageAnswerAdd listAdapter2;
+    public static List<View> liste;
+    public static List<String> listenumero;
+    public static List<String> listedescription;
+    public static String[] listenumeroliste;
+    public static String[] listedescriptionliste;
     String[] web = {
             "Proposition1",
             "Proposition2",
@@ -29,27 +36,73 @@ public class SondageReponse extends Activity {
             "Proposition5",
             "Proposition6"
     } ;
+    String[] phrase = {
+            "Texte Proposition1",
+            "Texte Proposition2",
+            "Texte Proposition3",
+            "Texte Proposition4",
+            "Texte Proposition5",
+            "Texte Proposition6"
+    } ;
 
     private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_sondage);
-        final CustomSondage listAdapter = new
-                CustomSondage(SondageReponse.this, web);
-        list=(ListView)findViewById(R.id.listView1);
+        setContentView(R.layout.activity_sondage_reponse);
+        liste = new ArrayList<View>();
+        listenumero = new ArrayList<String>();
+        listedescription = new ArrayList<String>();
+        for(int i=0;i<7;i++)
+        {
+            liste.add(null);
+        }
+        CustomSondageAnswer listAdapter = new
+                CustomSondageAnswer(SondageReponse.this, web, phrase);
+        list = (ListView) findViewById(R.id.listView2);
         list.setAdapter(listAdapter);
+        mListView = (ListView) findViewById(R.id.listView1);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(SondageReponse.this, "You Clicked at " +web[+ position]+" value = ", Toast.LENGTH_SHORT).show();
+                String propo = ((TextView) view.findViewById(R.id.txt)).getText().toString();
+                String descr = ((TextView) view.findViewById(R.id.txt2)).getText().toString();
+                if (listenumero.contains(propo)){
+                    listenumero.remove(propo);
+                    listedescription.remove(descr);
+                    listenumeroliste = listenumero.toArray(new String[listenumero.size()]);
+                    listedescriptionliste = listedescription.toArray(new String[listedescription.size()]);
+                    listAdapter2 = new
+                            CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
+                    //mListView.setAdapter(listAdapter2);
+                    Toast.makeText(SondageReponse.this, "You Clicked at " + web[+position] + " value = ", Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+                    //liste.set(position,view);
+                    String current;
+                    current = listenumero.get(0);
+                    int i = 0;
+                    while (current != null) {
+                        i++;
+                        current = listenumero.get(i);
+                    }
+                    listenumero.set(i, propo);
+                    listedescription.set(i, descr);
+                    listenumeroliste = listenumero.toArray(new String[listenumero.size()]);
+                    listedescriptionliste = listedescription.toArray(new String[listedescription.size()]);
+                    listAdapter2 = new
+                            CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
+                    mListView.setAdapter(listAdapter2);
+                    Toast.makeText(SondageReponse.this, "You Clicked at " + listenumeroliste[i] + " value = ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-        mListView = (ListView) findViewById(R.id.listView2);
-
+    }
+/*
         List<String> polls = genererSondage();
 
         PollAdapterSondageReponse adapter = new PollAdapterSondageReponse(SondageReponse.this, polls);
@@ -67,9 +120,13 @@ public class SondageReponse extends Activity {
             }
         });
     }
+    */
+
+    /*
     private List<String> genererSondage() {
     LienSondageDatabase lien = new LienSondageDatabase();
     return lien.getListSondage(User.loggedUser.getUsername());
     }
+    */
 
 }

@@ -135,7 +135,7 @@ public static int joueurs = 0;
                 }
                 else
                 {
-                    View vv = listproposition.get(1);
+                    View vv = listproposition.get(0);
                     EditText edit = (EditText) vv.findViewById(R.id.editText6);
                     Toast.makeText(p.poll.activity.Sondage.this,edit.getText(),
                             Toast.LENGTH_SHORT).show();

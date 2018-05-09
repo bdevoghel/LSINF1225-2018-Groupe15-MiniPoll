@@ -26,6 +26,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.SondageReponse"
+            android:label="@string/title_activity_survey" />
+        <activity
             android:name=".activity.listamihelp"
             android:label="@string/title_activity_survey" />
         <activity
