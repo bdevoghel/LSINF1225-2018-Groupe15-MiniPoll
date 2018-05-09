@@ -25,6 +25,7 @@ import p.poll.R;
  */
 
 public class Sondage extends Activity {
+    public static int idpoll = 3;
     ListView list;
     public static List<String> listfriendclick;
     Button bouton;
@@ -143,10 +144,16 @@ public class Sondage extends Activity {
                 }
             }
         });
+        View vv = listproposition.get(0);
+        EditText edit = (EditText) vv.findViewById(R.id.editText6);
+        int m = 0;
+        while (listproposition.get(m)!= null){
+
+        }
     }
 
 
-    private List<PollModel> genererAmi(){
+   /* private List<PollModel> genererAmi(){
         List<PollModel> tweets = new ArrayList<PollModel>();
         tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
         tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
@@ -175,4 +182,5 @@ public class Sondage extends Activity {
         tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
         return tweets;
     }
+    */
 }
