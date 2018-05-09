@@ -56,8 +56,17 @@ public class ScreenSlidePageFriendListFragment extends Fragment implements View.
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),ScreenSlidePagerActivity.class);
-                startActivity(intent);
+                if(User.getNotFriends().size()==0)
+                {
+                    Log.i("test","goToMenu");
+                    Intent intent = new Intent(getContext(),Menupoll.class);
+                    startActivity(intent);
+                    Toast.makeText(getContext(), "There is no one left to add!", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent intent = new Intent(getContext(), ScreenSlidePagerActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         ImageView image = (ImageView) view.findViewById(R.id.imageView6);

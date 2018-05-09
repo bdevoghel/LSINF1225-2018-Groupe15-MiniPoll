@@ -309,6 +309,7 @@ public class User {
         ContentValues values = new ContentValues();
         ContentValues values2 = new ContentValues();
 
+        Log.i("test","acceptFriend");
         //values.put(DB_COLUMN_USERNAME, loggedUser.getUsername());
         values.put("username",User.loggedUser.getUsername());
         values2.put("username",user.getUsername());
@@ -317,7 +318,7 @@ public class User {
         values.put("etat", String.valueOf(1));
         values2.put("etat", String.valueOf(1));
         Log.i("test","update");
-        db.update("Friend_list", values, DB_COLUMN_USERNAME+"=? AND username_amis=?", new String[]{loggedUser.getUsername(),user.getUsername()});
+        db.insert("Friend_list", null, values);
         db.update("Friend_list", values2, DB_COLUMN_USERNAME+"=? AND username_amis=?", new String[]{user.getUsername(),loggedUser.getUsername()});
         Log.i("test","done");
         db.close();
@@ -329,6 +330,7 @@ public class User {
             String[] colonnes = {DB_COLUMN_USERNAME, "username_amis", "etat"};
             Cursor cursor = db.query("Friend_list", colonnes, DB_COLUMN_USERNAME+"=? AND username_amis=?", new String[] {user.getUsername(),loggedUser.getUsername()}, null, null, null);
             cursor.moveToFirst();
+            Log.i("test","addfriend");
             if(!cursor.isAfterLast()) {
                 Log.i("test","isafterlast");
                 ContentValues values = new ContentValues();
@@ -350,7 +352,6 @@ public class User {
                 }
                 cursor1.close();
                 cursor.close();
-                db.close();
             }
             else {
                 ContentValues values = new ContentValues();
