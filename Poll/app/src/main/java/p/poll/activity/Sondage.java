@@ -44,7 +44,7 @@ public class Sondage extends Activity {
         }
         return ListePropositions;
     }
-public static int joueurs = 0;
+    public static int joueurs = 0;
     public static int total = 0;
 
     public static Boolean flag[ ]= {
@@ -54,7 +54,7 @@ public static int joueurs = 0;
             false,
             false,
             false,
-    } ;
+    };
 
     private ListView mListView;
 
