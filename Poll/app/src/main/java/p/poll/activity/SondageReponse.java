@@ -31,7 +31,7 @@ public class SondageReponse extends Activity {
     public static String[] listenumeroliste;
     public static String[] listedescriptionliste;
     String[] web = {
-            "Proposition1",
+            "Proposition1", // First == celui choisi
             "Proposition2",
             "Proposition3",
             "Proposition4",
