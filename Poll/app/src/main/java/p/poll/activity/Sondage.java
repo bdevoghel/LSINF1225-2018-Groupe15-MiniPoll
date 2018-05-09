@@ -3,14 +3,18 @@ package p.poll.activity;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import p.poll.R;
 
@@ -20,6 +24,8 @@ import p.poll.R;
 
 public class Sondage extends Activity {
     ListView list;
+    List<String> listfriendclick = new ArrayList<String>();
+    Button bouton;
     public static String[] web = {
             "Proposition1",
             "Proposition2",
@@ -56,6 +62,7 @@ public static int joueurs = 0;
         final CustomSondage listAdapter = new
                 CustomSondage(Sondage.this, web);
         list=(ListView)findViewById(R.id.listView1);
+        bouton = (Button) findViewById(R.id.button);
         list.setAdapter(listAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,13 +81,37 @@ public static int joueurs = 0;
         mListView.setClickable(true);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Object o = mListView.getItemAtPosition(position);
-                PollModel j = (PollModel)o;
-                Toast.makeText(Sondage.this, j.getText(),
-                        Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                    Object o = mListView.getItemAtPosition(position);
+                    PollModel j = (PollModel)o;
+                    if( !listfriendclick.contains(j.getPseudo()) && !listfriendclick.isEmpty())
+                    {
+                        arg1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+
+                        listfriendclick.add(j.getPseudo());
+                        if(listfriendclick.isEmpty()) {
+                            bouton.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+                        }
+                        Toast.makeText(p.poll.activity.Sondage.this, "Vous avez ajouté : " + j.getPseudo(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else if(listfriendclick.contains(j.getPseudo()))
+                    {
+                        bouton.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+                        if(listfriendclick.isEmpty()) {
+                            arg1.setBackgroundColor(getResources().getColor(android.R.color.white));
+                        }
+                        listfriendclick.remove(j.getPseudo());
+                    }
+                    else {
+                        bouton.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                        arg1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                        listfriendclick.add(j.getPseudo());
+                        Toast.makeText(p.poll.activity.Sondage.this, j.getText(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
         });
     }
 
