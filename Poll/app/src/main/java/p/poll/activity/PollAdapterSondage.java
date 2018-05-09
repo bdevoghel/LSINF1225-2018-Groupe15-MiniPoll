@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
@@ -18,10 +19,10 @@ import p.poll.R;
  */
 
 public class PollAdapterSondage extends ArrayAdapter<PollModel> {
-
     //tweets est la liste des models à afficher
     public PollAdapterSondage(Context context, List<PollModel> tweets) {
         super(context, 0, tweets);
+
     }
 
     @Override

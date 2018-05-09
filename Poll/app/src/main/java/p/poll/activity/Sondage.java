@@ -7,7 +7,9 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class Sondage extends Activity {
     ListView list;
     public static List<String> listfriendclick;
     Button bouton;
+    public static List<View> listproposition;
     public static String[] web = {
             "Proposition1",
             "Proposition2",
@@ -60,6 +63,11 @@ public static int joueurs = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sondage);
         listfriendclick = new ArrayList<String>();
+        listproposition = new ArrayList<View>();
+        for(int i=0;i<6;i++)
+        {
+            listproposition.add(null);
+        }
         final CustomSondage listAdapter = new
                 CustomSondage(Sondage.this, web);
         list=(ListView)findViewById(R.id.listView1);
@@ -69,7 +77,8 @@ public static int joueurs = 0;
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(Sondage.this, "You Clicked at " +web[+ position]+" value = ", Toast.LENGTH_SHORT).show();
+                listproposition.set(position,view);
+                Toast.makeText(Sondage.this, "You Clicked at " +web[position]+" value = ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -113,6 +122,26 @@ public static int joueurs = 0;
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
+        });
+
+        bouton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(listfriendclick.isEmpty())
+                {
+                    Toast.makeText(p.poll.activity.Sondage.this,"Aucun ami sélectionné",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    View vv = listproposition.get(1);
+                    EditText edit = (EditText) vv.findViewById(R.id.txt);
+                    Toast.makeText(p.poll.activity.Sondage.this,edit.getText(),
+                            Toast.LENGTH_SHORT).show();
+                    // Go to Sondage Prevue
+                }
+            }
         });
     }
 

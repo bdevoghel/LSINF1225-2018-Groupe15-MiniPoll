@@ -9,8 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
+
 import p.poll.R;
 
 public class CustomSondage extends ArrayAdapter<String>{
@@ -28,6 +32,17 @@ public class CustomSondage extends ArrayAdapter<String>{
         View rowView= inflater.inflate(R.layout.activity_screen_sondage, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
         txtTitle.setText(web[position]);
+        EditText edit = (EditText) rowView.findViewById(R.id.editText6);
+        View view2 = Sondage.listproposition.get((position));
+        if(view2 == null) {
+            Sondage.listproposition.set(position,view);
+        }
+        else
+        {
+            //edit.setText(((EditText)view2.findViewById(R.id.editText6)).getText());
+            ((TextView)view2.findViewById(R.id.txt)).setText("Proposition "+position);
+            return view2;
+        }
         return rowView;
     }
 }
