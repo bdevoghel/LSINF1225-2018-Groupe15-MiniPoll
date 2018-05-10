@@ -366,7 +366,6 @@ public class Sondage extends Activity {
                 }
             }
         });
-
     }
 
 
