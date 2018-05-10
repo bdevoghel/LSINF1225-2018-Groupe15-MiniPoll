@@ -24,7 +24,7 @@ import static p.poll.activity.ScreenSlidePagerActivity.NUM_PAGES;
 
 
 public class ScreenSlidePageFragment extends Fragment implements View.OnClickListener{
-    public User Queryuser=null;
+    public static User Queryuser=null;
     private int pos;
     private User oneuser;
     private View view;
