@@ -58,7 +58,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Queryuser=User.toHashMap(User.getFriends()).get(query);
+                Queryuser=User.toHashMap(User.getNotFriends()).get(query);
                 if(Queryuser!=null)
                 {
                     Intent intent = new Intent(getContext(),Ajoutamiunique.class);
