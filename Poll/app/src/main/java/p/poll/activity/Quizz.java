@@ -28,7 +28,7 @@ public class Quizz extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activty_quizz_response);
 
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
