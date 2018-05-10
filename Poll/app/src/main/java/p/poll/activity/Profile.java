@@ -50,7 +50,7 @@ public class Profile extends AppCompatActivity {
     private ImageButton btnImageGallery;
     private ImageButton btnImageCamera;
     private UserModifyTask mAuthTask = null;
-    private String imagePath;
+    private String imagePath=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,10 @@ public class Profile extends AppCompatActivity {
         String firstName = this.profile_first_name.getText().toString();
         String lastName = this.profile_name.getText().toString();
         String eMail = this.profile_email.getText().toString();
-        //TODO: ajouter la photo
+        String profilePic = User.loggedUser.getProfilePic();
+        if(imagePath!=null) {
+            profilePic = imagePath;
+        }
 
         if (mAuthTask != null) {
             return;
@@ -111,7 +114,7 @@ public class Profile extends AppCompatActivity {
             User.loggedUser.setFirstName(firstName);
             User.loggedUser.setLastName(lastName);
             User.loggedUser.setMailAdress(eMail);
-            User.loggedUser.setProfilePic(imagePath);
+            User.loggedUser.setProfilePic(profilePic);
         } else {
             if (TextUtils.isEmpty(firstName)) {
                 profile_first_name.setError("@string/error_empty_fname");
