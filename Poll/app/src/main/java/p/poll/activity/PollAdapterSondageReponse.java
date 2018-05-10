@@ -1,7 +1,6 @@
 package p.poll.activity;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,7 @@ public class PollAdapterSondageReponse extends ArrayAdapter<String> {
         if(viewHolder == null){
             viewHolder = new PollViewHolder();
             viewHolder.pseudo = (TextView) convertView.findViewById(R.id.pseudo);
-            viewHolder.text = (TextView) convertView.findViewById(R.id.text);
+            viewHolder.text = (TextView) convertView.findViewById(R.id.prenomFriendUnique);
             convertView.setTag(viewHolder);
         }
 

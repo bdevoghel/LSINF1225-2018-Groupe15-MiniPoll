@@ -35,7 +35,7 @@
                 app:srcCompat="@drawable/default_pic" />
 
             <TextView
-                android:id="@+id/text3"
+                android:id="@+id/nomFriendUnique"
                 style="?android:textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/prenomFriendUnique"
                 style="?android:textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/emailinfo"
+                android:id="@+id/emailinfoFriendUnique"
                 style="?android:textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

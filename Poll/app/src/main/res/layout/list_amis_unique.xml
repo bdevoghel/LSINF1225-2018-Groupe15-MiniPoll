@@ -15,43 +15,29 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/friend_list_activity"
+                android:textAppearance="@android:style/TextAppearance.Material.Display1" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
 
-                <SearchView
-                    android:layout_width="291dp"
-                    android:layout_height="wrap_content">
-
-                </SearchView>
-
-                <ImageButton
-                    android:id="@+id/imageButton4"
-                    style="@android:style/Widget.DeviceDefault.ImageButton"
-                    android:layout_width="71dp"
-                    android:layout_height="58dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/addfriend" />
-
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/friend_list_activity"
-                android:layout_gravity="center"
-                android:textAppearance="@android:style/TextAppearance.Material.Display1" />
-
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageViewFriendUnique"
                 android:layout_width="match_parent"
                 android:layout_height="183dp"
                 app:srcCompat="@drawable/default_pic" />
 
             <TextView
-                android:id="@+id/text3"
+                android:id="@+id/nomFriendUnique"
                 style="?android:textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +47,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/prenomFriendUnique"
                 style="?android:textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,7 +57,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/emailinfo"
+                android:id="@+id/emailinfoFriendUnique"
                 style="?android:textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,7 +79,7 @@
                     android:layout_height="wrap_content" />
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/switch2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,7 +115,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/buttonexit"
+                    android:id="@+id/buttonexit2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

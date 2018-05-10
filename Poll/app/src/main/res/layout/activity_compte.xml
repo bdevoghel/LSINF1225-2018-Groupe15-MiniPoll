@@ -38,7 +38,7 @@
 
 
         <TextView
-            android:id="@+id/text3"
+            android:id="@+id/nomFriendUnique"
             style="?android:textAppearanceMedium"
             android:layout_width="108dp"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:padding="16dp"
             android:text="@string/last_name"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/text"
+            app:layout_constraintBottom_toTopOf="@+id/prenomFriendUnique"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
@@ -66,11 +66,11 @@
             android:inputType="textPersonName"
             android:singleLine="true"
             app:layout_constraintBottom_toTopOf="@+id/profile_first_name"
-            app:layout_constraintStart_toEndOf="@+id/text3" />
+            app:layout_constraintStart_toEndOf="@+id/nomFriendUnique" />
 
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/prenomFriendUnique"
             style="?android:textAppearanceMedium"
             android:layout_width="108dp"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             android:padding="16dp"
             android:text="@string/first_name"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/emailinfo"
+            app:layout_constraintBottom_toTopOf="@+id/emailinfoFriendUnique"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
@@ -98,11 +98,11 @@
             android:inputType="textPersonName"
             android:singleLine="true"
             app:layout_constraintBottom_toTopOf="@+id/profile_email"
-            app:layout_constraintStart_toEndOf="@+id/text" />
+            app:layout_constraintStart_toEndOf="@+id/prenomFriendUnique" />
 
 
         <TextView
-            android:id="@+id/emailinfo"
+            android:id="@+id/emailinfoFriendUnique"
             style="?android:textAppearanceMedium"
             android:layout_width="108dp"
             android:layout_height="49dp"
@@ -131,8 +131,8 @@
             android:imeActionLabel="@string/action_sign_in_short"
             android:inputType="textPersonName"
             android:singleLine="true"
-            app:layout_constraintBottom_toBottomOf="@+id/emailinfo"
-            app:layout_constraintStart_toEndOf="@+id/emailinfo" />
+            app:layout_constraintBottom_toBottomOf="@+id/emailinfoFriendUnique"
+            app:layout_constraintStart_toEndOf="@+id/emailinfoFriendUnique" />
 
 
         <Button

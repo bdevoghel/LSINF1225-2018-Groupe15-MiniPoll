@@ -9,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,15 +50,15 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.friendlist, container, false);
         view = inflater.inflate(R.layout.userlist, container, false);
-        TextView textView = (TextView) view.findViewById(R.id.text);
+        TextView textView = (TextView) view.findViewById(R.id.prenomFriendUnique);
         textView.setText("Nom : "+" "+oneuser.getLastName());
-        textView2 = (TextView) view.findViewById(R.id.text3);
+        textView2 = (TextView) view.findViewById(R.id.nomFriendUnique);
         textView2.setText("Prenom : "+" "+oneuser.getFirstName());
         searchView = view.findViewById(R.id.search2);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Queryuser=User.toHashMap(User.getFriends()).get(query);
+                Queryuser=User.toHashMap(User.getNotFriends()).get(query);
                 if(Queryuser!=null)
                 {
                     Intent intent = new Intent(getContext(),Ajoutamiunique.class);

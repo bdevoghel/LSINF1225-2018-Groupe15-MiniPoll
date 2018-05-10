@@ -21,18 +21,18 @@ public class Ajoutamiunique extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ajout_amis_unique);
 
-        TextView nom = (TextView) findViewById(R.id.text3);
+        TextView nom = (TextView) findViewById(R.id.nomFriendUnique);
         nom.setText(strnom);
-        TextView prenom = (TextView) findViewById(R.id.text);
+        TextView prenom = (TextView) findViewById(R.id.prenomFriendUnique);
         prenom.setText(strprenom);
-        TextView email = (TextView) findViewById(R.id.emailinfo);
+        TextView email = (TextView) findViewById(R.id.emailinfoFriendUnique);
         email.setText(stremail);
 
         Button menu = (Button) findViewById(R.id.buttonexit);
         menu.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
+
             }
         });
     }
