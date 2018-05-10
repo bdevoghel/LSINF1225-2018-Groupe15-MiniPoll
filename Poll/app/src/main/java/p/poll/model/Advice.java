@@ -1,6 +1,7 @@
 package p.poll.model;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -15,32 +16,44 @@ import p.poll.MySQLiteHelper;
 public class Advice extends Poll {
 
     //Attributs
-    private Question question;
+    private String imagePath1;
+    private String imagePath2;
+    private String description;
 
     //Constructeurs
     public Advice(){
         super();
     }
-    public Advice(String title, String description, java.sql.Date deadline,
-                  Character type, User owner) {
+    public Advice(String title, String description, Character type, User owner, String imagePath1, String imagePath2, String descriptionQ) {
         super(title, description, type, owner);
+        this.imagePath1=imagePath1;
+        this.imagePath2 =imagePath2;
+        this.description=descriptionQ;
     }
-    public Advice(String title, String description, java.sql.Date deadline,
-                  Character type, User owner, Question question){
-        super(title, description, type, owner);
-        this.question=question;
-    }
-    public Advice(Question question){
-        super();
-        this.question=question;
-    }
-
     //Getteurs et setteurs
-    public void setQuestion(Question question){
-        this.question=question;
+    public String getDescription()
+    {
+        return description;
     }
-    public Question getQuestion(){
-        return question;
+    public String getImagePath1()
+    {
+        return imagePath1;
+    }
+    public String getImagePath2()
+    {
+        return imagePath2;
+    }
+    public void setImagePath1(String imagePath1)
+    {
+        this.imagePath1=imagePath1;
+    }
+    public void setImagePath2(String imagePath2)
+    {
+        this.imagePath2=imagePath2;
+    }
+    public void setDescription(String description)
+    {
+        this.description=description;
     }
 
     //DataBase
@@ -93,5 +106,60 @@ public class Advice extends Poll {
         db.insert("Questionnaire_and_Advice",null,values);
 
         db.close();
+    }
+
+    public static ArrayList<Advice> getAdvice()
+    {
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        ArrayList<Advice> advices = new ArrayList<>();
+
+        String[] colonnes = {"idpoll"};
+        Cursor cursor = db.query("Poll_access", colonnes, "username=? AND status_particulier=?", new String[]{User.loggedUser.getUsername(),String.valueOf(0)}, null, null, null);
+        cursor.moveToFirst();
+        ArrayList<Integer> idpoll = new ArrayList<>();
+        while (!cursor.isAfterLast()) {
+            idpoll.add(Integer.valueOf(cursor.getString(0)));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        for(int i=0;i<idpoll.size();i++) {
+            String idQuestion=null;
+            String description=null;
+            String[] colonnes2 = {"idquestion", "description_question"};
+            cursor = db.query("Question_list", colonnes2, "idpoll=?", new String[]{idpoll.get(i).toString()}, null, null, null);
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                idQuestion=cursor.getString(0);
+                description=cursor.getString(1);
+                cursor.moveToNext();
+            }
+            cursor.close();
+
+            String[] colonnes3 = {"texte"};
+            cursor = db.query("Questionnaire_and_Advice", colonnes3, "idquestion=?", new String[]{idQuestion}, null, null, null);
+            cursor.moveToFirst();
+            String[] imagePath = new String[2];
+            for (int j=0;!cursor.isAfterLast();j++) {
+                imagePath[j]=cursor.getString(0);
+                cursor.moveToNext();
+            }
+            cursor.close();
+
+            User owner=null;
+            String[] colonnes4 = {"username_proprietaire"};
+            cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=?", new String[]{String.valueOf(idpoll),String.valueOf(0)}, null, null, null);
+            cursor.moveToFirst();
+            for (int j=0;!cursor.isAfterLast();j++) {
+                owner=User.getUser(cursor.getString(0));
+                cursor.moveToNext();
+            }
+            cursor.close();
+
+            if(owner!=null) {
+                advices.add(new Advice("Help me out!", "Help me making a choice!", 'a', owner,imagePath[0],imagePath[1],description));
+            }
+        }
+        db.close();
+        return advices;
     }
 }
