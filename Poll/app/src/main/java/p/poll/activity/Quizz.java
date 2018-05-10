@@ -105,37 +105,36 @@ public class Quizz extends Activity{
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
-        listDataHeader.add("Top 250");
-        listDataHeader.add("Now Showing");
-        listDataHeader.add("Coming Soon..");
+        listDataHeader.add("Question 1");
+        listDataHeader.add("Question 2");
+        listDataHeader.add("Question 3");
 
         // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
+        List<String> Question1 = new ArrayList<String>();
+        Question1.add("The Shawshank Redemption");
+        Question1.add("The Godfather");
+        Question1.add("The Godfather: Part II");
+        Question1.add("Pulp Fiction");
+        Question1.add("The Good, the Bad and the Ugly");
+        Question1.add("The Dark Knight");
 
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
+        List<String> Question2 = new ArrayList<String>();
+        Question2.add("The Conjuring");
+        Question2.add("Despicable Me 2");
+        Question2.add("Turbo");
+        Question2.add("Grown Ups 2");
+        Question2.add("Red 2");
+        Question2.add("The Wolverine");
 
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
+        List<String> Question3 = new ArrayList<String>();
+        Question3.add("2 Guns");
+        Question3.add("The Smurfs 2");
+        Question3.add("The Spectacular Now");
+        Question3.add("The Canyons");
+        Question3.add("Europa Report");
 
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
+        listDataChild.put(listDataHeader.get(0), Question1); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), Question2);
+        listDataChild.put(listDataHeader.get(2), Question3);
     }
 }
