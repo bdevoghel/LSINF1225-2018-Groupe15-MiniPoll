@@ -27,13 +27,13 @@ public class NewQuizzQuestion extends Activity {
     CustomQuizzAnswerAdd listAdapter2;
 
 
-    public List<String> reponsequestion1;
-    public List<String> reponsequestion2;
-    public List<String> reponsequestion3;
-    public List<String> reponsequestion4;
-    public List<String> goodanswer;
+    public static List<String> reponsequestion1;
+    public static List<String> reponsequestion2;
+    public static List<String> reponsequestion3;
+    public static List<String> reponsequestion4;
+    public static List<String> goodanswer;
     int positionquestion;
-    int numberquestion;
+    public static int numberquestion;
 
     public List<String> current;
 
@@ -139,6 +139,8 @@ public class NewQuizzQuestion extends Activity {
             public void onClick(View v) {
                 if(bouton2.getText().toString().compareTo("Valider le Quizz") == 0)
                 {
+                    Intent intent = new Intent(getApplicationContext(),Quizzprevue.class);
+                    startActivity(intent);
                     ///////////////////////////////////////////////////////////////////////////////
                     //Base de données
                     ///////////////////////////////////////////////////////////////////////////////
@@ -155,57 +157,70 @@ public class NewQuizzQuestion extends Activity {
                 {
                     reponsequestion1 = current;
                     current = new ArrayList<String>();
-                    listereponse = current.toArray(new String[current.size()]);
                     listAdapter2 = new
                             CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
                     list.setAdapter(listAdapter2);
                     positionquestion++;
-                    titre.setText("Question "+ positionquestion +": "+question[1]);
+                    if(numberquestion == 1)
+                    {
+                        Intent intent = new Intent(getApplicationContext(),Quizzprevue.class);
+                        startActivity(intent);
+                        return;
+                    }
                     if(numberquestion == 2)
                     {
                         bouton2.setText("Valider le Quizz");
                     }
+                    titre.setText("Question "+ positionquestion +": "+question[1]);
 
                 }
                 else if(positionquestion == 2)
                 {
                     reponsequestion2 = current;
                     current = new ArrayList<String>();
-                    listereponse = current.toArray(new String[current.size()]);
                     listAdapter2 = new
                             CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
                     list.setAdapter(listAdapter2);
                     positionquestion++;
-                    titre.setText("Question "+ positionquestion +": "+question[2]);
+                    if(numberquestion == 2)
+                    {
+                        Intent intent = new Intent(getApplicationContext(),NewQuizzQuestion.class);
+                        startActivity(intent);
+                        return;
+                    }
                     if(numberquestion == 3)
                     {
                         bouton2.setText("Valider le Quizz");
                     }
+                    titre.setText("Question "+ positionquestion +": "+question[2]);
                 }
                 else if(positionquestion == 3)
                 {
                     reponsequestion3 = current;
                     current = new ArrayList<String>();
-                    listereponse = current.toArray(new String[current.size()]);
                     listAdapter2 = new
                             CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
                     list.setAdapter(listAdapter2);
                     positionquestion++;
-                    titre.setText("Question "+ positionquestion +": "+question[3]);
+                    if(numberquestion == 3)
+                    {
+                        Intent intent = new Intent(getApplicationContext(),Quizzprevue.class);
+                        startActivity(intent);
+                        return;
+                    }
                     if(numberquestion == 4)
                     {
                         bouton2.setText("Valider le Quizz");
                     }
+                    titre.setText("Question "+ positionquestion +": "+question[3]);
                 }
                 else if(positionquestion == 4)
                 {
                     reponsequestion4 = current;
                     current = new ArrayList<String>();
-                    listereponse = current.toArray(new String[current.size()]);
-                    listAdapter2 = new
-                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
-                    list.setAdapter(listAdapter2);
-                    positionquestion++;
+                    Intent intent = new Intent(getApplicationContext(),Quizzprevue.class);
+                    startActivity(intent);
+                    return;
                 }
             }
         });

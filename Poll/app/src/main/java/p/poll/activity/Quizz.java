@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
@@ -112,6 +114,15 @@ public class Quizz extends Activity{
                             Toast.LENGTH_SHORT).show();
                 }
                 return false;
+            }
+        });
+
+        Button valider = (Button) findViewById(R.id.Valider);
+        valider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //List<String> choix; contient la liste des réponse choisie par l'utilisateur
             }
         });
     }

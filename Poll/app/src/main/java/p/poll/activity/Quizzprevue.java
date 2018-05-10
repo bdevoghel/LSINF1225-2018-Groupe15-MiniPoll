@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
@@ -21,7 +22,7 @@ import p.poll.R;
  */
 
 public class Quizzprevue extends Activity{
-    ExpandableListAdapter listAdapter;
+    ExpandableListAdapterprevue listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     List<String> listdescription;
@@ -43,7 +44,7 @@ public class Quizzprevue extends Activity{
         // preparing list data
         prepareListData();
 
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listdescription, listDataChild);
+        listAdapter = new ExpandableListAdapterprevue(this, listDataHeader, listdescription, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
@@ -114,6 +115,17 @@ public class Quizzprevue extends Activity{
                 return false;
             }
         });
+
+        Button valider = (Button) findViewById(R.id.Valider);
+        valider.setText("Sauvegarder");
+        valider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Quizz sauvegardé",
+                        Toast.LENGTH_SHORT).show();
+                //List<String> choix; contient la liste des réponse choisie par l'utilisateur
+            }
+        });
     }
 
     /*
@@ -124,18 +136,58 @@ public class Quizzprevue extends Activity{
         listdescription = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
+        int numberquestion = NewQuizzQuestion.numberquestion;
+
         // Adding child data
-        listDataHeader.add("Question 1");
-        listDataHeader.add("Question 2");
-        listDataHeader.add("Question 3");
+        if(numberquestion == 1) {
+            listDataHeader.add("Question 1");
+            List<String> Question1 = NewQuizzQuestion.reponsequestion1;
+            listDataChild.put(listDataHeader.get(0), Question1); // Header, Child data
+            return;
+        }
+        else if(numberquestion == 2) {
+            listDataHeader.add("Question 1");
+            listDataHeader.add("Question 2");
+            List<String> Question1 = NewQuizzQuestion.reponsequestion1;
+            List<String> Question2 = NewQuizzQuestion.reponsequestion2;
+            listDataChild.put(listDataHeader.get(0), Question1); // Header, Child data
+            listDataChild.put(listDataHeader.get(1), Question2);
+        }
+        else if(numberquestion == 3) {
+            listDataHeader.add("Question 1");
+            listDataHeader.add("Question 2");
+            listDataHeader.add("Question 3");
+            List<String> Question1 = NewQuizzQuestion.reponsequestion1;
+            List<String> Question2 = NewQuizzQuestion.reponsequestion2;
+            List<String> Question3 = NewQuizzQuestion.reponsequestion3;
+            listDataChild.put(listDataHeader.get(0), Question1); // Header, Child data
+            listDataChild.put(listDataHeader.get(1), Question2);
+            listDataChild.put(listDataHeader.get(2), Question3);
+        }
+        else
+        {
+            listDataHeader.add("Question 1");
+            listDataHeader.add("Question 2");
+            listDataHeader.add("Question 3");
+            listDataHeader.add("Question 4");
+            List<String> Question1 = NewQuizzQuestion.reponsequestion1;
+            List<String> Question2 = NewQuizzQuestion.reponsequestion2;
+            List<String> Question3 = NewQuizzQuestion.reponsequestion3;
+            List<String> Question4 = NewQuizzQuestion.reponsequestion4;
+            listDataChild.put(listDataHeader.get(0), Question1); // Header, Child data
+            listDataChild.put(listDataHeader.get(1), Question2);
+            listDataChild.put(listDataHeader.get(2), Question3);
+            listDataChild.put(listDataHeader.get(3), Question4);
+        }
 
-
+        listdescription = NewQuizz.ListePropositions;
         //List description des questions
-        listdescription.add("Quel jour sommes nous ?");
-        listdescription.add("Qui est John ?");
-        listdescription.add("Suis-je gentil ?");
+        //listdescription.add("Quel jour sommes nous ?");
+        //listdescription.add("Qui est John ?");
+        //listdescription.add("Suis-je gentil ?");
 
         // Adding child data
+        /*
         List<String> Question1 = new ArrayList<String>();
         Question1.add("The Shawshank Redemption");
         Question1.add("The Godfather");
@@ -158,10 +210,8 @@ public class Quizzprevue extends Activity{
         Question3.add("The Spectacular Now");
         Question3.add("The Canyons");
         Question3.add("Europa Report");
+        */
 
-        listDataChild.put(listDataHeader.get(0), Question1); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), Question2);
-        listDataChild.put(listDataHeader.get(2), Question3);
     }
 }
 
