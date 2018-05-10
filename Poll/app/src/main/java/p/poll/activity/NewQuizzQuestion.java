@@ -80,9 +80,27 @@ public class NewQuizzQuestion extends Activity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                view.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+
                 TextView txt = (TextView) view.findViewById(R.id.txt);
-                goodanswer.set(positionquestion,txt.getText().toString());
+                if(goodanswer.get(positionquestion) == null)
+                {
+                    view.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                    goodanswer.set(positionquestion, txt.getText().toString());
+                    return true;
+                }
+                if(goodanswer.get(positionquestion).compareTo(txt.getText().toString()) == 0)
+                {
+                    goodanswer.set(positionquestion,null);
+                    view.setBackgroundColor(getResources().getColor(android.R.color.white));
+                }
+                else if(goodanswer.get(positionquestion) != null)
+                {
+                    Toast.makeText(NewQuizzQuestion.this, "Vous avez déjà choisi une réponse. Désélectionné là pour la retirer", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    view.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                    goodanswer.set(positionquestion, txt.getText().toString());
+                }
                 return true;
             }
         });
@@ -92,11 +110,17 @@ public class NewQuizzQuestion extends Activity {
             public void onClick(View v) {
                 if(current.size() <=5) {
                     EditText txt = (EditText) findViewById(R.id.editText2);
-                    current.add(txt.getText().toString());
-                    listereponse = current.toArray(new String[current.size()]);
-                    listAdapter2 = new
-                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
-                    list.setAdapter(listAdapter2);
+                    if(current.contains(txt.getText().toString()))
+                    {
+                        Toast.makeText(NewQuizzQuestion.this, "Cette réponse existe déjà", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        current.add(txt.getText().toString());
+                        listereponse = current.toArray(new String[current.size()]);
+                        listAdapter2 = new
+                                CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                        list.setAdapter(listAdapter2);
+                    }
                 }
                 else
                 {
