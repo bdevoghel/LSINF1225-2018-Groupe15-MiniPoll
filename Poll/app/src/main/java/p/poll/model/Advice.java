@@ -87,7 +87,10 @@ public class Advice extends Poll {
         values.put("reponse",String.valueOf(0));
         db.insert("Questionnaire_and_Advice",null,values);
         values=new ContentValues();
-        
+        values.put("idquestion",idQuestion);
+        values.put("texte",imagePath2);
+        values.put("reponse",String.valueOf(0));
+        db.insert("Questionnaire_and_Advice",null,values);
 
         db.close();
     }
