@@ -139,7 +139,16 @@ public class NewQuizzQuestion extends Activity {
             public void onClick(View v) {
                 if(bouton2.getText().toString().compareTo("Valider le Quizz") == 0)
                 {
+                    ///////////////////////////////////////////////////////////////////////////////
+                    //Base de données
+                    ///////////////////////////////////////////////////////////////////////////////
                     //Mettre la base de donnée ici;
+                    //reponsequestion1 Contient la liste des réponse pour la premiere question
+                    //reponsequestion2
+                    //reponsequestion3
+                    //reponsequestion4 -> si 3 question, alors pas forcement rempli
+                    //Question est le titre des question (attention pas forcement 4 question
+                    //goodanswer  = liste des bonne réponse pour caque question (dans le même ordre)
                     return ;
                 }
                 if(positionquestion == 1)

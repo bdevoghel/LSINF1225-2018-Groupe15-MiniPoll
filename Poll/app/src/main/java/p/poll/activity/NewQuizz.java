@@ -43,7 +43,10 @@ public class NewQuizz extends Activity {
             View vv = listproposition.get(i);
             if(vv != null) {
                 EditText edit = (EditText) vv.findViewById(R.id.editText6);
-                ListePropositions.add(edit.getText().toString());
+                if(edit.getText().toString().compareTo("") != 0)
+                {
+                    ListePropositions.add(edit.getText().toString());
+                }
             }
         }
     }
