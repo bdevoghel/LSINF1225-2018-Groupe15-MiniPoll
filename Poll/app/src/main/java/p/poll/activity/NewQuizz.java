@@ -1,6 +1,7 @@
 package p.poll.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -36,11 +37,14 @@ public class NewQuizz extends Activity {
             "Question 4"
     } ;
     public static List<String> ListePropositions = new ArrayList<String>();
-    public List<String> MakeListePropositions (){
+    public void MakeListePropositions (){
         for (int i = 0; i < 5; i++){
-            ListePropositions.add(this.web[i]);
+            View vv = listproposition.get(i);
+            if(vv != null) {
+                EditText edit = (EditText) vv.findViewById(R.id.editText6);
+                ListePropositions.add(edit.getText().toString());
+            }
         }
-        return ListePropositions;
     }
     public static int joueurs = 0;
     public static int total = 0;
@@ -133,11 +137,9 @@ public class NewQuizz extends Activity {
                 }
                 else
                 {
-                    View vv = listproposition.get(0);
-                    EditText edit = (EditText) vv.findViewById(R.id.editText6);
-                    Toast.makeText(p.poll.activity.NewQuizz.this,edit.getText(),
-                            Toast.LENGTH_SHORT).show();
-                    // Go to Sondage Prevue
+                    MakeListePropositions();
+                    Intent intent = new Intent(getApplicationContext(),NewQuizzQuestion.class);
+                    startActivity(intent);
                 }
             }
         });
