@@ -96,11 +96,7 @@ public class listamihelp extends Activity {
         List<PollModel> tweets = new ArrayList<PollModel>();
         for(int i =0; i<users.size();i++)
         {
-<<<<<<< HEAD
             tweets.add(new PollModel(Color.BLACK, users.get(i).getUsername(),users.get(i).getMailAdress()));
-=======
-            tweets.add(new PollModel(Color.BLACK,users.get(i).getUsername(),users.get(i).getMailAdress()));
->>>>>>> e961b9c786f17946382542e651b29ff63434a616
         }
         /*
         tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
