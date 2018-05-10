@@ -1,6 +1,7 @@
 package p.poll.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,6 +83,8 @@ public class listamihelp extends Activity {
                     Advice.createAdvice(User.getUser(userselect),NewHelp.imagePath1,NewHelp.imagePath2,NewHelp.description);
                     Toast.makeText(p.poll.activity.listamihelp.this, "L'ami(e) sélectionné est : "+ userselect,
                             Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+                    startActivity(intent);
                 }
             }
             });
