@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import p.poll.model.User;
 
 
 public class ScreenSlidePageFriendListFragment extends Fragment implements View.OnClickListener{
+    public User Queryfriend=null;
     private int pos;
     private User oneuser;
     private View view;
@@ -31,6 +33,8 @@ public class ScreenSlidePageFriendListFragment extends Fragment implements View.
     private Switch mySwitch;
     private ImageButton imageButton;
     private TextView textView2;
+    private TextView textView3;
+    private SearchView searchView;
     public ScreenSlidePageFriendListFragment(int pos, ArrayList<User> userList, ContentResolver content)
     {
         super();
@@ -52,6 +56,27 @@ public class ScreenSlidePageFriendListFragment extends Fragment implements View.
         textView.setText("Nom : "+" "+oneuser.getLastName());
         textView2 = (TextView) view.findViewById(R.id.text3);
         textView2.setText("Prenom : "+" "+oneuser.getFirstName());
+        textView3 = view.findViewById(R.id.emailinfo);
+        textView3.setText("Email : "+" "+oneuser.getMailAdress());
+        searchView = view.findViewById(R.id.search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Queryfriend=User.toHashMap(User.getFriends()).get(query);
+                if(Queryfriend!=null)
+                {
+                    Intent intent = new Intent(getContext(),Listamiunique.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
         imageButton = view.findViewById(R.id.imageButton4);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
