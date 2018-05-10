@@ -35,10 +35,9 @@ public class NewQuizzQuestion extends Activity {
     int positionquestion;
     int numberquestion;
 
-    public static List<String> current;
+    public List<String> current;
 
     String[] listereponse;
-    String[] web = NewQuizz.web;
     String[] question;
     Button bouton;
     Button bouton2;
@@ -66,6 +65,7 @@ public class NewQuizzQuestion extends Activity {
 
         bouton = (Button) findViewById(R.id.button);
         bouton2 = (Button) findViewById(R.id.button2);
+        bouton2.setText("Question suivante");
         list = (ListView) findViewById(R.id.listView1);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -137,6 +137,11 @@ public class NewQuizzQuestion extends Activity {
 
             @Override
             public void onClick(View v) {
+                if(bouton2.getText().toString().compareTo("Valider le Quizz") == 0)
+                {
+                    //Mettre la base de donnée ici;
+                    return ;
+                }
                 if(positionquestion == 1)
                 {
                     reponsequestion1 = current;
@@ -146,7 +151,11 @@ public class NewQuizzQuestion extends Activity {
                             CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
                     list.setAdapter(listAdapter2);
                     positionquestion++;
-                    titre.setText("Question 1: "+question[1]);
+                    titre.setText("Question "+ positionquestion +": "+question[1]);
+                    if(numberquestion == 2)
+                    {
+                        bouton2.setText("Valider le Quizz");
+                    }
 
                 }
                 else if(positionquestion == 2)
@@ -158,7 +167,11 @@ public class NewQuizzQuestion extends Activity {
                             CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
                     list.setAdapter(listAdapter2);
                     positionquestion++;
-                    titre.setText("Question 1: "+question[2]);
+                    titre.setText("Question "+ positionquestion +": "+question[2]);
+                    if(numberquestion == 3)
+                    {
+                        bouton2.setText("Valider le Quizz");
+                    }
                 }
                 else if(positionquestion == 3)
                 {
@@ -169,7 +182,11 @@ public class NewQuizzQuestion extends Activity {
                             CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
                     list.setAdapter(listAdapter2);
                     positionquestion++;
-                    titre.setText("Question 1: "+question[3]);
+                    titre.setText("Question "+ positionquestion +": "+question[3]);
+                    if(numberquestion == 4)
+                    {
+                        bouton2.setText("Valider le Quizz");
+                    }
                 }
                 else if(positionquestion == 4)
                 {

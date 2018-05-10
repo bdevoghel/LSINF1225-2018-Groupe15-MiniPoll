@@ -38,6 +38,7 @@ public class NewQuizz extends Activity {
     } ;
     public static List<String> ListePropositions = new ArrayList<String>();
     public void MakeListePropositions (){
+        ListePropositions.clear();
         for (int i = 0; i < 5; i++){
             View vv = listproposition.get(i);
             if(vv != null) {
@@ -70,6 +71,7 @@ public class NewQuizz extends Activity {
         {
             listproposition.add(null);
         }
+        ListePropositions = new ArrayList<String>();
         final CustomQuizz listAdapter = new
                 CustomQuizz(NewQuizz.this, web);
         list=(ListView)findViewById(R.id.listView1);
