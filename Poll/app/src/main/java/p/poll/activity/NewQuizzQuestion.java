@@ -25,10 +25,7 @@ import p.poll.model.User;
 public class NewQuizzQuestion extends Activity {
     ListView list;
     String[] listadd;
-    CustomSondageAnswerAdd listAdapter2;
-    public static List<View> liste;
-    public static List<String> listenumero;
-    public static List<String> listedescription;
+    CustomQuizzAnswerAdd listAdapter2;
     public static String[] listenumeroliste;
     public static String[] listedescriptionliste;
 
@@ -49,8 +46,11 @@ public class NewQuizzQuestion extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_quizz);
-        listenumero = new ArrayList<String>();
-        listedescription = new ArrayList<String>();
+        current = new ArrayList<String>();
+        reponsequestion1 = new ArrayList<String>();
+        reponsequestion2 = new ArrayList<String>();
+        reponsequestion3 = new ArrayList<String>();
+        reponsequestion4 = new ArrayList<String>();
 
         bouton = (Button) findViewById(R.id.button);
         bouton2 = (Button) findViewById(R.id.button2);
@@ -59,13 +59,12 @@ public class NewQuizzQuestion extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                if (true) {
-
-                    Toast.makeText(NewQuizzQuestion.this, "You Clicked at " + current.get(position) + " value = ", Toast.LENGTH_SHORT).show();
-
-                } else {
-
-                }
+                    TextView txt = (TextView) view.findViewById(R.id.txt);
+                    current.remove(txt.getText().toString());
+                    listereponse = current.toArray(new String[current.size()]);
+                    listAdapter2 = new
+                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                    list.setAdapter(listAdapter2);
             }
         });
 
@@ -73,13 +72,18 @@ public class NewQuizzQuestion extends Activity {
 
             @Override
             public void onClick(View v) {
-                int i = current.size();
-                EditText txt = (EditText) findViewById(R.id.editText2);
-                current.add(txt.getText().toString());
-                listereponse = current.toArray(new String[current.size()]);
-                listAdapter2 = new
-                        CustomSondageAnswerAdd(NewQuizzQuestion.this, listereponse);
-                list.setAdapter(listAdapter2);
+                if(current.size() <=6) {
+                    EditText txt = (EditText) findViewById(R.id.editText2);
+                    current.add(txt.getText().toString());
+                    listereponse = current.toArray(new String[current.size()]);
+                    listAdapter2 = new
+                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                    list.setAdapter(listAdapter2);
+                }
+                else
+                {
+                    Toast.makeText(NewQuizzQuestion.this, "Vous avez atteint le maximum de réponse possible", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
