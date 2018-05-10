@@ -47,7 +47,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-
         final String childText = (String) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
@@ -60,6 +59,19 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListItem);
 
         txtListChild.setText(childText);
+        if(Quizz.choix.get(groupPosition) == null)
+        {
+            convertView.setBackgroundColor(_context.getResources().getColor(android.R.color.white));
+        }
+        else if(Quizz.choix.get(groupPosition).toString().compareTo(childText) == 0)
+        {
+            convertView.setBackgroundColor(_context.getResources().getColor(android.R.color.holo_green_dark));
+        }
+        else
+        {
+            convertView.setBackgroundColor(_context.getResources().getColor(android.R.color.white));
+        }
+
         return convertView;
     }
 
