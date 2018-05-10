@@ -35,7 +35,7 @@ public class PollAdapter extends ArrayAdapter<PollModel> {
         if(viewHolder == null){
             viewHolder = new PollViewHolder();
             viewHolder.pseudo = (TextView) convertView.findViewById(R.id.pseudo);
-            viewHolder.text = (TextView) convertView.findViewById(R.id.text);
+            viewHolder.text = (TextView) convertView.findViewById(R.id.prenomFriendUnique);
             viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
             convertView.setTag(viewHolder);
         }

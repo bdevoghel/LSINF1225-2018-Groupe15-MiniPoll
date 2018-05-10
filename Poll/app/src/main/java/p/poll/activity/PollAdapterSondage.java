@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
@@ -36,7 +35,7 @@ public class PollAdapterSondage extends ArrayAdapter<PollModel> {
         if(viewHolder == null){
             viewHolder = new PollViewHolder();
             viewHolder.pseudo = (TextView) convertView.findViewById(R.id.pseudo);
-            viewHolder.text = (TextView) convertView.findViewById(R.id.text);
+            viewHolder.text = (TextView) convertView.findViewById(R.id.prenomFriendUnique);
             viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
             convertView.setTag(viewHolder);
         }

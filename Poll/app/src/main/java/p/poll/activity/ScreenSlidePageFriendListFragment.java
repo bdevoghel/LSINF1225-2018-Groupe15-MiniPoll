@@ -24,7 +24,7 @@ import p.poll.model.User;
 
 
 public class ScreenSlidePageFriendListFragment extends Fragment implements View.OnClickListener{
-    public User Queryfriend=null;
+    public static User Queryfriend=null;
     private int pos;
     private User oneuser;
     private View view;
@@ -52,16 +52,18 @@ public class ScreenSlidePageFriendListFragment extends Fragment implements View.
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.friendlist, container, false);
         view = inflater.inflate(R.layout.friendlist, container, false);
-        TextView textView = (TextView) view.findViewById(R.id.text);
+        TextView textView = (TextView) view.findViewById(R.id.prenomFriendUnique);
         textView.setText("Nom : "+" "+oneuser.getLastName());
-        textView2 = (TextView) view.findViewById(R.id.text3);
+        textView2 = (TextView) view.findViewById(R.id.nomFriendUnique);
         textView2.setText("Prenom : "+" "+oneuser.getFirstName());
-        textView3 = view.findViewById(R.id.emailinfo);
+        textView3 = view.findViewById(R.id.emailinfoFriendUnique);
         textView3.setText("Email : "+" "+oneuser.getMailAdress());
         searchView = view.findViewById(R.id.search);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Log.i("display",query);
                 Queryfriend=User.toHashMap(User.getFriends()).get(query);
                 if(Queryfriend!=null)
                 {
@@ -73,7 +75,7 @@ public class ScreenSlidePageFriendListFragment extends Fragment implements View.
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                Log.i("display",newText);
                 return false;
             }
         });
