@@ -23,6 +23,7 @@ public class Quizz extends Activity{
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
+    List<String> listdescription;
     HashMap<String, List<String>> listDataChild;
 
     @Override
@@ -36,7 +37,7 @@ public class Quizz extends Activity{
         // preparing list data
         prepareListData();
 
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listdescription, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
@@ -102,12 +103,18 @@ public class Quizz extends Activity{
      */
     private void prepareListData() {
         listDataHeader = new ArrayList<String>();
+        listdescription = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
         listDataHeader.add("Question 1");
         listDataHeader.add("Question 2");
         listDataHeader.add("Question 3");
+
+        //List description des questions
+        listDataHeader.add("Quel jour sommes nous ?");
+        listDataHeader.add("Qui est John ?");
+        listDataHeader.add("Suis-je gentil ?");
 
         // Adding child data
         List<String> Question1 = new ArrayList<String>();

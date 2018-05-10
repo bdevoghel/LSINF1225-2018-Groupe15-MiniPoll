@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
-import p.poll.model.User;
+import p.poll.model.Survey;
 
 /**
  * Created by Nicolas on 04/05/2018.
@@ -50,6 +50,7 @@ public class SondageReponse extends Activity {
 
     private ListView mListView;
     Button bouton;
+    public static List<String> pourcent = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +113,16 @@ public class SondageReponse extends Activity {
                 }
                 else
                 {
-                    Intent intent = new Intent(getApplicationContext(),resultatsondage.class);
-                    startActivity(intent);
+                    //Quand j'appuie sur valider :
+                    for (int i = 1; i <= listedescription.size(); i++){
+                        Survey.Modify(i, listedescription.get(i-1));
+                    }
+                    //Quand tout le monde a fini de repondre
+                    if (Survey.SondageFini(Survey.etats(Sondage.idpoll))== 1){
+                        pourcent = Survey.moyenne(Survey.getListPointsSondage(Sondage.idpoll));
+                    }
+                    //Intent intent = new Intent(getApplicationContext(),resultatsondage.class);
+                    //startActivity(intent);
                 }
             }
         });
