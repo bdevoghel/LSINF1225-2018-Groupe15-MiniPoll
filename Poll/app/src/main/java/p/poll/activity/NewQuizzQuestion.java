@@ -32,7 +32,7 @@ public class NewQuizzQuestion extends Activity {
     public static List<String> reponsequestion3;
     public static List<String> reponsequestion4;
     public static List<String> goodanswer;
-    int positionquestion;
+    public static int positionquestion;
     public static int numberquestion;
 
     public List<String> current;
@@ -58,7 +58,7 @@ public class NewQuizzQuestion extends Activity {
         reponsequestion3 = new ArrayList<String>();
         reponsequestion4 = new ArrayList<String>();
         goodanswer = new ArrayList<String>();
-        for(int i =0; i<numberquestion -1; i++)
+        for(int i =0; i<numberquestion; i++)
         {
             goodanswer.add(null);
         }
@@ -73,6 +73,13 @@ public class NewQuizzQuestion extends Activity {
                                     int position, long id) {
                     TextView txt = (TextView) view.findViewById(R.id.txt);
                     current.remove(txt.getText().toString());
+                    if(goodanswer.get(positionquestion-1) == null)
+                    {
+
+                    }
+                    else if(goodanswer.get(positionquestion-1).compareTo(txt.getText().toString()) == 0) {
+                        goodanswer.set(positionquestion-1,null);
+                    }
                     listereponse = current.toArray(new String[current.size()]);
                     listAdapter2 = new
                             CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
@@ -86,24 +93,24 @@ public class NewQuizzQuestion extends Activity {
                                     int position, long id) {
 
                 TextView txt = (TextView) view.findViewById(R.id.txt);
-                if(goodanswer.get(positionquestion) == null)
+                if(goodanswer.get(positionquestion-1) == null)
                 {
                     view.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-                    goodanswer.set(positionquestion, txt.getText().toString());
+                    goodanswer.set(positionquestion-1, txt.getText().toString());
                     return true;
                 }
-                if(goodanswer.get(positionquestion).compareTo(txt.getText().toString()) == 0)
+                if(goodanswer.get(positionquestion-1).compareTo(txt.getText().toString()) == 0)
                 {
-                    goodanswer.set(positionquestion,null);
+                    goodanswer.set(positionquestion-1,null);
                     view.setBackgroundColor(getResources().getColor(android.R.color.white));
                 }
-                else if(goodanswer.get(positionquestion) != null)
+                else if(goodanswer.get(positionquestion-1) != null)
                 {
                     Toast.makeText(NewQuizzQuestion.this, "Vous avez déjà choisi une réponse. Désélectionné là pour la retirer", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     view.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-                    goodanswer.set(positionquestion, txt.getText().toString());
+                    goodanswer.set(positionquestion-1, txt.getText().toString());
                 }
                 return true;
             }
@@ -137,9 +144,8 @@ public class NewQuizzQuestion extends Activity {
 
             @Override
             public void onClick(View v) {
-                if(bouton2.getText().toString().compareTo("Valider le Quizz") == 0)
-                {
-                    Intent intent = new Intent(getApplicationContext(),Quizzprevue.class);
+                if (bouton2.getText().toString().compareTo("Valider le Quizz") == 0) {
+                    Intent intent = new Intent(getApplicationContext(), Quizzprevue.class);
                     startActivity(intent);
                     ///////////////////////////////////////////////////////////////////////////////
                     //Base de données
@@ -151,80 +157,107 @@ public class NewQuizzQuestion extends Activity {
                     //reponsequestion4 -> si 3 question, alors pas forcement rempli
                     //Question est le titre des question (attention pas forcement 4 question
                     //goodanswer  = liste des bonne réponse pour caque question (dans le même ordre)
-                    return ;
-                }
-                if(positionquestion == 1)
-                {
-                    reponsequestion1 = current;
-                    current = new ArrayList<String>();
-                    listAdapter2 = new
-                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
-                    list.setAdapter(listAdapter2);
-                    positionquestion++;
-                    if(numberquestion == 1)
-                    {
-                        Intent intent = new Intent(getApplicationContext(),Quizzprevue.class);
-                        startActivity(intent);
-                        return;
-                    }
-                    if(numberquestion == 2)
-                    {
-                        bouton2.setText("Valider le Quizz");
-                    }
-                    titre.setText("Question "+ positionquestion +": "+question[1]);
-
-                }
-                else if(positionquestion == 2)
-                {
-                    reponsequestion2 = current;
-                    current = new ArrayList<String>();
-                    listAdapter2 = new
-                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
-                    list.setAdapter(listAdapter2);
-                    positionquestion++;
-                    if(numberquestion == 2)
-                    {
-                        Intent intent = new Intent(getApplicationContext(),NewQuizzQuestion.class);
-                        startActivity(intent);
-                        return;
-                    }
-                    if(numberquestion == 3)
-                    {
-                        bouton2.setText("Valider le Quizz");
-                    }
-                    titre.setText("Question "+ positionquestion +": "+question[2]);
-                }
-                else if(positionquestion == 3)
-                {
-                    reponsequestion3 = current;
-                    current = new ArrayList<String>();
-                    listAdapter2 = new
-                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
-                    list.setAdapter(listAdapter2);
-                    positionquestion++;
-                    if(numberquestion == 3)
-                    {
-                        Intent intent = new Intent(getApplicationContext(),Quizzprevue.class);
-                        startActivity(intent);
-                        return;
-                    }
-                    if(numberquestion == 4)
-                    {
-                        bouton2.setText("Valider le Quizz");
-                    }
-                    titre.setText("Question "+ positionquestion +": "+question[3]);
-                }
-                else if(positionquestion == 4)
-                {
-                    reponsequestion4 = current;
-                    current = new ArrayList<String>();
-                    Intent intent = new Intent(getApplicationContext(),Quizzprevue.class);
-                    startActivity(intent);
                     return;
                 }
+                if (positionquestion == 1) {
+                    if (goodanswer.get(positionquestion - 1) != null) {
+                        if (current.size() >= 2) {
+                            reponsequestion1 = current;
+                            current = new ArrayList<String>();
+                            listereponse = current.toArray(new String[current.size()]);
+                            listAdapter2 = new
+                                    CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                            list.setAdapter(listAdapter2);
+                            positionquestion++;
+                            if (numberquestion == 1) {
+                                Intent intent = new Intent(getApplicationContext(), Quizzprevue.class);
+                                startActivity(intent);
+                                return;
+                            }
+                            if (numberquestion == 2) {
+                                bouton2.setText("Valider le Quizz1");
+                            }
+                            titre.setText("Question " + positionquestion + ": " + question[1]);
+                        } else {
+                            Toast.makeText(NewQuizzQuestion.this, "Il n'y a pas assez de proposition", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(NewQuizzQuestion.this, "Vous n'avez pas choisi de bonne réponse. Cliquez longtemps sur une réponse", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else if (positionquestion == 2) {
+                    if (goodanswer.get(positionquestion - 1) != null) {
+                        if (current.size() >= 2) {
+                            reponsequestion2 = current;
+                            current = new ArrayList<String>();
+                            listereponse = current.toArray(new String[current.size()]);
+                            listAdapter2 = new
+                                    CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                            list.setAdapter(listAdapter2);
+                            positionquestion++;
+                            if (numberquestion == 2) {
+                                Intent intent = new Intent(getApplicationContext(), NewQuizzQuestion.class);
+                                startActivity(intent);
+                                return;
+                            }
+                            if (numberquestion == 3) {
+                                bouton2.setText("Valider le Quizz2");
+                            }
+                            titre.setText("Question " + positionquestion + ": " + question[2]);
+                        } else {
+                            Toast.makeText(NewQuizzQuestion.this, "Il n'y a pas assez de proposition", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(NewQuizzQuestion.this, "Vous n'avez pas choisi de bonne réponse. Cliquez longtemps sur une réponse", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (positionquestion == 3) {
+                    if (goodanswer.get(positionquestion - 1) != null) {
+                        if (current.size() >= 2) {
+                            reponsequestion3 = current;
+                            current = new ArrayList<String>();
+                            listereponse = current.toArray(new String[current.size()]);
+                            listAdapter2 = new
+                                    CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                            list.setAdapter(listAdapter2);
+                            positionquestion++;
+                            if (numberquestion == 3) {
+                                Intent intent = new Intent(getApplicationContext(), Quizzprevue.class);
+                                startActivity(intent);
+                                return;
+                            }
+                            if (numberquestion == 4) {
+                                bouton2.setText("Valider le Quizz3");
+                            }
+                            titre.setText("Question " + positionquestion + ": " + question[3]);
+                        } else {
+                            Toast.makeText(NewQuizzQuestion.this, "Il n'y a pas assez de proposition", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(NewQuizzQuestion.this, "Vous n'avez pas choisi de bonne réponse. Cliquez longtemps sur une réponse", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (positionquestion == 4) {
+                    if (goodanswer.get(positionquestion - 1) != null) {
+                        if (current.size() >= 2) {
+                            reponsequestion4 = current;
+                            current = new ArrayList<String>();
+                            Intent intent = new Intent(getApplicationContext(), Quizzprevue.class);
+                            startActivity(intent);
+                            return;
+                        } else {
+                            Toast.makeText(NewQuizzQuestion.this, "Il n'y a pas assez de proposition", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(NewQuizzQuestion.this, "Vous n'avez pas choisi de bonne réponse. Cliquez longtemps sur une réponse", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), NewQuizz.class);
+        startActivity(intent);
     }
 }

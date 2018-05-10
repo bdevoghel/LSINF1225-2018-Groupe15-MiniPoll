@@ -34,10 +34,7 @@ public class Quizzprevue extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activty_quizz_response);
         choix = new ArrayList<String>();
-        for(int i =0; i<4; i++)
-        {
-            choix.add(null);
-        }
+        choix = NewQuizzQuestion.goodanswer;
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
 

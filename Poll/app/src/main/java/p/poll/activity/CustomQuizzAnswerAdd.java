@@ -31,8 +31,19 @@ public class CustomQuizzAnswerAdd extends ArrayAdapter<String>{
 
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.row_quizz_answer, null, true);
-
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
+        if(NewQuizzQuestion.goodanswer.get(NewQuizzQuestion.positionquestion-1) == null)
+        {
+
+        }
+        else if(NewQuizzQuestion.goodanswer.get(NewQuizzQuestion.positionquestion-1).compareTo(web[position]) == 0)
+        {
+            rowView.setBackgroundColor(context.getResources().getColor(android.R.color.holo_green_dark));
+        }
+        else
+        {
+            rowView.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+        }
         txtTitle.setText(web[position]);
         return rowView;
     }
