@@ -18,13 +18,15 @@ import p.poll.R;
  */
 
 public class Helpprevue extends AppCompatActivity {
+    public static String description;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
         TextView desc = (TextView) findViewById(R.id.textView9);
         Intent intent= getIntent();
         Bundle b = intent.getExtras();
-        desc.setText((String) b.get("desc"));
+        description=(String) b.get("desc");
+        desc.setText(description);
         ImageView proposition1 = (ImageView) findViewById(R.id.imageView3);
         proposition1.setImageDrawable(NewHelp.proposition1);
         ImageView proposition2 = (ImageView) findViewById(R.id.imageView4);
