@@ -1,6 +1,7 @@
 package p.poll.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,6 +83,8 @@ public class listamihelp extends Activity {
                     Advice.createAdvice(User.getUser(userselect),NewHelp.imagePath1,NewHelp.imagePath2,NewHelp.description);
                     Toast.makeText(p.poll.activity.listamihelp.this, "L'ami(e) sélectionné est : "+ userselect,
                             Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+                    startActivity(intent);
                 }
             }
             });
@@ -93,11 +96,7 @@ public class listamihelp extends Activity {
         List<PollModel> tweets = new ArrayList<PollModel>();
         for(int i =0; i<users.size();i++)
         {
-<<<<<<< HEAD
             tweets.add(new PollModel(Color.BLACK, users.get(i).getUsername(),users.get(i).getMailAdress()));
-=======
-            tweets.add(new PollModel(Color.BLACK,users.get(i).getUsername(),users.get(i).getMailAdress()));
->>>>>>> e961b9c786f17946382542e651b29ff63434a616
         }
         /*
         tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
