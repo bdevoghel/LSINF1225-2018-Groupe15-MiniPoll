@@ -39,14 +39,18 @@ public class NewQuizzQuestion extends Activity {
 
     String[] listereponse;
     String[] web = NewQuizz.web;
-    String[] question = NewQuizz.ListePropositions.toArray(new String[NewQuizz.ListePropositions.size()]);
+    String[] question;
     Button bouton;
     Button bouton2;
+    TextView titre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_quizz);
+        titre = (TextView) findViewById(R.id.textView22);
+        question = NewQuizz.ListePropositions.toArray(new String[NewQuizz.ListePropositions.size()]);
+        titre.setText("Question 1: "+question[0]);
         numberquestion = question.length;
         positionquestion = 1;
         current = new ArrayList<String>();
@@ -136,20 +140,50 @@ public class NewQuizzQuestion extends Activity {
                 if(positionquestion == 1)
                 {
                     reponsequestion1 = current;
+                    current = new ArrayList<String>();
+                    listereponse = current.toArray(new String[current.size()]);
+                    listAdapter2 = new
+                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                    list.setAdapter(listAdapter2);
+                    positionquestion++;
+                    titre.setText("Question 1: "+question[1]);
+
                 }
                 else if(positionquestion == 2)
                 {
                     reponsequestion2 = current;
+                    current = new ArrayList<String>();
+                    listereponse = current.toArray(new String[current.size()]);
+                    listAdapter2 = new
+                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                    list.setAdapter(listAdapter2);
+                    positionquestion++;
+                    titre.setText("Question 1: "+question[2]);
                 }
                 else if(positionquestion == 3)
                 {
                     reponsequestion3 = current;
+                    current = new ArrayList<String>();
+                    listereponse = current.toArray(new String[current.size()]);
+                    listAdapter2 = new
+                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                    list.setAdapter(listAdapter2);
+                    positionquestion++;
+                    titre.setText("Question 1: "+question[3]);
                 }
                 else if(positionquestion == 4)
                 {
                     reponsequestion4 = current;
+                    current = new ArrayList<String>();
+                    listereponse = current.toArray(new String[current.size()]);
+                    listAdapter2 = new
+                            CustomQuizzAnswerAdd(NewQuizzQuestion.this, listereponse);
+                    list.setAdapter(listAdapter2);
+                    positionquestion++;
                 }
             }
         });
+
+
     }
 }
