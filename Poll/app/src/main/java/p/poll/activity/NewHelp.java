@@ -111,15 +111,21 @@ public class NewHelp extends AppCompatActivity implements Serializable{
 
     public void Prevue(View v)
     {
-        EditText tp = (EditText) findViewById (R.id.editText);
-        description = tp.getText().toString();
-        proposition1 = img1.getDrawable();
-        proposition2 = img2.getDrawable();
-        Intent intent = new Intent(this, Helpprevue.class);
-        intent.putExtra("desc", description);
-        //intent.putExtra("img1", proposition1);
-        //intent.putExtra("img2", (Serializable)proposition2);
-        startActivity(intent);
+        if(imagePath1 != null || imagePath2 != null) {
+            EditText tp = (EditText) findViewById(R.id.editText);
+            description = tp.getText().toString();
+            proposition1 = img1.getDrawable();
+            proposition2 = img2.getDrawable();
+            Intent intent = new Intent(this, Helpprevue.class);
+            intent.putExtra("desc", description);
+            //intent.putExtra("img1", proposition1);
+            //intent.putExtra("img2", (Serializable)proposition2);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this,  "Vous n'avez pas mis les deux images", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void resetimage2(View v)
