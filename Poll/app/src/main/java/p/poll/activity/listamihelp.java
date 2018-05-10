@@ -87,7 +87,13 @@ public class listamihelp extends Activity {
 
 
     private List<PollModel> genererAmi(){
+        List<User> users = User.getFriends();
         List<PollModel> tweets = new ArrayList<PollModel>();
+        for(int i =0; i<users.size();i++)
+        {
+            tweets.add(new PollModel((Color.BLACK,users.get(i).getUsername(),users.get(i).getMailAdress()));
+        }
+        /*
         tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
         tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
         tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));
@@ -113,6 +119,7 @@ public class listamihelp extends Activity {
         tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));
         tweets.add(new PollModel(Color.RED, "Mathieu", "Il est quelle heure ??"));
         tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
+        */
         return tweets;
     }
 }
