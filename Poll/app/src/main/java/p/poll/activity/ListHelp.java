@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
+import p.poll.model.Advice;
+import p.poll.model.User;
 
 
 /**
@@ -56,7 +58,12 @@ public class ListHelp extends AppCompatActivity {
     }
 
     private List<PollModel> genererPoll(){
-        List<PollModel> tweets = new ArrayList<>();/*
+        List<Advice> users = Advice.getAdvice();
+        List<PollModel> tweets = new ArrayList<PollModel>();
+        for(int i =0; i<users.size();i++)
+        {
+            tweets.add(new PollModel(null, users.get(i).getOwner().getUsername(),users.get(i).getDescription()));
+        }/*
         tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
         tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
         tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));
