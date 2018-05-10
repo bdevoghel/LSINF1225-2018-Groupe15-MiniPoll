@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import p.poll.R;
  */
 
 public class Quizzprevue extends Activity{
+    public static ContentResolver content;
     ExpandableListAdapterprevue listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -32,6 +34,7 @@ public class Quizzprevue extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        content=getContentResolver();
         setContentView(R.layout.activty_quizz_response);
         choix = new ArrayList<String>();
         choix = NewQuizzQuestion.goodanswer;

@@ -1,5 +1,6 @@
 package p.poll.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,8 +20,10 @@ import p.poll.R;
 
 public class Helpprevue extends AppCompatActivity {
     public static String description;
+    public static ContentResolver content;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        content=getContentResolver();
         setContentView(R.layout.activity_help);
         TextView desc = (TextView) findViewById(R.id.textView9);
         Intent intent= getIntent();
