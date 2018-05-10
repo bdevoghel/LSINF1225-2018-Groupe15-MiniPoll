@@ -24,7 +24,7 @@ import static p.poll.activity.ScreenSlidePagerActivity.NUM_PAGES;
 
 
 public class ScreenSlidePageFragment extends Fragment implements View.OnClickListener{
-    public User Queryuser=null;
+    public static User Queryuser=null;
     private int pos;
     private User oneuser;
     private View view;
@@ -52,7 +52,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         view = inflater.inflate(R.layout.userlist, container, false);
         TextView textView = (TextView) view.findViewById(R.id.prenomFriendUnique);
         textView.setText("Nom : "+" "+oneuser.getLastName());
-        textView2 = (TextView) view.findViewById(R.id.nomFriendUnique);
+        textView2 = (TextView) view.findViewById(R.id.nomUserUnique);
         textView2.setText("Prenom : "+" "+oneuser.getFirstName());
         searchView = view.findViewById(R.id.search2);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -64,12 +64,21 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                     Intent intent = new Intent(getContext(),Ajoutamiunique.class);
                     startActivity(intent);
                 }
+                else
+                {
+                    Toast.makeText(getContext(),"Couldn't find anyone with that username!",Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                Queryuser=User.toHashMap(User.getNotFriends()).get(newText);
+                if(Queryuser!=null)
+                {
+                    Intent intent = new Intent(getContext(),Ajoutamiunique.class);
+                    startActivity(intent);
+                }
                 return false;
             }
         });

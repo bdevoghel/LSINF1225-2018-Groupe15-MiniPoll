@@ -10,18 +10,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <SearchView
+        <TextView
+            android:id="@+id/textView28"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="36dp" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/ajoutamiuniquephoto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/michel" />
+            android:layout_height="182dp"
+            app:srcCompat="@drawable/default_pic" />
 
         <TextView
-            android:id="@+id/nomFriendUnique"
+            android:id="@+id/textView27"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+
+        <TextView
+            android:id="@+id/nomUserUnique"
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +37,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/prenomFriendUnique"
+            android:id="@+id/prenomUserUnique"
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +47,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/emailinfoFriendUnique"
+            android:id="@+id/emailinfoUserUnique"
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,28 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Ajouter" />
-            <view
-                class="android.support.v7.widget.Toolbar"
-                id="@+id/view"
-                layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
 
-            <Switch
-                android:id="@+id/switch1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text=" Favori  "
-                android:textAlignment="textEnd"
-                android:theme="@style/SCBSwitch" />
-
-            <view
-                class="android.support.v7.widget.Toolbar"
-                id="@+id/view"
-                layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <TextView
@@ -100,8 +85,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <Button
-                android:id="@+id/buttonexit"
+                android:id="@+id/buttonexit2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

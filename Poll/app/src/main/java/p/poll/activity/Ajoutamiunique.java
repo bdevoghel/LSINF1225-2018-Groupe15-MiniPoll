@@ -1,38 +1,75 @@
 package p.poll.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import p.poll.R;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 10/05/2018.
  */
 
 public class Ajoutamiunique extends Activity{
-    String strnom;
-    String strprenom;
-    String stremail;
+    public User Queryfriend=ScreenSlidePageFragment.Queryuser;
+    private View view;
+    private Button myButton;
+    private Button myButton2;
+    private TextView textView;
+    private TextView textView2;
+    private TextView textView3;
+    private ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ajout_amis_unique);
-
-        TextView nom = (TextView) findViewById(R.id.nomFriendUnique);
-        nom.setText(strnom);
-        TextView prenom = (TextView) findViewById(R.id.prenomFriendUnique);
-        prenom.setText(strprenom);
-        TextView email = (TextView) findViewById(R.id.emailinfoFriendUnique);
-        email.setText(stremail);
-
-        Button menu = (Button) findViewById(R.id.buttonexit);
-        menu.setOnClickListener(new View.OnClickListener() {
+        textView=findViewById(R.id.nomUserUnique);
+        textView2=findViewById(R.id.prenomUserUnique);
+        textView3=findViewById(R.id.emailinfoUserUnique);
+        myButton2=findViewById(R.id.buttonAddFriend);
+        myButton=findViewById(R.id.buttonexit2);
+        imageView=findViewById(R.id.ajoutamiuniquephoto);
+        textView.setText("Nom : "+" "+Queryfriend.getLastName());
+        textView2.setText("Prenom : "+" "+Queryfriend.getFirstName());
+        textView3.setText("Email : "+" "+Queryfriend.getMailAdress());
+        if(Queryfriend.getProfilePic()!=null)
+        {
+            imageView.setImageBitmap(User.toBitmap(Queryfriend.getProfilePic(),getContentResolver()));
+        }
+        else
+        {
+            imageView.setImageResource(R.drawable.default_pic);
+        }
+        myButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(User.addFriend(Queryfriend)) {
+                    Log.i("test","friend added true");
+                    Intent intent = new Intent(getApplicationContext(), ScreenSlidePagerActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "You added " + Queryfriend.getFirstName() + "!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent intent = new Intent(getApplicationContext(), ScreenSlidePagerActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(),"You are already friend with"+Queryfriend.getFirstName(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+                startActivity(intent);
             }
         });
     }
