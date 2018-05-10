@@ -9,7 +9,7 @@
         android:id="@+id/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nouveau sondage"
+        android:text="Nouveau Quizz"
         android:textAllCaps="false"
         android:textSize="30sp"
         android:textStyle="bold" />

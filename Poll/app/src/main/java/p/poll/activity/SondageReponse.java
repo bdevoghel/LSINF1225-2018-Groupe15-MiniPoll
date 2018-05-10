@@ -1,6 +1,7 @@
 package p.poll.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -106,12 +107,13 @@ public class SondageReponse extends Activity {
             public void onClick(View v) {
                 if(listenumero.size()!= web.length)
                 {
-                    Toast.makeText(p.poll.activity.SondageReponse.this,"Aucun ami sélectionné",
+                    Toast.makeText(p.poll.activity.SondageReponse.this," Vous n'avez pas sélectionné toutes les propositions",
                             Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    // Go to Sondage Prevue
+                    Intent intent = new Intent(getApplicationContext(),resultatsondage.class);
+                    startActivity(intent);
                 }
             }
         });

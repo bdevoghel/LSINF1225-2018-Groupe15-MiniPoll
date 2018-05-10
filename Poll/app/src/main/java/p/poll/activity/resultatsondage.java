@@ -50,19 +50,21 @@ public class resultatsondage extends Activity {
             40
     };
 
+    public int max;
+
     Button bouton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sondage_reponse);
-
-        TextView titresondage = (TextView) findViewById(R.id.textView22);
+        setContentView(R.layout.activityresultsondage);
+        max  = 80;
+        TextView titresondage = (TextView) findViewById(R.id.TitreSondage);
         titresondage.setText(nomdusondage);
 
-        CustomSondageResult listAdapter = new CustomSondageResult(resultatsondage.this, web, phrase, pourcent);
+        CustomSondageResult listAdapter = new CustomSondageResult(resultatsondage.this, web, phrase, pourcent, max);
         bouton = (Button) findViewById(R.id.button);
-        list = (ListView) findViewById(R.id.listView2);
+        list = (ListView) findViewById(R.id.listView1);
         list.setAdapter(listAdapter);
 
 
