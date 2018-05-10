@@ -49,6 +49,8 @@ public class ListQuizz extends AppCompatActivity {
                 PollModel j = (PollModel)o;
                 Toast.makeText(ListQuizz.this, j.getText(),
                         Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),Quizz.class);
+                startActivity(intent);
             }
         });
     }
