@@ -183,7 +183,7 @@ public class Poll {
         }
         cursor.close();
         db.close();
-        return id;
+        return id+1;
     }
 
     public static void setDone(int id)
@@ -199,7 +199,7 @@ public class Poll {
     {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         ContentValues values = new ContentValues();
-        values.put("status_particulier",String.valueOf(1));
+        values.put("statut_particulier",String.valueOf(1));
         db.update("Poll_access",values,"idpoll=? AND username=?",new String[]{String.valueOf(id),user.getUsername()});
         db.close();
     }
