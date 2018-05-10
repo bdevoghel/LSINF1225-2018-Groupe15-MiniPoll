@@ -42,12 +42,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /** Lance l'activité ajouter un ami. */
-    public void addFriend(View v) {
-        Intent intent = new Intent(this,AddFriendActivity.class);
-        startActivity(intent);
-    }
-
     /** Lance le menu. */
     public void goToMenu(View v) {
         Intent intent = new Intent(getApplicationContext(), ChargingPage.class);

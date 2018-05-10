@@ -6,16 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import p.poll.R;
 import p.poll.model.User;
-
-import static p.poll.activity.ScreenSlidePagerActivity.NUM_PAGES;
 
 /**
  * Created by Nicolas on 10/05/2018.
@@ -35,12 +31,12 @@ public class Ajoutamiunique extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ajout_amis_unique);
-        textView=findViewById(R.id.nomFriendUnique);
-        textView2=findViewById(R.id.prenomFriendUnique);
-        textView3=findViewById(R.id.emailinfoFriendUnique);
+        textView=findViewById(R.id.nomUserUnique);
+        textView2=findViewById(R.id.prenomUserUnique);
+        textView3=findViewById(R.id.emailinfoUserUnique);
         myButton2=findViewById(R.id.buttonAddFriend);
         myButton=findViewById(R.id.buttonexit2);
-        imageView=findViewById(R.id.imageViewFriendUnique);
+        imageView=findViewById(R.id.ajoutamiuniquephoto);
         textView.setText("Nom : "+" "+Queryfriend.getLastName());
         textView2.setText("Prenom : "+" "+Queryfriend.getFirstName());
         textView3.setText("Email : "+" "+Queryfriend.getMailAdress());
@@ -72,7 +68,7 @@ public class Ajoutamiunique extends Activity{
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ScreenSlidePagerFriendListActivity.class);
+                Intent intent = new Intent(getApplicationContext(),Menupoll.class);
                 startActivity(intent);
             }
         });

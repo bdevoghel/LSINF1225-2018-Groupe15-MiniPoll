@@ -16,7 +16,7 @@
             android:layout_height="36dp" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/ajoutamiuniquephoto"
             android:layout_width="match_parent"
             android:layout_height="182dp"
             app:srcCompat="@drawable/default_pic" />
@@ -27,7 +27,7 @@
             android:layout_height="36dp" />
 
         <TextView
-            android:id="@+id/nomFriendUnique"
+            android:id="@+id/nomUserUnique"
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/prenomFriendUnique"
+            android:id="@+id/prenomUserUnique"
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/emailinfoFriendUnique"
+            android:id="@+id/emailinfoUserUnique"
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,8 +85,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <Button
-                android:id="@+id/buttonexit"
+                android:id="@+id/buttonexit2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

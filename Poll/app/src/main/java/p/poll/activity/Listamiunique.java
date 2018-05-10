@@ -1,13 +1,11 @@
 package p.poll.activity;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -52,6 +50,10 @@ public class Listamiunique extends Activity{
         {
             imageView.setImageResource(R.drawable.default_pic);
         }
+        if(Queryfriend.getUsername().equals(User.loggedUser.getBestFriend()))
+        {
+            mySwitch.setChecked(true);
+        }
         mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
@@ -69,7 +71,7 @@ public class Listamiunique extends Activity{
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ScreenSlidePagerFriendListActivity.class);
+                Intent intent = new Intent(getApplicationContext(),Menupoll.class);
                 startActivity(intent);
             }
         });

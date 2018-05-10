@@ -54,7 +54,7 @@ public class ScreenSlidePageFriendListFragment extends Fragment implements View.
         view = inflater.inflate(R.layout.friendlist, container, false);
         TextView textView = (TextView) view.findViewById(R.id.prenomFriendUnique);
         textView.setText("Nom : "+" "+oneuser.getLastName());
-        textView2 = (TextView) view.findViewById(R.id.nomFriendUnique);
+        textView2 = (TextView) view.findViewById(R.id.nomUserUnique);
         textView2.setText("Prenom : "+" "+oneuser.getFirstName());
         textView3 = view.findViewById(R.id.emailinfoFriendUnique);
         textView3.setText("Email : "+" "+oneuser.getMailAdress());
@@ -70,12 +70,22 @@ public class ScreenSlidePageFriendListFragment extends Fragment implements View.
                     Intent intent = new Intent(getContext(),Listamiunique.class);
                     startActivity(intent);
                 }
+                else
+                {
+                    Toast.makeText(getContext(),"Couldn't find anyone in your friends with that username!",Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 Log.i("display",newText);
+                Queryfriend=User.toHashMap(User.getFriends()).get(newText);
+                if(Queryfriend!=null)
+                {
+                    Intent intent = new Intent(getContext(),Listamiunique.class);
+                    startActivity(intent);
+                }
                 return false;
             }
         });
