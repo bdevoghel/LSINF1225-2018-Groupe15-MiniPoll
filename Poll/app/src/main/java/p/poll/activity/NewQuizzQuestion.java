@@ -24,15 +24,16 @@ import p.poll.model.User;
 
 public class NewQuizzQuestion extends Activity {
     ListView list;
-    String[] listadd;
     CustomQuizzAnswerAdd listAdapter2;
-    public static String[] listenumeroliste;
-    public static String[] listedescriptionliste;
 
-    public static List<String> reponsequestion1;
-    public static List<String> reponsequestion2;
-    public static List<String> reponsequestion3;
-    public static List<String> reponsequestion4;
+
+    public List<String> reponsequestion1;
+    public List<String> reponsequestion2;
+    public List<String> reponsequestion3;
+    public List<String> reponsequestion4;
+    public List<String> goodanswer;
+    int positionquestion;
+    int numberquestion;
 
     public static List<String> current;
 
@@ -46,11 +47,18 @@ public class NewQuizzQuestion extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_quizz);
+        numberquestion = question.length;
+        positionquestion = 1;
         current = new ArrayList<String>();
         reponsequestion1 = new ArrayList<String>();
         reponsequestion2 = new ArrayList<String>();
         reponsequestion3 = new ArrayList<String>();
         reponsequestion4 = new ArrayList<String>();
+        goodanswer = new ArrayList<String>();
+        for(int i =0; i<numberquestion -1; i++)
+        {
+            goodanswer.add(null);
+        }
 
         bouton = (Button) findViewById(R.id.button);
         bouton2 = (Button) findViewById(R.id.button2);
@@ -68,11 +76,21 @@ public class NewQuizzQuestion extends Activity {
             }
         });
 
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                view.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                TextView txt = (TextView) view.findViewById(R.id.txt);
+                goodanswer.set(positionquestion,txt.getText().toString());
+                return true;
+            }
+        });
         bouton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(current.size() <=6) {
+                if(current.size() <=5) {
                     EditText txt = (EditText) findViewById(R.id.editText2);
                     current.add(txt.getText().toString());
                     listereponse = current.toArray(new String[current.size()]);
@@ -91,7 +109,22 @@ public class NewQuizzQuestion extends Activity {
 
             @Override
             public void onClick(View v) {
-
+                if(positionquestion == 1)
+                {
+                    reponsequestion1 = current;
+                }
+                else if(positionquestion == 2)
+                {
+                    reponsequestion2 = current;
+                }
+                else if(positionquestion == 3)
+                {
+                    reponsequestion3 = current;
+                }
+                else if(positionquestion == 4)
+                {
+                    reponsequestion4 = current;
+                }
             }
         });
     }
