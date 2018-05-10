@@ -68,7 +68,7 @@
             android:name=".activity.Menupoll"
             android:label="@string/title_activity_menu" />
         <activity
-            android:name=".activity.Notification2"
+            android:name=".activity.NotificationActivity"
             android:label="@string/title_activity_menu" />
         <activity
             android:name=".activity.ScreenSlidePagerActivity"
@@ -88,7 +88,7 @@
             android:name=".activity.AddFriendActivity"
             android:label="@string/addFriend_activity_title" />
         <activity
-            android:name=".activity.NotificationActivity"
+            android:name=".activity.NotificationShow"
             android:label="@string/notification" />
         <activity
             android:name=".activity.MainActivity"

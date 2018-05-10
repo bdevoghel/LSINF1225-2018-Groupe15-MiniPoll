@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import static p.poll.activity.ScreenSlidePagerActivity.NUM_PAGES;
 
 
 public class ScreenSlidePageFragment extends Fragment implements View.OnClickListener{
+    public User Queryuser=null;
     private int pos;
     private User oneuser;
     private View view;
@@ -33,6 +35,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     private Button addButton;
     private ImageButton imageButton;
     private TextView textView2;
+    private SearchView searchView;
     public ScreenSlidePageFragment(int pos, ArrayList<User> userList, ContentResolver content)
     {
         super();
@@ -53,6 +56,25 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         textView.setText("Nom : "+" "+oneuser.getLastName());
         textView2 = (TextView) view.findViewById(R.id.text3);
         textView2.setText("Prenom : "+" "+oneuser.getFirstName());
+        searchView = view.findViewById(R.id.search2);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Queryuser=User.toHashMap(User.getFriends()).get(query);
+                if(Queryuser!=null)
+                {
+                    Intent intent = new Intent(getContext(),Ajoutamiunique.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
         ImageView image = (ImageView) view.findViewById(R.id.imageView6);
         if(oneuser.getProfilePic()!=null) {
             Log.i("display",oneuser.getProfilePic());
@@ -80,7 +102,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                     {
                         Intent intent = new Intent(getContext(),Menupoll.class);
                         startActivity(intent);
-                        Toast.makeText(getContext(), "There is no one left to add!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "There is no one left to add!", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else
@@ -89,7 +111,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                     NUM_PAGES--;
                     Intent intent = new Intent(getContext(), ScreenSlidePagerActivity.class);
                     startActivity(intent);
-                    Toast.makeText(getContext(),"You are already friend with"+oneuser.getFirstName(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"You are already friend with"+oneuser.getFirstName(),Toast.LENGTH_SHORT).show();
                 }
             }
         });

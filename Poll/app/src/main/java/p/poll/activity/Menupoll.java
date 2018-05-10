@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import p.poll.R;
+import p.poll.model.Notification;
 import p.poll.model.User;
 
 /**
@@ -162,8 +163,14 @@ public class Menupoll extends AppCompatActivity implements
     }
     public void Notification(View v)
     {
-        Intent intent = new Intent(getApplicationContext(),Notification2.class);
-        startActivity(intent);
+        if(Notification.getNotifications().size()!=0) {
+            Intent intent = new Intent(getApplicationContext(), NotificationActivity.class);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"You have no notifications", Toast.LENGTH_SHORT).show();
+        }
     }
     public void Quizz()
     {

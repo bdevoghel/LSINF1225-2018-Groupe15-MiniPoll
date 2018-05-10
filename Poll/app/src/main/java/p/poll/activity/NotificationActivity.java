@@ -2,73 +2,73 @@ package p.poll.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
+import android.app.Activity;
 
 import java.util.ArrayList;
 
 import p.poll.R;
 import p.poll.model.Notification;
-import p.poll.model.User;
-
-import static p.poll.activity.Notification2.currentNotification;
 
 /**
- * Created by Vahid Beyraghi on 25-04-18.
+ * Created by Nicolas on 03/05/2018.
  */
-public class NotificationActivity extends AppCompatActivity {
-    private TextView description;
-    private Button accept;
-    private Button refuse;
-    private TextView from;
-    private ImageView photo;
-    private View view;
-    public Notification notification= currentNotification;
-    private User userNotif=User.getUser(notification.getUsername());
 
-    @Override
-    public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), Notification2.class);
-        startActivity(intent);
-        finish();
-    }
+public class NotificationActivity extends Activity {
+    public ArrayList<Notification> notifications;
+    public static Notification currentNotification=null;
+        ListView list;
+        String[] web ;
+        Integer[] imageId;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification_simple);
-        description=findViewById(R.id.description);
-        accept=findViewById(R.id.accept);
-        refuse=findViewById(R.id.refuse);
-        from=findViewById(R.id.from);
-        photo=findViewById(R.id.photo);
-
-        description.setText(notification.getText());
-        from.setText(userNotif.getFirstName()+" "+userNotif.getLastName());
-        if(userNotif.getProfilePic()!=null) {
-            photo.setImageBitmap(User.toBitmap(userNotif.getProfilePic(), getContentResolver()));
+        @Override
+        public void onBackPressed(){
+            Intent intent = new Intent(getApplicationContext(), Menupoll.class);
+            startActivity(intent);
+            finish();
         }
-        accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User.acceptFriend(userNotif);
-                Notification.setDone(notification);
-                Intent intent = new Intent(getApplicationContext(), Notification2.class);
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_notification);
+            Log.i("test","getNotifications");
+            notifications=Notification.getNotifications();
+            if(notifications.size()==0){
+                Intent intent = new Intent(getApplicationContext(),Menupoll.class);
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(),"You have no notifications", Toast.LENGTH_LONG).show();
                 finish();
             }
-        });
-        refuse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Notification.setDone(notification);
-                Intent intent = new Intent(getApplicationContext(), Notification2.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+            web= Notification.getText(notifications);
+            imageId = Notification.getImage(notifications);
+            final CustomList listAdapter = new
+                    CustomList(NotificationActivity.this, web, imageId);
+            list=(ListView)findViewById(R.id.list);
+            list.setAdapter(listAdapter);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    currentNotification=notifications.get(position);
+                    if(currentNotification.getPoll()==0) {
+                        Intent intent = new Intent(getApplicationContext(), NotificationShow.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else
+                    {
+                        //TODO: Gérer les notifications de poll
+                    }
+                    //TextView textview = (TextView) view.findViewById(R.id.txt);
+                    //CharSequence t = textview.getText();
+                    //Toast.makeText(NotificationActivity.this, "You Clicked at " +web[+ position]+" value = ", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(NotificationActivity.this, "You Clicked at " +web[+ position]+" value = "+ t.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
-}
