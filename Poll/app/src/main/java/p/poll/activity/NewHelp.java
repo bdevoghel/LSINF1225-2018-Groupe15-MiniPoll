@@ -47,9 +47,6 @@ public class NewHelp extends AppCompatActivity implements Serializable{
     public static final int CAMERA_PERMISSION_REQUEST_CODE = 4192;
     private ImageView img1;
     private ImageView img2;
-    Spinner spinner;
-    Spinner spinner2;
-    Spinner spinner3;
     View v;
     public static Drawable proposition1;
     public static Drawable proposition2;
@@ -116,15 +113,6 @@ public class NewHelp extends AppCompatActivity implements Serializable{
     {
         EditText tp = (EditText) findViewById (R.id.editText);
         description = tp.getText().toString();
-        Spinner s = (Spinner) findViewById(R.id.spinner);
-        String semaine = s.getSelectedItem().toString();
-        //int sem = Integer.getInteger(semaine);
-        Spinner s2 = (Spinner) findViewById(R.id.spinner2);
-        String jour = s2.getSelectedItem().toString();
-        //int j = Integer.getInteger(jour);
-        Spinner s3 = (Spinner) findViewById(R.id.spinner3);
-        String heures = s3.getSelectedItem().toString();
-        //int h = Integer.getInteger(heures);
         proposition1 = img1.getDrawable();
         proposition2 = img2.getDrawable();
         Intent intent = new Intent(this, Helpprevue.class);
