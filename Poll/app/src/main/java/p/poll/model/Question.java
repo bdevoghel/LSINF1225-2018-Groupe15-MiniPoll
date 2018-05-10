@@ -1,6 +1,11 @@
 package p.poll.model;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
+
+import p.poll.MySQLiteHelper;
 
 /**
  * Created by Vahid Beyraghi on 21-04-18.
@@ -72,4 +77,27 @@ public class Question {
         }
         return false;
     }
+
+    //DataBase
+
+    public static int setIdQuestion(String idpoll){
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        int id = 0;
+        String[] colonnes = {"idquestion"};
+        Cursor cursor = db.query("Question_list", colonnes, null, null,null, null, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            String idnew = cursor.getString(0);
+            if(Integer.parseInt(idnew)>id)
+            {
+                id=Integer.parseInt(idnew);
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return id;
+    }
+
 }

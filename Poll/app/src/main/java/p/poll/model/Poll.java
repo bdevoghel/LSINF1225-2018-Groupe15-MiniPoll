@@ -124,15 +124,6 @@ public class Poll {
         return false;
     }
 
-    //Methode d affectation de l'id
-    public void setId()
-    {
-        if(number.isEmpty()) {
-            this.id = currentNumber.get();
-            currentNumber.increment();
-        }
-    }
-
     //Methodes
     public void chooseBySliding()
     {
@@ -172,6 +163,45 @@ public class Poll {
         cursor.close();
         db.close();
         return users;
+    }
+
+    public static int setId()
+    {
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        int id = 0;
+        String[] colonnes = {"idpoll"};
+        Cursor cursor = db.query("Poll", colonnes, null, null, null, null, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            String idnew = cursor.getString(0);
+            if(Integer.parseInt(idnew)>id)
+            {
+                id=Integer.parseInt(idnew);
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return id;
+    }
+
+    public static void setDone(int id)
+    {
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("status_principal",1);
+        db.update("Poll", values,"idpoll = ?",new String[] {String.valueOf(id)});
+        db.close();
+    }
+
+    public static void setUserDone(int id, User user)
+    {
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("status_particulier",String.valueOf(1));
+        db.update("Poll_access",values,"idpoll=? AND username=?",new String[]{String.valueOf(id),user.getUsername()});
+        db.close();
     }
 }
 

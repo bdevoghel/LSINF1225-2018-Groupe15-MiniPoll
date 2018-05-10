@@ -39,6 +39,9 @@ import p.poll.R;
  */
 
 public class NewHelp extends AppCompatActivity implements Serializable{
+    public static String imagePath1=null;
+    public static String imagePath2=null;
+    public static String description=null;
     public static final int IMAGE_GALLERY_REQUEST = 20;
     public static final int CAMERA_REQUEST_CODE = 228;
     public static final int CAMERA_PERMISSION_REQUEST_CODE = 4192;
@@ -162,7 +165,7 @@ public class NewHelp extends AppCompatActivity implements Serializable{
     public void Prevue(View v)
     {
         EditText tp = (EditText) findViewById (R.id.editText);
-        String description = tp.getText().toString();
+        description = tp.getText().toString();
         Spinner s = (Spinner) findViewById(R.id.spinner);
         String semaine = s.getSelectedItem().toString();
         //int sem = Integer.getInteger(semaine);
@@ -282,7 +285,6 @@ public class NewHelp extends AppCompatActivity implements Serializable{
 
                 // the address of the image on the SD Card.
                 Uri imageUri = data.getData();
-
                 // declare a stream to read the image data from the SD Card.
                 InputStream inputStream;
 
@@ -297,15 +299,19 @@ public class NewHelp extends AppCompatActivity implements Serializable{
                     // show the image to the user
                     if(v.getId() == R.id.but1) {
                         img1.setImageBitmap(image);
+                        imagePath1 = imageUri.toString();
                     }
                     else if(v.getId() == R.id.but2) {
                         img1.setImageBitmap(image);
+                        imagePath1 = imageUri.toString();
                     }
                     else if(v.getId() == R.id.but3) {
                         img2.setImageBitmap(image);
+                        imagePath2 = imageUri.toString();
                     }
                     else if(v.getId() == R.id.but4) {
                         img2.setImageBitmap(image);
+                        imagePath2 = imageUri.toString();
                     }
                     else
                     {
