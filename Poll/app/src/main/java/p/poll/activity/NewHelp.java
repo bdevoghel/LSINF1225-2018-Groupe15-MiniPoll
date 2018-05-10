@@ -47,6 +47,7 @@ public class NewHelp extends AppCompatActivity implements Serializable{
     public static final int CAMERA_PERMISSION_REQUEST_CODE = 4192;
     private ImageView img1;
     private ImageView img2;
+
     View v;
     public static Drawable proposition1;
     public static Drawable proposition2;
@@ -59,6 +60,7 @@ public class NewHelp extends AppCompatActivity implements Serializable{
 
         img1 = (ImageView) findViewById(R.id.img1);
         img2 = (ImageView) findViewById(R.id.img2);
+
         Button menu=findViewById(R.id.menu);
         menu.setOnClickListener(new  View.OnClickListener() {
             @Override
@@ -101,6 +103,13 @@ public class NewHelp extends AppCompatActivity implements Serializable{
             public void onClick(View view) {
                 Menu(view);}
         });
+        Button reset=findViewById(R.id.button7);
+        reset.setOnClickListener(new  View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     public void Menu(View v)
@@ -132,9 +141,11 @@ public class NewHelp extends AppCompatActivity implements Serializable{
     {
         switch (v.getId()) {
             case R.id.img1:
+                imagePath1 = null;
                 img1.setImageResource(R.drawable.proposition1);
                 break;
             case R.id.img2:
+                imagePath2 = null;
                 img2.setImageResource(R.drawable.proposition2);
                 break;
         }
