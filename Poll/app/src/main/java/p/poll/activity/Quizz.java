@@ -11,6 +11,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import p.poll.R;
@@ -24,13 +25,18 @@ public class Quizz extends Activity{
     ExpandableListView expListView;
     List<String> listDataHeader;
     List<String> listdescription;
+    List<String> choix;
     HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activty_quizz_response);
-
+        choix = new ArrayList<String>();
+        for(int i =0; i<4; i++)
+        {
+            choix.add(null);
+        }
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
@@ -85,6 +91,22 @@ public class Quizz extends Activity{
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
                 // TODO Auto-generated method stub
+                TextView txt = (TextView) v.findViewById(R.id.lblListItem);
+                if(choix.get(groupPosition) == null)
+                {
+                    choix.set(groupPosition,txt.getText().toString());
+                    v.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                }
+                if(choix.get(groupPosition).toString().compareTo(txt.getText().toString()) == 0)
+                {
+                    choix.set(groupPosition,null);
+                    v.setBackgroundColor(getResources().getColor(android.R.color.white));
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Vous avez déjà choisi une réponse. Recliquer dessus pour supprimer",
+                            Toast.LENGTH_SHORT).show();
+                }
                 Toast.makeText(
                         getApplicationContext(),
                         listDataHeader.get(groupPosition)
