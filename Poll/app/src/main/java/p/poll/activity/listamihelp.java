@@ -3,6 +3,7 @@ package p.poll.activity;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -77,6 +78,7 @@ public class listamihelp extends Activity {
                 }
                 else
                 {
+                    Log.i("test","createAdvice");
                     Advice.createAdvice(User.getUser(userselect),NewHelp.imagePath1,NewHelp.imagePath2,NewHelp.description);
                     Toast.makeText(p.poll.activity.listamihelp.this, "L'ami(e) sélectionné est : "+ userselect,
                             Toast.LENGTH_SHORT).show();
