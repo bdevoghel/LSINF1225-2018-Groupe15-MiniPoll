@@ -59,10 +59,11 @@ public class Advice extends Poll {
     //DataBase
 
     public static void createAdvice(User user, String imagePath1, String imagePath2, String description){
-        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         ContentValues values = new ContentValues();
         String username=user.getUsername();
         String id=String.valueOf(Poll.setId());
+        String idQuestion=String.valueOf(Question.setIdQuestion(id));
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         values.put("username_proprietaire", User.loggedUser.getUsername());
         values.put("idpoll", id);
         values.put("titre", "Help me out!");
@@ -76,7 +77,7 @@ public class Advice extends Poll {
         values=new ContentValues();
         values.put("idpoll",id);
         values.put("username",username);
-        values.put("status_particulier",0);
+        values.put("statut_particulier",0);
         db.insert("Poll_access",null,values);
 
         values=new ContentValues();
@@ -85,10 +86,9 @@ public class Advice extends Poll {
         values.put("message",User.loggedUser.getFirstName()+" "+User.loggedUser.getLastName()+" wants you to help him out for a choice!");
         values.put("username_notif",User.loggedUser.getUsername());
         values.put("poll_notif",id);
-        db.insert("Notifications",null,values);
+        db.insert("Notification",null,values);
 
         values=new ContentValues();
-        String idQuestion=String.valueOf(Question.setIdQuestion(id));
         values.put("idpoll",id);
         values.put("idquestion",idQuestion);
         values.put("description_question",description);
@@ -114,7 +114,7 @@ public class Advice extends Poll {
         ArrayList<Advice> advices = new ArrayList<>();
 
         String[] colonnes = {"idpoll"};
-        Cursor cursor = db.query("Poll_access", colonnes, "username=? AND status_particulier=?", new String[]{User.loggedUser.getUsername(),String.valueOf(0)}, null, null, null);
+        Cursor cursor = db.query("Poll_access", colonnes, "username=? AND statut_particulier=?", new String[]{User.loggedUser.getUsername(),String.valueOf(0)}, null, null, null);
         cursor.moveToFirst();
         ArrayList<Integer> idpoll = new ArrayList<>();
         while (!cursor.isAfterLast()) {
