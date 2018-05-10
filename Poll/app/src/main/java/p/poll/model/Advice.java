@@ -162,4 +162,58 @@ public class Advice extends Poll {
         db.close();
         return advices;
     }
+
+    public static void answer(int idpoll, int choice)
+    {
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+
+        String idQuestion=null;
+        String[] colonnes = {"idquestion"};
+        Cursor cursor = db.query("Question_list", colonnes, "idpoll=?", new String[]{String.valueOf(idpoll)}, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            idQuestion=cursor.getString(0);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        if(idQuestion!=null) {
+            ContentValues values = new ContentValues();
+            values.put("username", User.loggedUser.getUsername());
+            values.put("idquestion", idQuestion);
+            values.put("reponse_utilisateur", choice);
+            Log.i("test", "insert");
+            db.insert("Questionnaire_and_Advice_Answer", null, values);
+            Log.i("test", "done");
+        }
+        Poll.setUserDone(idpoll,User.loggedUser);
+        db.close();
+    }
+
+    public static int getAnswer(int idpoll)
+    {
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+
+        String idQuestion=null;
+        String[] colonnes = {"idquestion"};
+        Cursor cursor = db.query("Question_list", colonnes, "idpoll=?", new String[]{String.valueOf(idpoll)}, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            idQuestion=cursor.getString(0);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        String[] colonnes2 = {"reponse_utilisateur"};
+        cursor=db.query("Questionnaire_and_Advice_Answer",colonnes2,"idquestion=?",new String[]{idQuestion},null,null,null);
+        cursor.moveToFirst();
+        int answer=0;
+        while (!cursor.isAfterLast()) {
+            answer=Integer.parseInt(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return answer;
+    }
 }

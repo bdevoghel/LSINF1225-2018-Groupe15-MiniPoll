@@ -84,7 +84,7 @@ public class Question {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         int id = 0;
         String[] colonnes = {"idquestion"};
-        Cursor cursor = db.query("Question_list", colonnes, "idpoll=?", new String[]{idpoll}, null, null, null);
+        Cursor cursor = db.query("Question_list", colonnes, null, null,null, null, null);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
