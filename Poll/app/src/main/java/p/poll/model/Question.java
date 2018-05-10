@@ -15,6 +15,7 @@ public class Question {
 
     //Attributs
     private String title;
+    private int idQuestion;
     private ArrayList<Proposition> PropositionList;
 
     //Constructeurs
@@ -30,12 +31,16 @@ public class Question {
         PropositionList=new ArrayList<>();
         this.addProposition(proposition);
     }
-    public Question(String title, ArrayList<Proposition> propositionList){
+    public Question(String title, ArrayList<Proposition> propositionList,int idQuestion){
         this.title=title;
         this.PropositionList=PropositionList;
+        this.idQuestion=idQuestion;
     }
 
+
     //Getteurs et setteurs
+    public void setIdQuestion(int id){idQuestion=id;}
+    public int getIdQuestion(){return idQuestion;}
     public void setTitle(String title){
         this.title=title;
     }

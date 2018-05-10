@@ -17,6 +17,7 @@ import p.poll.activity.CustomSondage;
 import p.poll.activity.PollAdapterSondage;
 import p.poll.activity.PollModel;
 import p.poll.model.Advice;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 04/05/2018.
@@ -76,7 +77,7 @@ public class listamihelp extends Activity {
                 }
                 else
                 {
-                    Advice.createAdvice(userselect,NewHelp.imagePath1,NewHelp.imagePath2,NewHelp.description)
+                    Advice.createAdvice(User.getUser(userselect),NewHelp.imagePath1,NewHelp.imagePath2,NewHelp.description);
                     Toast.makeText(p.poll.activity.listamihelp.this, "L'ami(e) sélectionné est : "+ userselect,
                             Toast.LENGTH_SHORT).show();
                 }

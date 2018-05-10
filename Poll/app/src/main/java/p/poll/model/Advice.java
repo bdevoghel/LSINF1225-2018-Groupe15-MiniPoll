@@ -82,7 +82,7 @@ public class Advice extends Poll {
         values=new ContentValues();
         values.put("username",username);
         values.put("etat",0);
-        values.put("message",User.loggedUser.getFirstName()+" "+User.loggedUser.getLastName()+" want you to help him out for a choice!");
+        values.put("message",User.loggedUser.getFirstName()+" "+User.loggedUser.getLastName()+" wants you to help him out for a choice!");
         values.put("username_notif",User.loggedUser.getUsername());
         values.put("poll_notif",id);
         db.insert("Notifications",null,values);
@@ -147,7 +147,7 @@ public class Advice extends Poll {
 
             User owner=null;
             String[] colonnes4 = {"username_proprietaire"};
-            cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=?", new String[]{String.valueOf(idpoll),String.valueOf(0)}, null, null, null);
+            cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=? AND types=?", new String[]{String.valueOf(idpoll),String.valueOf(0),"a"}, null, null, null);
             cursor.moveToFirst();
             for (int j=0;!cursor.isAfterLast();j++) {
                 owner=User.getUser(cursor.getString(0));
