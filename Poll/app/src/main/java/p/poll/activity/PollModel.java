@@ -5,12 +5,12 @@ package p.poll.activity;
  */
 
 public class PollModel {
-    private int color;
+    private String picture;
     private String pseudo;
     private String text;
 
-    public PollModel(int color, String pseudo, String text) {
-        this.color = color;
+    public PollModel(String color, String pseudo, String text) {
+        this.picture = color;
         this.pseudo = pseudo;
         this.text = text;
     }
@@ -23,8 +23,8 @@ public class PollModel {
     {
         return this.text;
     }
-    public int getColor()
+    public String getPicture()
     {
-        return this.color;
+        return this.picture;
     }
 }

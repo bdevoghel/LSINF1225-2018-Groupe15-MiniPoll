@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import p.poll.R;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 10/05/2018.
@@ -50,7 +51,7 @@ public class PollAdapterQuizz extends ArrayAdapter<PollModel> {
         //il ne reste plus qu'à remplir notre vue
         viewHolder.pseudo.setText(pollModel.getPseudo());
         viewHolder.text.setText(pollModel.getText());
-        viewHolder.avatar.setImageDrawable(new ColorDrawable(pollModel.getColor()));
+        viewHolder.avatar.setImageBitmap(User.toBitmap(pollModel.getPicture(),Quizzprevue.content));
 
         return convertView;
     }
