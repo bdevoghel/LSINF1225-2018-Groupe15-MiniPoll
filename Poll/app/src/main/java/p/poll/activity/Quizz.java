@@ -25,7 +25,7 @@ public class Quizz extends Activity{
     ExpandableListView expListView;
     List<String> listDataHeader;
     List<String> listdescription;
-    List<String> choix;
+    public static List<String> choix;
     HashMap<String, List<String>> listDataChild;
 
     @Override
@@ -97,8 +97,12 @@ public class Quizz extends Activity{
                     choix.set(groupPosition,txt.getText().toString());
                     v.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
                 }
-                if(choix.get(groupPosition).toString().compareTo(txt.getText().toString()) == 0)
+                else if(choix.get(groupPosition).toString().compareTo(txt.getText().toString()) == 0)
                 {
+                    Toast.makeText(
+                            getApplicationContext(),choix.get(groupPosition).toString()
+                            , Toast.LENGTH_SHORT)
+                            .show();
                     choix.set(groupPosition,null);
                     v.setBackgroundColor(getResources().getColor(android.R.color.white));
                 }
@@ -107,14 +111,6 @@ public class Quizz extends Activity{
                     Toast.makeText(getApplicationContext(),"Vous avez déjà choisi une réponse. Recliquer dessus pour supprimer",
                             Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(
-                        getApplicationContext(),
-                        listDataHeader.get(groupPosition)
-                                + " : "
-                                + listDataChild.get(
-                                listDataHeader.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT)
-                        .show();
                 return false;
             }
         });
@@ -133,10 +129,11 @@ public class Quizz extends Activity{
         listDataHeader.add("Question 2");
         listDataHeader.add("Question 3");
 
+
         //List description des questions
-        listDataHeader.add("Quel jour sommes nous ?");
-        listDataHeader.add("Qui est John ?");
-        listDataHeader.add("Suis-je gentil ?");
+        listdescription.add("Quel jour sommes nous ?");
+        listdescription.add("Qui est John ?");
+        listdescription.add("Suis-je gentil ?");
 
         // Adding child data
         List<String> Question1 = new ArrayList<String>();

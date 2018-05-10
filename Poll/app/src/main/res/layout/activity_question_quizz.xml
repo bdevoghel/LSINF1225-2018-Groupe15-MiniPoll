@@ -12,16 +12,17 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView24"
+    <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Liste des propositions" />
+        android:text="Question suivante" />
 
-    <ListView
-        android:id="@+id/listView1"
+    <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="354dp" />
+        android:layout_height="wrap_content"
+        android:text="Ajouter à la liste" />
 
     <TextView
         android:id="@+id/textView25"
@@ -37,15 +38,15 @@
         android:inputType="textPersonName"
         android:text="Reponse" />
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/textView24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter à la liste" />
+        android:text="Liste des propositions" />
 
-    <Button
-        android:id="@+id/button2"
+    <ListView
+        android:id="@+id/listView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Question suivante" />
+        android:layout_height="354dp" />
+
 </LinearLayout>
