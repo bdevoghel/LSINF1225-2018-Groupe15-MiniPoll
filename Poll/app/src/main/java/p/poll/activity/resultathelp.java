@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import p.poll.R;
 import p.poll.model.Advice;
+import p.poll.model.Poll;
 import p.poll.model.User;
 
 /**
@@ -33,7 +35,7 @@ public class resultathelp extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-
+        Log.i("test",String.valueOf(currentPoll));
         advice=Advice.getAdviceFromId(currentPoll);
         img1 = (ImageView) findViewById(R.id.imageView3);
         img2 = (ImageView) findViewById(R.id.imageView4);
@@ -51,7 +53,7 @@ public class resultathelp extends Activity{
         img1.setImageBitmap(User.toBitmap(advice.getImagePath1(),getContentResolver()));
         img2.setImageBitmap(User.toBitmap(advice.getImagePath2(),getContentResolver()));
         TextView titre = (TextView) findViewById(R.id.textView7);
-        titre.setText(NotificationActivity.userNotif + " vous a suggéré");
+        titre.setText(NotificationActivity.userNotif + " suggested :");
         TextView description = (TextView) findViewById(R.id.textView9);
         description.setText(advice.getDescriptionQ());
         bouton.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +61,7 @@ public class resultathelp extends Activity{
             @Override
             public void onClick(View v) {
                 //Valider
+                Poll.setDone(currentPoll);
                 Intent intent = new Intent(getApplicationContext(),Menu.class);
                 startActivity(intent);
             }

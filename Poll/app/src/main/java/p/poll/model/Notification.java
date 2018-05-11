@@ -96,6 +96,17 @@ public class Notification{
         return notifications;
     }
 
+    public static Notification getNotification(int idpoll){
+        ArrayList<Notification> notifications=getNotifications();
+        for(int i=0;i<notifications.size();i++){
+            if(notifications.get(i).getPoll()==idpoll)
+            {
+                return notifications.get(i);
+            }
+        }
+        return null;
+    }
+
     public static void setDone(Notification n){
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         ContentValues values = new ContentValues();
