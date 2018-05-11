@@ -49,6 +49,7 @@ public class ListHelp extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Help.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

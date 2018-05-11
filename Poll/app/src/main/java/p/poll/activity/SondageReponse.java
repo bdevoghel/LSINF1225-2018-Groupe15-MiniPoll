@@ -121,7 +121,6 @@ public class SondageReponse extends Activity {
                     listAdapter2 = new
                             CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
                     mListView.setAdapter(listAdapter2);
-                    Toast.makeText(SondageReponse.this, "You Clicked at " + web[+position] + " value = ", Toast.LENGTH_SHORT).show();
 
                 }
                 else
@@ -134,7 +133,6 @@ public class SondageReponse extends Activity {
                     listAdapter2 = new
                             CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
                     mListView.setAdapter(listAdapter2);
-                    Toast.makeText(SondageReponse.this, "You Clicked at " + listenumeroliste[listenumero.size()-1] + " value = ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
