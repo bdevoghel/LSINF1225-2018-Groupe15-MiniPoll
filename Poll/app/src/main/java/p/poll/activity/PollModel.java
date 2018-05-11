@@ -5,7 +5,7 @@ package p.poll.activity;
  */
 
 public class PollModel {
-    private String picture;
+    private String picture=null;
     private String pseudo;
     private String text;
 

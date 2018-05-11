@@ -55,8 +55,13 @@ public class PollAdapterHelp extends ArrayAdapter<PollModel> {
         //il ne reste plus qu'à remplir notre vue
         viewHolder.pseudo.setText(pollModel.getPseudo());
         viewHolder.text.setText(pollModel.getText());
-        viewHolder.avatar.setImageBitmap(User.toBitmap(pollModel.getPicture(),Helpprevue.content));
-
+        if(pollModel.getPicture()!=null) {
+            viewHolder.avatar.setImageBitmap(User.toBitmap(pollModel.getPicture(), Helpprevue.content));
+        }
+        else
+        {
+            viewHolder.avatar.setImageResource(R.drawable.default_pic);
+        }
         return convertView;
     }
 
