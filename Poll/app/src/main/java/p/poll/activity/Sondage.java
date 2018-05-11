@@ -231,6 +231,7 @@ public class Sondage extends Activity {
             "Proposition6"
     } ;
     String title;
+    EditText titre;
     public static List<String> ListePropositions = new ArrayList<String>();
     public List<String> MakeListePropositions (){
         for (int i = 0; i < 7; i++){
@@ -258,7 +259,7 @@ public class Sondage extends Activity {
         setContentView(R.layout.activity_new_sondage);
         p = 0;
         title = "";
-        EditText titre = (EditText) findViewById(R.id.editText3);
+        titre = (EditText) findViewById(R.id.editText3);
         title = titre.getText().toString();
         listPropositions = new ArrayList<String>();
         listfriendclick = new ArrayList<String>();
@@ -327,6 +328,7 @@ public class Sondage extends Activity {
 
             @Override
             public void onClick(View v) {
+                title = titre.getText().toString();
                 if(title.compareTo("") == 0)
                 {
                     Toast.makeText(p.poll.activity.Sondage.this,"Vous n'avez pas choisi de titre",
