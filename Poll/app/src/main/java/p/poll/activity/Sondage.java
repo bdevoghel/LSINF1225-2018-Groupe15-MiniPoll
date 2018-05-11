@@ -207,6 +207,7 @@ import java.util.ListIterator;
 
 import p.poll.MySQLiteHelper;
 import p.poll.R;
+import p.poll.model.Poll;
 import p.poll.model.User;
 import p.poll.model.Survey;
 
@@ -251,7 +252,7 @@ public class Sondage extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        idpoll = Survey.nouvIdpoll(Survey.getIdpoll());
+        idpoll = Poll.setId();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sondage);
         p = 0;
