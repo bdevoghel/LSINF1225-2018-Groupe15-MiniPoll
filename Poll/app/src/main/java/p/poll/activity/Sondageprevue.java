@@ -194,7 +194,7 @@ public class Sondageprevue extends Activity {
 
                 newValues2.put("username_proprietaire", User.loggedUser.getUsername());
                 newValues2.put("idpoll", Sondage.idpoll);
-                newValues2.put("description", Sondage.title);
+                newValues2.put("titre", Sondage.title);
                 newValues2.put("status_principal", 0);
                 newValues2.put("types","s");
                 SQLiteDatabase db1 = MySQLiteHelper.get().getWritableDatabase();
