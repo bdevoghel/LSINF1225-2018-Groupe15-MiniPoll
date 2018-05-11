@@ -236,7 +236,9 @@ public class Sondage extends Activity {
             if(vv != null) {
                 EditText edit = (EditText) vv.findViewById(R.id.editText6);
                 String prop = edit.getText().toString();
-                listPropositions.add(prop);
+                if(prop != "") {
+                    listPropositions.add(prop);
+                }
             }
         }
         return ListePropositions;
@@ -244,14 +246,6 @@ public class Sondage extends Activity {
     //public static int idpoll = 3;
     public static int p = 0;
 
-    public static Boolean flag[ ]= {
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-    } ;
 
     private ListView mListView;
 
@@ -260,6 +254,7 @@ public class Sondage extends Activity {
         idpoll = Survey.nouvIdpoll(Survey.getIdpoll());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sondage);
+        p = 0;
         listPropositions = new ArrayList<String>();
         listfriendclick = new ArrayList<String>();
         listproposition = new ArrayList<View>();

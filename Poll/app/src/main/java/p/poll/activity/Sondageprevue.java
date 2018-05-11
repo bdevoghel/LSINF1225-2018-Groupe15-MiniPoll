@@ -126,7 +126,7 @@ public class Sondageprevue extends Activity {
             @Override
             public void onClick(View v) {
                 int m = 0;
-                while (m<6){
+                while (m<7){
 
                     ContentValues newValues = new ContentValues();
                     View vv = Sondage.listproposition.get(m);
@@ -142,6 +142,7 @@ public class Sondageprevue extends Activity {
                         }
                     }
                 }
+                /*
                 for (int i = 0; i < Sondage.p; i++){
                     for (int k = 0; k < Sondage.listproposition.size(); k++){
                         ContentValues newValues1 = new ContentValues();
@@ -162,6 +163,7 @@ public class Sondageprevue extends Activity {
                 newValues1.put("idpoll", Sondage.idpoll);
                 newValues1.put("statut_particulier", 0);
                 MySQLiteHelper.get().getWritableDatabase().insert("Poll_access", null, newValues1);
+                */
             }
 
         });
