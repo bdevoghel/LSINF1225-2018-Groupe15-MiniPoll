@@ -191,7 +191,7 @@ public class Poll {
         }
         cursor.close();
         db.close();
-        return id+10;
+        return id+1;
     }
 
     public static void setDone(int id)
