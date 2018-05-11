@@ -43,7 +43,7 @@ public class Proposition {
     public boolean equals(Object o){
         if(o!=null){
             if(o instanceof Proposition){
-                if(((Proposition) o).getAnswer()==answer && ((Proposition) o).getTag()==tag){
+                if(((Proposition) o).getAnswer().equals(answer) && ((Proposition) o).getTag()==tag){
                     return true;
                 }
             }
