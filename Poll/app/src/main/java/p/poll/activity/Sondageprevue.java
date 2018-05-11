@@ -20,6 +20,7 @@ import java.util.List;
 
 import p.poll.MySQLiteHelper;
 import p.poll.R;
+import p.poll.model.Poll;
 import p.poll.model.Survey;
 import p.poll.model.User;
 
@@ -66,7 +67,7 @@ public class Sondageprevue extends Activity {
             "Texte Proposition6"
     };
     */
-
+    private int idpoll;
     private ListView mListView;
     Button bouton;
     public static List<String> pourcent = new ArrayList<String>();
@@ -75,6 +76,7 @@ public class Sondageprevue extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage_reponse);
+        idpoll= Poll.setId();
         web = new String[Sondage.listPropositions.size()];
         phrase = Sondage.listPropositions.toArray(new String[Sondage.listproposition.size()]);
         size = Sondage.listPropositions.size();
@@ -143,7 +145,7 @@ public class Sondageprevue extends Activity {
                         String prop = edit.getText().toString();
                         if (prop.compareTo("") != 0) {
                             Sondage.p ++;
-                            newValues.put("idpoll", Sondage.idpoll);
+                            newValues.put("idpoll", idpoll);
                             newValues.put("data_reponse", prop);
                             newValues.put("point",0);
 
@@ -164,7 +166,7 @@ public class Sondageprevue extends Activity {
                             String prop = edit.getText().toString();
                             if (prop.compareTo("") != 0) {
                                 prop = edit.getText().toString();
-                                newValues1.put("idpoll", Sondage.idpoll);
+                                newValues1.put("idpoll", idpoll);
                                 newValues1.put("username", Sondage.listfriendclick.get(i));
                                 newValues1.put("reponse", prop);
                                 newValues1.put("ordre", 0);
@@ -182,7 +184,7 @@ public class Sondageprevue extends Activity {
                 while (x < Sondage.listfriendclick.size()) {
                     ContentValues newValues1 = new ContentValues();
                     newValues1.put("username", Sondage.listfriendclick.get(x));
-                    newValues1.put("idpoll", Sondage.idpoll);
+                    newValues1.put("idpoll", idpoll);
                     newValues1.put("statut_particulier", 0);
                     SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
                     db.insert("Poll_access", null, newValues1);
@@ -193,7 +195,7 @@ public class Sondageprevue extends Activity {
                 ContentValues newValues2 = new ContentValues();
 
                 newValues2.put("username_proprietaire", User.loggedUser.getUsername());
-                newValues2.put("idpoll", Sondage.idpoll);
+                newValues2.put("idpoll", idpoll);
                 newValues2.put("titre", Sondage.title);
                 newValues2.put("status_principal", 0);
                 newValues2.put("types","s");
@@ -208,7 +210,7 @@ public class Sondageprevue extends Activity {
                     values.put("etat", String.valueOf(0));
                     values.put("username_notif", User.loggedUser.getUsername());
                     values.put("message", User.loggedUser.getFirstName() + " " + User.loggedUser.getLastName() + " invited you to answer his survey!");
-                    values.put("poll_notif", String.valueOf(Sondage.idpoll));
+                    values.put("poll_notif", String.valueOf(idpoll));
                     db1.insert("Notification", null, values);
                 }
                 db1.close();

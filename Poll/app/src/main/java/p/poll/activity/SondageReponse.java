@@ -54,6 +54,7 @@ public class SondageReponse extends Activity {
     Button bouton;
     private static int currentPoll;
     public static List<String> pourcent = new ArrayList<String>();
+    int flag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class SondageReponse extends Activity {
         }
         else
         {
+            flag=1;
             current=Survey.getSurveyFromId(currentPoll);
             NotificationActivity.currentPoll=0;
         }
@@ -156,7 +158,9 @@ public class SondageReponse extends Activity {
                     if (Survey.SondageFini(Survey.etats(current.getId()))== 1){
                         pourcent = Survey.moyenne(Survey.getListPointsSondage(current.getId()));
                     }
-                    Notification.setDone(notification);
+                    if(flag==1) {
+                        Notification.setDone(notification);
+                    }
                     Intent intent = new Intent(getApplicationContext(),Menupoll.class);
                     startActivity(intent);
                 }
