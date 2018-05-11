@@ -35,13 +35,15 @@ public class Help extends Activity{
     int[]  img2location= new int[2];
     int Xbegin = 0;
     int Ybegin = 0;
-    private Advice advice = ListHelp.advice;
-    private int currentPoll= NotificationActivity.currentPoll;
+    private Advice advice;
+    private int currentPoll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+        advice = ListHelp.advice;
+        currentPoll= NotificationActivity.currentPoll;
         if(NotificationActivity.currentPoll==0)
         {
             currentPoll=ListHelp.advice.getId();
