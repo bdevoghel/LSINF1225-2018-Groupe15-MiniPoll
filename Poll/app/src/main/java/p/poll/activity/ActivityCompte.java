@@ -108,19 +108,19 @@ public class ActivityCompte extends AppCompatActivity {
         else {
             if(TextUtils.isEmpty(firstName))
             {
-                profile_first_name.setError("@string/error_empty_fname");
+                profile_first_name.setError(getString(R.string.error_field_required));
                 focusView=profile_first_name;
                 cancel=true;
             }
             if(TextUtils.isEmpty(lastName))
             {
-                profile_name.setError("@string/error_empty_lname");
+                profile_name.setError(getString(R.string.error_field_required));
                 focusView=profile_name;
                 cancel=true;
             }
             if(!isEmailValid(eMail))
             {
-                profile_email.setError("@string/error_invalid_email");
+                profile_email.setError(getString(R.string.error_field_required));
                 focusView=profile_email;
                 cancel=true;
             }
