@@ -66,6 +66,7 @@ public class ListSurvey extends AppCompatActivity {
         List<PollModel> tweets = new ArrayList<PollModel>();
         for(int i =0; i<Sondage.size();i++)
         {
+            Log.i("display title :",Sondage.get(i).getTitle());
             tweets.add(new PollModel(null, Sondage.get(i).getOwner().getFirstName(),Sondage.get(i).getTitle()));
         }
         /*

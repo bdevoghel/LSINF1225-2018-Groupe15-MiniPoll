@@ -378,7 +378,7 @@ public class Survey extends Poll {
             for (int j = 0; !cursor.isAfterLast(); j++) {
                 Log.i("test", "owner");
                 owner = User.getUser(cursor.getString(0));
-                title = cursor.getString(0);
+                title = cursor.getString(1);
                 cursor.moveToNext();
             }
             cursor.close();
