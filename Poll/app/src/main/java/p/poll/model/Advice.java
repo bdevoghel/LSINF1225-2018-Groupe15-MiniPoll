@@ -225,6 +225,7 @@ public class Advice extends Poll {
         values.put("message",User.loggedUser.getFirstName()+" "+User.loggedUser.getLastName()+" answered to your help request!");
         values.put("poll_notif",String.valueOf(idpoll));
         db.insert("Notification",null,values);
+        Notification.setDone(Notification.getNotification(idpoll));
 
         db.close();
     }
