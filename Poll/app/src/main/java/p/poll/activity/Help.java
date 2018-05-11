@@ -5,6 +5,8 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,7 @@ public class Help extends Activity{
         }
         img1 = (ImageView) findViewById(R.id.imageView3);
         img2 = (ImageView) findViewById(R.id.imageView4);
+        Button bouton = (Button) findViewById(R.id.button5);
         img1.setImageBitmap(User.toBitmap(advice.getImagePath1(),getContentResolver()));
         img2.setImageBitmap(User.toBitmap(advice.getImagePath2(),getContentResolver()));
         Display display = getWindowManager().getDefaultDisplay();
@@ -56,9 +59,16 @@ public class Help extends Activity{
         widthscreen = size.x;
         heightscreen = size.y;
         TextView titre = (TextView) findViewById(R.id.textView7);
-        titre.setText(advice.getOwner().getUsername() + " a besoin de vos conseils");
+        titre.setText(advice.getOwner().getFirstName() + " a besoin de vos conseils");
         TextView description = (TextView) findViewById(R.id.textView9);
         description.setText(advice.getDescriptionQ());
+        bouton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //Valider
+            }
+        });
     }
 
     @Override
