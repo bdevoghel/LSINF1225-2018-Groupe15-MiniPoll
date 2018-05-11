@@ -130,10 +130,15 @@ public class Advice extends Poll {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 idQuestion=cursor.getString(0);
+                Log.i("test","idQuestion");
                 description=cursor.getString(1);
                 cursor.moveToNext();
             }
             cursor.close();
+            if(idQuestion==null){
+                db.close();
+                return advices;
+            }
 
             String[] colonnes3 = {"texte"};
             cursor = db.query("Questionnaire_and_Advice", colonnes3, "idquestion=?", new String[]{idQuestion}, null, null, null);
