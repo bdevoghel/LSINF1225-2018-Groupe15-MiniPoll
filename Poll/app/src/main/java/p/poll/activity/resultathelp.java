@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -34,6 +35,7 @@ public class resultathelp extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+        Log.i("test",String.valueOf(currentPoll));
         advice=Advice.getAdviceFromId(currentPoll);
         img1 = (ImageView) findViewById(R.id.imageView3);
         img2 = (ImageView) findViewById(R.id.imageView4);
