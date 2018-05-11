@@ -1,6 +1,7 @@
 package p.poll.activity;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -27,6 +28,8 @@ public class Help extends Activity{
     int[]  img2location= new int[2];
     int Xbegin = 0;
     int Ybegin = 0;
+    private int currentPoll= NotificationActivity.currentPoll;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

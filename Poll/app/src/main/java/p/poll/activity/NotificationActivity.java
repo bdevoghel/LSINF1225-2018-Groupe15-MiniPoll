@@ -56,21 +56,28 @@ public class NotificationActivity extends Activity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
+                    Log.i("test","0");
                     currentNotification=notifications.get(position);
                     if(currentNotification.getPoll()==0) {
+                        Log.i("test","1");
                         Intent intent = new Intent(getApplicationContext(), NotificationShow.class);
                         startActivity(intent);
                         finish();
                     }
                     else
                     {
+                        Log.i("test","2");
                         currentPoll=currentNotification.getPoll();
-                        if(Poll.getType(currentPoll)=="a") {
+                        Log.i("display",String.valueOf(currentPoll));
+                        Log.i("display",Poll.getType(currentPoll));
+                        if(Poll.getType(currentPoll).equals("a")) {
+                            Log.i("display",Poll.getType(currentPoll));
                             Intent intent = new Intent(getApplicationContext(), Help.class);
                             startActivity(intent);
+                            Notification.setDone(currentNotification);
                             finish();
                         }
-                        else if(Poll.getType(currentPoll)=="q")
+                        else if(Poll.getType(currentPoll).equals("q"))
                         {
 
                         }
