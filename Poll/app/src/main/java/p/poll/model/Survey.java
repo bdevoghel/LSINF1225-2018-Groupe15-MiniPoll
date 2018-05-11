@@ -306,8 +306,8 @@ public class Survey extends Poll {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
 
-        Cursor c = db.query("\"Survey\"", // La table
-                new String[]{"points"},
+        Cursor c = db.query("Survey", // La table
+                new String[]{"point"},
                 "reponse=? AND idpoll", // Colonnes pour la clause WHERE
                 new String[]{proposition, String.valueOf(idpoll)}, // Valeurs pour la clause WHERE
                 null, // ne pas grouper les lignes
@@ -358,50 +358,34 @@ public class Survey extends Poll {
         db.close();
         for (int i = 0; i < idpoll.size(); i++) {
             db = MySQLiteHelper.get().getReadableDatabase();
-            String idQuestion = null;
-            String description = null;
-            String[] colonnes2 = {"idquestion", "description_question"};
-            Log.i("display", idpoll.get(i).toString());
-            cursor = db.query("Question_list", colonnes2, "idpoll=?", new String[]{idpoll.get(i).toString()}, null, null, null);
+            String[] colonnes2 = {"data_reponse"};
+            cursor = db.query("Survey", colonnes2, "idpoll=?", new String[]{String.valueOf(idpoll.get(i))}, null, null, null);
             cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                idQuestion = cursor.getString(0);
-                Log.i("test", "idQuestion");
-                description = cursor.getString(1);
+            ArrayList<Proposition> proposisiton = new ArrayList<>();
+            for (int j = 0; !cursor.isAfterLast(); j++) {
+                Log.i("test", "proposition : " + j);
+                proposisiton.add(new Proposition(cursor.getString(0)));
                 cursor.moveToNext();
             }
             cursor.close();
-            if (idQuestion != null) {
 
-                String[] colonnes3 = {"texte"};
-                cursor = db.query("Questionnaire_and_Advice", colonnes3, "idquestion=?", new String[]{idQuestion}, null, null, null);
-                cursor.moveToFirst();
-                ArrayList<Proposition> proposisiton = new ArrayList<>();
-                for (int j = 0; !cursor.isAfterLast(); j++) {
-                    Log.i("test", "proposition : " + j);
-                    proposisiton.add(new Proposition(cursor.getString(0)));
-                    cursor.moveToNext();
-                }
-                cursor.close();
+            User owner = null;
+            String title = null;
+            Log.i("display", String.valueOf(idpoll));
+            String[] colonnes4 = {"username_proprietaire","titre"};
+            cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=? AND types=?", new String[]{String.valueOf(idpoll.get(i)), String.valueOf(0), "s"}, null, null, null);
+            cursor.moveToFirst();
+            for (int j = 0; !cursor.isAfterLast(); j++) {
+                Log.i("test", "owner");
+                owner = User.getUser(cursor.getString(0));
+                title = cursor.getString(0);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            Log.i("ids", String.valueOf(idpoll.get(i)));
 
-                User owner = null;
-                String title = null;
-                Log.i("display", String.valueOf(idpoll));
-                String[] colonnes4 = {"username_proprietaire","titre"};
-                cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=? AND types=?", new String[]{String.valueOf(idpoll.get(i)), String.valueOf(0), "s"}, null, null, null);
-                cursor.moveToFirst();
-                for (int j = 0; !cursor.isAfterLast(); j++) {
-                    Log.i("test", "owner");
-                    owner = User.getUser(cursor.getString(0));
-                    title = cursor.getString(0);
-                    cursor.moveToNext();
-                }
-                cursor.close();
-                Log.i("ids", String.valueOf(idpoll.get(i)));
-
-                if (owner != null) {
-                    surveys.add(new Survey(idpoll.get(i), title, null, 'a', owner, proposisiton));
-                }
+            if (owner != null) {
+                surveys.add(new Survey(idpoll.get(i), title, null, 'a', owner, proposisiton));
             }
             db.close();
         }

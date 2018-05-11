@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,7 @@ public class ListSurvey extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Sondage= Survey.getSurvey();
+        Log.i("display","size survey : "+Sondage.size());
         setContentView(R.layout.activity_listhelp);
         TextView texte =(TextView) findViewById(R.id.Title);
         texte.setText("Liste des sondages");

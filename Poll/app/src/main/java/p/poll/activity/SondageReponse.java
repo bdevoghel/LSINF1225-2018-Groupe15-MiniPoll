@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -61,6 +62,7 @@ public class SondageReponse extends Activity {
         proposition = new ArrayList<String>();
         proposition = Proposition.getAnswers((current.getPropostions()));
         proptitre = new ArrayList<String>();
+        Log.i("size propositions",String.valueOf(proposition.size()));
         for(int i=0; i<proposition.size();i++)
         {
             proptitre.add(web2[i]);
