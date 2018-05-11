@@ -3,18 +3,12 @@ package p.poll.model;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Collection;
 
 import p.poll.MySQLiteHelper;
-import p.poll.activity.NewPoll;
 import p.poll.activity.Sondage;
-import p.poll.activity.SondageReponse;
 
 /**
  * Created by Vahid Beyraghi on 22-04-18.
@@ -99,7 +93,7 @@ public class Survey extends Poll {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         ContentValues values = new ContentValues();
         String title=poll.getTitle();
-        String description=poll.getDescription();
+        String description=poll.getDescriptionQ();
         String status=String.valueOf(poll.getStatus());
         values.put(DB_COLUMN_STATUS, status);
         values.put(DB_COLUMN_TITLE, title);
@@ -127,7 +121,7 @@ public class Survey extends Poll {
         ContentValues values = new ContentValues();
         String id=String.valueOf(poll.getId());
         String title=poll.getTitle();
-        String description=poll.getDescription();
+        String description=poll.getDescriptionQ();
         String type=String.valueOf(poll.getType());
         User owner=poll.getOwner();
         String status=String.valueOf(poll.getStatus());

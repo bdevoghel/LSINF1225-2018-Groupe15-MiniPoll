@@ -57,7 +57,7 @@ public class Poll {
         this.title = title;
     }
 
-    public String getDescription() {
+    public String getDescriptionQ() {
         return this.description;
     }
 

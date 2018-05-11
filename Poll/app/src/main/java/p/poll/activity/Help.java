@@ -1,7 +1,6 @@
 package p.poll.activity;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -55,7 +54,7 @@ public class Help extends Activity{
         TextView titre = (TextView) findViewById(R.id.textView7);
         titre.setText(advice.getOwner().getUsername() + " a besoin de vos conseils");
         TextView description = (TextView) findViewById(R.id.textView9);
-        description.setText(advice.getDescription());
+        description.setText(advice.getDescriptionQ());
     }
 
     @Override

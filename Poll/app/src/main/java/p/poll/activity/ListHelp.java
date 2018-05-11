@@ -1,16 +1,10 @@
 package p.poll.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +14,6 @@ import java.util.List;
 
 import p.poll.R;
 import p.poll.model.Advice;
-import p.poll.model.User;
 
 
 /**
@@ -64,7 +57,7 @@ public class ListHelp extends AppCompatActivity {
         List<PollModel> tweets = new ArrayList<PollModel>();
         for(int i =0; i<users.size();i++)
         {
-            tweets.add(new PollModel(null, users.get(i).getOwner().getFirstName(),users.get(i).getDescription()));
+            tweets.add(new PollModel(null, users.get(i).getOwner().getFirstName(),users.get(i).getDescriptionQ()));
         }/*
         tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
         tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));

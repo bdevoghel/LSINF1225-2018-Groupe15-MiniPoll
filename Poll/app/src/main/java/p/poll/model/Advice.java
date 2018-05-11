@@ -31,7 +31,7 @@ public class Advice extends Poll {
         this.description=descriptionQ;
     }
     //Getteurs et setteurs
-    public String getDescription()
+    public String getDescriptionQ()
     {
         return description;
     }
