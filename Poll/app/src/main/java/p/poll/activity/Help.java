@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import p.poll.R;
 import p.poll.model.Advice;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 04/05/2018.
@@ -46,6 +47,8 @@ public class Help extends Activity{
         }
         img1 = (ImageView) findViewById(R.id.imageView3);
         img2 = (ImageView) findViewById(R.id.imageView4);
+        img1.setImageBitmap(User.toBitmap(advice.getImagePath1(),getContentResolver()));
+        img2.setImageBitmap(User.toBitmap(advice.getImagePath2(),getContentResolver()));
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
