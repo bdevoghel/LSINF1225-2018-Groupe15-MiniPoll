@@ -59,7 +59,7 @@ public class SondageReponse extends Activity {
         TextView titre = (TextView) findViewById(R.id.Title);
         titre.setText(title);
         proposition = new ArrayList<String>();
-        Proposition.getAnswer((proposition = current.getPropostions());
+        proposition = Proposition.getAnswers((current.getPropostions()));
         proptitre = new ArrayList<String>();
         for(int i=0; i<proposition.size();i++)
         {
