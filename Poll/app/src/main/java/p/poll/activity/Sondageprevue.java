@@ -83,8 +83,8 @@ public class Sondageprevue extends Activity {
         for (int i = 0; i < 7; i++) {
             liste.add(null);
         }
-        CustomSondageAnswer listAdapter = new
-                CustomSondageAnswer(Sondageprevue.this, web, phrase);
+        CustomSondagePrevue listAdapter = new
+                CustomSondagePrevue(Sondageprevue.this, web, phrase);
         bouton = (Button) findViewById(R.id.button);
         bouton.setText("Sauvegarder");
         list = (ListView) findViewById(R.id.listView2);

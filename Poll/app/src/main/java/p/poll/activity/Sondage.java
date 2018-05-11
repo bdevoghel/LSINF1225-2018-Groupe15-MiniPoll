@@ -260,6 +260,7 @@ public class Sondage extends Activity {
         idpoll = Survey.nouvIdpoll(Survey.getIdpoll());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sondage);
+        listPropositions = new ArrayList<String>();
         listfriendclick = new ArrayList<String>();
         listproposition = new ArrayList<View>();
         for(int i=0;i<7;i++)
