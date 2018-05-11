@@ -110,8 +110,9 @@ public class Advice extends Poll {
     }
 
     public static Advice getAdviceFromId(int id){
-        ArrayList<Advice> advices=getAdvice();
+        ArrayList<Advice> advices=getAdvicesOf(User.loggedUser);
         Advice advice=null;
+        Log.i("Search id",String.valueOf(id));
         for(int i=0;i<advices.size();i++){
             if(advices.get(i).getId()==id)
                 advice=advices.get(i);
@@ -177,10 +178,64 @@ public class Advice extends Poll {
                 cursor.moveToNext();
             }
             cursor.close();
+            Log.i("ids",String.valueOf(idpoll.get(i)));
 
             if(owner!=null) {
                 advices.add(new Advice(idpoll.get(i),"Help me out!", "Help me making a choice!", 'a', owner,imagePath[0],imagePath[1],description));
             }
+        }
+        db.close();
+        return advices;
+    }
+
+    public static ArrayList<Advice> getAdvicesOf(User user)
+    {
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        ArrayList<Advice> advices = new ArrayList<>();
+
+        String[] colonnes = {"idpoll"};
+        Cursor cursor = db.query("Poll", colonnes, "username_proprietaire=? AND types=?", new String[]{User.loggedUser.getUsername(),"a"}, null, null, null);
+        cursor.moveToFirst();
+        ArrayList<Integer> idpoll = new ArrayList<>();
+        while (!cursor.isAfterLast()) {
+            idpoll.add(Integer.valueOf(cursor.getString(0)));
+            Log.i("display",(cursor.getString(0)));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        Log.i("display size",String.valueOf(idpoll.size()));
+        Log.i("test",String.valueOf(0));
+        for(int i=0;i<idpoll.size();i++) {
+            String idQuestion=null;
+            String description=null;
+            String[] colonnes2 = {"idquestion", "description_question"};
+            Log.i("display",idpoll.get(i).toString());
+            cursor = db.query("Question_list", colonnes2, "idpoll=?", new String[]{idpoll.get(i).toString()}, null, null, null);
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                idQuestion=cursor.getString(0);
+                Log.i("test","idQuestion");
+                description=cursor.getString(1);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            if(idQuestion==null){
+                db.close();
+                return advices;
+            }
+
+            String[] colonnes3 = {"texte"};
+            cursor = db.query("Questionnaire_and_Advice", colonnes3, "idquestion=?", new String[]{idQuestion}, null, null, null);
+            cursor.moveToFirst();
+            String[] imagePath = new String[2];
+            for (int j=0;!cursor.isAfterLast();j++) {
+                Log.i("test","imagepath : "+j);
+                imagePath[j]=cursor.getString(0);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            advices.add(new Advice(idpoll.get(i),"Help me out!", "Help me making a choice!", 'a', User.loggedUser,imagePath[0],imagePath[1],description));
+
         }
         db.close();
         return advices;
@@ -225,7 +280,10 @@ public class Advice extends Poll {
         values.put("message",User.loggedUser.getFirstName()+" "+User.loggedUser.getLastName()+" answered to your help request!");
         values.put("poll_notif",String.valueOf(idpoll));
         db.insert("Notification",null,values);
-        Notification.setDone(Notification.getNotification(idpoll));
+        Notification n =Notification.getNotification(idpoll);
+        if(n==null)
+            Log.i("NULL","n=NULL");
+        Notification.setDone(n);
 
         db.close();
     }

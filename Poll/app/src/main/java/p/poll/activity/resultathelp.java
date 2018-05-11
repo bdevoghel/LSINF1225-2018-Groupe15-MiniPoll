@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import p.poll.R;
 import p.poll.model.Advice;
+import p.poll.model.Notification;
 import p.poll.model.Poll;
 import p.poll.model.User;
 
@@ -29,14 +30,19 @@ public class resultathelp extends Activity{
     public ImageView img2;
     int i = 0;
     private Advice advice;
-    private int currentPoll= NotificationActivity.currentPoll;
+    private int currentPoll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+        currentPoll= NotificationActivity.currentPoll;
         Log.i("test",String.valueOf(currentPoll));
         advice=Advice.getAdviceFromId(currentPoll);
+        if(advice==null)
+        {
+            Log.i("NULL","NULL");
+        }
         img1 = (ImageView) findViewById(R.id.imageView3);
         img2 = (ImageView) findViewById(R.id.imageView4);
         if(Advice.getAnswer(currentPoll) == 0)
@@ -62,7 +68,7 @@ public class resultathelp extends Activity{
             public void onClick(View v) {
                 //Valider
                 Poll.setDone(currentPoll);
-                Intent intent = new Intent(getApplicationContext(),Menu.class);
+                Intent intent = new Intent(getApplicationContext(),Menupoll.class);
                 startActivity(intent);
             }
         });
