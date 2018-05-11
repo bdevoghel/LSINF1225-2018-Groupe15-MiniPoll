@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
+import p.poll.model.Survey;
 import p.poll.model.User;
 
 /**
@@ -23,8 +24,10 @@ import p.poll.model.User;
 
 public class resultatsondage extends Activity {
     ListView list;
-    String nomdusondage = "Un sondage";
-    String[] web = {
+    String nomdusondage;
+    List<String> webliste;
+    String[] web;
+    String[] web2 = {
             "Proposition1",
             "Proposition2",
             "Proposition3",
@@ -32,24 +35,10 @@ public class resultatsondage extends Activity {
             "Proposition5",
             "Proposition6"
     };
-    String[] phrase = {
-            "Texte Proposition1",
-            "Texte Proposition2",
-            "Texte Proposition3",
-            "Texte Proposition4",
-            "Texte Proposition5",
-            "Texte Proposition6"
-    };
-
-    Integer[] pourcent = { // de 0 à 100 !!!
-            10,
-            20,
-            80,
-            5,
-            65,
-            40
-    };
-
+    List<String> phrase;
+    String[] phrase2;
+    List<Integer> pourcent;
+    Integer[] pourcent2;
     public int max;
 
     Button bouton;
@@ -58,11 +47,29 @@ public class resultatsondage extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityresultsondage);
-        max  = 80;
+        webliste = new ArrayList<String>();
+        nomdusondage = Survey.getTitre(0).get(0);
+        phrase =  Survey.getListProposition(0);
+        phrase2 = phrase.toArray(new String[phrase.size()]);
+        for(int i = 0; i<phrase.size();i++)
+        {
+            webliste.add(web2[i]);
+        }
+        web = webliste.toArray(new String[webliste.size()]);
+        pourcent = Survey.moyenne(Survey.getListPointsSondage(Sondage.idpoll));
+        pourcent2 = pourcent.toArray(new Integer[pourcent.size()]);
+        max  = 0;
+        for(int i =0;i<pourcent2.length;i++)
+        {
+            if(max < pourcent2[i])
+            {
+                max = pourcent2[i];
+            }
+        }
         TextView titresondage = (TextView) findViewById(R.id.TitreSondage);
         titresondage.setText(nomdusondage);
 
-        CustomSondageResult listAdapter = new CustomSondageResult(resultatsondage.this, web, phrase, pourcent, max);
+        CustomSondageResult listAdapter = new CustomSondageResult(resultatsondage.this, web, phrase2, pourcent2, max);
         bouton = (Button) findViewById(R.id.button);
         list = (ListView) findViewById(R.id.listView1);
         list.setAdapter(listAdapter);

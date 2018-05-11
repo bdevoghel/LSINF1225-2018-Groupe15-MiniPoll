@@ -177,6 +177,54 @@ public class Survey extends Poll {
         return i;
     }
 
+    public static List<String> getTitre(int idpoll) {
+
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        //Les resultats de la requete sont mis dans un "curseur"
+        List<String> list = new ArrayList<String>();
+        Cursor c = db.query("\"Poll\"", // La table
+                new String[]{"description"},
+                "idpoll =?",
+                new String[]{String.valueOf(idpoll)},
+                null,
+                null,
+                null
+
+        );
+        if (c.moveToFirst()) {
+            for (int i = 0; i < c.getCount(); i++) {
+                String s = c.getString(c.getColumnIndexOrThrow("description"));
+                list.add(s);
+                c.moveToNext();
+            }
+        }
+        c.close();
+        return list;
+    }
+
+
+    public static List<String> getListProposition(int PollIdentifiant) {
+        List<String> proposition = new ArrayList<String>();
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        //Les resultats de la requete sont mis dans un "curseur"
+        Cursor c = db.query("\"Survey\"", // La table
+                new String[]{"\"data_reponse\""},
+                "\"idpoll=?\"",
+                new String[]{String.valueOf(PollIdentifiant)},
+                null,
+                null,
+                null
+        );
+        if (c.moveToFirst()) {
+            for (int i = 0; i < c.getCount(); i++) {
+                String s = c.getString(c.getColumnIndexOrThrow("data_reponse"));
+                proposition.add(s);
+                c.moveToNext();
+            }
+        }
+        c.close();
+        return proposition;
+    }
 
     public static void Modify(int a, String prop) {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
@@ -323,15 +371,15 @@ public class Survey extends Poll {
         return sondages;
     }
 
-    public static List<String> moyenne(List<Double> points) {
+    public static List<Integer> moyenne(List<Double> points) {
         double Somme = 0;
-        List<String> pourcent = new ArrayList<String>();
+        List<Integer> pourcent = new ArrayList<Integer>();
         for (int i = 0; i < points.size(); i++) {
             Somme = Somme + points.get(i);
         }
         for (int i = 0; i < points.size(); i++) {
             Double pourc = (points.get(i) / Somme) * 100;
-            pourcent.add(pourc.toString());
+            pourcent.add(pourc.intValue());
         }
         return pourcent;
     }
