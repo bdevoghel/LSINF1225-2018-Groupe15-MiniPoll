@@ -51,7 +51,7 @@ public class resultathelp extends Activity{
         img1.setImageBitmap(User.toBitmap(advice.getImagePath1(),getContentResolver()));
         img2.setImageBitmap(User.toBitmap(advice.getImagePath2(),getContentResolver()));
         TextView titre = (TextView) findViewById(R.id.textView7);
-        titre.setText(advice.getOwner().getFirstName() + " vous a suggéré");
+        titre.setText(NotificationActivity.userNotif + " vous a suggéré");
         TextView description = (TextView) findViewById(R.id.textView9);
         description.setText(advice.getDescriptionQ());
         bouton.setOnClickListener(new View.OnClickListener() {
