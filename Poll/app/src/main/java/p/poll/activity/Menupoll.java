@@ -156,7 +156,7 @@ public class Menupoll extends AppCompatActivity implements
     }
     public void Survey()
     {
-        Toast.makeText(Menupoll.this,  getString(R.string.survey),
+        Toast.makeText(Menupoll.this,  getString(R.string.advice),
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),ListHelp.class);
         startActivity(intent);
@@ -181,7 +181,7 @@ public class Menupoll extends AppCompatActivity implements
     }
     private void Choise()
     {
-        Toast.makeText(Menupoll.this,  getString(R.string.choice),
+        Toast.makeText(Menupoll.this,  getString(R.string.survey),
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(),ListSurvey.class);
         startActivity(intent);
