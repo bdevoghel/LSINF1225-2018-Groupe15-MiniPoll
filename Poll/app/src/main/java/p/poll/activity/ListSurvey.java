@@ -58,6 +58,7 @@ public class ListSurvey extends AppCompatActivity {
                 current = Sondage.get(position);
                 Intent intent = new Intent(getApplicationContext(),SondageReponse.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
