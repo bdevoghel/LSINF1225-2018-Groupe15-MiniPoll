@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import p.poll.R;
 import p.poll.model.Notification;
 import p.poll.model.Poll;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 03/05/2018.
@@ -71,19 +72,35 @@ public class NotificationActivity extends Activity {
                         Log.i("display",String.valueOf(currentPoll));
                         Log.i("display",Poll.getType(currentPoll));
                         if(Poll.getType(currentPoll).equals("a")) {
-                            Log.i("display",Poll.getType(currentPoll));
-                            Intent intent = new Intent(getApplicationContext(), Help.class);
-                            startActivity(intent);
-                            Notification.setDone(currentNotification);
-                            finish();
+                            if(Poll.getOwner(currentPoll).equals(User.loggedUser)) {
+                                Intent intent = new Intent(getApplicationContext(), resultathelp.class);
+                                startActivity(intent);
+                                Notification.setDone(currentNotification);
+                                finish();
+                            }
+                            else {
+
+                                Log.i("display", Poll.getType(currentPoll));
+                                Intent intent = new Intent(getApplicationContext(), Help.class);
+                                startActivity(intent);
+                                Notification.setDone(currentNotification);
+                                finish();
+                            }
                         }
                         else if(Poll.getType(currentPoll).equals("q"))
                         {
+                            if(Poll.getOwner(currentPoll).equals(User.loggedUser)) {
+                            }
+                            else {
 
+                            }
                         }
                         else
                         {
-
+                            if(Poll.getOwner(currentPoll).equals(User.loggedUser)) {
+                            }
+                            else {
+                            }
                         }
                     }
                     //TextView textview = (TextView) view.findViewById(R.id.txt);

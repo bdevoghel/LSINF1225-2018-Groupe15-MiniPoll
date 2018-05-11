@@ -36,14 +36,22 @@ public class Poll {
 
     //Constructeurs
     public Poll(){
-        this.setId();
+        this.id=setId();
     }
     public Poll(String title, String description, char type, User owner) {
         this.setTitle(title);
         this.setDescription(description);
         this.setType(type);
         this.setOwner(owner);
-        this.setId();
+        this.id=setId();
+        this.status=0;
+    }
+    public Poll(int id, String title, String description, char type, User owner) {
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setType(type);
+        this.setOwner(owner);
+        this.id=id;
         this.status=0;
     }
 
@@ -183,7 +191,7 @@ public class Poll {
         }
         cursor.close();
         db.close();
-        return id+1;
+        return id+10;
     }
 
     public static void setDone(int id)
@@ -217,6 +225,21 @@ public class Poll {
         cursor.close();
         db.close();
         return type;
+    }
+
+    public static User getOwner(int id){
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        String username=null;
+        String[] colonnes = {"username_proprietaire"};
+        Cursor cursor = db.query("Poll", colonnes, "idpoll=?", new String[]{String.valueOf(id)}, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            username = cursor.getString(0);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return User.getUser(username);
     }
 }
 

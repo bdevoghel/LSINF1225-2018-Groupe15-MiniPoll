@@ -1,5 +1,6 @@
 package p.poll.model;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,8 +25,8 @@ public class Advice extends Poll {
     public Advice(){
         super();
     }
-    public Advice(String title, String description, Character type, User owner, String imagePath1, String imagePath2, String descriptionQ) {
-        super(title, description, type, owner);
+    public Advice(int id, String title, String description, Character type, User owner, String imagePath1, String imagePath2, String descriptionQ) {
+        super(id, title, description, type, owner);
         this.imagePath1=imagePath1;
         this.imagePath2 =imagePath2;
         this.description=descriptionQ;
@@ -178,7 +179,7 @@ public class Advice extends Poll {
             cursor.close();
 
             if(owner!=null) {
-                advices.add(new Advice("Help me out!", "Help me making a choice!", 'a', owner,imagePath[0],imagePath[1],description));
+                advices.add(new Advice(idpoll.get(i),"Help me out!", "Help me making a choice!", 'a', owner,imagePath[0],imagePath[1],description));
             }
         }
         db.close();
@@ -188,12 +189,13 @@ public class Advice extends Poll {
     public static void answer(int idpoll, int choice)
     {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        Log.i("test", "answer");
+        Log.i("test", String.valueOf(idpoll));
         String idQuestion=null;
         String[] colonnes = {"idquestion"};
         Cursor cursor = db.query("Question_list", colonnes, "idpoll=?", new String[]{String.valueOf(idpoll)}, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
+            Log.i("test","check");
             idQuestion=cursor.getString(0);
             cursor.moveToNext();
         }
@@ -209,6 +211,20 @@ public class Advice extends Poll {
             Log.i("test", "done");
         }
         Poll.setUserDone(idpoll,User.loggedUser);
+
+        ContentValues values = new ContentValues();
+        db.close();
+
+        User owner = Poll.getOwner(idpoll);
+
+        db = MySQLiteHelper.get().getReadableDatabase();
+
+        values.put("username",owner.getUsername());
+        values.put("etat",String.valueOf(0));
+        values.put("message",User.loggedUser.getFirstName()+" "+User.loggedUser.getLastName()+" answered to your help request!");
+        values.put("poll_notif",String.valueOf(idpoll));
+        db.insert("Notification",null,values);
+
         db.close();
     }
 

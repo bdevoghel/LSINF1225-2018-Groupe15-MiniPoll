@@ -102,7 +102,7 @@ public class Question {
         }
         cursor.close();
         db.close();
-        return id+1;
+        return id+10;
     }
 
 }

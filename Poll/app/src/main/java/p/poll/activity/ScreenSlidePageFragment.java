@@ -33,6 +33,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
     private Button addButton;
     private ImageButton imageButton;
     private TextView textView2;
+    private TextView textView3;
     private SearchView searchView;
     public ScreenSlidePageFragment(int pos, ArrayList<User> userList, ContentResolver content)
     {
@@ -54,6 +55,8 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         textView.setText("Nom : "+" "+oneuser.getLastName());
         textView2 = (TextView) view.findViewById(R.id.nomUserUnique);
         textView2.setText("Prenom : "+" "+oneuser.getFirstName());
+        textView3 = view.findViewById(R.id.emailinfoFriendUnique);
+        textView3.setText("Email : "+ " "+oneuser.getMailAdress());
         searchView = view.findViewById(R.id.search2);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

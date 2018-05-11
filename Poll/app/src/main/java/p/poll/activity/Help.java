@@ -1,8 +1,10 @@
 package p.poll.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,6 +45,9 @@ public class Help extends Activity{
         if(NotificationActivity.currentPoll==0)
         {
             currentPoll=ListHelp.advice.getId();
+            Log.i("Notif_current",String.valueOf(NotificationActivity.currentPoll));
+            NotificationActivity.currentPoll=0;
+            Log.i("currentPoll",String.valueOf(currentPoll));
         }
         else
         {
@@ -66,7 +71,10 @@ public class Help extends Activity{
 
             @Override
             public void onClick(View v) {
-                //Valider
+                Advice.answer(currentPoll,choice);
+                Intent intent = new Intent(getApplicationContext(), Menupoll.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
