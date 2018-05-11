@@ -9,7 +9,9 @@
         android:id="@+id/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center"
         android:text="Nouveau Quizz"
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="30sp"
         android:textStyle="bold" />

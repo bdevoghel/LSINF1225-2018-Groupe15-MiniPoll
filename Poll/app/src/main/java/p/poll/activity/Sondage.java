@@ -234,6 +234,7 @@ public class Sondage extends Activity {
     EditText titre;
     public static List<String> ListePropositions = new ArrayList<String>();
     public List<String> MakeListePropositions (){
+        listPropositions = new ArrayList<String>();
         for (int i = 0; i < 7; i++){
             View vv = listproposition.get(i);
             if(vv != null) {
