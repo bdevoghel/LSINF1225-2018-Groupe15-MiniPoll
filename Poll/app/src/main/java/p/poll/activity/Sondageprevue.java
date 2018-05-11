@@ -33,7 +33,7 @@ public class Sondageprevue extends Activity {
     public static ContentResolver content;
     ListView list;
     String[] listadd;
-    CustomSondageAnswerAdd listAdapter2;
+    CustomSondagePreviewAdd listAdapter2;
     public static List<View> liste;
     public static List<String> listenumero;
     public static List<String> listedescription;
@@ -103,7 +103,7 @@ public class Sondageprevue extends Activity {
                     listenumeroliste = listenumero.toArray(new String[listenumero.size()]);
                     listedescriptionliste = listedescription.toArray(new String[listedescription.size()]);
                     listAdapter2 = new
-                            CustomSondageAnswerAdd(Sondageprevue.this, listenumeroliste);
+                            CustomSondagePreviewAdd(Sondageprevue.this, listenumeroliste);
                     mListView.setAdapter(listAdapter2);
                     Toast.makeText(Sondageprevue.this, "You Clicked at " + web[+position] + " value = ", Toast.LENGTH_SHORT).show();
 
@@ -114,7 +114,7 @@ public class Sondageprevue extends Activity {
                     listenumeroliste = listenumero.toArray(new String[listenumero.size()]);
                     listedescriptionliste = listedescription.toArray(new String[listedescription.size()]);
                     listAdapter2 = new
-                            CustomSondageAnswerAdd(Sondageprevue.this, listenumeroliste);
+                    CustomSondagePreviewAdd(Sondageprevue.this, listenumeroliste);
                     mListView.setAdapter(listAdapter2);
                     Toast.makeText(Sondageprevue.this, "You Clicked at " + listenumeroliste[listenumero.size() - 1] + " value = ", Toast.LENGTH_SHORT).show();
                 }
