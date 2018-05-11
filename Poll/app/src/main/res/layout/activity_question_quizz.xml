@@ -28,6 +28,7 @@
         android:id="@+id/textView25"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:text="Ajouter une proposition" />
 
     <EditText
@@ -35,13 +36,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Reponse" />
+        android:hint="Reponse"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:text="Liste des propositions" />
 
     <ListView

@@ -179,16 +179,20 @@ public class Survey extends Poll {
 
 
     public static void Modify(int a, String prop) {
-
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         ContentValues newValues1 = new ContentValues();
         ContentValues newValues2 = new ContentValues();
         ContentValues newValues3 = new ContentValues();
+        ContentValues newValues4 = new ContentValues();
         newValues1.put("points", (Survey.getListPointsProposition(prop, Sondage.idpoll).get(0)) + (6 - a));
         newValues2.put("ordre", a);
-        newValues3.put("statut_particulier", etats(Sondage.idpoll).get(0) + (1/Sondage.listfriendclick.size()));
-        MySQLiteHelper.get().getReadableDatabase().update("Survey", newValues1, "idpoll=? AND data_reponse=?", new String[]{String.valueOf(Sondage.idpoll), prop});
-        MySQLiteHelper.get().getReadableDatabase().update("Survey_Answer", newValues2, "username=? AND idpoll=? AND reponse=?", new String[]{User.loggedUser.getUsername(), String.valueOf(Sondage.idpoll), prop});
-        MySQLiteHelper.get().getReadableDatabase().update("Poll_access", newValues1, "idpoll=?", new String[]{String.valueOf(Sondage.idpoll)});
+        newValues3.put("statut_principal", etats(Sondage.idpoll).get(0) + (1/Sondage.listfriendclick.size()));
+        newValues4.put("statut_particulier", 1);
+        db.update("Survey", newValues1, "idpoll=? AND data_reponse=?", new String[]{String.valueOf(Sondage.idpoll), prop});
+        db.update("Survey_Answer", newValues2, "username=? AND idpoll=? AND reponse=?", new String[]{User.loggedUser.getUsername(), String.valueOf(Sondage.idpoll), prop});
+        db.update("Poll", newValues3, "idpoll=?", new String[]{String.valueOf(Sondage.idpoll)});
+        db.update("Poll_access", newValues4, "idpoll=? AND username=?", new String[]{String.valueOf(Sondage.idpoll), User.loggedUser.getUsername()});
+        db.close();
     }
 
 
@@ -244,8 +248,10 @@ public class Survey extends Poll {
     }
 
     public static int SondageFini (List <Integer> list){
-        if (list.get(0)==0){
-            return 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) != 1) {
+                return 0;
+            }
         }
         return 1;
     }
