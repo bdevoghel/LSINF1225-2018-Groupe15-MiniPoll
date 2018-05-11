@@ -1,5 +1,7 @@
 package p.poll.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Vahid Beyraghi on 22-04-18.
  */
@@ -47,5 +49,15 @@ public class Proposition {
             }
         }
         return false;
+    }
+
+    public static ArrayList<String> getAnswers(ArrayList<Proposition> p)
+    {
+        ArrayList<String> answers=new ArrayList<>();
+        for(int i=0;i<p.size();i++)
+        {
+            answers.add(p.get(i).getAnswer());
+        }
+        return answers;
     }
 }
