@@ -41,7 +41,7 @@ public class SondageReponse extends Activity {
             "Proposition4",
             "Proposition5",
             "Proposition6"
-    } ;
+    };
     String[] web;
     List<String> proposition;
     List<String> proptitre;
