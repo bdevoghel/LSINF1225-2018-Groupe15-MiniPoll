@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
+import p.poll.model.Proposition;
 import p.poll.model.Survey;
 
 /**
@@ -31,6 +32,7 @@ public class SondageReponse extends Activity {
     public static List<String> listedescription;
     public static String[] listenumeroliste;
     public static String[] listedescriptionliste;
+    private Survey current;
     String[] web2 = {
             "Proposition1", // First == celui choisi
             "Proposition2",
@@ -52,9 +54,12 @@ public class SondageReponse extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage_reponse);
+        current = ListSurvey.current;
+        title = current.getTitle();
         TextView titre = (TextView) findViewById(R.id.Title);
         titre.setText(title);
         proposition = new ArrayList<String>();
+        Proposition.getAnswer((proposition = current.getPropostions());
         proptitre = new ArrayList<String>();
         for(int i=0; i<proposition.size();i++)
         {

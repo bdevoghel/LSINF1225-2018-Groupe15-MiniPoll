@@ -29,7 +29,8 @@ import p.poll.model.User;
 
 public class ListSurvey extends AppCompatActivity {
     private ListView mListView;
-    ArrayList<Survey> Sondage;
+    private ArrayList<Survey> Sondage;
+    public static Survey current;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,7 @@ public class ListSurvey extends AppCompatActivity {
                 PollModel j = (PollModel)o;
                 Toast.makeText(ListSurvey.this, j.getText(),
                         Toast.LENGTH_SHORT).show();
+                current = Sondage.get(position);
                 Intent intent = new Intent(getApplicationContext(),SondageReponse.class);
                 startActivity(intent);
             }
