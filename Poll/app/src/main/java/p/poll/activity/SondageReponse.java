@@ -53,7 +53,7 @@ public class SondageReponse extends Activity {
     private ListView mListView;
     Button bouton;
     private static int currentPoll;
-    public static List<String> pourcent = new ArrayList<String>();
+    public static List<Integer> pourcent = new ArrayList<Integer>();
     int flag = 0;
 
     @Override
@@ -156,7 +156,7 @@ public class SondageReponse extends Activity {
                     }
                     //Quand tout le monde a fini de repondre
                     if (Survey.SondageFini(Survey.etats(current.getId()))== 1){
-                        //pourcent = Survey.moyenne(Survey.getListPointsSondage(current.getId()));
+                        pourcent = Survey.moyenne(Survey.getListPointsSondage(current.getId()));
                     }
                     if(flag==1) {
                         Notification.setDone(notification);
