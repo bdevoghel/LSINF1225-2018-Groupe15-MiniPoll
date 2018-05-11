@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.MySQLiteHelper;
+import p.poll.activity.ListSurvey;
 import p.poll.activity.Sondage;
+import p.poll.activity.SondageReponse;
 
 /**
  * Created by Vahid Beyraghi on 22-04-18.
@@ -30,7 +32,7 @@ public class Survey extends Poll {
 
     private static final String DB_TABLE_SURVEY = "Survey";
     private static final String DB_COLUMN_DATA = "data_reponse";
-    private static final String DB_COLUMN_POINTS = "points";
+    private static final String DB_COLUMN_POINTS = "point";
 
     private static final String DB_TABLE_SURVEY_ANSWER = "Survey_Answer";
     private static final String DB_COLUMN_USERNAME = "username";
@@ -200,14 +202,15 @@ public class Survey extends Poll {
 
     public static void Modify(int a, String prop) {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        int idpoll = SondageReponse.current.getId();
         ContentValues newValues1 = new ContentValues();
         ContentValues newValues2 = new ContentValues();
         ContentValues newValues3 = new ContentValues();
         ContentValues newValues4 = new ContentValues();
-        newValues1.put("points", (Survey.getListPointsProposition(prop, Sondage.idpoll).get(0)) + (6 - a));
+        newValues1.put("point", (Survey.getListPointsProposition(prop, idpoll).get(0)) + (6 - a));
         newValues2.put("ordre", a);
-        newValues3.put("statut_principal", etats(Sondage.idpoll).get(0) + (1 / Sondage.listfriendclick.size()));
-        newValues4.put("statut_particulier", 1);
+        newValues3.put("status_principal", String.valueOf(0));
+        newValues4.put("statut_particulier",  String.valueOf(1));
         db.update("Survey", newValues1, "idpoll=? AND data_reponse=?", new String[]{String.valueOf(Sondage.idpoll), prop});
         db.update("Survey_Answer", newValues2, "username=? AND idpoll=? AND reponse=?", new String[]{User.loggedUser.getUsername(), String.valueOf(Sondage.idpoll), prop});
         db.update("Poll", newValues3, "idpoll=?", new String[]{String.valueOf(Sondage.idpoll)});
@@ -223,7 +226,7 @@ public class Survey extends Poll {
         List<String> list = new ArrayList<String>();
         Cursor c = db.query("Survey", // La table
                 new String[]{"data_reponse"},
-                "idpoll =? AND points=?",
+                "idpoll =? AND point=?",
                 new String[]{String.valueOf(idpoll), String.valueOf(points)},
                 null,
                 null,
@@ -266,9 +269,9 @@ public class Survey extends Poll {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
         List<Integer> list = new ArrayList<Integer>();
-        Cursor c = db.query("\"Poll_access\"", // La table
+        Cursor c = db.query("Poll_access", // La table
                 new String[]{"statut_particulier"},
-                "idpoll",
+                "idpoll=?",
                 new String[]{String.valueOf(idpolll)},
                 null,
                 null,
@@ -302,9 +305,9 @@ public class Survey extends Poll {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
 
-        Cursor c = db.query("\"Survey\"", // La table
-                new String[]{"points"},
-                "idpoll", // Colonnes pour la clause WHERE
+        Cursor c = db.query("Survey", // La table
+                new String[]{"point"},
+                "idpoll=?", // Colonnes pour la clause WHERE
                 new String[]{String.valueOf(idpoll)}, // Valeurs pour la clause WHERE
                 null, // ne pas grouper les lignes
                 null, // ne pas filtrer par goupe de ligne
@@ -313,7 +316,7 @@ public class Survey extends Poll {
 
         if (c.moveToFirst()) {
             for (int i = 0; i < c.getCount(); i++) {
-                double s = c.getDouble(c.getColumnIndexOrThrow("points"));
+                double s = c.getDouble(c.getColumnIndexOrThrow("point"));
                 sondages.add(s);
                 c.moveToNext();
             }
@@ -327,19 +330,13 @@ public class Survey extends Poll {
         List<Integer> sondages = new ArrayList<Integer>();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
-
-        Cursor c = db.query("Survey", // La table
-                new String[]{"point"},
-                "reponse=? AND idpoll", // Colonnes pour la clause WHERE
-                new String[]{proposition, String.valueOf(idpoll)}, // Valeurs pour la clause WHERE
-                null, // ne pas grouper les lignes
-                null, // ne pas filtrer par goupe de ligne
-                null  // pas d'ordre
-        );
-
+        Log.i("display proposition",proposition);
+        Log.i("display idpoll",String.valueOf(idpoll));
+        Cursor c = db.query("Survey", new String[]{"point"},"data_reponse=? AND idpoll=?",new String[]{proposition, String.valueOf(idpoll)},null,null, null);
+        Log.i("size c", String.valueOf(c.getCount()));
         if (c.moveToFirst()) {
             for (int i = 0; i < c.getCount(); i++) {
-                int s = c.getInt(c.getColumnIndexOrThrow("points"));
+                int s = Integer.parseInt(c.getString(0));
                 sondages.add(s);
                 c.moveToNext();
             }
@@ -412,5 +409,57 @@ public class Survey extends Poll {
             db.close();
         }
         return surveys;
+    }
+
+    public static Survey getSurveyFromId(int id)
+    {
+        ArrayList<Survey> surveys=getSurvey();
+        Survey survey=null;
+        Log.i("Search id",String.valueOf(id));
+        for(int i=0;i<surveys.size();i++){
+            if(surveys.get(i).getId()==id)
+                survey=surveys.get(i);
+        }
+        return survey;
+    }
+
+    public static ArrayList<Survey> getSurveyOf(User user)
+    {
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        ArrayList<Survey> surveys = new ArrayList<>();
+
+        String[] colonnes = {"idpoll","titre"};
+        Cursor cursor = db.query("Poll", colonnes, "username_proprietaire=? AND types=?", new String[]{user.getUsername(),"s"}, null, null, null);
+        cursor.moveToFirst();
+        String title=null;
+        ArrayList<Integer> idpoll = new ArrayList<>();
+        while (!cursor.isAfterLast()) {
+            idpoll.add(Integer.valueOf(cursor.getString(0)));
+            title=cursor.getString(1);
+            Log.i("display",(cursor.getString(0)));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        Log.i("display size",String.valueOf(idpoll.size()));
+        Log.i("test",String.valueOf(0));
+        for(int i=0;i<idpoll.size();i++) {
+            String idQuestion=null;
+            String description=null;
+            String[] colonnes2 = {"data_reponse"};
+            cursor = db.query("Survey", colonnes2, "idpoll=?", new String[]{String.valueOf(idpoll.get(i))}, null, null, null);
+            cursor.moveToFirst();
+            ArrayList<Proposition> proposisiton = new ArrayList<>();
+            for (int j = 0; !cursor.isAfterLast(); j++) {
+                Log.i("test", "proposition : " + j);
+                proposisiton.add(new Proposition(cursor.getString(0)));
+                cursor.moveToNext();
+            }
+            cursor.close();
+            surveys.add(new Survey(idpoll.get(i), title, null, 'a', user, proposisiton));
+
+        }
+        db.close();
+        return surveys;
+
     }
 }
