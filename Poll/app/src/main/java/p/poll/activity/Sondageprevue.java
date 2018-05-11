@@ -3,8 +3,10 @@ package p.poll.activity;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -181,6 +183,9 @@ public class Sondageprevue extends Activity {
                 SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
                 db.insert("Poll_access", null, newValues1);
                 db.close();
+
+                Intent intent = new Intent(getApplicationContext(), Menu.class);
+                startActivity(intent);
 
             }
 
