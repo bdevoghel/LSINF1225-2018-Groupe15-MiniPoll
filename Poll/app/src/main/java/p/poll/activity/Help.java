@@ -51,7 +51,7 @@ public class Help extends Activity{
         TextView titre = (TextView) findViewById(R.id.textView7);
         titre.setText(advice.getOwner().getUsername() + " a besoin de vos conseils");
         TextView description = (TextView) findViewById(R.id.textView9);
-        description.setText(advice.get);
+        description.setText(advice.getDescription());
     }
 
     @Override
