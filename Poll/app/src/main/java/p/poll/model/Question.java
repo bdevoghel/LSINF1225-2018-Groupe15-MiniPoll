@@ -87,7 +87,7 @@ public class Question {
 
     public static int setIdQuestion(String idpoll){
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        int id = 0;
+        int id = 1;
         String[] colonnes = {"idquestion"};
         Cursor cursor = db.query("Question_list", colonnes, null, null,null, null, null);
         cursor.moveToFirst();

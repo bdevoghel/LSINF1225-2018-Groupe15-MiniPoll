@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import p.poll.R;
 import p.poll.model.Notification;
+import p.poll.model.Poll;
 
 /**
  * Created by Nicolas on 03/05/2018.
@@ -21,6 +22,7 @@ import p.poll.model.Notification;
 public class NotificationActivity extends Activity {
     public ArrayList<Notification> notifications;
     public static Notification currentNotification=null;
+    public static int currentPoll=0;
         ListView list;
         String[] web ;
         Integer[] imageId;
@@ -62,7 +64,20 @@ public class NotificationActivity extends Activity {
                     }
                     else
                     {
-                        //TODO: Gérer les notifications de poll
+                        currentPoll=currentNotification.getPoll();
+                        if(Poll.getType(currentPoll)=="a") {
+                            Intent intent = new Intent(getApplicationContext(), Help.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else if(Poll.getType(currentPoll)=="q")
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
                     }
                     //TextView textview = (TextView) view.findViewById(R.id.txt);
                     //CharSequence t = textview.getText();
