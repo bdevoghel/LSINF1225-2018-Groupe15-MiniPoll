@@ -24,6 +24,7 @@ public class NotificationActivity extends Activity {
     public ArrayList<Notification> notifications;
     public static Notification currentNotification=null;
     public static int currentPoll=0;
+    public static String userNotif=null;
         ListView list;
         String[] web ;
         Integer[] imageId;
@@ -73,6 +74,7 @@ public class NotificationActivity extends Activity {
                         Log.i("display",Poll.getType(currentPoll));
                         if(Poll.getType(currentPoll).equals("a")) {
                             if(Poll.getOwner(currentPoll).equals(User.loggedUser)) {
+                                userNotif=currentNotification.getUsername();
                                 Intent intent = new Intent(getApplicationContext(), resultathelp.class);
                                 startActivity(intent);
                                 Notification.setDone(currentNotification);
