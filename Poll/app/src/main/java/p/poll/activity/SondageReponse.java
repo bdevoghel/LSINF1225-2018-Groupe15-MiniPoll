@@ -31,7 +31,7 @@ public class SondageReponse extends Activity {
     public static List<String> listedescription;
     public static String[] listenumeroliste;
     public static String[] listedescriptionliste;
-    String[] web = {
+    String[] web2 = {
             "Proposition1", // First == celui choisi
             "Proposition2",
             "Proposition3",
@@ -39,15 +39,11 @@ public class SondageReponse extends Activity {
             "Proposition5",
             "Proposition6"
     } ;
-    String[] phrase = {
-            "Texte Proposition1",
-            "Texte Proposition2",
-            "Texte Proposition3",
-            "Texte Proposition4",
-            "Texte Proposition5",
-            "Texte Proposition6"
-    } ;
-
+    String[] web;
+    List<String> proposition;
+    List<String> proptitre;
+    String[] phrase;
+    String title;
     private ListView mListView;
     Button bouton;
     public static List<String> pourcent = new ArrayList<String>();
@@ -56,6 +52,16 @@ public class SondageReponse extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage_reponse);
+        TextView titre = (TextView) findViewById(R.id.Title);
+        titre.setText(title);
+        proposition = new ArrayList<String>();
+        proptitre = new ArrayList<String>();
+        for(int i=0; i<proposition.size();i++)
+        {
+            proptitre.add(web2[i]);
+        }
+        web = proptitre.toArray(new String[proptitre.size()]);
+        phrase = proposition.toArray(new String[proposition.size()]);
         liste = new ArrayList<View>();
         listenumero = new ArrayList<String>();
         listedescription = new ArrayList<String>();
