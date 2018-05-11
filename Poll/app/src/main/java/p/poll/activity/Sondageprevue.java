@@ -183,7 +183,7 @@ public class Sondageprevue extends Activity {
                 SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
                 db.insert("Poll_access", null, newValues1);
                 db.close();
-
+                //TODO: ajouter notif et poll
                 Intent intent = new Intent(getApplicationContext(), Menupoll.class);
                 startActivity(intent);
 
