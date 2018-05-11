@@ -230,7 +230,7 @@ public class Sondage extends Activity {
             "Proposition5",
             "Proposition6"
     } ;
-    String title;
+    public static String title;
     EditText titre;
     public static List<String> ListePropositions = new ArrayList<String>();
     public List<String> MakeListePropositions (){
