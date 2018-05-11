@@ -22,7 +22,7 @@ import p.poll.model.Advice;
 
 public class ListHelp extends AppCompatActivity {
     private ListView mListView;
-    private List<Advice> users = Advice.getAdvice();
+    private List<Advice> users;
     public static Advice advice;
 
     @Override
@@ -32,7 +32,7 @@ public class ListHelp extends AppCompatActivity {
         TextView texte =(TextView) findViewById(R.id.Title);
         texte.setText("Liste des demandes d'aide");
         mListView = (ListView) findViewById(R.id.listView);
-
+        users = Advice.getAdvice();
         List<PollModel> polls = genererPoll();
 
         PollAdapter adapter = new PollAdapter(ListHelp.this, polls);

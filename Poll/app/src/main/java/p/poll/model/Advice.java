@@ -137,7 +137,9 @@ public class Advice extends Poll {
         cursor.close();
         Log.i("display size",String.valueOf(idpoll.size()));
         Log.i("test",String.valueOf(0));
+        db.close();
         for(int i=0;i<idpoll.size();i++) {
+            db = MySQLiteHelper.get().getReadableDatabase();
             String idQuestion=null;
             String description=null;
             String[] colonnes2 = {"idquestion", "description_question"};
@@ -151,40 +153,39 @@ public class Advice extends Poll {
                 cursor.moveToNext();
             }
             cursor.close();
-            if(idQuestion==null){
-                db.close();
-                return advices;
-            }
+            if(idQuestion!=null) {
 
-            String[] colonnes3 = {"texte"};
-            cursor = db.query("Questionnaire_and_Advice", colonnes3, "idquestion=?", new String[]{idQuestion}, null, null, null);
-            cursor.moveToFirst();
-            String[] imagePath = new String[2];
-            for (int j=0;!cursor.isAfterLast();j++) {
-                Log.i("test","imagepath : "+j);
-                imagePath[j]=cursor.getString(0);
-                cursor.moveToNext();
-            }
-            cursor.close();
 
-            User owner=null;
-            Log.i("display",String.valueOf(idpoll));
-            String[] colonnes4 = {"username_proprietaire"};
-            cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=?", new String[]{String.valueOf(idpoll.get(i)),String.valueOf(0)}, null, null, null);
-            cursor.moveToFirst();
-            for (int j=0;!cursor.isAfterLast();j++) {
-                Log.i("test","owner");
-                owner=User.getUser(cursor.getString(0));
-                cursor.moveToNext();
-            }
-            cursor.close();
-            Log.i("ids",String.valueOf(idpoll.get(i)));
+                String[] colonnes3 = {"texte"};
+                cursor = db.query("Questionnaire_and_Advice", colonnes3, "idquestion=?", new String[]{idQuestion}, null, null, null);
+                cursor.moveToFirst();
+                String[] imagePath = new String[2];
+                for (int j = 0; !cursor.isAfterLast(); j++) {
+                    Log.i("test", "imagepath : " + j);
+                    imagePath[j] = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+                cursor.close();
 
-            if(owner!=null) {
-                advices.add(new Advice(idpoll.get(i),"Help me out!", "Help me making a choice!", 'a', owner,imagePath[0],imagePath[1],description));
+                User owner = null;
+                Log.i("display", String.valueOf(idpoll));
+                String[] colonnes4 = {"username_proprietaire"};
+                cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=?", new String[]{String.valueOf(idpoll.get(i)), String.valueOf(0)}, null, null, null);
+                cursor.moveToFirst();
+                for (int j = 0; !cursor.isAfterLast(); j++) {
+                    Log.i("test", "owner");
+                    owner = User.getUser(cursor.getString(0));
+                    cursor.moveToNext();
+                }
+                cursor.close();
+                Log.i("ids", String.valueOf(idpoll.get(i)));
+
+                if (owner != null) {
+                    advices.add(new Advice(idpoll.get(i), "Help me out!", "Help me making a choice!", 'a', owner, imagePath[0], imagePath[1], description));
+                }
             }
+            db.close();
         }
-        db.close();
         return advices;
     }
 
@@ -281,11 +282,12 @@ public class Advice extends Poll {
         values.put("poll_notif",String.valueOf(idpoll));
         db.insert("Notification",null,values);
         Notification n =Notification.getNotification(idpoll);
-        if(n==null)
-            Log.i("NULL","n=NULL");
+        if(n==null) {
+            Log.i("NULL", "n=NULL");
+        }
+        db.close();
         Notification.setDone(n);
 
-        db.close();
     }
 
     public static int getAnswer(int idpoll)
