@@ -127,7 +127,7 @@ public class Sondageprevue extends Activity {
             @Override
             public void onClick(View v) {
                 int m = 0;
-                while (m<7){
+                while (m<Sondage.listproposition.size()){
 
                     ContentValues newValues = new ContentValues();
                     View vv = Sondage.listproposition.get(m);
