@@ -184,7 +184,7 @@ public class Sondageprevue extends Activity {
                 db.insert("Poll_access", null, newValues1);
                 db.close();
 
-                Intent intent = new Intent(getApplicationContext(), Menu.class);
+                Intent intent = new Intent(getApplicationContext(), Menupoll.class);
                 startActivity(intent);
 
             }
