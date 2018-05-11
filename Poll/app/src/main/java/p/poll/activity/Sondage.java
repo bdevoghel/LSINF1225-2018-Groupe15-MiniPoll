@@ -187,6 +187,7 @@ package p.poll.activity;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -219,6 +220,7 @@ public class Sondage extends Activity {
     public static List<String> listfriendclick;
     Button bouton;
     public static List<View> listproposition;
+    public static List<String> listPropositions;
     public static String[] web = {
             "Proposition1",
             "Proposition2",
@@ -230,7 +232,12 @@ public class Sondage extends Activity {
     public static List<String> ListePropositions = new ArrayList<String>();
     public List<String> MakeListePropositions (){
         for (int i = 0; i < 7; i++){
-            ListePropositions.add(this.web[i]);
+            View vv = listproposition.get(i);
+            if(vv != null) {
+                EditText edit = (EditText) vv.findViewById(R.id.editText6);
+                String prop = edit.getText().toString();
+                listPropositions.add(prop);
+            }
         }
         return ListePropositions;
     }
@@ -324,45 +331,10 @@ public class Sondage extends Activity {
                     Toast.makeText(p.poll.activity.Sondage.this,"Aucun ami sélectionné",
                             Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
-                    int m = 0;
-                    while (m<6){
-
-                        ContentValues newValues = new ContentValues();
-                        View vv = listproposition.get(m);
-                        if (vv != null ) {
-                            EditText edit = (EditText) vv.findViewById(R.id.editText6);
-                            String prop = edit.getText().toString();
-                            if (prop != "") {
-                                p ++;
-                                newValues.put("idpoll", idpoll);
-                                newValues.put("data_reponse", prop);
-
-                                MySQLiteHelper.get().getWritableDatabase().insert("Survey", null, newValues);
-                            }
-                        }
-                    }
-                    for (int i = 0; i < p; i++){
-                        for (int k = 0; k < listproposition.size(); k++){
-                            ContentValues newValues1 = new ContentValues();
-                            View vv = listproposition.get(k);
-                            EditText edit = (EditText) vv.findViewById(R.id.editText6);
-                            String prop = edit.getText().toString();
-                            newValues1.put("idpoll", idpoll);
-                            newValues1.put("username", listfriendclick.get(i));
-                            newValues1.put("data_reponse", prop);
-
-
-                            MySQLiteHelper.get().getWritableDatabase().insert("Survey_Answer", null, newValues1);
-                        }
-                    }
-                    ContentValues newValues1 = new ContentValues();
-
-                    newValues1.put("username", User.loggedUser.getUsername());
-                    newValues1.put("idpoll", Sondage.idpoll);
-                    newValues1.put("statut_particulier", 0);
-                    MySQLiteHelper.get().getWritableDatabase().insert("Poll_access", null, newValues1);
+                else {
+                    MakeListePropositions();
+                    Intent intent = new Intent(getApplicationContext(), Sondageprevue.class);
+                    startActivity(intent);
                 }
             }
         });
