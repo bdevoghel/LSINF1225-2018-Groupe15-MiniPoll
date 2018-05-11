@@ -3,6 +3,7 @@ package p.poll.activity;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -138,7 +139,9 @@ public class Sondageprevue extends Activity {
                             newValues.put("idpoll", Sondage.idpoll);
                             newValues.put("data_reponse", prop);
 
-                            MySQLiteHelper.get().getWritableDatabase().insert("Survey", null, newValues);
+                            SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
+                            db.insert("Survey", null, newValues);
+                            db.close();
                         }
                     }
                     m++;
@@ -158,7 +161,9 @@ public class Sondageprevue extends Activity {
                                 newValues1.put("data_reponse", prop);
 
 
-                                MySQLiteHelper.get().getWritableDatabase().insert("Survey_Answer", null, newValues1);
+                                SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
+                                db.insert("Survey_Answer", null, newValues1);
+                                db.close();
                             }
                         }
                     }
@@ -168,7 +173,9 @@ public class Sondageprevue extends Activity {
                 newValues1.put("username", User.loggedUser.getUsername());
                 newValues1.put("idpoll", Sondage.idpoll);
                 newValues1.put("statut_particulier", 0);
-                MySQLiteHelper.get().getWritableDatabase().insert("Poll_access", null, newValues1);
+                SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
+                db.insert("Poll_access", null, newValues1);
+                db.close();
 
             }
 
