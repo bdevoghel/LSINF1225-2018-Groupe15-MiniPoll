@@ -41,9 +41,9 @@ public class Sondageprevue extends Activity {
     public static String[] listenumeroliste;
     public static String[] listedescriptionliste;
 
-    String[] web = new String[Sondage.listproposition.size()];
+    String[] web;
     int size;
-    String[] phrase = Sondage.listPropositions.toArray(new String[Sondage.listproposition.size()]);
+    String[] phrase;
     String[] web2 = {
             "Proposition1", // First == celui choisi
             "Proposition2",
@@ -73,6 +73,8 @@ public class Sondageprevue extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage_reponse);
+        web = new String[Sondage.listproposition.size()];
+        phrase = Sondage.listPropositions.toArray(new String[Sondage.listproposition.size()]);
         size = Sondage.listPropositions.size();
         for(int i =0; i<size ; i++)
         {
