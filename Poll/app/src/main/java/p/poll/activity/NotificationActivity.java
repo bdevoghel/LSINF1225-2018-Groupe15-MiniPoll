@@ -102,6 +102,10 @@ public class NotificationActivity extends Activity {
                             if(Poll.getOwner(currentPoll).equals(User.loggedUser)) {
                             }
                             else {
+                                Intent intent = new Intent(getApplicationContext(),SondageReponse.class);
+                                startActivity(intent);
+                                Notification.setDone(currentNotification);
+                                finish();
                             }
                         }
                     }
