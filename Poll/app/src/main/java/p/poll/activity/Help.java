@@ -26,6 +26,7 @@ public class Help extends Activity{
     int widthscreen;
     int heightscreen;
     int i = 0;
+    int choice=0;
     int[]  img1location= new int[2];
     int[]  img2location= new int[2];
     int Xbegin = 0;
@@ -104,7 +105,7 @@ public class Help extends Activity{
                     Toast.makeText(this, "Slide left image1", Toast.LENGTH_SHORT).show();
                     img1.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
                     img2.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-                    Advice.answer(currentPoll,1);
+                    choice=1;
 
                 }
                 else if(isInimg1 && X>Xbegin+widthscreen/3)
@@ -112,21 +113,21 @@ public class Help extends Activity{
                     Toast.makeText(this, "Slide right image1", Toast.LENGTH_SHORT).show();
                     img2.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
                     img1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-                    Advice.answer(currentPoll,0);
+                    choice=0;
                 }
                 else if(isInimg2 && X<Xbegin-widthscreen/3)
                 {
                     Toast.makeText(this, "Slide left image2", Toast.LENGTH_SHORT).show();
                     img2.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
                     img1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-                    Advice.answer(currentPoll,0);
+                    choice=0;
                 }
                 else if(isInimg2 && X>Xbegin+widthscreen/3)
                 {
                     Toast.makeText(this, "Slide right image2", Toast.LENGTH_SHORT).show();
                     img1.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
                     img2.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-                    Advice.answer(currentPoll,1);
+                    choice=1;
                 }
                 else
                 {

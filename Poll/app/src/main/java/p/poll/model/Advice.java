@@ -188,7 +188,7 @@ public class Advice extends Poll {
     public static void answer(int idpoll, int choice)
     {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-
+        Log.i("test", "answer");
         String idQuestion=null;
         String[] colonnes = {"idquestion"};
         Cursor cursor = db.query("Question_list", colonnes, "idpoll=?", new String[]{String.valueOf(idpoll)}, null, null, null);
