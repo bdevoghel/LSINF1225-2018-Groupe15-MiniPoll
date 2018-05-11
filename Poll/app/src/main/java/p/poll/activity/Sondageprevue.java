@@ -2,10 +2,12 @@ package p.poll.activity;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,8 +15,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import p.poll.MySQLiteHelper;
 import p.poll.R;
 import p.poll.model.Survey;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 04/05/2018.
@@ -35,7 +39,11 @@ public class Sondageprevue extends Activity {
     public static List<String> listedescription;
     public static String[] listenumeroliste;
     public static String[] listedescriptionliste;
-    String[] web = {
+
+    String[] web = new String[Sondage.listproposition.size()];
+    int size = Sondage.listPropositions.size();
+    String[] phrase = Sondage.listPropositions.toArray(new String[Sondage.listproposition.size()]);
+    String[] web2 = {
             "Proposition1", // First == celui choisi
             "Proposition2",
             "Proposition3",
@@ -43,6 +51,9 @@ public class Sondageprevue extends Activity {
             "Proposition5",
             "Proposition6"
     };
+
+
+    /*
     String[] phrase = {
             "Texte Proposition1",
             "Texte Proposition2",
@@ -51,6 +62,7 @@ public class Sondageprevue extends Activity {
             "Texte Proposition5",
             "Texte Proposition6"
     };
+    */
 
     private ListView mListView;
     Button bouton;
@@ -60,6 +72,10 @@ public class Sondageprevue extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage_reponse);
+        for(int i =0; i<size ; i++)
+        {
+            web[i] = web2[i];
+        }
         content = getContentResolver();
         liste = new ArrayList<View>();
         listenumero = new ArrayList<String>();
@@ -70,6 +86,7 @@ public class Sondageprevue extends Activity {
         CustomSondageAnswer listAdapter = new
                 CustomSondageAnswer(Sondageprevue.this, web, phrase);
         bouton = (Button) findViewById(R.id.button);
+        bouton.setText("Sauvegarder");
         list = (ListView) findViewById(R.id.listView2);
         list.setAdapter(listAdapter);
         mListView = (ListView) findViewById(R.id.listView1);
@@ -108,8 +125,45 @@ public class Sondageprevue extends Activity {
 
             @Override
             public void onClick(View v) {
-                //Sauvegarder
+                int m = 0;
+                while (m<6){
+
+                    ContentValues newValues = new ContentValues();
+                    View vv = Sondage.listproposition.get(m);
+                    if (vv != null ) {
+                        EditText edit = (EditText) vv.findViewById(R.id.editText6);
+                        String prop = edit.getText().toString();
+                        if (prop != "") {
+                            Sondage.p ++;
+                            newValues.put("idpoll", Sondage.idpoll);
+                            newValues.put("data_reponse", prop);
+
+                            MySQLiteHelper.get().getWritableDatabase().insert("Survey", null, newValues);
+                        }
+                    }
+                }
+                for (int i = 0; i < Sondage.p; i++){
+                    for (int k = 0; k < Sondage.listproposition.size(); k++){
+                        ContentValues newValues1 = new ContentValues();
+                        View vv = Sondage.listproposition.get(k);
+                        EditText edit = (EditText) vv.findViewById(R.id.editText6);
+                        String prop = edit.getText().toString();
+                        newValues1.put("idpoll", Sondage.idpoll);
+                        newValues1.put("username", Sondage.listfriendclick.get(i));
+                        newValues1.put("data_reponse", prop);
+
+
+                        MySQLiteHelper.get().getWritableDatabase().insert("Survey_Answer", null, newValues1);
+                    }
+                }
+                ContentValues newValues1 = new ContentValues();
+
+                newValues1.put("username", User.loggedUser.getUsername());
+                newValues1.put("idpoll", Sondage.idpoll);
+                newValues1.put("statut_particulier", 0);
+                MySQLiteHelper.get().getWritableDatabase().insert("Poll_access", null, newValues1);
             }
+
         });
     }
 }
