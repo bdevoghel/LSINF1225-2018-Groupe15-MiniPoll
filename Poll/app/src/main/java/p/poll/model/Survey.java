@@ -61,8 +61,8 @@ public class Survey extends Poll {
         propositions = new ArrayList<>();
     }
 
-    public Survey(String title, String description, char type, User owner, ArrayList<Proposition> propositions) {
-        super(title, description, type, owner);
+    public Survey(int id, String title, String description, char type, User owner, ArrayList<Proposition> propositions) {
+        super(id, title, description, type, owner);
         this.propositions = propositions;
     }
 
@@ -376,29 +376,31 @@ public class Survey extends Poll {
                 String[] colonnes3 = {"texte"};
                 cursor = db.query("Questionnaire_and_Advice", colonnes3, "idquestion=?", new String[]{idQuestion}, null, null, null);
                 cursor.moveToFirst();
-                String[] imagePath = new String[2];
+                ArrayList<Proposition> proposisiton = new ArrayList<>();
                 for (int j = 0; !cursor.isAfterLast(); j++) {
-                    Log.i("test", "imagepath : " + j);
-                    imagePath[j] = cursor.getString(0);
+                    Log.i("test", "proposition : " + j);
+                    proposisiton.add(new Proposition(cursor.getString(0)));
                     cursor.moveToNext();
                 }
                 cursor.close();
 
                 User owner = null;
+                String title = null;
                 Log.i("display", String.valueOf(idpoll));
-                String[] colonnes4 = {"username_proprietaire"};
+                String[] colonnes4 = {"username_proprietaire","titre"};
                 cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=? AND types=?", new String[]{String.valueOf(idpoll.get(i)), String.valueOf(0), "s"}, null, null, null);
                 cursor.moveToFirst();
                 for (int j = 0; !cursor.isAfterLast(); j++) {
                     Log.i("test", "owner");
                     owner = User.getUser(cursor.getString(0));
+                    title = cursor.getString(0);
                     cursor.moveToNext();
                 }
                 cursor.close();
                 Log.i("ids", String.valueOf(idpoll.get(i)));
 
                 if (owner != null) {
-                    //surveys.add(new Survey(idpoll.get(i), "Help me out!", "Help me making a choice!", 'a', owner, imagePath[0], imagePath[1], description));
+                    surveys.add(new Survey(idpoll.get(i), title, description, 'a', owner, proposisiton));
                 }
             }
             db.close();
