@@ -26,6 +26,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.Sondageprevue"
+            android:label="@string/title_activity_survey" />
+        <activity
             android:name=".activity.Quizzprevue"
             android:label="@string/title_activity_survey" />
         <activity

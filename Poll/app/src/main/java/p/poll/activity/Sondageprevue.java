@@ -163,7 +163,7 @@ public class Sondageprevue extends Activity {
                 newValues1.put("statut_particulier", 0);
                 MySQLiteHelper.get().getWritableDatabase().insert("Poll_access", null, newValues1);
             }
-            
+
         });
     }
 }
