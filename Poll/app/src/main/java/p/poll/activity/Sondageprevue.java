@@ -158,12 +158,13 @@ public class Sondageprevue extends Activity {
                                 prop = edit.getText().toString();
                                 newValues1.put("idpoll", Sondage.idpoll);
                                 newValues1.put("username", Sondage.listfriendclick.get(i));
-                                newValues1.put("data_reponse", prop);
+                                newValues1.put("reponse", prop);
+                                newValues1.put("ordre", 0);
 
 
-                                SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
-                                db.insert("Survey_Answer", null, newValues1);
-                                db.close();
+                                //SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
+                                MySQLiteHelper.get().getWritableDatabase().insert("Survey_Answer", null, newValues1);
+                                MySQLiteHelper.get().getWritableDatabase().close();
                             }
                         }
                     }
