@@ -91,6 +91,7 @@ public class Sondageprevue extends Activity {
         }
         CustomSondagePrevue listAdapter = new
                 CustomSondagePrevue(Sondageprevue.this, web, phrase);
+        TextView titre = (TextView) findViewById(R.id.Title);
         bouton = (Button) findViewById(R.id.button);
         bouton.setText("Sauvegarder");
         list = (ListView) findViewById(R.id.listView2);
