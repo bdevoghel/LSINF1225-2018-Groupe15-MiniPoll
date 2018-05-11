@@ -73,7 +73,7 @@ public class Sondageprevue extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage_reponse);
-        web = new String[Sondage.listproposition.size()];
+        web = new String[Sondage.listPropositions.size()];
         phrase = Sondage.listPropositions.toArray(new String[Sondage.listproposition.size()]);
         size = Sondage.listPropositions.size();
         for(int i =0; i<size ; i++)
