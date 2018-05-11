@@ -236,7 +236,7 @@ public class Sondage extends Activity {
             if(vv != null) {
                 EditText edit = (EditText) vv.findViewById(R.id.editText6);
                 String prop = edit.getText().toString();
-                if(prop != "") {
+                if(prop.compareTo("")!=0) {
                     listPropositions.add(prop);
                 }
             }

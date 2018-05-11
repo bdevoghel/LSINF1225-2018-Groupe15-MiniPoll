@@ -141,8 +141,9 @@ public class Sondageprevue extends Activity {
                             MySQLiteHelper.get().getWritableDatabase().insert("Survey", null, newValues);
                         }
                     }
+                    m++;
                 }
-                /*
+
                 for (int i = 0; i < Sondage.p; i++){
                     for (int k = 0; k < Sondage.listproposition.size(); k++){
                         ContentValues newValues1 = new ContentValues();
@@ -163,7 +164,7 @@ public class Sondageprevue extends Activity {
                 newValues1.put("idpoll", Sondage.idpoll);
                 newValues1.put("statut_particulier", 0);
                 MySQLiteHelper.get().getWritableDatabase().insert("Poll_access", null, newValues1);
-                */
+
             }
 
         });
