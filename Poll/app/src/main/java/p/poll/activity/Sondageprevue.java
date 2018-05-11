@@ -190,15 +190,26 @@ public class Sondageprevue extends Activity {
 
                 ContentValues newValues2 = new ContentValues();
 
-                newValues2.put("username_propriétaire", User.loggedUser.getUsername());
+                newValues2.put("username_proprietaire", User.loggedUser.getUsername());
                 newValues2.put("idpoll", Sondage.idpoll);
                 newValues2.put("description", Sondage.title);
                 newValues2.put("status_principal", 0);
+                newValues2.put("types","s");
                 SQLiteDatabase db1 = MySQLiteHelper.get().getWritableDatabase();
                 db1.insert("Poll", null, newValues2);
                 db1.close();
 
-                //TODO: ajouter notif et poll
+                db1 = MySQLiteHelper.get().getWritableDatabase();
+                for(int i=0;i<Sondage.listfriendclick.size();i++) {
+                    ContentValues values = new ContentValues();
+                    values.put("username",Sondage.listfriendclick.get(i));
+                    values.put("etat", String.valueOf(0));
+                    values.put("username_notif", User.loggedUser.getUsername());
+                    values.put("message", User.loggedUser.getFirstName() + " " + User.loggedUser.getLastName() + " invited you to answer his survey!");
+                    values.put("poll_notif", String.valueOf(Sondage.idpoll));
+                    db1.insert("Notification", null, values);
+                }
+                db1.close();
 
                 Intent intent = new Intent(getApplicationContext(), Menupoll.class);
                 startActivity(intent);
