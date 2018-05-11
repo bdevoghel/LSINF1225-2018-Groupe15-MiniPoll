@@ -144,8 +144,8 @@ public class Sondageprevue extends Activity {
                     m++;
                 }
 
-                for (int i = 0; i < 7; i++){
-                    for (int k = 0; k < Sondage.listproposition.size(); k++){
+                for (int i = 0; i < Sondage.listfriendclick.size(); i++){
+                    for (int k = 0; k < 7; k++){
                         ContentValues newValues1 = new ContentValues();
                         View vv = Sondage.listproposition.get(k);
                         if (vv != null ) {
