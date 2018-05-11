@@ -29,6 +29,8 @@ import p.poll.model.User;
 
 public class ListHelp extends AppCompatActivity {
     private ListView mListView;
+    private List<Advice> users = Advice.getAdvice();
+    public static Advice advice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class ListHelp extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Object o = mListView.getItemAtPosition(position);
                 PollModel j = (PollModel)o;
+                advice=users.get(position);
                 Toast.makeText(ListHelp.this, j.getText(),
                         Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Help.class);
@@ -58,7 +61,6 @@ public class ListHelp extends AppCompatActivity {
     }
 
     private List<PollModel> genererPoll(){
-        List<Advice> users = Advice.getAdvice();
         List<PollModel> tweets = new ArrayList<PollModel>();
         for(int i =0; i<users.size();i++)
         {

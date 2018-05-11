@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import p.poll.R;
+import p.poll.model.Advice;
 
 /**
  * Created by Nicolas on 04/05/2018.
@@ -28,12 +29,17 @@ public class Help extends Activity{
     int[]  img2location= new int[2];
     int Xbegin = 0;
     int Ybegin = 0;
+    private Advice advice = ListHelp.advice;
     private int currentPoll= NotificationActivity.currentPoll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+        if(NotificationActivity.currentPoll==0)
+        {
+            currentPoll=ListHelp.advice.getId();
+        }
         img1 = (ImageView) findViewById(R.id.imageView3);
         img2 = (ImageView) findViewById(R.id.imageView4);
         Display display = getWindowManager().getDefaultDisplay();
@@ -65,13 +71,11 @@ public class Help extends Activity{
                 int height2 = img2.getHeight();
                 if(yy1<Y && Y<(yy1+height1))
                 {
-                    Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+X+" Y: "+Y+"DEDANS image1" + "height = " + height1, Toast.LENGTH_SHORT).show();
                     isInimg1 = true;
                     isInimg2 = false;
                 }
                 else if(yy2<Y && Y<(yy2+height2))
                 {
-                    Toast.makeText(this, "ACTION_DOWN AT COORDS "+"X: "+X+" Y: "+Y+"DEDANS image2" + "height = " + height2, Toast.LENGTH_SHORT).show();
                     isInimg2 = true;
                     isInimg1 = false;
                 }
@@ -89,6 +93,7 @@ public class Help extends Activity{
                     Toast.makeText(this, "Slide left image1", Toast.LENGTH_SHORT).show();
                     img1.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
                     img2.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                    Advice.answer(currentPoll,1);
 
                 }
                 else if(isInimg1 && X>Xbegin+widthscreen/3)
@@ -96,18 +101,21 @@ public class Help extends Activity{
                     Toast.makeText(this, "Slide right image1", Toast.LENGTH_SHORT).show();
                     img2.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
                     img1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                    Advice.answer(currentPoll,0);
                 }
                 else if(isInimg2 && X<Xbegin-widthscreen/3)
                 {
                     Toast.makeText(this, "Slide left image2", Toast.LENGTH_SHORT).show();
                     img2.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
                     img1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                    Advice.answer(currentPoll,0);
                 }
                 else if(isInimg2 && X>Xbegin+widthscreen/3)
                 {
                     Toast.makeText(this, "Slide right image2", Toast.LENGTH_SHORT).show();
                     img1.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
                     img2.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                    Advice.answer(currentPoll,1);
                 }
                 else
                 {
