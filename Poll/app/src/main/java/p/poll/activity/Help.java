@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import p.poll.R;
@@ -47,6 +48,10 @@ public class Help extends Activity{
         display.getSize(size);
         widthscreen = size.x;
         heightscreen = size.y;
+        TextView titre = (TextView) findViewById(R.id.textView7);
+        titre.setText(advice.getOwner().getUsername() + " a besoin de vos conseils");
+        TextView description = (TextView) findViewById(R.id.textView9);
+        description.setText(advice.get);
     }
 
     @Override
