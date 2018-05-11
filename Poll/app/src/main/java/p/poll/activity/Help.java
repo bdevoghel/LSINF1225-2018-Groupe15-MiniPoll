@@ -41,6 +41,10 @@ public class Help extends Activity{
         {
             currentPoll=ListHelp.advice.getId();
         }
+        else
+        {
+            advice=Advice.getAdviceFromId(currentPoll);
+        }
         img1 = (ImageView) findViewById(R.id.imageView3);
         img2 = (ImageView) findViewById(R.id.imageView4);
         Display display = getWindowManager().getDefaultDisplay();

@@ -108,6 +108,16 @@ public class Advice extends Poll {
         db.close();
     }
 
+    public static Advice getAdviceFromId(int id){
+        ArrayList<Advice> advices=getAdvice();
+        Advice advice=null;
+        for(int i=0;i<advices.size();i++){
+            if(advices.get(i).getId()==id)
+                advice=advices.get(i);
+        }
+        return advice;
+    }
+
     public static ArrayList<Advice> getAdvice()
     {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
