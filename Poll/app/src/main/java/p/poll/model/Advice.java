@@ -69,7 +69,7 @@ public class Advice extends Poll {
         values.put("titre", "Help me out!");
         values.put("description", "Help me making a choice!");
         values.put("types", "a");
-        values.put("status_principal", 0);
+        values.put("status_principal", String.valueOf(0));
         Log.i("test","insert");
         db.insert("Poll", null, values);
         Log.i("test","done");
@@ -77,7 +77,7 @@ public class Advice extends Poll {
         values=new ContentValues();
         values.put("idpoll",id);
         values.put("username",username);
-        values.put("statut_particulier",0);
+        values.put("statut_particulier",String.valueOf(0));
         db.insert("Poll_access",null,values);
 
         values=new ContentValues();
@@ -119,13 +119,17 @@ public class Advice extends Poll {
         ArrayList<Integer> idpoll = new ArrayList<>();
         while (!cursor.isAfterLast()) {
             idpoll.add(Integer.valueOf(cursor.getString(0)));
+            Log.i("display",(cursor.getString(0)));
             cursor.moveToNext();
         }
         cursor.close();
+        Log.i("display size",String.valueOf(idpoll.size()));
+        Log.i("test",String.valueOf(0));
         for(int i=0;i<idpoll.size();i++) {
             String idQuestion=null;
             String description=null;
             String[] colonnes2 = {"idquestion", "description_question"};
+            Log.i("display",idpoll.get(i).toString());
             cursor = db.query("Question_list", colonnes2, "idpoll=?", new String[]{idpoll.get(i).toString()}, null, null, null);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -145,16 +149,19 @@ public class Advice extends Poll {
             cursor.moveToFirst();
             String[] imagePath = new String[2];
             for (int j=0;!cursor.isAfterLast();j++) {
+                Log.i("test","imagepath : "+j);
                 imagePath[j]=cursor.getString(0);
                 cursor.moveToNext();
             }
             cursor.close();
 
             User owner=null;
+            Log.i("display",String.valueOf(idpoll));
             String[] colonnes4 = {"username_proprietaire"};
-            cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=? AND types=?", new String[]{String.valueOf(idpoll),String.valueOf(0),"a"}, null, null, null);
+            cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=?", new String[]{String.valueOf(idpoll.get(i)),String.valueOf(0)}, null, null, null);
             cursor.moveToFirst();
             for (int j=0;!cursor.isAfterLast();j++) {
+                Log.i("test","owner");
                 owner=User.getUser(cursor.getString(0));
                 cursor.moveToNext();
             }
