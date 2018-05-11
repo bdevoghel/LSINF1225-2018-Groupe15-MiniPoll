@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import p.poll.R;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 03/05/2018.
@@ -26,6 +27,8 @@ public class Helpprevue extends AppCompatActivity {
         content=getContentResolver();
         setContentView(R.layout.activity_help);
         TextView desc = (TextView) findViewById(R.id.textView9);
+        TextView title = (TextView) findViewById(R.id.textView7);
+        title.setText(User.loggedUser.getUsername()+ " a besoin de votre aide");
         Intent intent= getIntent();
         Bundle b = intent.getExtras();
         description=(String) b.get("desc");
