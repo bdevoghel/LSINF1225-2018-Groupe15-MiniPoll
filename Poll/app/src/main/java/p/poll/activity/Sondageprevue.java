@@ -175,14 +175,28 @@ public class Sondageprevue extends Activity {
                         }
                     }
                 }
-                ContentValues newValues1 = new ContentValues();
 
-                newValues1.put("username", User.loggedUser.getUsername());
-                newValues1.put("idpoll", Sondage.idpoll);
-                newValues1.put("statut_particulier", 0);
-                SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
-                db.insert("Poll_access", null, newValues1);
-                db.close();
+                int x = 0;
+                while (x < Sondage.listfriendclick.size()) {
+                    ContentValues newValues1 = new ContentValues();
+                    newValues1.put("username", Sondage.listfriendclick.get(x));
+                    newValues1.put("idpoll", Sondage.idpoll);
+                    newValues1.put("statut_particulier", 0);
+                    SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
+                    db.insert("Poll_access", null, newValues1);
+                    db.close();
+                    x++;
+                }
+
+                ContentValues newValues2 = new ContentValues();
+
+                newValues2.put("username_propriétaire", User.loggedUser.getUsername());
+                newValues2.put("idpoll", Sondage.idpoll);
+                newValues2.put("description", "ton String");
+                newValues2.put("status_principal", 0);
+                SQLiteDatabase db1 = MySQLiteHelper.get().getWritableDatabase();
+                db1.insert("Poll", null, newValues2);
+                db1.close();
 
                 //TODO: ajouter notif et poll
 
