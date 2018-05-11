@@ -177,6 +177,32 @@ public class Survey extends Poll {
         return i;
     }
 
+    public static List<String> getTitre(int idpoll) {
+
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        //Les resultats de la requete sont mis dans un "curseur"
+        List<String> list = new ArrayList<String>();
+        Cursor c = db.query("\"Poll\"", // La table
+                new String[]{"description"},
+                "idpoll =?",
+                new String[]{String.valueOf(idpoll)},
+                null,
+                null,
+                null
+
+        );
+        if (c.moveToFirst()) {
+            for (int i = 0; i < c.getCount(); i++) {
+                String s = c.getString(c.getColumnIndexOrThrow("description"));
+                list.add(s);
+                c.moveToNext();
+            }
+        }
+        c.close();
+        return list;
+    }
+
+
     public static List<String> getListProposition(int PollIdentifiant) {
         List<String> proposition = new ArrayList<String>();
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
