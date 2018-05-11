@@ -162,9 +162,9 @@ public class Sondageprevue extends Activity {
                                 newValues1.put("ordre", 0);
 
 
-                                //SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
-                                MySQLiteHelper.get().getWritableDatabase().insert("Survey_Answer", null, newValues1);
-                                MySQLiteHelper.get().getWritableDatabase().close();
+                                SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
+                                db.insert("Survey_Answer", null, newValues1);
+                                db.close();
                             }
                         }
                     }
