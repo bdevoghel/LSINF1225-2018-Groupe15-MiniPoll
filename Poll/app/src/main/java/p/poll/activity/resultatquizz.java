@@ -24,7 +24,7 @@ import p.poll.R;
 
 public class resultatquizz extends Activity{
     public static ContentResolver content;
-    ExpandableListAdapterprevue listAdapter;
+    ExpandableListAdapterresultat listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     List<String> listdescription;
@@ -45,7 +45,7 @@ public class resultatquizz extends Activity{
         // preparing list data
         prepareListData();
 
-        listAdapter = new ExpandableListAdapterprevue(this, listDataHeader, listdescription, listDataChild);
+        listAdapter = new ExpandableListAdapterresultat(this, listDataHeader, listdescription, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
@@ -86,36 +86,7 @@ public class resultatquizz extends Activity{
             }
         });
 
-        // Listview on child click listener
-        expListView.setOnChildClickListener(new OnChildClickListener() {
 
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                // TODO Auto-generated method stub
-                TextView txt = (TextView) v.findViewById(R.id.lblListItem);
-                if(choix.get(groupPosition) == null)
-                {
-                    choix.set(groupPosition,txt.getText().toString());
-                    v.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-                }
-                else if(choix.get(groupPosition).toString().compareTo(txt.getText().toString()) == 0)
-                {
-                    Toast.makeText(
-                            getApplicationContext(),choix.get(groupPosition).toString()
-                            , Toast.LENGTH_SHORT)
-                            .show();
-                    choix.set(groupPosition,null);
-                    v.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Vous avez déjà choisi une réponse. Recliquer dessus pour supprimer",
-                            Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
-        });
 
         Button valider = (Button) findViewById(R.id.Valider);
         valider.setText("Sauvegarder");
