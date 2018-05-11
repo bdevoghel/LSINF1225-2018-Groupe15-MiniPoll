@@ -202,15 +202,17 @@ public class Survey extends Poll {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         //Les resultats de la requete sont mis dans un "curseur"
         List<String> list = new ArrayList<String>();
-        Cursor c = db.query("\"Survey\"", // La table
+        Cursor c = db.query("Survey", // La table
                 new String[]{"data_reponse"},
-                "id =? AND points=?",
+                "idpoll =? AND points=?",
                 new String[]{String.valueOf(idpoll), String.valueOf(points)},
                 null,
                 null,
                 null
 
         );
+
+
         if (c.moveToFirst()) {
             for (int i = 0; i < c.getCount(); i++) {
                 String s = c.getString(c.getColumnIndexOrThrow("data_reponse"));
@@ -219,8 +221,27 @@ public class Survey extends Poll {
             }
         }
         c.close();
+        db.close();
         return list;
     }
+
+    public static ArrayList<String> getListSondage(int idpoll) {
+
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        //Les resultats de la requete sont mis dans un "curseur"
+        ArrayList<String> list = new ArrayList<String>();
+        Cursor c = db.query("Survey",new String[]{"data_reponse"},"idpoll =?",new String[]{String.valueOf(idpoll)},null, null, null);
+        c.moveToFirst();
+        while(!c.isAfterLast())
+        {
+            list.add(c.getString(0));
+            c.moveToNext();
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
 
     public static List<Integer> etats (int idpolll) {
 
