@@ -170,7 +170,7 @@ public class Advice extends Poll {
                 User owner = null;
                 Log.i("display", String.valueOf(idpoll));
                 String[] colonnes4 = {"username_proprietaire"};
-                cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=?", new String[]{String.valueOf(idpoll.get(i)), String.valueOf(0)}, null, null, null);
+                cursor = db.query("Poll", colonnes4, "idpoll=? AND status_principal=? AND types=?", new String[]{String.valueOf(idpoll.get(i)), String.valueOf(0),"a"}, null, null, null);
                 cursor.moveToFirst();
                 for (int j = 0; !cursor.isAfterLast(); j++) {
                     Log.i("test", "owner");

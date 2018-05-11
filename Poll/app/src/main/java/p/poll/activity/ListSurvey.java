@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p.poll.R;
+import p.poll.model.Survey;
 import p.poll.model.User;
 
 
@@ -28,10 +29,11 @@ import p.poll.model.User;
 
 public class ListSurvey extends AppCompatActivity {
     private ListView mListView;
-    List<String> Sondage;
+    ArrayList<Integer> Sondage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Sondage= Survey.getListSondage()
         setContentView(R.layout.activity_listhelp);
         TextView texte =(TextView) findViewById(R.id.Title);
         texte.setText("Liste des sondages");
