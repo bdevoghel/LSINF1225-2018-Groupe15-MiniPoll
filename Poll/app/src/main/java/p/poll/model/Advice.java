@@ -110,7 +110,7 @@ public class Advice extends Poll {
     }
 
     public static Advice getAdviceFromId(int id){
-        ArrayList<Advice> advices=getAdvicesOf(User.loggedUser);
+        ArrayList<Advice> advices=getAdvice();
         Advice advice=null;
         Log.i("Search id",String.valueOf(id));
         for(int i=0;i<advices.size();i++){
@@ -266,7 +266,6 @@ public class Advice extends Poll {
             db.insert("Questionnaire_and_Advice_Answer", null, values);
             Log.i("test", "done");
         }
-        Poll.setUserDone(idpoll,User.loggedUser);
 
         ContentValues values = new ContentValues();
         db.close();
@@ -285,8 +284,11 @@ public class Advice extends Poll {
         if(n==null) {
             Log.i("NULL", "n=NULL");
         }
+        else {
+            Notification.setDone(n);
+        }
+        Poll.setUserDone(idpoll,User.loggedUser);
         db.close();
-        Notification.setDone(n);
 
     }
 

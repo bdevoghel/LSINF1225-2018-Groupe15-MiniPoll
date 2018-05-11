@@ -47,13 +47,13 @@ public class Help extends Activity{
         if(NotificationActivity.currentPoll==0)
         {
             currentPoll=ListHelp.advice.getId();
-            Log.i("Notif_current",String.valueOf(NotificationActivity.currentPoll));
             NotificationActivity.currentPoll=0;
             Log.i("currentPoll",String.valueOf(currentPoll));
         }
         else
         {
             advice=Advice.getAdviceFromId(currentPoll);
+            NotificationActivity.currentPoll=0;
         }
         img1 = (ImageView) findViewById(R.id.imageView3);
         img2 = (ImageView) findViewById(R.id.imageView4);

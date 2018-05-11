@@ -23,7 +23,7 @@ import p.poll.model.User;
 public class NotificationActivity extends Activity {
     public ArrayList<Notification> notifications;
     public static Notification currentNotification=null;
-    public static int currentPoll=0;
+    public static int currentPoll;
     public static String userNotif=null;
         ListView list;
         String[] web ;
@@ -41,6 +41,7 @@ public class NotificationActivity extends Activity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_notification);
             Log.i("test","getNotifications");
+            currentPoll=0;
             notifications=Notification.getNotifications();
             if(notifications.size()==0){
                 Intent intent = new Intent(getApplicationContext(),Menupoll.class);
