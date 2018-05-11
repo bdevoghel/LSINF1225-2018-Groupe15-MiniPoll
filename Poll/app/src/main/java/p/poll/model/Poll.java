@@ -168,7 +168,7 @@ public class Poll {
     public static int setId()
     {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
-        int id = 0;
+        int id = 1;
         String[] colonnes = {"idpoll"};
         Cursor cursor = db.query("Poll", colonnes, null, null, null, null, null);
         cursor.moveToFirst();
@@ -202,6 +202,21 @@ public class Poll {
         values.put("statut_particulier",String.valueOf(1));
         db.update("Poll_access",values,"idpoll=? AND username=?",new String[]{String.valueOf(id),user.getUsername()});
         db.close();
+    }
+
+    public static String getType(int id){
+        SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
+        String type=null;
+        String[] colonnes = {"types"};
+        Cursor cursor = db.query("Poll", colonnes, "idpoll=?", new String[]{String.valueOf(id)}, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            type = cursor.getString(0);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return type;
     }
 }
 
