@@ -133,7 +133,7 @@ public class Sondageprevue extends Activity {
                     if (vv != null ) {
                         EditText edit = (EditText) vv.findViewById(R.id.editText6);
                         String prop = edit.getText().toString();
-                        if (prop != "") {
+                        if (prop.compareTo("") != 0) {
                             Sondage.p ++;
                             newValues.put("idpoll", Sondage.idpoll);
                             newValues.put("data_reponse", prop);
@@ -144,18 +144,23 @@ public class Sondageprevue extends Activity {
                     m++;
                 }
 
-                for (int i = 0; i < Sondage.p; i++){
+                for (int i = 0; i < 7; i++){
                     for (int k = 0; k < Sondage.listproposition.size(); k++){
                         ContentValues newValues1 = new ContentValues();
                         View vv = Sondage.listproposition.get(k);
-                        EditText edit = (EditText) vv.findViewById(R.id.editText6);
-                        String prop = edit.getText().toString();
-                        newValues1.put("idpoll", Sondage.idpoll);
-                        newValues1.put("username", Sondage.listfriendclick.get(i));
-                        newValues1.put("data_reponse", prop);
+                        if (vv != null ) {
+                            EditText edit = (EditText) vv.findViewById(R.id.editText6);
+                            String prop = edit.getText().toString();
+                            if (prop.compareTo("") != 0) {
+                                prop = edit.getText().toString();
+                                newValues1.put("idpoll", Sondage.idpoll);
+                                newValues1.put("username", Sondage.listfriendclick.get(i));
+                                newValues1.put("data_reponse", prop);
 
 
-                        MySQLiteHelper.get().getWritableDatabase().insert("Survey_Answer", null, newValues1);
+                                MySQLiteHelper.get().getWritableDatabase().insert("Survey_Answer", null, newValues1);
+                            }
+                        }
                     }
                 }
                 ContentValues newValues1 = new ContentValues();
