@@ -139,6 +139,7 @@ public class Sondageprevue extends Activity {
                             Sondage.p ++;
                             newValues.put("idpoll", Sondage.idpoll);
                             newValues.put("data_reponse", prop);
+                            newValues.put("point",0);
 
                             SQLiteDatabase db = MySQLiteHelper.get().getWritableDatabase();
                             db.insert("Survey", null, newValues);
