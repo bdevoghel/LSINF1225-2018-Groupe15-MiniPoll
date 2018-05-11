@@ -156,7 +156,7 @@ public class SondageReponse extends Activity {
                     }
                     //Quand tout le monde a fini de repondre
                     if (Survey.SondageFini(Survey.etats(current.getId()))== 1){
-                        pourcent = Survey.moyenne(Survey.getListPointsSondage(current.getId()));
+                        //pourcent = Survey.moyenne(Survey.getListPointsSondage(current.getId()));
                     }
                     if(flag==1) {
                         Notification.setDone(notification);
