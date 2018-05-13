@@ -66,6 +66,7 @@ public class SondageReponse extends Activity {
         {
             currentPoll=ListSurvey.current.getId();
             current = ListSurvey.current;
+            notification=Notification.getNotification(currentPoll);
             if(current==null)
             {
                 Log.i("null","null");
@@ -158,9 +159,8 @@ public class SondageReponse extends Activity {
                     if (Survey.SondageFini(Survey.etats(current.getId()))== 1){
                         pourcent = Survey.moyenne(Survey.getListPointsSondage(current.getId()));
                     }
-                    if(flag==1) {
-                        Notification.setDone(notification);
-                    }
+                    Notification.setDone(notification);
+
                     Intent intent = new Intent(getApplicationContext(),Menupoll.class);
                     startActivity(intent);
                 }
