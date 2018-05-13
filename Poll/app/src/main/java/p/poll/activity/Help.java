@@ -44,6 +44,7 @@ public class Help extends Activity{
         setContentView(R.layout.activity_help);
         advice = ListHelp.advice;
         currentPoll= NotificationActivity.currentPoll;
+        Log.i("Notif-currentPoll",String.valueOf(NotificationActivity.currentPoll));
         if(NotificationActivity.currentPoll==0)
         {
             currentPoll=ListHelp.advice.getId();
