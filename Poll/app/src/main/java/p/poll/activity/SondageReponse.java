@@ -19,8 +19,10 @@ import java.util.List;
 
 import p.poll.R;
 import p.poll.model.Notification;
+import p.poll.model.Poll;
 import p.poll.model.Proposition;
 import p.poll.model.Survey;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 04/05/2018.
@@ -60,37 +62,38 @@ public class SondageReponse extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sondage_reponse);
-        currentPoll= NotificationActivity.currentPoll;
-        notification=NotificationActivity.currentNotification;
-        if(NotificationActivity.currentPoll==0)
-        {
-            currentPoll=ListSurvey.current.getId();
+        currentPoll = NotificationActivity.currentPoll;
+        notification = NotificationActivity.currentNotification;
+        if (NotificationActivity.currentPoll == 0) {
+            Log.i("1", "1");
+            currentPoll = ListSurvey.current.getId();
             current = ListSurvey.current;
-            notification=Notification.getNotification(currentPoll);
-            if(current==null)
-            {
-                Log.i("null","null");
+            notification = Notification.getNotification(currentPoll);
+            if (current == null) {
+                Log.i("null", "null");
             }
-            Log.i("Notif_current",String.valueOf(NotificationActivity.currentPoll));
-            NotificationActivity.currentPoll=0;
-            Log.i("currentPoll",String.valueOf(currentPoll));
+            Log.i("Notif_current", String.valueOf(NotificationActivity.currentPoll));
+            NotificationActivity.currentPoll = 0;
+            NotificationActivity.currentNotification = null;
+            Log.i("currentPoll", String.valueOf(currentPoll));
+        } else {
+            Log.i("2", "2");
+            flag = 1;
+            current = Survey.getSurveyFromId(currentPoll, null);
+            if(current==null)
+                Log.i("NULL","NULL");
+            NotificationActivity.currentPoll = 0;
+            NotificationActivity.currentNotification = null;
         }
-        else
-        {
-            flag=1;
-            current=Survey.getSurveyFromId(currentPoll);
-            NotificationActivity.currentPoll=0;
-        }
-        Log.i("display idpoll",String.valueOf(current.getId()));
+        Log.i("display idpoll", String.valueOf(current.getId()));
         title = current.getTitle();
         TextView titre = (TextView) findViewById(R.id.Title);
         titre.setText(title);
         proposition = new ArrayList<String>();
         proposition = Proposition.getAnswers((current.getPropostions()));
         proptitre = new ArrayList<String>();
-        Log.i("size propositions",String.valueOf(proposition.size()));
-        for(int i=0; i<proposition.size();i++)
-        {
+        Log.i("size propositions", String.valueOf(proposition.size()));
+        for (int i = 0; i < proposition.size(); i++) {
             proptitre.add(web2[i]);
         }
         web = proptitre.toArray(new String[proptitre.size()]);
@@ -98,8 +101,7 @@ public class SondageReponse extends Activity {
         liste = new ArrayList<View>();
         listenumero = new ArrayList<String>();
         listedescription = new ArrayList<String>();
-        for(int i=0;i<7;i++)
-        {
+        for (int i = 0; i < 7; i++) {
             liste.add(null);
         }
         CustomSondageAnswer listAdapter = new
@@ -114,8 +116,8 @@ public class SondageReponse extends Activity {
                                     int position, long id) {
                 String propo = ((TextView) view.findViewById(R.id.txt)).getText().toString();
                 String descr = ((TextView) view.findViewById(R.id.txt2)).getText().toString();
-                Log.i("descr",descr);
-                if (listenumero.contains(propo)){
+                Log.i("descr", descr);
+                if (listenumero.contains(propo)) {
                     view.setBackgroundColor(getResources().getColor(android.R.color.white));
                     listenumero.remove(propo);
                     listedescription.remove(descr);
@@ -125,9 +127,7 @@ public class SondageReponse extends Activity {
                             CustomSondageAnswerAdd(SondageReponse.this, listenumeroliste);
                     mListView.setAdapter(listAdapter2);
 
-                }
-                else
-                {
+                } else {
                     view.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
                     listenumero.add(propo);
                     listedescription.add(descr);
@@ -144,54 +144,25 @@ public class SondageReponse extends Activity {
 
             @Override
             public void onClick(View v) {
-                if(listenumero.size()!= web.length)
-                {
-                    Toast.makeText(p.poll.activity.SondageReponse.this," Vous n'avez pas sélectionné toutes les propositions",
+                if (listenumero.size() != web.length) {
+                    Toast.makeText(p.poll.activity.SondageReponse.this, " Vous n'avez pas sélectionné toutes les propositions",
                             Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     //Quand j'appuie sur valider :
-                    for (int i = 1; i <= listedescription.size(); i++){
-                        Survey.Modify(i, listedescription.get(i-1));
+                    for (int i = 1; i <= listedescription.size(); i++) {
+                        Survey.Modify(i, listedescription.get(i - 1));
                     }
                     //Quand tout le monde a fini de repondre
-                    if (Survey.SondageFini(Survey.etats(current.getId()))== 1){
+                    if (Survey.SondageFini(Survey.etats(current.getId())) == 1) {
                         pourcent = Survey.moyenne(Survey.getListPointsSondage(current.getId()));
                     }
+                    Poll.setUserDone(currentPoll, User.loggedUser);
                     Notification.setDone(notification);
 
-                    Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+                    Intent intent = new Intent(getApplicationContext(), Menupoll.class);
                     startActivity(intent);
                 }
             }
         });
     }
-/*
-        List<String> polls = genererSondage();
-
-        PollAdapterSondageReponse adapter = new PollAdapterSondageReponse(SondageReponse.this, polls);
-        mListView.setAdapter(adapter);
-        mListView.setClickable(true);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Object o = mListView.getItemAtPosition(position);
-
-                String j = (String) o;
-                Toast.makeText(SondageReponse.this, j,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    */
-
-    /*
-    private List<String> genererSondage() {
-    LienSondageDatabase lien = new LienSondageDatabase();
-    return lien.getListSondage(User.loggedUser.getUsername());
-    }
-    */
-
 }

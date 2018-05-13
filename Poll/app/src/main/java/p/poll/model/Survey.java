@@ -236,11 +236,9 @@ public class Survey extends Poll {
         newValues1.put("point", (Survey.getListPointsProposition(prop, idpoll).get(0)) + (6 - a));
         newValues2.put("ordre", a);
         newValues3.put("status_principal", String.valueOf(0));
-        newValues4.put("statut_particulier",  String.valueOf(1));
         db.update("Survey", newValues1, "idpoll=? AND data_reponse=?", new String[]{String.valueOf(Sondage.idpoll), prop});
         db.update("Survey_Answer", newValues2, "username=? AND idpoll=? AND reponse=?", new String[]{User.loggedUser.getUsername(), String.valueOf(Sondage.idpoll), prop});
         db.update("Poll", newValues3, "idpoll=?", new String[]{String.valueOf(Sondage.idpoll)});
-        db.update("Poll_access", newValues4, "idpoll=? AND username=?", new String[]{String.valueOf(Sondage.idpoll), User.loggedUser.getUsername()});
         db.close();
     }
 
@@ -437,9 +435,16 @@ public class Survey extends Poll {
         return surveys;
     }
 
-    public static Survey getSurveyFromId(int id)
+    public static Survey getSurveyFromId(int id, User user)
     {
-        ArrayList<Survey> surveys=getSurvey();
+        ArrayList<Survey> surveys;
+        if(user==null){
+            surveys=getSurvey();
+        }
+        else
+        {
+            surveys=getSurveyOf(user);
+        }
         Survey survey=null;
         Log.i("Search id",String.valueOf(id));
         for(int i=0;i<surveys.size();i++){
