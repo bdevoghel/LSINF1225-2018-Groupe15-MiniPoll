@@ -115,7 +115,7 @@ public class Advice extends Poll {
 
     public static Advice getAdviceFromId(int id,User user){
         ArrayList<Advice> advices=null;
-        if(user!=null) {
+        if(user==null) {
             advices = getAdvicesOf();
         }
         else
