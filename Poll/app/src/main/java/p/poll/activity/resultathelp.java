@@ -38,7 +38,7 @@ public class resultathelp extends Activity{
         setContentView(R.layout.activity_help);
         currentPoll= NotificationActivity.currentPoll;
         Log.i("test",String.valueOf(currentPoll));
-        advice=Advice.getAdviceFromId(currentPoll);
+        advice=Advice.getMyAdviceFromId(currentPoll);
         if(advice==null)
         {
             Log.i("NULL","NULL");

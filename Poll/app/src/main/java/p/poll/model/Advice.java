@@ -109,8 +109,19 @@ public class Advice extends Poll {
         db.close();
     }
 
-    public static Advice getAdviceFromId(int id){
-        ArrayList<Advice> advices=getAdvice();
+    public static Advice getMyAdviceFromId(int id){
+        return getAdviceFromId(id,null);
+    }
+
+    public static Advice getAdviceFromId(int id,User user){
+        ArrayList<Advice> advices=null;
+        if(!user.equals(User.loggedUser)) {
+            advices = getAdvicesOf();
+        }
+        else
+        {
+            advices = getAdvice();
+        }
         Advice advice=null;
         Log.i("Search id",String.valueOf(id));
         for(int i=0;i<advices.size();i++){
@@ -189,7 +200,7 @@ public class Advice extends Poll {
         return advices;
     }
 
-    public static ArrayList<Advice> getAdvicesOf(User user)
+    public static ArrayList<Advice> getAdvicesOf()
     {
         SQLiteDatabase db = MySQLiteHelper.get().getReadableDatabase();
         ArrayList<Advice> advices = new ArrayList<>();

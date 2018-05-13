@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 import p.poll.MySQLiteHelper;
 import p.poll.R;
-import p.poll.model.struc.LimitedNumber;
-import p.poll.model.struc.ListNumber;
 
 public class Notification{
 
@@ -115,11 +113,8 @@ public class Notification{
         String poll=String.valueOf(n.getPoll());
         String state=String.valueOf(1);
         values.put("etat", state);
-        values.put("message", text);
-        values.put("username_notif", username);
-        values.put("poll_notif", poll);
         Log.i("test","update");
-        db.update("Notification", values, "username=? AND message=?", new String[]{User.loggedUser.getUsername(),n.getText()});
+        db.update("Notification", values, "username=? AND message=? AND poll_notif=? AND username_notif=?", new String[]{User.loggedUser.getUsername(),text,poll,username});
         Log.i("test","done");
         db.close();
     }

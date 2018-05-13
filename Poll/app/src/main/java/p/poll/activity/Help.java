@@ -52,7 +52,7 @@ public class Help extends Activity{
         }
         else
         {
-            advice=Advice.getAdviceFromId(currentPoll);
+            advice=Advice.getAdviceFromId(currentPoll,User.loggedUser);
             NotificationActivity.currentPoll=0;
         }
         img1 = (ImageView) findViewById(R.id.imageView3);

@@ -61,15 +61,15 @@ public class NotificationActivity extends Activity {
                                         int position, long id) {
                     Log.i("test","0");
                     currentNotification=notifications.get(position);
+                    Log.i("position",String.valueOf(position));
+                    Log.i("currentNotif.getPoll",String.valueOf(currentNotification.getPoll()));
                     if(currentNotification.getPoll()==0) {
-                        Log.i("test","1");
                         Intent intent = new Intent(getApplicationContext(), NotificationShow.class);
                         startActivity(intent);
                         finish();
                     }
                     else
                     {
-                        Log.i("test","2");
                         currentPoll=currentNotification.getPoll();
                         Log.i("display",String.valueOf(currentPoll));
                         Log.i("display",Poll.getType(currentPoll));
