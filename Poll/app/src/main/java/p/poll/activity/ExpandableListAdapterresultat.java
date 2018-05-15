@@ -59,11 +59,11 @@ public class ExpandableListAdapterresultat extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListItem);
 
         txtListChild.setText(childText);
-        if(Quizzprevue.choix.get(groupPosition) == null)
+        if(Quizz.choix.get(groupPosition) == null)
         {
             convertView.setBackgroundColor(_context.getResources().getColor(android.R.color.white));
         }
-        else if(Quizzprevue.choix.get(groupPosition).toString().compareTo(childText) == 0)
+        else if(Quizz.choix.get(groupPosition).toString().compareTo(childText) == 0)
         {
             if(resultatquizz.good.get(groupPosition).toString().compareTo(childText) == 0) {
                 convertView.setBackgroundColor(_context.getResources().getColor(android.R.color.holo_green_dark));

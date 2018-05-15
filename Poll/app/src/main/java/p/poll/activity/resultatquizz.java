@@ -28,6 +28,7 @@ public class resultatquizz extends Activity{
     ExpandableListView expListView;
     List<String> listDataHeader;
     List<String> listdescription;
+    public static int scorenumber;
     public static List<String> choix;
     public static List<String> good;
     HashMap<String, List<String>> listDataChild;
@@ -37,6 +38,7 @@ public class resultatquizz extends Activity{
         super.onCreate(savedInstanceState);
         content=getContentResolver();
         setContentView(R.layout.activty_quizz_response);
+        scorenumber = 0;
         choix = new ArrayList<String>();
         //choix = NewQuizzQuestion.goodanswer;
         choix = Quizz.choix;
@@ -47,11 +49,19 @@ public class resultatquizz extends Activity{
         // preparing list data
         prepareListData();
 
+        for(int i = 0; i<good.size(); i++)
+        {
+            if(good.get(i).compareTo(choix.get(i))== 0)
+            {
+                scorenumber++;
+            }
+        }
         listAdapter = new ExpandableListAdapterresultat(this, listDataHeader, listdescription, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
-
+        TextView score = (TextView) findViewById(R.id.textView30);
+        score.setText("Vous avec "+ scorenumber + "/"+ good.size());
         // Listview Group click listener
         expListView.setOnGroupClickListener(new OnGroupClickListener() {
 
