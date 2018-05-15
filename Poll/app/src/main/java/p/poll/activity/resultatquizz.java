@@ -38,7 +38,9 @@ public class resultatquizz extends Activity{
         content=getContentResolver();
         setContentView(R.layout.activty_quizz_response);
         choix = new ArrayList<String>();
-        choix = NewQuizzQuestion.goodanswer;
+        //choix = NewQuizzQuestion.goodanswer;
+        choix = Quizz.choix;
+        good = new ArrayList<String>();
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
@@ -108,9 +110,59 @@ public class resultatquizz extends Activity{
         listdescription = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-        int numberquestion = NewQuizzQuestion.numberquestion;
+        good.add("The Godfather");
+        good.add("The Conjuring");
+        good.add("Europa Report");
 
         // Adding child data
+        listDataHeader.add("Question 1");
+        listDataHeader.add("Question 2");
+        listDataHeader.add("Question 3");
+
+
+        //List description des questions
+        listdescription.add("Quel jour sommes nous ?");
+        listdescription.add("Qui est John ?");
+        listdescription.add("Suis-je gentil ?");
+
+        // Adding child data
+        List<String> Question1 = new ArrayList<String>();
+        Question1.add("The Shawshank Redemption");
+        Question1.add("The Godfather");
+        Question1.add("The Godfather: Part II");
+        Question1.add("Pulp Fiction");
+        Question1.add("The Good, the Bad and the Ugly");
+        Question1.add("The Dark Knight");
+
+        List<String> Question2 = new ArrayList<String>();
+        Question2.add("The Conjuring");
+        Question2.add("Despicable Me 2");
+        Question2.add("Turbo");
+        Question2.add("Grown Ups 2");
+        Question2.add("Red 2");
+        Question2.add("The Wolverine");
+
+        List<String> Question3 = new ArrayList<String>();
+        Question3.add("2 Guns");
+        Question3.add("The Smurfs 2");
+        Question3.add("The Spectacular Now");
+        Question3.add("The Canyons");
+        Question3.add("Europa Report");
+
+        listDataChild.put(listDataHeader.get(0), Question1); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), Question2);
+        listDataChild.put(listDataHeader.get(2), Question3);
+
+
+
+
+
+        /*
+        int numberquestion = NewQuizzQuestion.numberquestion;
+
+
+        // Adding child data
+
         if(numberquestion == 1) {
             listDataHeader.add("Question 1");
             List<String> Question1 = NewQuizzQuestion.reponsequestion1;
@@ -152,9 +204,9 @@ public class resultatquizz extends Activity{
             listDataChild.put(listDataHeader.get(3), Question4);
         }
 
-        listdescription = NewQuizz.ListePropositions;
+        //listdescription = NewQuizz.ListePropositions;
         //List description des questions
-        //listdescription.add("Quel jour sommes nous ?");
+        listdescription = Quizz.listdescription;
         //listdescription.add("Qui est John ?");
         //listdescription.add("Suis-je gentil ?");
 

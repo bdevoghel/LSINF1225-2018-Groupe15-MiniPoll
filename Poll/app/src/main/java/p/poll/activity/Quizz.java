@@ -26,7 +26,7 @@ public class Quizz extends Activity{
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
-    List<String> listdescription;
+    public static List<String> listdescription;
     Button bouton;
     public static List<String> choix;
     HashMap<String, List<String>> listDataChild;
@@ -135,7 +135,7 @@ public class Quizz extends Activity{
                     }
                     if(valid)
                     {
-                        Intent intent = new Intent(getApplicationContext(), Menupoll.class);
+                        Intent intent = new Intent(getApplicationContext(), resultatquizz.class);
                         startActivity(intent);
                     }
                     else
