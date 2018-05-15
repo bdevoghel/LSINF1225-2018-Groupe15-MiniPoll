@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import p.poll.R;
+import p.poll.model.User;
 
 /**
  * Created by Nicolas on 04/05/2018.
@@ -152,9 +153,15 @@ public class NewQuizz extends Activity {
 
 
     private List<PollModel> genererAmi(){
-        List<PollModel> tweets = new ArrayList<PollModel>();/*
-        tweets.add(new PollModel(Color.BLACK, "Florent", "Mon premier tweet !"));
-        tweets.add(new PollModel(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
+        List<User> users = User.getFriends();
+        List<PollModel> tweets = new ArrayList<PollModel>();
+        for(int i =0; i<users.size();i++)
+        {
+            tweets.add(new PollModel(users.get(i).getProfilePic(), users.get(i).getUsername(),users.get(i).getMailAdress()));
+        }
+        /*
+        tweets.add(new PollModel(null, "Florent", "Mon premier tweet !"));
+        tweets.add(new PollModel(null, "Kevin", "C'est ici que ça se passe !"));
         tweets.add(new PollModel(Color.GREEN, "Logan", "Que c'est beau..."));
         tweets.add(new PollModel(Color.RED, "Mathieu", "Il est quelle heure ??"));
         tweets.add(new PollModel(Color.GRAY, "Willy", "On y est presque"));
