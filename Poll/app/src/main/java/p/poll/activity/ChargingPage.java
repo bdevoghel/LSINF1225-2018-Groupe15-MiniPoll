@@ -44,7 +44,7 @@ public class ChargingPage extends AppCompatActivity {
                 }
             }
         });
-        
+
     }
 
     @Override

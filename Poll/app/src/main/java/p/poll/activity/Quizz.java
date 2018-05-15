@@ -27,6 +27,7 @@ public class Quizz extends Activity{
     ExpandableListView expListView;
     List<String> listDataHeader;
     List<String> listdescription;
+    Button bouton;
     public static List<String> choix;
     HashMap<String, List<String>> listDataChild;
 
@@ -34,16 +35,18 @@ public class Quizz extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activty_quizz_response);
+        bouton = (Button) findViewById(R.id.Valider);
         choix = new ArrayList<String>();
-        for(int i =0; i<4; i++)
-        {
-            choix.add(null);
-        }
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
         // preparing list data
         prepareListData();
+
+        for(int i =0; i<listDataHeader.size(); i++)
+        {
+            choix.add(null);
+        }
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listdescription, listDataChild);
 
@@ -68,9 +71,7 @@ public class Quizz extends Activity{
 
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Expanded",
-                        Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -79,9 +80,7 @@ public class Quizz extends Activity{
 
             @Override
             public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Collapsed",
-                        Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -121,11 +120,34 @@ public class Quizz extends Activity{
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                    boolean valid = true;
+                    if(choix.size() != listDataHeader.size())
+                    {
+                        Toast.makeText(getApplicationContext(),"Vous n'avez pas répondu à toutes les questions.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    for(int i =0; i<choix.size() && valid;i++)
+                    {
+                        if(choix.get(i) == null)
+                        {
+                            valid = false;
+                        }
+                    }
+                    if(valid)
+                    {
+                        Intent intent = new Intent(getApplicationContext(), Menupoll.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"Vous n'avez pas répondu à toutes les questions.",
+                                Toast.LENGTH_SHORT).show();
+                    }
 
-                //List<String> choix; contient la liste des réponse choisie par l'utilisateur
             }
         });
     }
+
 
     /*
      * Preparing the list data

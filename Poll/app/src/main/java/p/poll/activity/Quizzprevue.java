@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -124,6 +125,8 @@ public class Quizzprevue extends Activity{
                 Toast.makeText(getApplicationContext(),"Quizz sauvegardé",
                         Toast.LENGTH_SHORT).show();
                 //List<String> choix; contient la liste des réponse choisie par l'utilisateur
+                Intent intent = new Intent(getApplicationContext(),Menupoll.class);
+                startActivity(intent);
             }
         });
     }
